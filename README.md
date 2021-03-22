@@ -72,3 +72,4 @@ Las notas manuscritas referidas a dicho análisis se encuentran en el fichero [n
 * [Árbol de recursos del estándar CODICE](https://contrataciondelestado.es/codice/)
 * [Open Contracting Data Standard](https://standard.open-contracting.org/latest/)
 * [Guía básica para el mapeo a datos OCDS](https://docs.google.com/document/d/1VAKw8QCU08__qUnssmbSl_N38Rpd7nhcNChZ80qHOCI)
+* [Librería utilizada para el parseo de XML, **licencia BSD**](https://lxml.de/)
