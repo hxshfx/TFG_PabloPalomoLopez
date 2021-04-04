@@ -1,0 +1,533 @@
+\section{Correspondencias entre CODICE y OCDS}
+
+    Aquí vendría una pequeña descripción de la sección
+
+    \vspace{0.3cm}
+    
+    \subsection{Datos generales del expediente}
+    
+    Aquí vendría una pequeña descripción de la subsección
+    
+        \subsubsection{Estado}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc-place-ext:ContractFolderStatusCode}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tag}
+            \item \textbf{Comentarios}: La lista de posibles códigos del elemento en CODICE se encuentra en el siguiente 
+                \href{https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc}{enlace}.
+                La lista análoga de códigos en el esquema OCDS se puede consultar en el siguiente
+                \href{https://standard.open-contracting.org/latest/es/schema/codelists/#release-tag}{enlace}.
+                La correspondencia entre ambas listas de códigos se ha establecido de la siguiente manera:
+                    \subitem - \texttt{PRE} (Anuncio previo) $\rightarrow$ \texttt{planning}
+                    \subitem - \texttt{PUB} (En plazo) $\rightarrow$ \texttt{tender}
+                    \subitem - \texttt{EV} (Pendiente de adjudicación) $\rightarrow$ \texttt{tender}
+                    \subitem - \texttt{ADJ} (Adjudicada) $\rightarrow$ \texttt{award}
+                    \subitem - \texttt{RES} (Resuelta) $\rightarrow$ \texttt{contract}
+                    \subitem - \texttt{ANUL} (Anulada) $\rightarrow$ \texttt{awardCancellation}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cbc-place-ext:ContractFolderStatusCode languageID="es"
+                         listURI="https://contrataciondelestado.es/codice/cl/2.04/
+                         SyndicationContractFolderStatusCode-2.04.gc">
+                            ADJ
+                        </cbc-place-ext:ContractFolderStatusCode>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tag": [
+                            "award"
+                        ]
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Número de expediente}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:ContractFolderID}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{ocid}
+            \item \textbf{Comentarios}: En el esquema de OCDS, los procesos de contratación deben identificarse mediante un código unívoco que será idéntico en cualquier posterior entrega del mismo proceso de contratación. Para asegurar que dichos códigos no puedan colisionar, OCDS provee a los publicadores prefijos que concatenar a los identificadores internos para así asegurar la creación de identificadores globales únicos.
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cbc:ContractFolderID>
+                            002/2021-CONTR
+                        </cbc:ContractFolderID>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "ocid": "ES-002/2021-CONTR"
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Objeto del contrato}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:ProcurementProject/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:Name}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.title}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cbc:Name>
+                                Suministro de energía eléctrica para las instalaciones de RTVE
+                            </cbc:Name>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "title": "Suministro de energía eléctrica para las instalaciones de RTVE"
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Valor estimado e importe de licitación}
+        \begin{itemize}
+            \item \textbf{Elementos en el esquema CODICE}:
+                \tabto{7.7cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.7cm} \texttt{cac:ProcurementProject/} \\
+                \tabto{7.7cm} \texttt{cac:BudgetAmount/} \\
+                \tabto{7.7cm} \{\texttt{\textit{cbc:EstimatedOverallContractAmount}}, \\
+                \tabto{7.7cm} \texttt{\textit{cbc:TotalAmount}}\}
+            \item \textbf{Elementos en el esquema OCDS}:
+                \tabto{7.7cm} \texttt{EstimatedOverallContractAmount} \\ \tabto{8cm} $\rightarrow$ \texttt{tender.value} \\
+                \tabto{7.7cm} \texttt{TotalAmount} \\ \tabto{8cm} $\rightarrow$ \texttt{planning.budget.amount}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:BudgetAmount>
+                                <cbc:EstimatedOverallContractAmount currencyID="EUR">
+                                    185000
+                                </cbc:EstimatedOverallContractAmount>
+                                <cbc:TotalAmount currencyID="EUR">
+                                    120000
+                                </cbc:TotalAmount>
+                            </cac:BudgetAmount>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "value": {
+                                "amount": 185000,
+                                "currency": "EUR"
+                            }
+                        } ,
+                        "planning": {
+                            "budget": {
+                                "amount": {
+                                    "amount": 120000,
+                                    "currency": "EUR"
+                                }
+                            }
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Duración del contrato}
+        \begin{itemize}
+            \item \textbf{Elementos en el esquema CODICE}:
+                \tabto{7.7cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.7cm} \texttt{cac:ProcurementProject/} \\
+                \tabto{7.7cm} \texttt{cac:PlannedPeriod/} \\
+                \tabto{7.7cm} \{\texttt{\textit{cbc:StartDate}}, \\
+                \tabto{7.7cm} \{\texttt{\textit{cbc:EndDate}}, \\
+                \tabto{7.7cm} \texttt{\textit{cbc:DurationMeasure}}\}\}
+            \item \textbf{Elementos en el esquema OCDS}:
+                \tabto{7.7cm} \texttt{StartDate} \\ \tabto{8cm} $\rightarrow$ \texttt{tender.tenderPeriod.startDate} \\
+                \tabto{7.7cm} \texttt{EndDate} \\ \tabto{8cm} $\rightarrow$ \texttt{tender.tenderPeriod.endDate}
+                \tabto{7.7cm} \texttt{DurationMeasure} \\ \tabto{8cm} $\rightarrow$ \texttt{tender.tenderPeriod.durationInDays}
+            \item \textbf{Comentarios}: La duración prevista del contrato puede expresarse mediante una fecha de inicio y una de final, o bien mediante una fecha de inicio y una duración prevista, cuyos valores pueden ser expresados mediante días (\texttt{DAY}), meses (\texttt{MON}) o años (\texttt{ANN}).
+            \item \textbf{Ejemplos}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:PlannedPeriod>
+                                <cbc:StartDate>
+                                    2021-09-01
+                                </cbc:StartDate>
+                                <cbc:EndDate>
+                                    2021-12-01
+                                </cbc:EndDate>
+                            </cac:PlannedPeriod>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:PlannedPeriod>
+                                <cbc:DurationMeasure unitCode="MON">
+                                    3
+                                </cbc:DurationMeasure>
+                            </cac:PlannedPeriod>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "tenderPeriod": {
+                                "durationInDays": 90
+                            }
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Tipo de contrato}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:ProcurementProject/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:TypeCode}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.mainProcurementCategory}
+            \item \textbf{Comentarios}: La lista de posibles valores que pueden tomar los códigos que describen los tipos de contrato en CODICE pueden encontrarse en el siguiente \href{https://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc}{enlace}. La lista análoga de códigos en el esquema OCDS se puede consultar en el siguiente \href{https://standard.open-contracting.org/latest/es/schema/codelists/#procurement-category}{enlace}. La correspondencia entre ambas listas de códigos se ha establecido de la siguiente manera:
+                    \subitem - \texttt{1} (Suministros) $\rightarrow$ \texttt{goods}
+                    \subitem - \texttt{2} (Servicios) $\rightarrow$ \texttt{services}
+                    \subitem - \texttt{3} (Obras) $\rightarrow$ \texttt{works}
+                    \subitem - \texttt{21} (Gestión de servicios públicos) $\rightarrow$ \texttt{services}
+                    \subitem - \texttt{22} (Gestión de servicios) $\rightarrow$ \texttt{services}
+                    \subitem - \texttt{31} (Concesión de obras públicas) $\rightarrow$ \texttt{works}
+                    \subitem - \texttt{32} (Concesión de obras) $\rightarrow$ \texttt{works}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cbc:TypeCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.08/
+                             ContractCode-2.08.gc">
+                                2
+                            </cbc:TypeCode>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "mainProcurementCategory": "services"
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Enlaces de descarga de pliegos}
+        \begin{itemize}
+            \item \textbf{Elementos en el esquema CODICE}:
+                \tabto{7.7cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.7cm} \{\texttt{cac:LegalDocumentReference/}, \\
+                \tabto{7.7cm} \texttt{cac:TechnicalDocumentReference/}, \\
+                \tabto{7.7cm} \texttt{cac:AditionalDocumentReference/}\} \\
+                \tabto{7.7cm} \texttt{\textit{cbc:ID}},\\
+                \tabto{7.7cm} \texttt{cac:Attachment/} \\
+                \tabto{7.7cm} \texttt{cac:ExternalReference/} \\
+                \tabto{7.7cm} \texttt{\textit{cbc:URI}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.7cm} \texttt{tender.documents}
+            \item \textbf{Comentarios}: Los distintos pliegos que pueden documentar un proceso de contratación vienen descritos, en su tipo, por el elemento inmediatamente inferior a \texttt{ContractFolderStatus}, y su mapeo al esquema OCDS se representa mediante la lista de códigos \href{https://standard.open-contracting.org/latest/es/schema/codelists/#document-type}{\texttt{documentType}}.
+                    \subitem - LegalDocumentReference $\rightarrow$ \texttt{?}
+                    \subitem - TechnicalDocumentReference $\rightarrow$ \texttt{technicalSpecifications}
+                    \subitem - AditionalDocumentReference $\rightarrow$ \texttt{?}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:LegalDocumentReference>
+                            <cbc:ID>
+                                PPT_2020_00120.pdf
+                            </cbc:ID>
+                            <cac:Attachment>
+                                <cac:ExternalReference>
+                                    <cbc:URI>
+                                        https://contrataciondelestado.es/wps/wcm/...
+                                    </cbc:URI>
+                                </cac:ExternalReference>
+                            </cac:Attachment>
+                        </cac:LegalDocumentReference>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "documents": [
+                                {
+                                    "documentType": "technicalSpecifications",
+                                    "id": "PPT_2020_00120.pdf",
+                                    "url": "https://contrataciondelestado.es/wps/wcm/..."
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+
+    \vspace{0.3cm}
+
+    \subsection{Procesos de licitación}
+    
+        Aquí vendría una pequeña descripción de la subsección
+    
+        \subsubsection{Tipo de procedimiento}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:TenderingProcess/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:ProcedureCode}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.procurementMethod}
+            \item \textbf{Comentarios}: La lista de posibles códigos del elemento en CODICE se encuentra en el siguiente 
+                \href{https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc}{enlace}.
+                La lista análoga de códigos en el esquema OCDS se puede consultar en el siguiente
+                \href{https://standard.open-contracting.org/latest/es/schema/codelists/#method}{enlace}.
+                La correspondencia entre ambas listas de códigos se ha establecido de la siguiente manera:
+                    \subitem - \texttt{1} (Abierto) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{2} (Restringido) $\rightarrow$ \texttt{selective}
+                    \subitem - \texttt{3} (Negociado sin publicidad) $\rightarrow$ \texttt{limited}
+                    \subitem - \texttt{4} (Negociado con publicidad) $\rightarrow$ \texttt{limited}
+                    \subitem - \texttt{5} (Diálogo competitivo) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{6} (Contrato menor) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{7} (Derivado de acuerdo macro) $\rightarrow$ \texttt{selective}
+                    \subitem - \texttt{8} (Concurso de proyectos) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{9} (Abierto simplificado) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{10} (Asociación para la innovación) $\rightarrow$ \texttt{limited}
+                    \subitem - \texttt{11} (Derivado de asociación para la innovación) $\rightarrow$ \texttt{limited}
+                    \subitem - \texttt{12} (Basado en un sistema dinámico de adquisición) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{13} (Licitación con negociación) $\rightarrow$ \texttt{open}
+                    \subitem - \texttt{100} (Normas internas) $\rightarrow$ \texttt{limited}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:ProcedureCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.07/
+                             SyndicationTenderingProcessCode-2.07.gc">
+                                9
+                            </cbc:ProcedureCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "procurementMethod": "open"
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Sistema de contratación}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:TenderingProcess/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:ContractingSystemCode}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.procurementMethodDetails}
+            \item \textbf{Comentarios}: Este elemento describe si el sistema de contratación se trata de un contrato, de un acuerdo marco, o de un sistema dinámico de adquisición. Con el sufijo \texttt{es} se especifica que el campo muestra su información en castellano, tal y como aparece en el  \href{https://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc}{documento de códigos} de CODICE.
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:ContractingSystemCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.08/
+                             ContractingSystemTypeCode-2.08.gc">
+                                3
+                            </cbc:ContractingSystemCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "procurementMethodDetails_es": "Contract based in a framework agreement"
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Presentación de la oferta} \label{subsec:PresentacionOferta}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:TenderingProcess/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:SubmissionMethodCode}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.submissionMethod}
+            \item \textbf{Comentarios}: La lista de posibles códigos del elemento en CODICE se encuentra en el siguiente 
+                \href{https://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc}{enlace}.
+                La lista análoga de códigos en el esquema OCDS se puede consultar en el siguiente
+                \href{https://standard.open-contracting.org/latest/es/schema/codelists/#submission-method}{enlace}.
+                La correspondencia entre ambas listas de códigos se ha establecido de la siguiente manera:
+                    \subitem - \texttt{1} (Electrónica) $\rightarrow$ \texttt{[electronicSubmission]}
+                    \subitem - \texttt{2} (Manual) $\rightarrow$ \texttt{[written]}
+                    \subitem - \texttt{3} (Manual y/o Electrónica) $\rightarrow$ \texttt{[electronicSubmission, written]}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:SubmissionMethodCode
+                             listURI="https://contrataciondelestado.es/codice/cl/1.04/
+                             TenderDeliveryCode-1.04.gc">
+                                1
+                            </cbc:SubmissionMethodCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethod": [
+                                "electronicSubmission"
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Idioma de presentación de la oferta}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:TenderingTerms/} \\
+                \tabto{7.6cm} \texttt{cac:Language/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:ID}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.submissionMethodDetails}
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingTerms>
+                            <cac:Language>
+                                <cbc:ID>
+                                    es
+                                </cbc:ID>
+                            </cac:Language>
+                            <cac:Language>
+                                <cbc:ID>
+                                    ca
+                                </cbc:ID>
+                            </cac:Language>
+                        </cac:TenderingTerms>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethodDetails": "Languages: es, ca"
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+        
+        \subsubsection{Licitación son subasta electrónica}
+        \begin{itemize}
+            \item \textbf{Elemento en el esquema CODICE}:
+                \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                \tabto{7.6cm} \texttt{cac:TenderingProcess/} \\
+                \tabto{7.6cm} \texttt{cac:AuctionTerms/} \\
+                \tabto{7.6cm} \texttt{\textit{cbc:AuctionConstraintIndicator}}
+            \item \textbf{Elemento en el esquema OCDS}:
+                \tabto{7.6cm} \texttt{tender.submissionMethod}
+            \item \textbf{Comentarios}: Si en el elemento \texttt{AuctionConstraintIndicator} está indicado el valor \texttt{true}, significa que la licitación estará sujeta a subasta electrónica, por lo que el valor \texttt{electronicAuction} de la lista de códigos \href{https://standard.open-contracting.org/latest/es/schema/codelists/#submission-method}{\texttt{submissionMethod}} se sobreescribe en el campo \texttt{tender.submissionMethod}, que ya había sido inicializado por el elemento \hyperref[subsec:PresentacionOferta]{Presentación de la oferta}.
+            \item \textbf{Ejemplo}: \\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cac:AuctionTerms>
+                                <cbc:AuctionConstraintIndicator>
+                                    true
+                                </cbc:AuctionConstraintIndicator>
+                            </cac:AuctionTerms>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethod": [
+                                "electronicAuction"
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+        \end{itemize}
+
+\newpage

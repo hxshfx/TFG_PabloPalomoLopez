@@ -55,6 +55,144 @@
 \usepackage{tocloft}
 % Insert empty pages
 \usepackage{afterpage}
+
+% Custom packages
+% Font specification
+\usepackage{fontspec}
+\setmainfont[
+    ItalicFont=NewCM10-Italic.otf,
+    BoldFont=NewCM10-Bold.otf,
+    BoldItalicFont=NewCM10-BoldItalic.otf,
+    SmallCapsFeatures={Numbers=OldStyle}]
+{NewCM10-Regular.otf}
+\setsansfont[
+    ItalicFont=NewCMSans10-Oblique.otf,
+    BoldFont=NewCMSans10-Bold.otf,
+    BoldItalicFont=NewCMSans10-BoldOblique.otf,
+    SmallCapsFeatures={Numbers=OldStyle}]
+{NewCMSans10-Regular.otf}
+\setmonofont[
+    Path=./fonts/,
+    Extension=.ttf,
+    BoldFont=*-SemiBold, % Semibold font as bold
+    UprightFont=*-Regular, % Regular font as default
+    ItalicFont=*-Medium, % Medium font as italic
+    Scale=0.8]
+{FiraCode}
+
+% Graphic package for bullet points
+\usepackage{graphicx}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\urlstyle{same}
+
+% Language highlighting
+\usepackage{listings}
+\lstdefinelanguage{lXML}{
+    alsoletter={-},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    gobble=20,
+    keywordstyle=[1]{\bfseries\color{RoyalBlue}},
+    keywordstyle=[2]{\itshape\color{PineGreen}},
+    keywordstyle=[3]{\color{RedViolet}},
+    keywords=[1]{cac, cbc, cac-place-ext, cbc-place-ext},
+    morekeywords=[2]{
+        Attachment,
+        AuctionConstraintIndicator,
+        AuctionTerms,
+        BudgetAmount,
+        EstimatedOverallContractAmount,
+        ExternalReference,
+        ContractFolderID,
+        ContractFolderStatus,
+        ContractFolderStatusCode,
+        ContractingSystemCode,
+        DurationMeasure,
+        EndDate,
+        ID,
+        Language,
+        LegalDocumentReference,
+        Name,
+        PlannedPeriod,
+        ProcedureCode,
+        ProcurementProject,
+        StartDate,
+        SubmissionMethodCode,
+        TenderingProcess,
+        TenderingTerms,
+        TotalAmount,
+        TypeCode,
+        URI
+    },
+    morekeywords=[3]{
+        currencyID,
+        languageID,
+        listURI,
+        unitCode
+    },
+    morestring=*[d]{"},
+    morestring=[s][]{\#\{}{\}},
+    rulecolor=\color{black},
+    showstringspaces=false,
+    stringstyle=\color{OrangeRed}, 
+    tabsize=10
+}
+\lstdefinelanguage{lJSON}{
+    alsoletter={\{,\},\[,\]},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    gobble=20,
+    keywordstyle=[1]{\bfseries},
+    keywordstyle=[2]{\color{Brown}},
+    keywordstyle=[3]{\color{Red}},
+    keywords=[1]{\{,\},\[,\]},
+    morekeywords=[2]{
+        planning,
+        tender
+    },
+    morekeywords=[3]{
+        amount,
+        budget,
+        currency,
+        documents,
+        documentType,
+        endDate,
+        mainProcurementCategory,
+        id,
+        ocid,
+        procurementMethod,
+        procurementMethodDetails,
+        startDate,
+        submissionMethod,
+        submissionMethodDetails,
+        tag,
+        tenderPeriod,
+        title,
+        url,
+        value
+    },
+    morestring=*[d]{"},
+    morestring=[s][]{\#\{}{\}},
+    rulecolor=\color{black},
+    showstringspaces=false,
+    stringstyle=\color{BrickRed},
+    tabsize=10
+}
+% Fixed tabbing
+\usepackage{tabto}
+
 % Configure style aspects of the document
 \usepackage{caption}            % To configure the captions
 \usepackage{siunitx}            % For SI units
@@ -141,7 +279,7 @@
     \input{includes/index_figures}
     \input{includes/index_equations}
     \input{includes/intro}
-    \input{includes/development}
+    \input{includes/correspondencias}
     \input{includes/conclusions}
     \input{includes/references}
     \input{includes/annex}
