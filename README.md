@@ -54,9 +54,8 @@
     /src        -> código fuente de la aplicación
         /Program.cs -> punto de entrada de la aplicación
         /Examples   -> ficheros auxiliares tanto de muestra como para testing
-            /csv/occurences.csv   -> contiene el número de ocurrencias de cada elemento XML en cada entrada de los datos recogidos
-            /json/mappedData.json -> lista con todos los elementos XML registrados
-            /xml/*                -> directorio con algunos de los ficheros XML proporcionados en la plataforma de contratación
+            /json/* -> directorio con muestras de mapeos realizados por la aplicación
+            /xml/*  -> directorio con una muestra de fichero XML proporcionado por la plataforma de contratación, más un fichero para testing
         /Exceptions -> excepciones lanzadas por la aplicación
         /Interfaces -> interfaces que son implementadas por los módulos de la aplicación
         /Model      -> módulos que implementan las funcionalidades de la aplicación
@@ -88,9 +87,9 @@ La aplicación está compuesta por cinco diferentes módulos que constituyen un 
 
 * ~~Implementar las funcionalidades capaces de mapear los datos ya analizados, presentes en todos los ficheros parseados~~
 
-* Ir mapeando las nuevas reglas revisadas
+* ~~Llegar al 80% de cobertura del código~~
 
-* Llegar al 80% de cobertura del código
+* Ir mapeando las nuevas reglas revisadas
 
 * Empaquetar los datos mapeados para poder introducirlos en la [Herramienta de Revisión de Datos de OCDS](https://standard.open-contracting.org/review/)
 
@@ -108,6 +107,7 @@ La aplicación está compuesta por cinco diferentes módulos que constituyen un 
 
 ***Documentos de trabajo***
 * [Enlace al documento de Google Docs con las tablas de mapeo CÓDICE->OCDS](https://docs.google.com/document/d/1OdDeeeZMnlCsp2YdNgM1hbv4rYlcY3YAuGfxqOZ-3lY/edit?usp=sharing)
+* [Checklist con el progreso de los elementos de mapeo](https://docs.google.com/spreadsheets/d/14pikYzS-yzNWjtISyU-bPtoPe7cY1-KjOGGSC0lBhnI/edit?usp=sharing)
 
 ***Librerías utilizadas en el código***
 * [Enlace a la librería de logging utilizada (licencia Apache)](https://logging.apache.org/log4net/)

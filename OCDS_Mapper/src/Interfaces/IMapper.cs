@@ -29,5 +29,11 @@ namespace OCDS_Mapper.src.Interfaces
          *              => _mappedEntry = { "tag": [ "planning" ] }
          */
         void MapElement(IEnumerable<string> pathMap, XElement[] parsedElement);
+
+        /*  función Commit() => void
+         *      Introduce los cambios al JSON que no se pueden introducir
+         *      mediante los mapeos unitarios de elementos
+         */
+        void Commit();
     }
 }

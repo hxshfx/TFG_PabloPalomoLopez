@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -13,6 +14,47 @@ namespace OCDS_Mapper.src.Model
             /* Elementos raíz */
             public const string Tag = "tag";
             public const string OCID = "ocid";
+
+            /* Elementos en 'awards' */
+            public const string Award = "awards";
+            public static class Awards
+            {
+                public const string Date = "date";
+                public const string Description = "description_es";
+                public const string Id = "id";
+                public const string Status = "status";
+                public const string Suppliers = "suppliers";
+                public const String Value = "value";
+            }
+
+            /* Elementos en 'parties' */
+            public const string Party = "parties";
+            public static class Parties
+            {
+                public const string CountryName = "countryName";
+                public const string Identifier = "identifier";
+                public const string Name = "name";
+
+                /* Elementos en 'parties'.'address' */
+                public const string Address = "address";
+                public static class Addresses
+                {
+                    public const string Locality = "locality";
+                    public const string PostalCode = "postalCode";
+                    public const string StreetAddress = "streetAddress";
+                }
+
+                /* Elementos en 'parties'.'contactPoint' */
+                public const string ContactPoint = "contactPoint";
+                public static class ContactPoints
+                {
+                    public const string Email = "email";
+                    public const string FaxNumber = "faxNumber";
+                    public const string Name_ = "name";
+                    public const string Telephone = "telephone";
+                    public const string Url = "url";
+                }
+            }
 
             /* Elementos en 'planning' */
             public const string Planning = "planning";
@@ -31,6 +73,7 @@ namespace OCDS_Mapper.src.Model
             public static class Tenders
             {
                 public const string MainProcurementCategory = "mainProcurementCategory";
+                public const string NumberOfTenderers = "numberOfTenderers";
                 public const string ProcurementMethod = "procurementMethod";
                 public const string ProcurementMethodDetails = "procurementMethodDetails_es";
                 public const string SubmissionMethod = "submissionMethod";
@@ -50,7 +93,7 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función estática GetMappings(IDictionary<string, XNamespace>) => IDictionary<IEnumerable<XName>, IEnumerable<string>>
+        /*  función estática GetMappingRules(IDictionary<string, XNamespace>) => IDictionary<IEnumerable<XName>, IEnumerable<string>>
          *      Obtiene el diccionario con la información necesaria para realizar los mapeos.
          *  @param namespaces : Diccionario con los espacios de nombres
          *  @return : Diccionario con los pares de rutas en los elementos en CODICE y OCDS
@@ -67,7 +110,7 @@ namespace OCDS_Mapper.src.Model
          *              }, ...
          *            }
          */
-        public static IDictionary<IEnumerable<XName>, IEnumerable<string>> GetMappings(IDictionary<string, XNamespace> namespaces)
+        public static IDictionary<IEnumerable<XName>, IEnumerable<string>> GetMappingRules(IDictionary<string, XNamespace> namespaces)
         {
             IDictionary<IEnumerable<XName>, IEnumerable<string>> mappings = new Dictionary<IEnumerable<XName>, IEnumerable<string>>()
             {
@@ -222,6 +265,119 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<string>(new string[]{
                         MappingElement.Tender,
                         MappingElement.Tenders.SubmissionMethod
+                    })
+                },
+                {
+                   new LinkedList<XName>(new XName[]{
+                        namespaces["cac-place-ext"] + "LocatedContractingParty",
+                        namespaces["cac"] + "Party",
+                        namespaces["cac"] + "PartyName",
+                        namespaces["cbc"] + "Name"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Party,
+                        MappingElement.Parties.Name
+                    }) 
+                },
+                {
+                   new LinkedList<XName>(new XName[]{
+                        namespaces["cac-place-ext"] + "LocatedContractingParty",
+                        namespaces["cac"] + "Party",
+                        namespaces["cac"] + "PartyIdentification",
+                        namespaces["cbc"] + "ID"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Party,
+                        MappingElement.Parties.Identifier
+                    }) 
+                },
+                {
+                   new LinkedList<XName>(new XName[]{
+                        namespaces["cac-place-ext"] + "LocatedContractingParty",
+                        namespaces["cac"] + "Party"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Party
+                    }) 
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cac"] + "AwardedTenderedProject"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Id
+                    }) 
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cbc"] + "ResultCode"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Status
+                    }) 
+                },
+                {
+                   new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cac"] + "AwardedTenderedProject",
+                        namespaces["cac"] + "LegalMonetaryTotal"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Value
+                    }) 
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cbc"] + "ReceivedTenderQuantity"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Tender,
+                        MappingElement.Tenders.NumberOfTenderers
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cbc"] + "Description"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Description
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cbc"] + "AwardDate"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Date
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult"
+
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Award,
+                        MappingElement.Awards.Suppliers
                     })
                 }
             };

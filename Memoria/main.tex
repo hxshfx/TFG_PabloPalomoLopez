@@ -107,10 +107,18 @@
     keywordstyle=[3]{\color{RedViolet}},
     keywords=[1]{cac, cbc, cac-place-ext, cbc-place-ext},
     morekeywords=[2]{
+        AddressLine,
         Attachment,
         AuctionConstraintIndicator,
         AuctionTerms,
+        AwardDate,
+        AwardedTenderedProject,
         BudgetAmount,
+        CityName,
+        Contact,
+        Country,
+        Description,
+        ElectronicMail,
         EstimatedOverallContractAmount,
         ExternalReference,
         ContractFolderID,
@@ -120,24 +128,43 @@
         DurationMeasure,
         EndDate,
         ID,
+        IdentificationCode,
         Language,
         LegalDocumentReference,
+        LegalMonetaryTotal,
+        Line,
+        LocatedContractingParty,
         Name,
+        Party,
+        PartyName,
+        PartyIdentification,
+        PayableAmount,
         PlannedPeriod,
+        PostalAddress,
+        PostalZone,
         ProcedureCode,
+        ProcurementProjectLotID,
         ProcurementProject,
+        ReceivedTenderQuantity,
+        ResultCode,
         StartDate,
         SubmissionMethodCode,
+        Telefax,
+        Telephone,
         TenderingProcess,
         TenderingTerms,
+        TenderResult,
         TotalAmount,
         TypeCode,
-        URI
+        URI,
+        WebsiteURI,
+        WinningParty
     },
     morekeywords=[3]{
         currencyID,
         languageID,
         listURI,
+        schemeName,
         unitCode
     },
     morestring=*[d]{"},
@@ -159,25 +186,44 @@
     keywordstyle=[3]{\color{Red}},
     keywords=[1]{\{,\},\[,\]},
     morekeywords=[2]{
+        awards,
+        parties,
         planning,
         tender
     },
     morekeywords=[3]{
+        additionalIdentifiers,
+        address,
         amount,
         budget,
+        contactPoint,
+        countryName,
         currency,
+        date,
+        description_es,
         documents,
         documentType,
+        email,
         endDate,
-        mainProcurementCategory,
+        faxNumber,
         id,
+        identifier,
+        locality,
+        mainProcurementCategory,
+        name,
         ocid,
+        postalCode,
         procurementMethod,
-        procurementMethodDetails,
+        procurementMethodDetails_es,
+        roles,
+        scheme,
         startDate,
+        streetAddress,
         submissionMethod,
         submissionMethodDetails,
+        suppliers,
         tag,
+        telephone,
         tenderPeriod,
         title,
         url,
@@ -192,6 +238,13 @@
 }
 % Fixed tabbing
 \usepackage{tabto}
+
+% Paragraph sections
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+
+% Index name change
+\renewcommand*\contentsname{Índice}
 
 % Configure style aspects of the document
 \usepackage{caption}            % To configure the captions

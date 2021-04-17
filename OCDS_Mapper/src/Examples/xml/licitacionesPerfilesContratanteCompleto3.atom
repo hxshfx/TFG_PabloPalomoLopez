@@ -70,6 +70,7 @@
             <cac-place-ext:LocatedContractingParty>
                 <cbc:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ContractingAuthorityCode-1.04.gc">3</cbc:ContractingPartyTypeCode>
                 <cac:Party>
+                    <cbc:WebsiteURI>https://lapalmaaguas.com</cbc:WebsiteURI>
                     <cac:PartyIdentification>
                         <cbc:ID schemeName="DIR3">L03380010</cbc:ID>
                     </cac:PartyIdentification>
@@ -93,6 +94,8 @@
                     <cac:Contact>
                         <cbc:Name>Presidencia del Consejo Insular de Aguas de La Palma</cbc:Name>
                         <cbc:ElectronicMail>gabinete.presidencia@cablapalma.es</cbc:ElectronicMail>
+                        <cbc:Telefax>918562480</cbc:Telefax>
+                        <cbc:Telephone>918562479</cbc:Telephone>
                     </cac:Contact>
                 </cac:Party>
             </cac-place-ext:LocatedContractingParty>

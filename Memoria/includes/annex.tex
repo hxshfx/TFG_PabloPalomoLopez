@@ -1,5 +1,726 @@
-\section{Annex}
+\section{Anexos}
 
-    ...
+    \subsection{Anexo I: Ejemplos de los mapeos entre CODICE y OCDS}
 
+        \subsubsection{Datos generales del expediente}
+            \paragraph{Estado} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cbc-place-ext:ContractFolderStatusCode languageID="es"
+                         listURI="https://contrataciondelestado.es/codice/cl/2.04/
+                         SyndicationContractFolderStatusCode-2.04.gc">
+                            ADJ
+                        </cbc-place-ext:ContractFolderStatusCode>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tag": [
+                            "award"
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Número de expediente} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cbc:ContractFolderID>
+                            002/2021-CONTR
+                        </cbc:ContractFolderID>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "ocid": "ES-002/2021-CONTR"
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Objeto del contrato} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cbc:Name>
+                                Suministro de energía eléctrica para las instalaciones de RTVE
+                            </cbc:Name>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "title": "Suministro de energía eléctrica para las instalaciones de RTVE"
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Valor estimado e importe de licitación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:BudgetAmount>
+                                <cbc:EstimatedOverallContractAmount currencyID="EUR">
+                                    185000
+                                </cbc:EstimatedOverallContractAmount>
+                                <cbc:TotalAmount currencyID="EUR">
+                                    120000
+                                </cbc:TotalAmount>
+                            </cac:BudgetAmount>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "value": {
+                                "amount": 185000,
+                                "currency": "EUR"
+                            }
+                        } ,
+                        "planning": {
+                            "budget": {
+                                "amount": {
+                                    "amount": 120000,
+                                    "currency": "EUR"
+                                }
+                            }
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Duración del contrato} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:PlannedPeriod>
+                                <cbc:StartDate>
+                                    2021-09-01
+                                </cbc:StartDate>
+                                <cbc:EndDate>
+                                    2021-12-01
+                                </cbc:EndDate>
+                            </cac:PlannedPeriod>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "tenderPeriod": {
+                                "startDate": "2021-09-01T00:00:00Z",
+                                "endDate": "2021-12-01T00:00:00Z"
+                            }
+                        }
+                    }
+                \end{lstlisting}
+                
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cac:PlannedPeriod>
+                                <cbc:DurationMeasure unitCode="MON">
+                                    3
+                                </cbc:DurationMeasure>
+                            </cac:PlannedPeriod>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "tenderPeriod": {
+                                "durationInDays": 90
+                            }
+                        }
+                    }
+                \end{lstlisting}
+            
+            \paragraph{Tipo de contrato} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProject>
+                            <cbc:TypeCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.08/
+                             ContractCode-2.08.gc">
+                                2
+                            </cbc:TypeCode>
+                        </cac:ProcurementProject>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "mainProcurementCategory": "services"
+                        }
+                    }
+                \end{lstlisting}
+                        
+            \paragraph{Enlaces de descarga de pliegos} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:LegalDocumentReference>
+                            <cbc:ID>
+                                PPT_2020_00120.pdf
+                            </cbc:ID>
+                            <cac:Attachment>
+                                <cac:ExternalReference>
+                                    <cbc:URI>
+                                        https://contrataciondelestado.es/wps/wcm/...
+                                    </cbc:URI>
+                                </cac:ExternalReference>
+                            </cac:Attachment>
+                        </cac:LegalDocumentReference>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "documents": [
+                                {
+                                    "documentType": "technicalSpecifications",
+                                    "id": "PPT_2020_00120.pdf",
+                                    "url": "https://contrataciondelestado.es/wps/wcm/..."
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
+        \subsubsection{Procesos de licitación}
+            \paragraph{Tipo de procedimiento} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:ProcedureCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.07/
+                             SyndicationTenderingProcessCode-2.07.gc">
+                                9
+                            </cbc:ProcedureCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "procurementMethod": "open"
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Sistema de contratación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:ContractingSystemCode
+                             listURI="https://contrataciondelestado.es/codice/cl/2.08/
+                             ContractingSystemTypeCode-2.08.gc">
+                                3
+                            </cbc:ContractingSystemCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "procurementMethodDetails_es": "Contrato basado en un Acuerdo Marco"
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Presentación de la oferta} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cbc:SubmissionMethodCode
+                             listURI="https://contrataciondelestado.es/codice/cl/1.04/
+                             TenderDeliveryCode-1.04.gc">
+                                1
+                            </cbc:SubmissionMethodCode>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethod": [
+                                "electronicSubmission"
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Idioma de presentación de la oferta} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingTerms>
+                            <cac:Language>
+                                <cbc:ID>
+                                    es
+                                </cbc:ID>
+                            </cac:Language>
+                            <cac:Language>
+                                <cbc:ID>
+                                    ca
+                                </cbc:ID>
+                            </cac:Language>
+                        </cac:TenderingTerms>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethodDetails": "Languages: es, ca"
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Licitación son subasta electrónica} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderingProcess>
+                            <cac:AuctionTerms>
+                                <cbc:AuctionConstraintIndicator>
+                                    true
+                                </cbc:AuctionConstraintIndicator>
+                            </cac:AuctionTerms>
+                        </cac:TenderingProcess>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "submissionMethod": [
+                                "electronicAuction"
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+        
+        \subsubsection{Entidades adjudicadoras}
+            \paragraph{Órgano de contratación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac-place-ext:LocatedContractingParty>
+                            <cac:Party>
+                                <cac:PartyName>
+                                    <cbc:Name>
+                                        Junta de Gobierno del Ayuntamiento de Orihuela
+                                    </cbc:Name>
+                                </cac:PartyName>
+                            </cac:Party>
+                        </cac-place-ext:LocatedContractingParty>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "parties": [
+                            {
+                                "name": "Junta de Gobierno del Ayuntamiento de Orihuela"
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Ubicación orgánica} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac-place-ext:LocatedContractingParty>
+                            <cac:Party>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="DIR3">
+                                        L01030993
+                                    </cbc:ID>
+                                </cac:PartyIdentification>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="NIF">
+                                        P0309900I
+                                    </cbc:ID>
+                                </cac:PartyIdentification>
+                            </cac:Party>
+                        </cac-place-ext:LocatedContractingParty>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "parties": [
+                            {
+                                "identifier": {
+                                    "scheme": "ES-DIR3",
+                                    "id": "L01030993",
+                                    "additionalIdentifiers": [
+                                        {
+                                            "scheme": "ES-RMC",
+                                            "id": "P0309900I"
+                                        }
+                                    ]
+                                } ,
+                                "id": "L01030993",
+                                "roles": [
+                                    "procuringEntity"
+                                ]
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Otros campos} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac-place-ext:LocatedContractingParty>
+                            <cac:Party>
+                                <cbc:WebsiteURI>
+                                    http://www.orihuela.es/
+                                </cbc:WebsiteURI>
+                                <cac:PostalAddress>
+                                    <cbc:CityName>
+                                        Orihuela
+                                    </cbc:CityName>
+                                    <cbc:PostalZone>
+                                        03300
+                                    </cbc:PostalZone>
+                                    <cac:AddressLine>
+                                        <cbc:Line>
+                                            Marqués de Arneva, 1
+                                        </cbc:Line>
+                                    </cac:AddressLine>
+                                    <cac:Country>
+                                        <cbc:IdentificationCode
+                                        listURI="http://docs.oasis-open.org/ubl/os-ubl-2.0/
+                                        cl/gc/default/CountryIdentificationCode-2.0.gc">
+                                            ES
+                                        </cbc:IdentificationCode>
+                                    </cac:Country>
+                                </cac:PostalAddress>
+                                <cac:Contact>
+                                    <cbc:Name>
+                                        Junta de Gobierno del Ayuntamiento de Orihuela
+                                    </cbc:Name>
+                                    <cbc:Telephone>
+                                        966076100
+                                    </cbc:Telephone>
+                                    <cbc:Telefax>
+                                        966076101
+                                    </cbc:Telefax>
+                                    <cbc:ElectronicMail>
+                                        contratacion@orihuela.es
+                                    </cbc:ElectronicMail>
+                                </cac:Contact>
+                            </cac:Party>
+                        </cac-place-ext:LocatedContractingParty>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "parties": [
+                            {
+                                "countryName": "ES",
+                                "address": {
+                                    "streetAddress": "Marqués de Arneva, 1",
+                                    "locality": "Orihuela",
+                                    "postalCode": "03300"
+                                },
+                                "contactPoint": {
+                                    "email": "contratacion@orihuela.es",
+                                    "faxNumber": "966076101",
+                                    "name": "Junta de Gobierno del Ayuntamiento de Orihuela",
+                                    "telephone": "966076100",
+                                    "url": "http://www.orihuela.es/"
+                                }
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+            
+        \subsubsection{Resultado del procedimiento}
+            \paragraph{Identificador} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cac:AwardedTenderedProject>
+                                <cbc:ProcurementProjectLotID>
+                                    1
+                                </cbc:ProcurementProjectLotID>
+                            </cac:AwardedTenderedProject>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "id": "1"
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Resultado} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cac:ResultCode
+                            listURI="http://contrataciondelestado.es/codice/cl/2.02/
+                            TenderResultCode-2.02.gc">
+                                8
+                            </cac:ResultCode>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "status": "active"
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+            
+            \paragraph{Identidad del adjudicatario} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cac:WinningParty>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="NIF">
+                                        B37012515
+                                    </cbc:ID>
+                                </cac:PartyIdentification>
+                                <cac:PartyName>
+                                    <cbc:Name>
+                                        AGRUPESCA, S.L.
+                                    </cbc:Name>
+                                </cac:PartyName>
+                            </cac:WinningParty>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "suppliers": [
+                                    {
+                                        "id": "B37012515",
+                                        "name": "AGRUPESCA, S.L."
+                                    }
+                                ]
+                            }
+                        ],
+                        "parties": [
+                            {
+                                "identifier": {
+                                    "scheme": "ES-RMC",
+                                    "id": "B37012515"
+                                },
+                                "id": "B37012515",
+                                "name": "AGRUPESCA, S.L.",
+                                "roles": [
+                                    "supplier"
+                                ]
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Importe de adjudicación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cac:AwardedTenderedProject>
+                                <cac:LegalMonetaryTotal>
+                                    <cbc:PayableAmount currencyID="EUR">
+                                        18260.5
+                                    </cbc:PayableAmount>
+                                </cac:LegalMonetaryTotal>
+                            </cac:AwardedTenderedProject>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "value": {
+                                    "amount": "18260.5",
+                                    "currency": "EUR"
+                                }
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Número de licitadores participantes} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cbc:ReceivedTenderQuantity>
+                                5
+                            </cbc:ReceivedTenderQuantity>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "numberOfTenderers: 5
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Fecha de la adjudicación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cbc:AwardDate>
+                                2021-04-15
+                            </cbc:AwardDate>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "date": "2021-04-15T00:00:00Z"
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Descripción de la adjudicación} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:TenderResult>
+                            <cbc:Description>
+                                Mejor oferta
+                            </cbc:Description>
+                        </cac:TenderResult>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "awards": [
+                            {
+                                "description_es": "Mejor oferta"
+                            }
+                        ]
+                    }
+                \end{lstlisting}
+                
 \newpage

@@ -144,6 +144,7 @@ namespace OCDS_Mapper.src.Model
                 // Si no lo encuentra, devuelve null
                 if (!query.Any())
                 {
+                    _Log(this, $"Elemento {pathToElement.Last().LocalName} no encontrado", Level.Debug);
                     return null;
                 }
                 // Si existe, actualiza el elemento de búsqueda
@@ -191,6 +192,42 @@ namespace OCDS_Mapper.src.Model
 
 
         /* Funciones estáticas */
+
+        /*  función GetElement(IEnumerable<XName>) => XElement[]
+         *      Devuelve el elemento XML desde el elemento provisto, y con el nombre pasado como parámetro
+         *  @param element : elemento a partir del cual buscar
+         *  @param toSearch : nombre local del elemento a buscar
+         *  @return : elemento buscado, o null si no se puede encontrar
+         *      @ej : XElement(<cbc:Name>"..."</cbc:Name>)
+         */
+        public static XElement GetSpecificElement(XElement element, string toSearch)
+        {
+            // Realiza una consulta Linq desde el elemento pasado como parámetro
+            IEnumerable<XElement> query =
+                from node in element.Elements()
+                where node.Name.LocalName.Equals(toSearch)
+                select node;
+            
+            // Si no lo encuentra, devuelve null
+            if (!query.Any())
+            {
+                return null;
+            }
+            // Si existe, devuelve el elemento específico buscado
+            else
+            {
+                return query.First();
+            }
+        }
+
+
+        /*  función GetCodeValue() => string
+         *      Carga el documento de códigos provisto como parámetro y devuelve el valor
+         *      de la entrada cuyo código casa con el segundo parámetro
+         *  @param url : url del documento de códigos
+         *  @param code : código buscado
+         *  @return : valor del código buscado
+         */
         public static string GetCodeValue(string url, string code)
         {
             XElement document = XElement.Load(url);
@@ -198,6 +235,7 @@ namespace OCDS_Mapper.src.Model
                 from node in document.Elements()
                 where node.Name.LocalName.Equals("SimpleCodeList")
                 select node;
+            
             query =
                 from node in query.First().Elements()
                 where node.Elements().First().Value.Equals(code)
@@ -208,7 +246,7 @@ namespace OCDS_Mapper.src.Model
             {
                 return null;
             }
-            // Si existe, devuelve la URI correspondiente al siguiente fichero
+            // Si existe, devuelve el valor de la entrada
             else
             {
                 query =

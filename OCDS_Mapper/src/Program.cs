@@ -79,7 +79,7 @@ namespace OCDS_Mapper
                 IList<JObject> mappedEntries = new List<JObject>();
 
                 IDictionary<string, XNamespace> namespaces = parser.GetNamespaces();
-                IDictionary<IEnumerable<XName>, IEnumerable<string>> mappings = Mappings.GetMappings(namespaces);
+                IDictionary<IEnumerable<XName>, IEnumerable<string>> mappingRules = Mappings.GetMappingRules(namespaces);
 
                 IEnumerable<XElement> entrySet = parser.GetEntrySet(namespaces);
                 foreach (XElement entry in entrySet)
@@ -87,7 +87,7 @@ namespace OCDS_Mapper
                     IMapper mapper = new Mapper(Log);
                     parser.SetEntryRootElement(entry);
 
-                    foreach (KeyValuePair<IEnumerable<XName>, IEnumerable<string>> map in mappings)
+                    foreach (KeyValuePair<IEnumerable<XName>, IEnumerable<string>> map in mappingRules)
                     {
                         XElement[] elem = parser.GetElement(map.Key);
                         if (elem != null)
@@ -95,6 +95,7 @@ namespace OCDS_Mapper
                             mapper.MapElement(map.Value, elem);
                         }
                     }
+                    mapper.Commit();
                     mappedEntries.Add(mapper.MappedEntry);
                 }
                 Packager.Package(mappedEntries, count);
