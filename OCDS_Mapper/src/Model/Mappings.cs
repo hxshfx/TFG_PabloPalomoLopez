@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -24,7 +23,7 @@ namespace OCDS_Mapper.src.Model
                 public const string Id = "id";
                 public const string Status = "status";
                 public const string Suppliers = "suppliers";
-                public const String Value = "value";
+                public const string Value = "value";
             }
 
             /* Elementos en 'parties' */
@@ -80,6 +79,22 @@ namespace OCDS_Mapper.src.Model
                 public const string SubmissionMethodDetails = "submissionMethodDetails";
                 public const string Title = "title";
                 public const string Value = "value";
+
+                /* Elementos en 'tender'.'items' */
+                public const string Item = "items";
+                public static class Items
+                {
+                    public const string Classification = "classification";
+                }
+
+                /* Elementos en 'tender'.'lots' */
+                public const string Lot = "lots";
+                public static class Lots
+                {
+                    public const string Id = "id";
+                    public const string Name = "name";
+                    public const string Value_ = "value";
+                }
 
                 /* Elementos en 'tender'.'tenderPeriod' */
                 public const string TenderPeriod = "tenderPeriod";
@@ -273,7 +288,6 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "Party",
                         namespaces["cac"] + "PartyName",
                         namespaces["cbc"] + "Name"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Party,
@@ -286,7 +300,6 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "Party",
                         namespaces["cac"] + "PartyIdentification",
                         namespaces["cbc"] + "ID"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Party,
@@ -297,7 +310,6 @@ namespace OCDS_Mapper.src.Model
                    new LinkedList<XName>(new XName[]{
                         namespaces["cac-place-ext"] + "LocatedContractingParty",
                         namespaces["cac"] + "Party"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Party
@@ -307,7 +319,6 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult",
                         namespaces["cac"] + "AwardedTenderedProject"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
@@ -318,7 +329,6 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult",
                         namespaces["cbc"] + "ResultCode"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
@@ -330,7 +340,6 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "TenderResult",
                         namespaces["cac"] + "AwardedTenderedProject",
                         namespaces["cac"] + "LegalMonetaryTotal"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
@@ -341,7 +350,6 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult",
                         namespaces["cbc"] + "ReceivedTenderQuantity"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Tender,
@@ -352,7 +360,6 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult",
                         namespaces["cbc"] + "Description"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
@@ -363,7 +370,6 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult",
                         namespaces["cbc"] + "AwardDate"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
@@ -373,11 +379,59 @@ namespace OCDS_Mapper.src.Model
                 {
                     new LinkedList<XName>(new XName[]{
                         namespaces["cac"] + "TenderResult"
-
                     }),
                     new LinkedList<string>(new string[]{
                         MappingElement.Award,
                         MappingElement.Awards.Suppliers
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "ProcurementProjectLot",
+                        namespaces["cbc"] + "ID"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Tender,
+                        MappingElement.Tenders.Lot,
+                        MappingElement.Tenders.Lots.Id
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "ProcurementProjectLot",
+                        namespaces["cac"] + "ProcurementProject",
+                        namespaces["cbc"] + "Name"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Tender,
+                        MappingElement.Tenders.Lot,
+                        MappingElement.Tenders.Lots.Name
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "ProcurementProjectLot",
+                        namespaces["cac"] + "ProcurementProject",
+                        namespaces["cac"] + "BudgetAmount",
+                        namespaces["cbc"] + "TotalAmount"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Tender,
+                        MappingElement.Tenders.Lot,
+                        MappingElement.Tenders.Lots.Value_
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "ProcurementProjectLot",
+                        namespaces["cac"] + "ProcurementProject",
+                        namespaces["cac"] + "RequiredCommodityClassification",
+                        namespaces["cbc"] + "ItemClassificationCode"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElement.Tender,
+                        MappingElement.Tenders.Item,
+                        MappingElement.Tenders.Items.Classification
                     })
                 }
             };

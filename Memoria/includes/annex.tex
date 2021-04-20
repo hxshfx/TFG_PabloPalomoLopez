@@ -226,6 +226,140 @@
                     }
                 \end{lstlisting}
                 
+        \subsubsection{Lotes y artículos}
+            \paragraph{Número de lote} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProjectLot>
+                            <cbc:ID>
+                                5
+                            </cbc:ID>
+                        </cac:ProcurementProjectLot>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "lots": [
+                                {
+                                    "id": "lot-5"
+                                }
+                            ],
+                            "items": [
+                                {
+                                    "id": "5",
+                                    "relatedLot": "lot-5"
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Objeto del lote} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProjectLot>
+                            <cac:ProcurementProject>
+                                <cbc:Name>
+                                    Equipos respiratorios autónomos
+                                </cbc:Name>
+                            </cac:ProcurementProject>
+                        </cac:ProcurementProjectLot>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "lots": [
+                                {
+                                    "name": "Equipos respiratorios autónomos"
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Importe del lote} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProjectLot>
+                            <cac:ProcurementProject>
+                                <cac:BudgetAmount>
+                                    <cbc:TotalAmount>
+                                        2250
+                                    </cbc:TotalAmount>
+                                </cac:BudgetAmount>
+                            <cac:ProcurementProject>
+                        </cac:ProcurementProjectLot>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "lots": [
+                                {
+                                    "value": {
+                                        "value": 2250.0,
+                                        "currency": "EUR"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
+            \paragraph{Clasificación \textit{CPV}} \mbox{}\\
+                \begin{lstlisting}[language=lXML]
+                    <cac-place-ext:ContractFolderStatus>
+                        <cac:ProcurementProjectLot>
+                            <cac:ProcurementProject>
+                                <cbc:RequiredCommodityClassification>
+                                    <cbc:ItemClassificationCode 
+                                    listURI="http://contrataciondelestado.es/codice/cl/1.04/
+                                    CPV2007-1.04.gc">
+                                        35111100
+                                    </cbc:ItemClassificationCode>
+                                </cbc:RequiredCommodityClassification>
+                            </cac:ProcurementProject>
+                        </cac:ProcurementProjectLot>
+                    </cac-place-ext:ContractFolderStatus>
+                \end{lstlisting}
+                
+                \begin{center}
+                    $\big\Downarrow$
+                \end{center}
+                
+                \begin{lstlisting}[language=lJSON]
+                    {
+                        "tender": {
+                            "items": [
+                                {
+                                    "classification": {
+                                        "id": "35111100",
+                                        "schema": "CPV",
+                                        "description_es": "Aparatos respiratorios para extinción de incendios."
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                \end{lstlisting}
+                
         \subsubsection{Procesos de licitación}
             \paragraph{Tipo de procedimiento} \mbox{}\\
                 \begin{lstlisting}[language=lXML]
@@ -642,7 +776,7 @@
                         "awards": [
                             {
                                 "value": {
-                                    "amount": "18260.5",
+                                    "amount": 18260.5,
                                     "currency": "EUR"
                                 }
                             }

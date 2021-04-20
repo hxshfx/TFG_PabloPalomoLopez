@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using log4net.Core;
+using Nito.AsyncEx;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
 
@@ -37,7 +38,7 @@ namespace OCDS_Mapper.src.Model
          *      Colección thread-safe que permite una extracción
          *      ordenada de los documentos provistos
          */
-        public BlockingCollection<string> Files { get; set; }
+        public AsyncCollection<string> Files { get; set; }
 
         /* propiedad AllProvider => Thread
          *      Thread utilizado para la provisión en el caso de utilizar PROVIDER_ALL
@@ -58,7 +59,6 @@ namespace OCDS_Mapper.src.Model
          *      Mecanismo de sincronización para la interacción con el Parser
          */
         private ManualResetEvent _mre;
-
         
         /*  atributo _fileName => string
          *      Nombre del fichero siendo provisto, descargado o local
@@ -76,7 +76,7 @@ namespace OCDS_Mapper.src.Model
         /*  constante _LATEST_PATH => string
          *      Path del documento publicado más reciente
          */
-        private const string _LATEST_PATH = "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom";
+        private readonly string _LATEST_PATH = ConfigurationManager.AppSettings["LatestDocument_URL"];
 
 
         /*  atributo _Log => Action<object, string, Level>
@@ -95,7 +95,7 @@ namespace OCDS_Mapper.src.Model
             _Log = Log;
 
             // Inicializa la estructura de ficheros y crea el directirio temporal si no existe
-            Files = new BlockingCollection<string>();
+            Files = new AsyncCollection<string>();
             if (!Directory.Exists("./tmp"))
             {
                 Directory.CreateDirectory("./tmp");
@@ -123,6 +123,11 @@ namespace OCDS_Mapper.src.Model
                 _fileName = _LATEST_PATH;
                 _webClient.DownloadFileAsync(new Uri(_fileName), _OUTPUT_PATH);
             }
+            else
+            {
+                _Log.Invoke(this, "This constructor only takes PROVIDE_ALL or PROVIDE_LATEST codes", Level.Error);
+                throw new InvalidOperationCodeException();
+            }
         }
 
 
@@ -135,7 +140,7 @@ namespace OCDS_Mapper.src.Model
             _Log = Log;
 
             // Inicializa la estructura de ficheros y crea el directirio temporal si no existe
-            Files = new BlockingCollection<string>();
+            Files = new AsyncCollection<string>();
             if (!Directory.Exists("./tmp"))
             {
                 Directory.CreateDirectory("./tmp");
@@ -148,6 +153,10 @@ namespace OCDS_Mapper.src.Model
                 {
                     _fileName = filePath;
                     Files.Add(filePath);
+
+                    _Log(this, $"Retrieving local file {filePath}", Level.Info);
+
+                    Files.CompleteAdding();
                 }
                 // Si el fichero provisto no existe en local, se asevera si está formado como una URI correcta
                 else if (Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out Uri uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
@@ -158,6 +167,8 @@ namespace OCDS_Mapper.src.Model
                     _webClient = new WebClient();
                     _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
                     _webClient.DownloadFileAsync(uri, _OUTPUT_PATH);
+
+                    _Log(this, $"Downloading {filePath} file", Level.Info);
                 }
                 else
                 {
@@ -177,38 +188,38 @@ namespace OCDS_Mapper.src.Model
         /* Implementación de IProvider */
 
 
-        /*  función HasNext() => bool
-         *      Utilizada para saber si el proveedor aún tiene documentos listos o ha terminado su función
-         *  @return : true si aún quedan elementos, false en otro caso
+        /*  función TakeFile() => string
+         *      Función bloqueante que devuelve un documento provisto cuando éste está disponible
+         *  @return : path al documento provisto, o null si no quedan más documentos que proveer
          */
-        public bool HasNext()
+        public async Task<string> TakeFile()
         {
-            // caso PROVIDE_SPECIFIC
-            if (_webClient == null)
+            try
             {
-                return Files.Any();
+                return await Files.TakeAsync();
             }
-            // caso PROVIDE_LATEST (+ PROVIDE_ALL terminado)
-            else if (_mre == null)
+            catch (InvalidOperationException)
             {
-                return Files.Any() || _webClient.IsBusy;
-            }
-            // caso PROVIDE_ALL sin terminar
-            else
-            {
-                return true;
+                return null;
             }
         }
 
 
-        /*  función TakeFile() => string
-         *      Función bloqueante que devuelve un documento provisto cuando éste está disponible
-         *  @return : path al documento provisto
+        /*  función RemoveFile(string) => void
+         *      Función que elimina un archivo provisto ya mapeado
+         *  param filePath : path del documento a eliminar
          */
-        public string TakeFile()
+        public void RemoveFile(string filePath)
         {
-            Files.TryTake(out string file, -1);
-            return file;
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                _Log(this, $"Completed file {filePath} deleted", Level.Info);
+            }
+            else
+            {
+                _Log(this, $"Tried to delete unexisting file {filePath}", Level.Error);
+            }
         }
 
 
@@ -241,6 +252,8 @@ namespace OCDS_Mapper.src.Model
             {
                 // Añade el elemento y libera los recursos puesto que no habrá más descargas
                 Files.Add(_OUTPUT_PATH);
+
+                Files.CompleteAdding();
                 _webClient.Dispose();
             }
             // caso PROVIDE_ALL
@@ -292,6 +305,7 @@ namespace OCDS_Mapper.src.Model
             while (uri != null);
 
             // Una vez finalizado el cómputo, libera los recursos
+            Files.CompleteAdding();
             _mre = null;
             _webClient.Dispose();
         }

@@ -129,6 +129,7 @@
         EndDate,
         ID,
         IdentificationCode,
+        ItemClassificationCode,
         Language,
         LegalDocumentReference,
         LegalMonetaryTotal,
@@ -143,9 +144,11 @@
         PostalAddress,
         PostalZone,
         ProcedureCode,
-        ProcurementProjectLotID,
         ProcurementProject,
+        ProcurementProjectLot,
+        ProcurementProjectLotID,
         ReceivedTenderQuantity,
+        RequiredCommodityClassification,
         ResultCode,
         StartDate,
         SubmissionMethodCode,
@@ -196,6 +199,7 @@
         address,
         amount,
         budget,
+        classification,
         contactPoint,
         countryName,
         currency,
@@ -208,15 +212,18 @@
         faxNumber,
         id,
         identifier,
+        items,
         locality,
+        lots,
         mainProcurementCategory,
         name,
         ocid,
         postalCode,
         procurementMethod,
         procurementMethodDetails_es,
+        relatedLot,
         roles,
-        scheme,
+        schema,
         startDate,
         streetAddress,
         submissionMethod,
@@ -243,8 +250,9 @@
 \usepackage{titlesec}
 \setcounter{secnumdepth}{4}
 
-% Index name change
+% Indexes name change
 \renewcommand*\contentsname{Índice}
+\renewcommand*\listtablename{Lista de tablas}
 
 % Configure style aspects of the document
 \usepackage{caption}            % To configure the captions
@@ -258,6 +266,9 @@
 \lhead{\tfg}                    % Set the header right-side contents
 \rhead{\name}                   % Set the header left-side contents
 \cfoot{\thepage}                % Set the footer page number
+
+% Table label change
+\captionsetup[table]{name=Tabla}
 
 % Create a custom command shortcut
 \renewcommand{\arraystretch}{1.3} % Modify the vertical spacing of the tables
@@ -332,6 +343,7 @@
     \input{includes/index_figures}
     \input{includes/index_equations}
     \input{includes/intro}
+    %\input{includes/software}
     \input{includes/correspondencias}
     \input{includes/conclusions}
     \input{includes/references}

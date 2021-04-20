@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using log4net;
 using log4net.Config;
 using log4net.Core;
+using Newtonsoft.Json.Linq;
 using OCDS_Mapper.src.Model;
 using OCDS_Mapper.src.Interfaces;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace OCDS_Mapper
 {
@@ -17,7 +18,7 @@ namespace OCDS_Mapper
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             InitLogger();
 
@@ -62,14 +63,18 @@ namespace OCDS_Mapper
                 return;
             }
 
-            Compute(provider, code);
+            await Compute(provider, code);
         }
 
-        private static void Compute(IProvider provider, Provider.EProviderOperationCode code)
+        private async static Task Compute(IProvider provider, Provider.EProviderOperationCode code)
         {
-            for (int count = 1; provider.HasNext(); count++)
+            int count = 1;
+            string mappedPath = "";
+
+            string documentPath = await provider.TakeFile();
+            do
             {
-                IParser parser = new Parser(Log, provider.TakeFile());
+                IParser parser = new Parser(Log, documentPath);
 
                 if (code == Provider.EProviderOperationCode.PROVIDE_ALL)
                 {
@@ -89,7 +94,7 @@ namespace OCDS_Mapper
 
                     foreach (KeyValuePair<IEnumerable<XName>, IEnumerable<string>> map in mappingRules)
                     {
-                        XElement[] elem = parser.GetElement(map.Key);
+                        XElement[] elem = parser.GetElements(map.Key);
                         if (elem != null)
                         {
                             mapper.MapElement(map.Value, elem);
@@ -98,9 +103,13 @@ namespace OCDS_Mapper
                     mapper.Commit();
                     mappedEntries.Add(mapper.MappedEntry);
                 }
-                Packager.Package(mappedEntries, count);
-                Log(null, "Document mapped and written", Level.Info);
+                mappedPath = Packager.Package(mappedEntries, count++);
+                Log(null, $"Document {mappedPath} mapped and written", Level.Info);
+
+                provider.RemoveFile(documentPath);
+                documentPath = await provider.TakeFile();
             }
+            while (documentPath != null);
         }
 
         private static void DisplayHelp()

@@ -39,6 +39,16 @@ namespace OCDS_Mapper.src.Model
          */
         private readonly JObject _contractingParty;
 
+        /*  atributo _lots => JObject
+         *      Almacén temporal del objeto representando la colección de lotes
+         */
+        private readonly JArray _lots;
+
+        /*  atributo _items => JObject
+         *      Almacén temporal del objeto representando la colección de items
+         */
+        private readonly JArray _items;
+
         /*  atributo _supplierParties => JArray
          *      Almacén temporal de los objetos representando las entidades adjudicatarias
          */
@@ -60,6 +70,12 @@ namespace OCDS_Mapper.src.Model
 
             // Inicializa el objeto JSON para almacenar temporalmente la entidad adjudicadora
             _contractingParty = new JObject();
+
+            // Inicializa el objeto JSON para almacenar temporalmente la coleccion de lotes
+            _lots = new JArray();
+
+            // Inicializa el objeto JSON para almacenar temporalmente la coleccion de items
+            _items = new JArray();
 
             // Inicializa el objeto JSON para almacenar temporalmente las entidades adjudicatarias
             _supplierParties = new JArray();
@@ -112,7 +128,6 @@ namespace OCDS_Mapper.src.Model
             catch (Exception e)
             {
                 _Log(this, e.Message, Level.Fatal);
-                _Log(this, e.StackTrace, Level.Fatal);
                 return;
             }
 
@@ -171,6 +186,20 @@ namespace OCDS_Mapper.src.Model
             if (_awards.Any())
             {
                 MappedEntry.Add("awards", _awards);
+            }
+
+            if (_items.Any() && _lots.Any())
+            {
+                JObject tender = (JObject) MappedEntry["tender"];
+
+                if (tender == null)
+                {
+                    MappedEntry.Add(new JProperty("tender", new JObject()));
+                    tender = (JObject) MappedEntry["tender"];
+                }
+
+                tender.Add("items", _items);
+                tender.Add("lots", _lots);
             }
 
             JArray parties = new JArray();
@@ -390,6 +419,36 @@ namespace OCDS_Mapper.src.Model
                     path = pathEnumerator.Current;
                     switch (path)
                     {
+                        case Mappings.MappingElement.Tenders.Item:
+                            pathEnumerator.MoveNext();
+                            path = pathEnumerator.Current;
+                            switch (path)
+                            {
+                                case Mappings.MappingElement.Tenders.Items.Classification:
+                                    mappingFunction = MapTenderItemsClassification;
+                                    break;
+                                default:
+                                    throw new WrongMappingException(path);
+                            }
+                            break;
+                        case Mappings.MappingElement.Tenders.Lot:
+                            pathEnumerator.MoveNext();
+                            path = pathEnumerator.Current;
+                            switch (path)
+                            {
+                                case Mappings.MappingElement.Tenders.Lots.Id:
+                                    mappingFunction = MapTenderLotsId;
+                                    break;
+                                case Mappings.MappingElement.Tenders.Lots.Name:
+                                    mappingFunction = MapTenderLotsName;
+                                    break;
+                                case Mappings.MappingElement.Tenders.Lots.Value_:
+                                    mappingFunction = MapTenderLotsValue;
+                                    break;
+                                default:
+                                    throw new WrongMappingException(path);
+                            }
+                            break;
                         case Mappings.MappingElement.Tenders.TenderPeriod:
                             pathEnumerator.MoveNext();
                             path = pathEnumerator.Current;
@@ -442,19 +501,34 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función SimulateElement(int) => JObject
+        /*  función SimulateElement(string, int) => JObject
          *      Simula la creación de un elemento para el testing que
          *      en condiciones normales se habría creado ya
          *  @return : elemento creado
          */
-        private JObject SimulateElement(int id)
+        private JObject SimulateElement(string type, int id)
         {
-            JObject award = new JObject();
-            award.Add("id", $"{id}");
-            _awards.Add(award);
+            JObject jobj = new JObject();
 
-            return award;
+            if (type.Equals("award"))
+            {
+                jobj.Add("id", $"{id}");
+                _awards.Add(jobj);
+            }
+            else if (type.Equals("lot"))
+            {
+                jobj.Add("id", $"lot-{id}");
+                _lots.Add(jobj);
+            }
+            else if (type.Equals("item"))
+            {
+                jobj.Add("id", $"{id}");
+                _items.Add(jobj);
+            }
+            
+            return jobj;
         }
+
 
 
         /* Funciones específicas de mapeo */
@@ -500,7 +574,7 @@ namespace OCDS_Mapper.src.Model
             return new JValue($"ES-{toMap[0].Value}");
         }
 
-        // Mapeo de los elementos awards[i].date
+        // Mapeo del elemento awards[i].date
         private JToken MapAwardDate(XElement[] toMap)
         {
             JObject award;
@@ -511,7 +585,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement(1);
+                    award = SimulateElement("award", 1);
                 }
 
                 award.Add("date", $"{toMap[0].Value}T00:00:00Z");
@@ -524,7 +598,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement(count++);
+                        award = SimulateElement("award", count++);
                     }
 
                     date = Parser.GetSpecificElement(awardElement, "AwardDate");
@@ -539,7 +613,7 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo de los elementos awards[i].description
+        // Mapeo del elemento awards[i].description
         private JToken MapAwardDescription(XElement[] toMap)
         {
             JObject award;
@@ -550,7 +624,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement(1);
+                    award = SimulateElement("award", 1);
                 }
 
                 award.Add("description_es", toMap[0].Value);
@@ -563,7 +637,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement(count++);
+                        award = SimulateElement("award", count++);
                     }
 
                     description = Parser.GetSpecificElement(awardElement, "Description");
@@ -578,7 +652,7 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo de los elementos awards[i].id
+        // Mapeo del elemento awards[i].id
         private JToken MapAwardId(XElement[] toMap)
         {
             JObject award;
@@ -609,7 +683,7 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo de los elementos awards[i].status
+        // Mapeo del elemento awards[i].status
         private JToken MapAwardStatus(XElement[] toMap)
         {
             JObject award = (JObject) _awards.First;
@@ -618,7 +692,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement(1);
+                    award = SimulateElement("award", 1);
                 }
 
                 if (toMap[0].Value.Equals("1") || toMap[0].Value.Equals("6"))
@@ -652,7 +726,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement(count++);
+                        award = SimulateElement("award", count++);
                     }
 
                     awardedTenderedProject = Parser.GetSpecificElement(awardElement, "AwardedTenderedProject");
@@ -692,7 +766,7 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo de los elementos awards[i].suppliers
+        // Mapeo del elemento awards[i].suppliers
         private JToken MapAwardSuppliers(XElement[] toMap)
         {
             int count = 1;
@@ -705,7 +779,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement(count++);
+                    award = SimulateElement("award", count++);
                 }
 
                 winningParty = Parser.GetSpecificElement(tenderElement, "WinningParty");
@@ -758,7 +832,7 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo de los elementos awards[i].value
+        // Mapeo del elemento awards[i].value
         private JToken MapAwardValue(XElement[] toMap)
         {
             JObject award, value;
@@ -771,15 +845,22 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement(1);
+                    award = SimulateElement("award", 1);
                 }
                 
                 payableAmount = Parser.GetSpecificElement(toMap[0], "PayableAmount");
+                if (payableAmount != null)
+                {
+                    if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
+                    {
+                        _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Warn);
+                        return null;
+                    }
+                    value.Add("amount", Convert.ToDouble(payableAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
+                    value.Add("currency", "EUR");
 
-                value.Add("amount", payableAmount.Value);
-                value.Add("currency", "EUR");
-
-                award.Add("value", value);
+                    award.Add("value", value);
+                }
             }
             else
             {
@@ -789,7 +870,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement(count++);
+                        award = SimulateElement("award", count++);
                     }
 
                     value = new JObject();
@@ -802,7 +883,13 @@ namespace OCDS_Mapper.src.Model
                         payableAmount = Parser.GetSpecificElement(legalMonetaryTotal, "PayableAmount");
                         if (payableAmount != null)
                         {
-                            value.Add("amount", payableAmount.Value);
+                            if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
+                            {
+                                _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Warn);
+                                return null;
+                            }
+
+                            value.Add("amount", Convert.ToDouble(payableAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
                             value.Add("currency", "EUR");
 
                             award.Add("value", value);
@@ -984,7 +1071,227 @@ namespace OCDS_Mapper.src.Model
                 _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element planning.budget.amount unrecognized", Level.Warn);
                 return null;
             }
-            return new JObject(new JProperty("amount", element.Value), new JProperty("currency", "EUR"));
+            return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));
+        }
+
+        // Mapeo del elemento tender.items.classification
+        private JToken MapTenderItemsClassification(XElement[] toMap)
+        {
+            string code;
+            JObject item, classification;
+
+            item = (JObject) _items.First;
+
+            if (toMap.Length == 1)
+            {
+                if (item == null)
+                {
+                    item = SimulateElement("item", 1);
+                    SimulateElement("lot", 1);
+                }
+
+                classification = new JObject();
+
+                classification.Add("id", toMap[0].Value);
+                classification.Add("scheme", "CPV");
+
+                code = Parser.GetCodeValue("CPV", toMap[0].Value);
+                if (code == null)
+                {
+                    _Log(this, $"CPV element {toMap[0].Value} unrecognized", Level.Warn);
+                }
+                classification.Add("description_es", code);
+
+                item.Add("classification", classification);
+            }
+            else
+            {
+                int count = 1;
+                XElement procurementProject, requiredCommodityClassification, itemClassificationCode;
+                foreach (XElement awardElement in toMap)
+                {
+                    if (item == null)
+                    {
+                        item = SimulateElement("item", count);
+                        SimulateElement("lot", count++);
+                    }
+
+                    classification = new JObject();
+
+                    procurementProject = Parser.GetSpecificElement(awardElement, "ProcurementProject");
+                    if (procurementProject != null)
+                    {
+                        requiredCommodityClassification = Parser.GetSpecificElement(procurementProject, "RequiredCommodityClassification");
+                        if (requiredCommodityClassification != null)
+                        {
+                            itemClassificationCode = Parser.GetSpecificElement(requiredCommodityClassification, "ItemClassificationCode");
+                            if (itemClassificationCode != null)
+                            {
+                                classification.Add("id", itemClassificationCode.Value);
+                                classification.Add("scheme", "CPV");
+
+                                code = Parser.GetCodeValue("CPV", itemClassificationCode.Value);
+                                if (code == null)
+                                {
+                                    _Log(this, $"CPV element {itemClassificationCode.Value} unrecognized", Level.Warn);
+                                }
+                                classification.Add("description_es", code);
+
+                                item.Add("classification", classification);
+                            }
+                        }
+                    }
+
+                    item = (JObject) item.Next;
+                }
+            }
+            return null;
+        }
+
+        // Mapeo del elemento tender.lots.id
+        // Añade de manera adicional los elementos tender.items.id y tender.items.relatedLot
+        private JToken MapTenderLotsId(XElement[] toMap)
+        {
+            JObject item, lot;
+
+            if (toMap.Length == 1)
+            {
+                item = new JObject();
+                lot = new JObject();
+
+                item.Add("id", toMap[0].Value);
+                item.Add("relatedLot", $"lot-{toMap[0].Value}");
+                _items.Add(item);
+
+                lot.Add("id", $"lot-{toMap[0].Value}");
+                _lots.Add(lot);
+            }
+            else
+            {
+                XElement id;
+                foreach (XElement awardElement in toMap)
+                {
+                    item = new JObject();
+                    lot = new JObject();
+
+                    id = Parser.GetSpecificElement(awardElement, "ID");
+                    
+                    if (id != null)
+                    {
+                        item.Add("id", id.Value);
+                        item.Add("relatedLot", $"lot-{id.Value}");
+                        _items.Add(item);
+
+                        lot.Add("id", $"lot-{id.Value}");
+                        _lots.Add(lot);
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Mapeo del elemento tender.lots.name
+        private JToken MapTenderLotsName(XElement[] toMap)
+        {
+            JObject lot;
+
+            lot = (JObject) _lots.First;
+
+            if (toMap.Length == 1)
+            {
+                if (lot == null)
+                {
+                    lot = SimulateElement("lot", 1);
+                    SimulateElement("item", 1);
+                }
+
+                lot.Add("name", toMap[0].Value);
+            }
+            else
+            {
+                int count = 1;
+                XElement procurementProject, name;
+                foreach (XElement awardElement in toMap)
+                {
+                    if (lot == null)
+                    {
+                        lot = SimulateElement("lot", count);
+                        SimulateElement("item", count++);
+                    }
+
+                    procurementProject = Parser.GetSpecificElement(awardElement, "ProcurementProject");
+
+                    if (procurementProject != null)
+                    {
+                        name = Parser.GetSpecificElement(procurementProject, "Name");
+                        if (name != null)
+                        {
+                            lot.Add("name", name.Value);
+                        }
+                    }
+                    
+                    lot = (JObject) lot.Next;
+                }
+            }
+            return null;
+        }
+
+        // Mapeo del elemento tender.lots.value
+        private JToken MapTenderLotsValue(XElement[] toMap)
+        {
+            JObject lot, value;
+
+            lot = (JObject) _lots.First;
+
+            if (toMap.Length == 1)
+            {
+                if (lot == null)
+                {
+                    lot = SimulateElement("lot", 1);
+                    SimulateElement("item", 1);
+                }
+
+                value = new JObject();
+
+                value.Add("value", Convert.ToDouble(toMap[0].Value, System.Globalization.CultureInfo.InvariantCulture));
+                value.Add("currency", "EUR");
+
+                lot.Add("value", value);
+            }
+            else
+            {
+                int count = 1;
+                XElement procurementProject, budgetAmount, totalAmount;
+                foreach (XElement awardElement in toMap)
+                {
+                    if (lot == null)
+                    {
+                        lot = SimulateElement("lot", count);
+                        SimulateElement("item", count++);
+                    }
+                    value = new JObject();
+
+                    procurementProject = Parser.GetSpecificElement(awardElement, "ProcurementProject");
+                    if (procurementProject != null)
+                    {
+                        budgetAmount = Parser.GetSpecificElement(procurementProject, "BudgetAmount");
+                        if (budgetAmount != null)
+                        {
+                            totalAmount = Parser.GetSpecificElement(budgetAmount, "TotalAmount");
+                            if (totalAmount != null)
+                            {
+                                value.Add("value", Convert.ToDouble(totalAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
+                                value.Add("currency", "EUR");
+
+                                lot.Add("value", value);
+                            }
+                        }
+                    }
+
+                    lot = (JObject) lot.Next;
+                }
+            }
+            return null;
         }
 
         // Mapeo del elemento tender.mainProcurementCategory
@@ -1059,10 +1366,11 @@ namespace OCDS_Mapper.src.Model
             XElement element = toMap[0];
             if (!element.Value.Equals("0"))
             {
-                string mapped = Parser.GetCodeValue("https://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc", element.Value);
+                string mapped = Parser.GetCodeValue("ContractingSTC", element.Value);
                 if (mapped == null)
                 {
                     _Log(this, $"Mapping code {element.Value} at element tender.procurementMethodDetails unrecognized", Level.Warn);
+                    return null;
                 }
                 return new JValue(mapped);
             }
@@ -1176,8 +1484,9 @@ namespace OCDS_Mapper.src.Model
             if (element.FirstAttribute == null || element.FirstAttribute.Value != "EUR")
             {
                 _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.value unrecognized", Level.Warn);
+                return null;
             }
-            return new JObject(new JProperty("amount", element.Value), new JProperty("currency", "EUR"));
+            return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));
         }
     }
 }

@@ -10,17 +10,21 @@ namespace OCDS_Mapper.src.Model
     public class Packager : IPackager
     {
 
-        public static void Package(IList<JObject> data, int count)
+        public static string Package(IList<JObject> data, int count)
         {
             JArray array = new JArray();
             foreach (JObject entry in data)
             {
                 array.Add(entry);
             }
-            using (StreamWriter sw = new StreamWriter($"./tmp/mapped{count}.json"))
+            
+            string filePath = $"./tmp/mapped{count}.json";
+            using (StreamWriter sw = new StreamWriter(filePath))
             {
                 sw.WriteLine(array.ToString());
             }
+
+            return filePath;
         }
     }
 }

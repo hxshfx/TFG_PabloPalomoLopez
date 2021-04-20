@@ -48,7 +48,7 @@ namespace OCDS_Mapper.src.Interfaces
          */
         void SetEntryRootElement(XElement entry);
 
-        /*  función GetElement(IEnumerable<XName>) => XElement[]
+        /*  función GetElements(IEnumerable<XName>) => XElement[]
          *      Devuelve el (los) elemento(s) XML descrito por la ruta pasada como parámetro
          *  @param pathToElement : lista enlazada con la ruta del elemento deseado:
          *      @ej : [ XName(XNamespace("cac") + "ProcurementProject"),
@@ -56,7 +56,7 @@ namespace OCDS_Mapper.src.Interfaces
          *  @return : elemento buscado, o null si no se puede encontrar
          *      @ej : XElement(<cbc:Name>"..."</cbc:Name>)
          */
-        XElement[] GetElement(IEnumerable<XName> pathToElement);
+        XElement[] GetElements(IEnumerable<XName> pathToElement);
 
         /*  función GetNextFile() => Uri
          *      Devuelve la URI correspondiente al siguiente fichero, descrito por el

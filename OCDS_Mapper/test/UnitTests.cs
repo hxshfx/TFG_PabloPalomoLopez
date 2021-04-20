@@ -1,17 +1,16 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
+using Nito.AsyncEx;
+using Xunit;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
 using OCDS_Mapper.src.Model;
-using Xunit;
-
 
 namespace OCDS_Mapper.test
 {
@@ -37,6 +36,39 @@ namespace OCDS_Mapper.test
                 Assert.NotNull(_mapper.MappedEntry);
                 Assert.IsType<JObject>(_mapper.MappedEntry);
                 Assert.True("{}".Equals(_mapper.MappedEntry.ToString()));
+            }
+
+            [Fact]
+            public void TestMapElement1()
+            {
+                IEnumerable<string> pathMap = new LinkedList<string>(new string[] {});
+
+                _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "null") });
+
+                Assert.Empty(_mapper.MappedEntry);
+                Assert.Null(_mapper.MappedEntry.First);
+            }
+
+            [Fact]
+            public void TestMapElement2()
+            {
+                IEnumerable<string> pathMap = new LinkedList<string>(new string[] { "a", "b", "c", "d" });
+
+                _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "null") });
+
+                Assert.Empty(_mapper.MappedEntry);
+                Assert.Null(_mapper.MappedEntry.First);
+            }
+
+            [Fact]
+            public void TestMapElement3()
+            {
+                IEnumerable<string> pathMap = new LinkedList<string>(new string[] { "null" });
+
+                _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "null") });
+
+                Assert.Empty(_mapper.MappedEntry);
+                Assert.Null(_mapper.MappedEntry.First);
             }
 
             public class TagTests
@@ -1125,7 +1157,8 @@ namespace OCDS_Mapper.test
                     JValue amountValue = (JValue) amountProperty.First;
                     JValue currencyValue = (JValue) currencyProperty.First;
 
-                    Assert.True("657458.17".Equals(amountValue.Value));
+                    Double value = 657458.17;
+                    Assert.True(value.Equals(amountValue.Value));
                     Assert.True("EUR".Equals(currencyValue.Value));
                 }
 
@@ -1245,10 +1278,64 @@ namespace OCDS_Mapper.test
                     JValue amountValue2 = (JValue) amountProperty2.First;
                     JValue currencyValue2 = (JValue) currencyProperty2.First;
 
-                    Assert.True("48970.35".Equals(amountValue1.Value));
+                    Double value1 = 48970.35;
+                    Double value2 = 48171.3;
+                    Assert.True(value1.Equals(amountValue1.Value));
                     Assert.True("EUR".Equals(currencyValue1.Value));
-                    Assert.True("48171.3".Equals(amountValue2.Value));
+                    Assert.True(value2.Equals(amountValue2.Value));
                     Assert.True("EUR".Equals(currencyValue2.Value));
+                }
+            
+                [Fact]
+                public void TestAwardValue3()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "awards",
+                        "value"
+                    });
+                    string elementDump = "<cac:LegalMonetaryTotal xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">543353.86</cbc:TaxExclusiveAmount>\n</cac:LegalMonetaryTotal>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty awards = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("awards".Equals(awards.Name));
+                    Assert.Single(awards);
+                    Assert.NotNull(awards.First);
+                    Assert.IsType<JArray>(awards.First);
+
+                    JArray awardsArray = (JArray) awards.First;
+
+                    Assert.Single(awardsArray);
+                    Assert.NotNull(awardsArray.First);
+                    Assert.IsType<JObject>(awardsArray.First);
+
+                    JObject awardsObject = (JObject) awardsArray.First;
+
+                    Assert.Single(awardsObject);
+                    Assert.IsType<JProperty>(awardsObject.First);
+                    Assert.IsType<JProperty>(awardsObject.Last);
+    
+                    JProperty idProperty = (JProperty) awardsObject.First;
+
+                    Assert.True("id".Equals(idProperty.Name));
+                    Assert.Single(idProperty);
+                    Assert.NotNull(idProperty.First);
+                    Assert.IsType<JValue>(idProperty.First);
+
+                    JValue idValue = (JValue) idProperty.First;
+
+                    Assert.True("1".Equals(idValue.Value));
                 }
             }
 
@@ -1796,7 +1883,8 @@ namespace OCDS_Mapper.test
                     JValue amountValue = (JValue) amountProperty.First;
                     JValue currencyValue = (JValue) currencyProperty.First;
 
-                    Assert.True("189250".Equals(amountValue.Value));
+                    Double value = 189250;
+                    Assert.True(value.Equals(amountValue.Value));
                     Assert.True("EUR".Equals(currencyValue.Value));
                 }
 
@@ -1837,6 +1925,1168 @@ namespace OCDS_Mapper.test
 
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
+                }
+            }
+
+            public class TenderItemsClassificationTests
+            {
+                private IMapper _mapper;
+
+                public TenderItemsClassificationTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log);
+                }
+
+                [Fact]
+                public void TestTenderItemsClassification1()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "items",
+                        "classification"
+                    });
+
+                    _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "45000000") });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.Single(lotsArray);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+
+                    JObject lotIdObject = (JObject) lotsArray.First;
+
+                    Assert.Single(lotIdObject);
+                    Assert.NotNull(lotIdObject.First);
+                    Assert.IsType<JProperty>(lotIdObject.First);
+
+                    JProperty lotIdProperty = (JProperty) lotIdObject.First;
+
+                    Assert.Single(lotIdProperty);
+                    Assert.NotNull(lotIdProperty.First);
+                    Assert.IsType<JValue>(lotIdProperty.First);
+
+                    JValue lotIdValue = (JValue) lotIdProperty.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue.Value));
+
+                    Assert.Single(itemsArray);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+
+                    JObject itemObject = (JObject) itemsArray.First;
+
+                    Assert.True(itemObject.Count == 2);
+                    Assert.IsType<JProperty>(itemObject.First);
+                    Assert.IsType<JProperty>(itemObject.Last);
+
+                    JProperty itemIdProperty = (JProperty) itemObject.First;
+                    JProperty itemClassificationProperty = (JProperty) itemObject.Last;
+
+                    Assert.Single(itemIdProperty);
+                    Assert.NotNull(itemIdProperty.First);
+                    Assert.IsType<JValue>(itemIdProperty.First);
+
+                    JValue itemIdValue = (JValue) itemIdProperty.First;
+
+                    Assert.True("1".Equals(itemIdValue.Value));
+
+                    Assert.Single(itemClassificationProperty);
+                    Assert.NotNull(itemClassificationProperty.First);
+                    Assert.IsType<JObject>(itemClassificationProperty.First);
+
+                    JObject itemClassificationObject = (JObject) itemClassificationProperty.First;
+
+                    Assert.True(itemClassificationObject.Count == 3);
+                    Assert.IsType<JProperty>(itemClassificationObject.First);
+
+                    JProperty classificationIdProperty = (JProperty) itemClassificationObject.First;
+
+                    Assert.Single(classificationIdProperty);
+                    Assert.NotNull(classificationIdProperty.First);
+                    Assert.IsType<JValue>(classificationIdProperty.First);
+
+                    JValue classificationIdValue = (JValue) classificationIdProperty.First;
+
+                    Assert.True("45000000".Equals(classificationIdValue.Value));
+
+                    JProperty schemeProperty = (JProperty) classificationIdProperty.Next;
+
+                    Assert.Single(schemeProperty);
+                    Assert.NotNull(schemeProperty.First);
+                    Assert.IsType<JValue>(schemeProperty.First);
+
+                    JValue schemeValue = (JValue) schemeProperty.First;
+
+                    Assert.True("CPV".Equals(schemeValue.Value));
+
+                    JProperty descriptionProperty = (JProperty) schemeProperty.Next;
+
+                    Assert.Single(descriptionProperty);
+                    Assert.NotNull(descriptionProperty.First);
+                    Assert.IsType<JValue>(descriptionProperty.First);
+
+                    JValue descriptionValue = (JValue) descriptionProperty.First;
+
+                    Assert.True("Trabajos de construcción.".Equals(descriptionValue.Value));
+                }
+            
+                [Fact]
+                public void TestTenderItemsClassification2()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "items",
+                        "classification"
+                    });
+                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.True(lotsArray.Count == 2);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+                    Assert.NotNull(lotsArray.Last);
+                    Assert.IsType<JObject>(lotsArray.Last);
+
+                    JObject lotIdObject1 = (JObject) lotsArray.First;
+                    JObject lotIdObject2 = (JObject) lotsArray.Last;
+
+                    Assert.Single(lotIdObject1);
+                    Assert.NotNull(lotIdObject1.First);
+                    Assert.IsType<JProperty>(lotIdObject1.First);
+                    Assert.Single(lotIdObject2);
+                    Assert.NotNull(lotIdObject2.First);
+                    Assert.IsType<JProperty>(lotIdObject2.First);
+
+                    JProperty lotIdProperty1 = (JProperty) lotIdObject1.First;
+                    JProperty lotIdProperty2 = (JProperty) lotIdObject2.First;
+
+                    Assert.Single(lotIdProperty1);
+                    Assert.NotNull(lotIdProperty1.First);
+                    Assert.IsType<JValue>(lotIdProperty1.First);
+                    Assert.Single(lotIdProperty2);
+                    Assert.NotNull(lotIdProperty2.First);
+                    Assert.IsType<JValue>(lotIdProperty2.First);
+
+                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
+                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue1.Value));
+                    Assert.True("lot-2".Equals(lotIdValue2.Value));
+
+                    Assert.True(itemsArray.Count == 2);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+                    Assert.NotNull(itemsArray.Last);
+                    Assert.IsType<JObject>(itemsArray.Last);
+
+                    JObject itemObject1 = (JObject) itemsArray.First;
+                    JObject itemObject2 = (JObject) itemsArray.Last;
+
+                    Assert.True(itemObject1.Count == 2);
+                    Assert.IsType<JProperty>(itemObject1.First);
+                    Assert.IsType<JProperty>(itemObject1.Last);
+                    Assert.True(itemObject2.Count == 2);
+                    Assert.IsType<JProperty>(itemObject2.First);
+                    Assert.IsType<JProperty>(itemObject2.Last);
+
+                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
+                    JProperty itemClassificationProperty1 = (JProperty) itemObject1.Last;
+                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
+                    JProperty itemClassificationProperty2 = (JProperty) itemObject2.Last;
+
+                    Assert.Single(itemIdProperty1);
+                    Assert.NotNull(itemIdProperty1.First);
+                    Assert.IsType<JValue>(itemIdProperty1.First);
+                    Assert.Single(itemIdProperty2);
+                    Assert.NotNull(itemIdProperty2.First);
+                    Assert.IsType<JValue>(itemIdProperty2.First);
+
+                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
+                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
+
+                    Assert.True("1".Equals(itemIdValue1.Value));
+                    Assert.True("2".Equals(itemIdValue2.Value));
+
+                    Assert.Single(itemClassificationProperty1);
+                    Assert.NotNull(itemClassificationProperty1.First);
+                    Assert.IsType<JObject>(itemClassificationProperty1.First);
+                    Assert.Single(itemClassificationProperty2);
+                    Assert.NotNull(itemClassificationProperty2.First);
+                    Assert.IsType<JObject>(itemClassificationProperty2.First);
+
+                    JObject itemClassificationObject1 = (JObject) itemClassificationProperty1.First;
+                    JObject itemClassificationObject2 = (JObject) itemClassificationProperty2.First;
+
+                    Assert.True(itemClassificationObject1.Count == 3);
+                    Assert.IsType<JProperty>(itemClassificationObject1.First);
+                    Assert.True(itemClassificationObject2.Count == 3);
+                    Assert.IsType<JProperty>(itemClassificationObject2.First);
+
+                    JProperty classificationIdProperty1 = (JProperty) itemClassificationObject1.First;
+                    JProperty classificationIdProperty2 = (JProperty) itemClassificationObject2.First;
+
+                    Assert.Single(classificationIdProperty1);
+                    Assert.NotNull(classificationIdProperty1.First);
+                    Assert.IsType<JValue>(classificationIdProperty1.First);
+                    Assert.Single(classificationIdProperty2);
+                    Assert.NotNull(classificationIdProperty2.First);
+                    Assert.IsType<JValue>(classificationIdProperty2.First);
+
+                    JValue classificationIdValue1 = (JValue) classificationIdProperty1.First;
+                    JValue classificationIdValue2 = (JValue) classificationIdProperty2.First;
+
+                    Assert.True("15981100".Equals(classificationIdValue1.Value));
+                    Assert.True("15981100".Equals(classificationIdValue2.Value));
+
+                    JProperty schemeProperty1 = (JProperty) classificationIdProperty1.Next;
+                    JProperty schemeProperty2 = (JProperty) classificationIdProperty2.Next;
+
+                    Assert.Single(schemeProperty1);
+                    Assert.NotNull(schemeProperty1.First);
+                    Assert.IsType<JValue>(schemeProperty1.First);
+                    Assert.Single(schemeProperty2);
+                    Assert.NotNull(schemeProperty2.First);
+                    Assert.IsType<JValue>(schemeProperty2.First);
+
+                    JValue schemeValue1 = (JValue) schemeProperty1.First;
+                    JValue schemeValue2 = (JValue) schemeProperty2.First;
+
+                    Assert.True("CPV".Equals(schemeValue1.Value));
+                    Assert.True("CPV".Equals(schemeValue2.Value));
+
+                    JProperty descriptionProperty1 = (JProperty) schemeProperty1.Next;
+                    JProperty descriptionProperty2 = (JProperty) schemeProperty2.Next;
+
+                    Assert.Single(descriptionProperty1);
+                    Assert.NotNull(descriptionProperty1.First);
+                    Assert.IsType<JValue>(descriptionProperty1.First);
+                    Assert.Single(descriptionProperty2);
+                    Assert.NotNull(descriptionProperty2.First);
+                    Assert.IsType<JValue>(descriptionProperty2.First);
+
+                    JValue descriptionValue1 = (JValue) descriptionProperty1.First;
+                    JValue descriptionValue2 = (JValue) descriptionProperty2.First;
+
+                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue1.Value));
+                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue2.Value));
+                }
+            }
+
+            public class TenderLotsIdTests
+            {
+                private IMapper _mapper;
+
+                public TenderLotsIdTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log);
+                }
+
+                [Fact]
+                public void TestTenderLotsId1()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "lots",
+                        "id"
+                    });
+
+                    _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "1234") });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.Single(lotsArray);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+
+                    JObject lotIdObject = (JObject) lotsArray.First;
+
+                    Assert.Single(lotIdObject);
+                    Assert.NotNull(lotIdObject.First);
+                    Assert.IsType<JProperty>(lotIdObject.First);
+
+                    JProperty lotIdProperty = (JProperty) lotIdObject.First;
+
+                    Assert.Single(lotIdProperty);
+                    Assert.NotNull(lotIdProperty.First);
+                    Assert.IsType<JValue>(lotIdProperty.First);
+
+                    JValue lotIdValue = (JValue) lotIdProperty.First;
+
+                    Assert.True("lot-1234".Equals(lotIdValue.Value));
+
+                    Assert.Single(itemsArray);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+
+                    JObject itemObject = (JObject) itemsArray.First;
+
+                    Assert.True(itemObject.Count == 2);
+                    Assert.IsType<JProperty>(itemObject.First);
+                    Assert.IsType<JProperty>(itemObject.Last);
+
+                    JProperty itemIdProperty = (JProperty) itemObject.First;
+                    JProperty itemRelatedLotProperty = (JProperty) itemObject.Last;
+
+                    Assert.Single(itemIdProperty);
+                    Assert.NotNull(itemIdProperty.First);
+                    Assert.IsType<JValue>(itemIdProperty.First);
+
+                    JValue itemIdValue = (JValue) itemIdProperty.First;
+
+                    Assert.True("1234".Equals(itemIdValue.Value));
+
+                    Assert.Single(itemRelatedLotProperty);
+                    Assert.NotNull(itemRelatedLotProperty.First);
+                    Assert.IsType<JValue>(itemRelatedLotProperty.First);
+
+                    JValue itemRelatedValue = (JValue) itemRelatedLotProperty.First;
+
+                    Assert.True("lot-1234".Equals(itemRelatedValue.Value));
+                }
+            
+                [Fact]
+                public void TestTenderLotsId2()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "lots",
+                        "id"
+                    });
+                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.True(lotsArray.Count == 2);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+                    Assert.NotNull(lotsArray.Last);
+                    Assert.IsType<JObject>(lotsArray.Last);
+
+                    JObject lotIdObject1 = (JObject) lotsArray.First;
+                    JObject lotIdObject2 = (JObject) lotsArray.Last;
+
+                    Assert.Single(lotIdObject1);
+                    Assert.NotNull(lotIdObject1.First);
+                    Assert.IsType<JProperty>(lotIdObject1.First);
+                    Assert.Single(lotIdObject2);
+                    Assert.NotNull(lotIdObject2.First);
+                    Assert.IsType<JProperty>(lotIdObject2.First);
+
+                    JProperty lotIdProperty1 = (JProperty) lotIdObject1.First;
+                    JProperty lotIdProperty2 = (JProperty) lotIdObject2.First;
+
+                    Assert.Single(lotIdProperty1);
+                    Assert.NotNull(lotIdProperty1.First);
+                    Assert.IsType<JValue>(lotIdProperty1.First);
+                    Assert.Single(lotIdProperty2);
+                    Assert.NotNull(lotIdProperty2.First);
+                    Assert.IsType<JValue>(lotIdProperty2.First);
+
+                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
+                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue1.Value));
+                    Assert.True("lot-2".Equals(lotIdValue2.Value));
+
+                    Assert.True(itemsArray.Count == 2);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+                    Assert.NotNull(itemsArray.Last);
+                    Assert.IsType<JObject>(itemsArray.Last);
+
+                    JObject itemObject1 = (JObject) itemsArray.First;
+                    JObject itemObject2 = (JObject) itemsArray.Last;
+
+                    Assert.True(itemObject1.Count == 2);
+                    Assert.IsType<JProperty>(itemObject1.First);
+                    Assert.IsType<JProperty>(itemObject1.Last);
+                    Assert.True(itemObject2.Count == 2);
+                    Assert.IsType<JProperty>(itemObject2.First);
+                    Assert.IsType<JProperty>(itemObject2.Last);
+
+                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
+                    JProperty itemRelatedLotProperty1 = (JProperty) itemObject1.Last;
+                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
+                    JProperty itemRelatedLotProperty2 = (JProperty) itemObject2.Last;
+
+                    Assert.Single(itemIdProperty1);
+                    Assert.NotNull(itemIdProperty1.First);
+                    Assert.IsType<JValue>(itemIdProperty1.First);
+                    Assert.Single(itemIdProperty2);
+                    Assert.NotNull(itemIdProperty2.First);
+                    Assert.IsType<JValue>(itemIdProperty2.First);
+
+                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
+                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
+
+                    Assert.True("1".Equals(itemIdValue1.Value));
+                    Assert.True("2".Equals(itemIdValue2.Value));
+
+                    Assert.Single(itemRelatedLotProperty1);
+                    Assert.NotNull(itemRelatedLotProperty1.First);
+                    Assert.IsType<JValue>(itemRelatedLotProperty1.First);
+                    Assert.Single(itemRelatedLotProperty2);
+                    Assert.NotNull(itemRelatedLotProperty2.First);
+                    Assert.IsType<JValue>(itemRelatedLotProperty2.First);
+
+                    JValue itemRelatedValue1 = (JValue) itemRelatedLotProperty1.First;
+                    JValue itemRelatedValue2 = (JValue) itemRelatedLotProperty2.First;
+
+                    Assert.True("lot-1".Equals(itemRelatedValue1.Value));
+                    Assert.True("lot-2".Equals(itemRelatedValue2.Value));
+                }
+            }
+
+            public class TenderLotsNameTests
+            {
+                private IMapper _mapper;
+
+                public TenderLotsNameTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log);
+                }
+
+                [Fact]
+                public void TestTenderLotsName1()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "lots",
+                        "name"
+                    });
+
+                    _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "ABCD") });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.Single(lotsArray);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+
+                    JObject lotObject = (JObject) lotsArray.First;
+
+                    Assert.True(lotObject.Count == 2);
+                    Assert.NotNull(lotObject.First);
+                    Assert.IsType<JProperty>(lotObject.First);
+                    Assert.NotNull(lotObject.Last);
+                    Assert.IsType<JProperty>(lotObject.Last);
+
+                    JProperty lotIdProperty = (JProperty) lotObject.First;
+                    JProperty lotNameProperty = (JProperty) lotObject.Last;
+
+                    Assert.Single(lotIdProperty);
+                    Assert.NotNull(lotIdProperty.First);
+                    Assert.IsType<JValue>(lotIdProperty.First);
+                    Assert.Single(lotNameProperty);
+                    Assert.NotNull(lotNameProperty.First);
+                    Assert.IsType<JValue>(lotNameProperty.First);
+
+                    JValue lotIdValue = (JValue) lotIdProperty.First;
+                    JValue lotNameValue = (JValue) lotNameProperty.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue.Value));
+                    Assert.True("ABCD".Equals(lotNameValue.Value));
+
+                    Assert.Single(itemsArray);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+
+                    JObject itemObject = (JObject) itemsArray.First;
+
+                    Assert.Single(itemObject);
+                    Assert.IsType<JProperty>(itemObject.First);
+
+                    JProperty itemIdProperty = (JProperty) itemObject.First;
+
+                    Assert.Single(itemIdProperty);
+                    Assert.NotNull(itemIdProperty.First);
+                    Assert.IsType<JValue>(itemIdProperty.First);
+
+                    JValue itemIdValue = (JValue) itemIdProperty.First;
+
+                    Assert.True("1".Equals(itemIdValue.Value));
+                }
+            
+                [Fact]
+                public void TestTenderLotsId2()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "lots",
+                        "name"
+                    });
+                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.True(lotsArray.Count == 2);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+                    Assert.NotNull(lotsArray.Last);
+                    Assert.IsType<JObject>(lotsArray.Last);
+
+                    JObject lotObject1 = (JObject) lotsArray.First;
+                    JObject lotObject2 = (JObject) lotsArray.Last;
+
+                    Assert.True(lotObject1.Count == 2);
+                    Assert.NotNull(lotObject1.First);
+                    Assert.IsType<JProperty>(lotObject1.First);
+                    Assert.NotNull(lotObject1.Last);
+                    Assert.IsType<JProperty>(lotObject1.Last);
+                    Assert.True(lotObject2.Count == 2);
+                    Assert.NotNull(lotObject2.First);
+                    Assert.IsType<JProperty>(lotObject2.First);
+                    Assert.NotNull(lotObject2.Last);
+                    Assert.IsType<JProperty>(lotObject2.Last);
+
+                    JProperty lotIdProperty1 = (JProperty) lotObject1.First;
+                    JProperty lotNameProperty1 = (JProperty) lotObject1.Last;
+                    JProperty lotIdProperty2 = (JProperty) lotObject2.First;
+                    JProperty lotNameProperty2 = (JProperty) lotObject2.Last;
+
+                    Assert.Single(lotIdProperty1);
+                    Assert.NotNull(lotIdProperty1.First);
+                    Assert.IsType<JValue>(lotIdProperty1.First);
+                    Assert.Single(lotNameProperty1);
+                    Assert.NotNull(lotNameProperty1.First);
+                    Assert.IsType<JValue>(lotNameProperty1.First);
+                    Assert.Single(lotIdProperty2);
+                    Assert.NotNull(lotIdProperty2.First);
+                    Assert.IsType<JValue>(lotIdProperty2.First);
+                    Assert.Single(lotNameProperty2);
+                    Assert.NotNull(lotNameProperty2.First);
+                    Assert.IsType<JValue>(lotNameProperty2.First);
+
+                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
+                    JValue lotNameValue1 = (JValue) lotNameProperty1.First;
+                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
+                    JValue lotNameValue2 = (JValue) lotNameProperty2.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue1.Value));
+                    Assert.True("Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares".Equals(lotNameValue1.Value));
+                    Assert.True("lot-2".Equals(lotIdValue2.Value));
+                    Assert.True("Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias".Equals(lotNameValue2.Value));
+
+                    Assert.True(itemsArray.Count == 2);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+                    Assert.NotNull(itemsArray.Last);
+                    Assert.IsType<JObject>(itemsArray.Last);
+
+                    JObject itemObject1 = (JObject) itemsArray.First;
+                    JObject itemObject2 = (JObject) itemsArray.Last;
+
+                    Assert.Single(itemObject1);
+                    Assert.IsType<JProperty>(itemObject1.First);
+                    Assert.Single(itemObject2);
+                    Assert.IsType<JProperty>(itemObject2.First);
+
+                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
+                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
+
+                    Assert.Single(itemIdProperty1);
+                    Assert.NotNull(itemIdProperty1.First);
+                    Assert.IsType<JValue>(itemIdProperty1.First);
+                    Assert.Single(itemIdProperty2);
+                    Assert.NotNull(itemIdProperty2.First);
+                    Assert.IsType<JValue>(itemIdProperty2.First);
+
+                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
+                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
+
+                    Assert.True("1".Equals(itemIdValue1.Value));
+                    Assert.True("2".Equals(itemIdValue2.Value));
+                }
+            }
+
+            public class TenderLotsValueTests
+            {
+                private IMapper _mapper;
+
+                public TenderLotsValueTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log);
+                }
+
+                [Fact]
+                public void TestTenderLotsValue1()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "lots",
+                        "value"
+                    });
+                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.True(lotsArray.Count == 2);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+                    Assert.NotNull(lotsArray.Last);
+                    Assert.IsType<JObject>(lotsArray.Last);
+
+                    JObject lotIdObject1 = (JObject) lotsArray.First;
+                    JObject lotIdObject2 = (JObject) lotsArray.Last;
+
+                    Assert.True(lotIdObject1.Count == 2);
+                    Assert.NotNull(lotIdObject1.First);
+                    Assert.IsType<JProperty>(lotIdObject1.First);
+                    Assert.NotNull(lotIdObject1.Last);
+                    Assert.IsType<JProperty>(lotIdObject1.Last);
+                    Assert.True(lotIdObject2.Count == 2);
+                    Assert.NotNull(lotIdObject2.First);
+                    Assert.IsType<JProperty>(lotIdObject2.First);
+                    Assert.NotNull(lotIdObject2.Last);
+                    Assert.IsType<JProperty>(lotIdObject2.Last);
+
+                    JProperty lotIdProperty1 = (JProperty) lotIdObject1.First;
+                    JProperty lotValueProperty1 = (JProperty) lotIdObject1.Last;
+                    JProperty lotIdProperty2 = (JProperty) lotIdObject2.First;
+                    JProperty lotValueProperty2 = (JProperty) lotIdObject2.Last;
+
+                    Assert.Single(lotIdProperty1);
+                    Assert.NotNull(lotIdProperty1.First);
+                    Assert.IsType<JValue>(lotIdProperty1.First);
+                    Assert.Single(lotIdProperty2);
+                    Assert.NotNull(lotIdProperty2.First);
+                    Assert.IsType<JValue>(lotIdProperty2.First);
+
+                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
+                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue1.Value));
+                    Assert.True("lot-2".Equals(lotIdValue2.Value));
+
+                    Assert.Single(lotValueProperty1);
+                    Assert.NotNull(lotValueProperty1.First);
+                    Assert.IsType<JObject>(lotValueProperty1.First);
+                    Assert.Single(lotValueProperty2);
+                    Assert.NotNull(lotValueProperty2.First);
+                    Assert.IsType<JObject>(lotValueProperty2.First);
+
+                    JObject lotValueObject1 = (JObject) lotValueProperty1.First;
+                    JObject lotValueObject2 = (JObject) lotValueProperty2.First;
+
+                    Assert.True(lotValueObject1.Count == 2);
+                    Assert.IsType<JProperty>(lotValueObject1.First);
+                    Assert.True(lotValueObject2.Count == 2);
+                    Assert.IsType<JProperty>(lotValueObject2.First);
+
+                    JProperty lotValueValueProperty1 = (JProperty) lotValueObject1.First;
+                    JProperty lotValueValueProperty2 = (JProperty) lotValueObject2.First;
+
+                    Assert.Single(lotValueValueProperty1);
+                    Assert.NotNull(lotValueValueProperty1.First);
+                    Assert.IsType<JValue>(lotValueValueProperty1.First);
+                    Assert.Single(lotValueValueProperty2);
+                    Assert.NotNull(lotValueValueProperty2.First);
+                    Assert.IsType<JValue>(lotValueValueProperty2.First);
+
+                    JValue lotValueValueValue1 = (JValue) lotValueValueProperty1.First;
+                    JValue lotValueValueValue2 = (JValue) lotValueValueProperty2.First;
+
+                    Double d1 = 2215.68;
+                    Double d2 = 6584.78;
+                    Assert.True(d1.Equals(lotValueValueValue1.Value));
+                    Assert.True(d2.Equals(lotValueValueValue2.Value));
+
+                    JProperty lotValueCurrencyProperty1 = (JProperty) lotValueValueProperty1.Next;
+                    JProperty lotValueCurrencyProperty2 = (JProperty) lotValueValueProperty2.Next;
+
+                    Assert.Single(lotValueCurrencyProperty1);
+                    Assert.NotNull(lotValueCurrencyProperty1.First);
+                    Assert.IsType<JValue>(lotValueCurrencyProperty1.First);
+                    Assert.Single(lotValueCurrencyProperty2);
+                    Assert.NotNull(lotValueCurrencyProperty2.First);
+                    Assert.IsType<JValue>(lotValueCurrencyProperty2.First);
+
+                    JValue lotValueCurrencyValue1 = (JValue) lotValueCurrencyProperty1.First;
+                    JValue lotValueCurrencyValue2 = (JValue) lotValueCurrencyProperty2.First;
+
+                    Assert.True("EUR".Equals(lotValueCurrencyValue1.Value));
+                    Assert.True("EUR".Equals(lotValueCurrencyValue2.Value));
+
+                    Assert.True(itemsArray.Count == 2);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+                    Assert.NotNull(itemsArray.Last);
+                    Assert.IsType<JObject>(itemsArray.Last);
+
+                    JObject itemObject1 = (JObject) itemsArray.First;
+                    JObject itemObject2 = (JObject) itemsArray.Last;
+
+                    Assert.Single(itemObject1);
+                    Assert.IsType<JProperty>(itemObject1.First);
+                    Assert.Single(itemObject2);
+                    Assert.IsType<JProperty>(itemObject2.First);
+
+                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
+                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
+
+                    Assert.Single(itemIdProperty1);
+                    Assert.NotNull(itemIdProperty1.First);
+                    Assert.IsType<JValue>(itemIdProperty1.First);
+                    Assert.Single(itemIdProperty2);
+                    Assert.NotNull(itemIdProperty2.First);
+                    Assert.IsType<JValue>(itemIdProperty2.First);
+
+                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
+                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
+
+                    Assert.True("1".Equals(itemIdValue1.Value));
+                    Assert.True("2".Equals(itemIdValue2.Value));
+                }
+            
+                [Fact]
+                public void TestTenderLotsValue2()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        "tender",
+                        "items",
+                        "classification"
+                    });
+                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
+
+                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True("tender".Equals(tender.Name));
+                    Assert.Single(tender);
+                    Assert.NotNull(tender.First);
+                    Assert.IsType<JObject>(tender.First);
+
+                    JObject tenderObject = (JObject) tender.First;
+
+                    Assert.True(tenderObject.Count == 2);
+                    Assert.IsType<JProperty>(tenderObject.First);
+                    Assert.IsType<JProperty>(tenderObject.Last);
+
+                    JProperty itemsProperty = (JProperty) tenderObject.First;
+                    JProperty lotsProperty = (JProperty) tenderObject.Last;
+
+                    Assert.True("items".Equals(itemsProperty.Name));
+                    Assert.True("lots".Equals(lotsProperty.Name));
+                    Assert.Single(itemsProperty);
+                    Assert.Single(lotsProperty);
+                    Assert.NotNull(itemsProperty.First);
+                    Assert.NotNull(lotsProperty.First);
+                    Assert.IsType<JArray>(itemsProperty.First);
+                    Assert.IsType<JArray>(lotsProperty.First);
+
+                    JArray lotsArray = (JArray) lotsProperty.First;
+                    JArray itemsArray = (JArray) itemsProperty.First;
+
+                    Assert.True(lotsArray.Count == 2);
+                    Assert.NotNull(lotsArray.First);
+                    Assert.IsType<JObject>(lotsArray.First);
+                    Assert.NotNull(lotsArray.Last);
+                    Assert.IsType<JObject>(lotsArray.Last);
+
+                    JObject lotIdObject1 = (JObject) lotsArray.First;
+                    JObject lotIdObject2 = (JObject) lotsArray.Last;
+
+                    Assert.Single(lotIdObject1);
+                    Assert.NotNull(lotIdObject1.First);
+                    Assert.IsType<JProperty>(lotIdObject1.First);
+                    Assert.Single(lotIdObject2);
+                    Assert.NotNull(lotIdObject2.First);
+                    Assert.IsType<JProperty>(lotIdObject2.First);
+
+                    JProperty lotIdProperty1 = (JProperty) lotIdObject1.First;
+                    JProperty lotIdProperty2 = (JProperty) lotIdObject2.First;
+
+                    Assert.Single(lotIdProperty1);
+                    Assert.NotNull(lotIdProperty1.First);
+                    Assert.IsType<JValue>(lotIdProperty1.First);
+                    Assert.Single(lotIdProperty2);
+                    Assert.NotNull(lotIdProperty2.First);
+                    Assert.IsType<JValue>(lotIdProperty2.First);
+
+                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
+                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
+
+                    Assert.True("lot-1".Equals(lotIdValue1.Value));
+                    Assert.True("lot-2".Equals(lotIdValue2.Value));
+
+                    Assert.True(itemsArray.Count == 2);
+                    Assert.NotNull(itemsArray.First);
+                    Assert.IsType<JObject>(itemsArray.First);
+                    Assert.NotNull(itemsArray.Last);
+                    Assert.IsType<JObject>(itemsArray.Last);
+
+                    JObject itemObject1 = (JObject) itemsArray.First;
+                    JObject itemObject2 = (JObject) itemsArray.Last;
+
+                    Assert.True(itemObject1.Count == 2);
+                    Assert.IsType<JProperty>(itemObject1.First);
+                    Assert.IsType<JProperty>(itemObject1.Last);
+                    Assert.True(itemObject2.Count == 2);
+                    Assert.IsType<JProperty>(itemObject2.First);
+                    Assert.IsType<JProperty>(itemObject2.Last);
+
+                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
+                    JProperty itemClassificationProperty1 = (JProperty) itemObject1.Last;
+                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
+                    JProperty itemClassificationProperty2 = (JProperty) itemObject2.Last;
+
+                    Assert.Single(itemIdProperty1);
+                    Assert.NotNull(itemIdProperty1.First);
+                    Assert.IsType<JValue>(itemIdProperty1.First);
+                    Assert.Single(itemIdProperty2);
+                    Assert.NotNull(itemIdProperty2.First);
+                    Assert.IsType<JValue>(itemIdProperty2.First);
+
+                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
+                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
+
+                    Assert.True("1".Equals(itemIdValue1.Value));
+                    Assert.True("2".Equals(itemIdValue2.Value));
+
+                    Assert.Single(itemClassificationProperty1);
+                    Assert.NotNull(itemClassificationProperty1.First);
+                    Assert.IsType<JObject>(itemClassificationProperty1.First);
+                    Assert.Single(itemClassificationProperty2);
+                    Assert.NotNull(itemClassificationProperty2.First);
+                    Assert.IsType<JObject>(itemClassificationProperty2.First);
+
+                    JObject itemClassificationObject1 = (JObject) itemClassificationProperty1.First;
+                    JObject itemClassificationObject2 = (JObject) itemClassificationProperty2.First;
+
+                    Assert.True(itemClassificationObject1.Count == 3);
+                    Assert.IsType<JProperty>(itemClassificationObject1.First);
+                    Assert.True(itemClassificationObject2.Count == 3);
+                    Assert.IsType<JProperty>(itemClassificationObject2.First);
+
+                    JProperty classificationIdProperty1 = (JProperty) itemClassificationObject1.First;
+                    JProperty classificationIdProperty2 = (JProperty) itemClassificationObject2.First;
+
+                    Assert.Single(classificationIdProperty1);
+                    Assert.NotNull(classificationIdProperty1.First);
+                    Assert.IsType<JValue>(classificationIdProperty1.First);
+                    Assert.Single(classificationIdProperty2);
+                    Assert.NotNull(classificationIdProperty2.First);
+                    Assert.IsType<JValue>(classificationIdProperty2.First);
+
+                    JValue classificationIdValue1 = (JValue) classificationIdProperty1.First;
+                    JValue classificationIdValue2 = (JValue) classificationIdProperty2.First;
+
+                    Assert.True("15981100".Equals(classificationIdValue1.Value));
+                    Assert.True("15981100".Equals(classificationIdValue2.Value));
+
+                    JProperty schemeProperty1 = (JProperty) classificationIdProperty1.Next;
+                    JProperty schemeProperty2 = (JProperty) classificationIdProperty2.Next;
+
+                    Assert.Single(schemeProperty1);
+                    Assert.NotNull(schemeProperty1.First);
+                    Assert.IsType<JValue>(schemeProperty1.First);
+                    Assert.Single(schemeProperty2);
+                    Assert.NotNull(schemeProperty2.First);
+                    Assert.IsType<JValue>(schemeProperty2.First);
+
+                    JValue schemeValue1 = (JValue) schemeProperty1.First;
+                    JValue schemeValue2 = (JValue) schemeProperty2.First;
+
+                    Assert.True("CPV".Equals(schemeValue1.Value));
+                    Assert.True("CPV".Equals(schemeValue2.Value));
+
+                    JProperty descriptionProperty1 = (JProperty) schemeProperty1.Next;
+                    JProperty descriptionProperty2 = (JProperty) schemeProperty2.Next;
+
+                    Assert.Single(descriptionProperty1);
+                    Assert.NotNull(descriptionProperty1.First);
+                    Assert.IsType<JValue>(descriptionProperty1.First);
+                    Assert.Single(descriptionProperty2);
+                    Assert.NotNull(descriptionProperty2.First);
+                    Assert.IsType<JValue>(descriptionProperty2.First);
+
+                    JValue descriptionValue1 = (JValue) descriptionProperty1.First;
+                    JValue descriptionValue2 = (JValue) descriptionProperty2.First;
+
+                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue1.Value));
+                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue2.Value));
                 }
             }
 
@@ -3544,7 +4794,8 @@ namespace OCDS_Mapper.test
                     JValue amountValue = (JValue) amountProperty.First;
                     JValue currencyValue = (JValue) currencyProperty.First;
 
-                    Assert.True("189250".Equals(amountValue.Value));
+                    Double value = 189250;
+                    Assert.True(value.Equals(amountValue.Value));
                     Assert.True("EUR".Equals(currencyValue.Value));
                 }
 
@@ -3635,7 +4886,7 @@ namespace OCDS_Mapper.test
             }
         }
 
-        /* Tests unitarios del componen de provisión */
+        /* Tests unitarios del componente de provisión */
 
         public class ProviderTests
         {
@@ -3647,22 +4898,20 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public void TestConstructor1()
+            public async Task TestConstructor1()
             {
                 _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<BlockingCollection<string>>(_provider.Files);
-                Assert.Empty(_provider.Files);
+                Assert.IsType<AsyncCollection<string>>(_provider.Files);
 
-                Thread.Sleep(15 * 1000);
+                string filePath = await _provider.TakeFile();
 
-                Assert.Single(_provider.Files);
-                Assert.True(_provider.Files.First().Equals("./tmp/document.atom"));
+                Assert.True("./tmp/document.atom".Equals(filePath));
             }
 
             [Fact]
-            public void TestConstructor2()
+            public async Task TestConstructor2()
             {
                 _provider = new Provider(
                     Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
@@ -3670,13 +4919,15 @@ namespace OCDS_Mapper.test
                 );
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<BlockingCollection<string>>(_provider.Files);
-                Assert.Single(_provider.Files);
-                Assert.True(_provider.Files.First().Equals("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"));
+                Assert.IsType<AsyncCollection<string>>(_provider.Files);
+
+                string filePath = await _provider.TakeFile();
+
+                Assert.True("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom".Equals(filePath));
             }
 
             [Fact]
-            public void TestConstructor3()
+            public async Task TestConstructor3()
             {
                 _provider = new Provider(
                     Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
@@ -3684,13 +4935,11 @@ namespace OCDS_Mapper.test
                 );
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<BlockingCollection<string>>(_provider.Files);
-                Assert.Empty(_provider.Files);
+                Assert.IsType<AsyncCollection<string>>(_provider.Files);
 
-                Thread.Sleep(15 * 1000);
+                string filePath = await _provider.TakeFile();
 
-                Assert.Single(_provider.Files);
-                Assert.True(_provider.Files.First().Equals("./tmp/document.atom"));
+                Assert.True("./tmp/document.atom".Equals(filePath));
             }
 
             [Fact]
@@ -3713,6 +4962,67 @@ namespace OCDS_Mapper.test
                 );
 
                 action.Should().Throw<InvalidOperationCodeException>();
+            }
+
+            [Fact]
+            public void TestConstructor6()
+            {
+                Action action = () => new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC);
+
+                action.Should().Throw<InvalidOperationCodeException>();
+            }
+
+            [Fact]
+            public async Task TestProviderTakeFile1()
+            {
+                _provider = new Provider(
+                        Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
+                        "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"
+                );
+
+                string filePath = await _provider.TakeFile();
+
+                Assert.True(filePath.Equals("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"));
+                Assert.True(File.Exists("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"));
+
+                filePath = await _provider.TakeFile();
+
+                Assert.Null(filePath);
+            }
+
+            [Fact]
+            public async Task TestProviderTakeFile2()
+            {
+                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+
+                string filePath = await _provider.TakeFile();
+
+                Assert.True(filePath.Equals("./tmp/document.atom"));
+                Assert.True(File.Exists("./tmp/document.atom"));
+            }
+
+            [Fact]
+            public void TestProviderRemoveFile1()
+            {
+                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+
+                string filePath = "./tmp/x.atom";
+
+                File.Create(filePath);
+                Assert.True(File.Exists(filePath));
+
+                _provider.RemoveFile(filePath);
+            }
+             
+            [Fact]
+            public void TestProviderRemoveFile2()
+            {
+                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+
+                string filePath = "./tmp/x.atom";
+
+                _provider.RemoveFile(filePath);
+                Assert.True(!File.Exists(filePath));
             }
         }
     }

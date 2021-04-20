@@ -112,3 +112,4 @@ La aplicación está compuesta por cinco diferentes módulos que constituyen un 
 ***Librerías utilizadas en el código***
 * [Enlace a la librería de logging utilizada (licencia Apache)](https://logging.apache.org/log4net/)
 * [Enlace a la librería de manejo de JSON utilizada (licencia MIT)](https://www.newtonsoft.com/json)
+* [Enlace a la librería de las colecciones asíncronas (licencia MIT)](https://github.com/StephenCleary/AsyncEx)

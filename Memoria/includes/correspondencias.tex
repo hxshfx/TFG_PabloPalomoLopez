@@ -115,6 +115,61 @@
             \end{itemize}
 
     \vspace{0.3cm}
+    
+    \subsection{Lotes}
+        
+        El uso de lotes en el esquema OCDS viene otorgado por  \href{https://extensions.open-contracting.org/en/extensions/lots/v1.1.5/}{la extensión de mismo nombre}.
+    
+        \subsubsection{Número de lote}
+            \begin{itemize}
+                \item \textbf{Elemento en el esquema CODICE}:
+                    \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProjectLot/} \\
+                    \tabto{7.6cm} \texttt{\textit{cbc:ID}}
+                \item \textbf{Elementos en el esquema OCDS}:
+                    \tabto{7.6cm} \texttt{tender.lots[i].\textit{id}} \\
+                    \tabto{7.6cm} \texttt{tender.items[i].\textit{id}} \\
+                    \tabto{7.6cm} \texttt{tender.items[i].\textit{relatedLot}} \\
+                \item \textbf{Comentarios}: En todos los apartados de esta sección se utilizará la notación \texttt{lots[i]} e \texttt{items[i]} para referirse a los i-ésimos objetos representando el lote y el artículo, respectivamente, dentro de las colecciones de éstos. El campo \texttt{relatedLot} se utilizará para enlazar el artículo con su lote.
+            \end{itemize}
+            
+        \subsubsection{Objeto del lote}
+            \begin{itemize}
+                \item \textbf{Elemento en el esquema CODICE}:
+                    \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProjectLot/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProject/} \\
+                    \tabto{7.6cm} \texttt{\textit{cbc:Name}}
+                \item \textbf{Elemento en el esquema OCDS}:
+                    \tabto{7.6cm} \texttt{tender.lots[i].\textit{name}}
+            \end{itemize}
+        
+        \subsubsection{Importe del lote}
+            \begin{itemize}
+                \item \textbf{Elemento en el esquema CODICE}:
+                    \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProjectLot/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProject/} \\
+                    \tabto{7.6cm} \texttt{cac:BudgetAmount/} \\
+                    \tabto{7.6cm} \texttt{\textit{cbc:TotalAmount}}
+                \item \textbf{Elemento en el esquema OCDS}:
+                    \tabto{7.6cm} \texttt{tender.lots[i].\textit{value}}
+            \end{itemize}
+            
+        \subsubsection{Clasificación \textit{CPV}}
+            \begin{itemize}
+                \item \textbf{Elemento en el esquema CODICE}:
+                    \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProjectLot/} \\
+                    \tabto{7.6cm} \texttt{cac:ProcurementProject/} \\
+                    \tabto{7.6cm} \texttt{cac:RequiredCommodityClassification/} \\
+                    \tabto{7.6cm} \texttt{\textit{cbc:ItemClassificationCode}}
+                \item \textbf{Elemento en el esquema OCDS}:
+                    \tabto{7.6cm} \texttt{tender.lots[i].\textit{classification}}
+                \item \textbf{Comentarios}: El sistema de clasificación de bienes y servicios utilizado en CODICE, \href{https://www.licitaciones.es/codigos-cpv}{\textit{CPV}}, es un estándar válido en OCDS, indicándolo en el campo \texttt{classification.\textit{schema}}.
+            \end{itemize}
+
+    \vspace{0.3cm}
 
     \subsection{Procesos de licitación}
     
@@ -201,7 +256,9 @@
                 \item \textbf{Comentarios}: Si en el elemento \texttt{AuctionConstraintIndicator} está indicado el valor \texttt{true}, significa que la licitación estará sujeta a subasta electrónica, por lo que el valor \texttt{electronicAuction} de la lista de códigos \href{https://standard.open-contracting.org/latest/es/schema/codelists/#submission-method}{\texttt{submissionMethod}} se sobreescribe en el campo \texttt{tender.submissionMethod}, que ya había sido inicializado por el elemento \hyperref[subsec:PresentacionOferta]{Presentación de la oferta}.
             \end{itemize}
         
-        \subsection{Entidades adjudicadoras}
+    \vspace{0.3cm}
+    
+    \subsection{Entidades adjudicadoras}
     
         Aquí vendría una pequeña descripción de la subsección
     
@@ -249,6 +306,8 @@
                     \tabto{7.6cm} \texttt{parties[i].\textit{contactPoint}}
             \end{itemize}
     
+    \vspace{0.3cm}
+    
     \subsection{Resultado del procedimiento}
         
         Aquí vendría una pequeña descripción de la subsección
@@ -260,7 +319,7 @@
                     \tabto{7.6cm} \texttt{cac:TenderResult/} \\
                     \tabto{7.6cm} \texttt{cac:AwardedTenderedProject/} \\
                     \tabto{7.6cm} \texttt{\textit{cbc:ProcurementProjectLotID}}
-                \item \textbf{Elementos en el esquema OCDS}:
+                \item \textbf{Elemento en el esquema OCDS}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{id}}
                 \item \textbf{Comentarios}: En todos los apartados de esta sección se utilizará la notación \texttt{awards[i]} para referirse al mismo objeto representando el resultado de un procedimiento de adjudicación dentro de un mismo proceso de contratación.
             \end{itemize}
@@ -271,7 +330,7 @@
                     \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
                     \tabto{7.6cm} \texttt{cac:TenderResult/} \\
                     \tabto{7.6cm} \texttt{\textit{cbc:ResultCode}}
-                \item \textbf{Elementos en el esquema OCDS}:
+                \item \textbf{Elemento en el esquema OCDS}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{status}}
                 \item \textbf{Comentarios}: La lista de posibles códigos del elemento en CODICE se encuentra en el siguiente 
                     \href{http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc}{enlace}.
@@ -312,7 +371,7 @@
                     \tabto{7.6cm} \texttt{cac:AwardedTenderedProject/} \\
                     \tabto{7.6cm} \texttt{cac:LegalMonetaryTotal/} \\
                     \tabto{7.6cm} \texttt{\textit{cbc:PayableAmount}}
-                \item \textbf{Elementos en el esquema OCDS}:
+                \item \textbf{Elemento en el esquema OCDS}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{value}}
             \end{itemize}
             
@@ -322,7 +381,7 @@
                     \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
                     \tabto{7.6cm} \texttt{cac:TenderResult/} \\
                     \tabto{7.6cm} \texttt{\textit{cbc:ReceivedTenderQuantity}}
-                \item \textbf{Elementos en el esquema OCDS}:
+                \item \textbf{Elemento en el esquema OCDS}:
                     \tabto{7.6cm} \texttt{tender.\textit{numberOfTenderers}}
                 \item \textbf{Comentarios}: Dado que OCDS no provee el campo \texttt{numberOfTenderers} dentro de la colección de \texttt{awards}, este mapeo sólo se realizará en el caso de que el proceso de adjudicación sólo contenga un lote, es decir, la longitud de la colección \texttt{awards} sea 1 y, por tanto, \texttt{numberOfTenderers} refleje efectivamente el número de participantes.
             \end{itemize}
@@ -343,8 +402,9 @@
                     \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
                     \tabto{7.6cm} \texttt{cac:TenderResult/} \\
                     \tabto{7.6cm} \texttt{\textit{cbc:Description}}
-                \item \textbf{Elementos en el esquema OCDS}:
+                \item \textbf{Elemento en el esquema OCDS}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{description\_es}}
                 \item \textbf{Comentarios}: Como sucedía en el elemento  \hyperref[subsec:SistemaDeContratacion]{sistema de contratación}, se hace uso del sufijo \texttt{es} para indicar que el campo contendrá su información en castellano.
             \end{itemize}
+            
 \newpage

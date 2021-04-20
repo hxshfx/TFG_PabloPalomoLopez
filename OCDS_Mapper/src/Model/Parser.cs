@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 using log4net.Core;
 using OCDS_Mapper.src.Exceptions;
@@ -34,6 +34,21 @@ namespace OCDS_Mapper.src.Model
          *      Puntero a la función de logging
          */
         private readonly Action<object, string, Level> _Log;
+
+        /*  atributo _codeLists => IDictionary<string, XElement>
+         *      Colección de ficheros de códigos de acceso recurrente
+         */
+        private static IDictionary<string, XElement> _codeLists = new Dictionary<string, XElement>()
+        {
+            {
+                "CPV",
+                XElement.Load(ConfigurationManager.AppSettings["CPV_codelist"])
+            },
+            {
+                "ContractingSTC",
+                XElement.Load(ConfigurationManager.AppSettings["ContractingSTC_codelist"])
+            }
+        };
 
 
 
@@ -122,7 +137,7 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetElement(IEnumerable<XName>) => XElement[]
+        /*  función GetElements(IEnumerable<XName>) => XElement[]
          *      Devuelve el (los) elemento(s) XML descrito por la ruta pasada como parámetro
          *  @param pathToElement : lista enlazada con la ruta del elemento deseado:
          *      @ej : [ XName(XNamespace("cac") + "ProcurementProject"),
@@ -130,7 +145,7 @@ namespace OCDS_Mapper.src.Model
          *  @return : elemento buscado, o null si no se puede encontrar
          *      @ej : XElement(<cbc:Name>"..."</cbc:Name>)
          */
-        public XElement[] GetElement(IEnumerable<XName> pathToElement)
+        public XElement[] GetElements(IEnumerable<XName> pathToElement)
         {
             // Parte de la raíz para navegar por el XML, iterando por el path pasado como parámetro
             XElement element = EntryRoot;
@@ -193,7 +208,7 @@ namespace OCDS_Mapper.src.Model
 
         /* Funciones estáticas */
 
-        /*  función GetElement(IEnumerable<XName>) => XElement[]
+        /*  función GetSpecificElement(IEnumerable<XName>) => XElement[]
          *      Devuelve el elemento XML desde el elemento provisto, y con el nombre pasado como parámetro
          *  @param element : elemento a partir del cual buscar
          *  @param toSearch : nombre local del elemento a buscar
@@ -224,13 +239,19 @@ namespace OCDS_Mapper.src.Model
         /*  función GetCodeValue() => string
          *      Carga el documento de códigos provisto como parámetro y devuelve el valor
          *      de la entrada cuyo código casa con el segundo parámetro
-         *  @param url : url del documento de códigos
+         *  @param name : nombre descriptor del fichero de códigos
          *  @param code : código buscado
          *  @return : valor del código buscado
          */
-        public static string GetCodeValue(string url, string code)
+        public static string GetCodeValue(string name, string code)
         {
-            XElement document = XElement.Load(url);
+            XElement document = _codeLists[name];
+
+            if (document == null)
+            {
+                return null;
+            }
+
             IEnumerable<XElement> query =
                 from node in document.Elements()
                 where node.Name.LocalName.Equals("SimpleCodeList")
