@@ -11,6 +11,7 @@ using Xunit;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
 using OCDS_Mapper.src.Model;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.test
 {
@@ -27,7 +28,7 @@ namespace OCDS_Mapper.test
             public MapperTests()
             {
                 Program.InitLogger();
-                _mapper = new Mapper(Program.Log);
+                _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
             }
 
             [Fact]
@@ -78,7 +79,7 @@ namespace OCDS_Mapper.test
                 public TagTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -86,7 +87,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "PRE";
 
@@ -98,7 +99,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tag = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -119,7 +120,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "PUB";
 
@@ -131,7 +132,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tag = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -144,7 +145,7 @@ namespace OCDS_Mapper.test
 
                     JValue tagValue = (JValue) tagArray.First;
 
-                    Assert.True("tender".Equals(tagValue.Value));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tagValue.Value));
 
                     parsedElement = "EV";
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", parsedElement) });
@@ -155,7 +156,7 @@ namespace OCDS_Mapper.test
 
                     tag = (JProperty) _mapper.MappedEntry.Last;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -168,7 +169,7 @@ namespace OCDS_Mapper.test
 
                     tagValue = (JValue) tagArray.First;
 
-                    Assert.True("tender".Equals(tagValue.Value));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tagValue.Value));
                 }
 
                 [Fact]
@@ -176,7 +177,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "ADJ";
 
@@ -188,7 +189,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tag = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -209,7 +210,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "RES";
 
@@ -221,7 +222,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tag = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -242,7 +243,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "ANUL";
 
@@ -254,7 +255,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tag = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tag".Equals(tag.Name));
+                    Assert.True(Mappings.MappingElements.Tag.Equals(tag.Name));
                     Assert.Single(tag);
                     Assert.NotNull(tag.First);
                     Assert.IsType<JArray>(tag.First);
@@ -275,7 +276,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tag"
+                        Mappings.MappingElements.Tag
                     });
                     string parsedElement = "wrong";
 
@@ -292,7 +293,7 @@ namespace OCDS_Mapper.test
                 public OCIDTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
                 
                 [Fact]
@@ -300,7 +301,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "ocid"
+                        Mappings.MappingElements.OCID
                     });
                     string parsedElement = "someID";
 
@@ -312,14 +313,14 @@ namespace OCDS_Mapper.test
 
                     JProperty ocid = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("ocid".Equals(ocid.Name));
+                    Assert.True(Mappings.MappingElements.OCID.Equals(ocid.Name));
                     Assert.Single(ocid);
                     Assert.NotNull(ocid.First);
                     Assert.IsType<JValue>(ocid.First);
 
                     JValue ocidValue = (JValue) ocid.First;
 
-                    Assert.True("ES-someID".Equals(ocidValue.Value));
+                    Assert.True($"ocds-1xraxc-someID".Equals(ocidValue.Value));
                 }
             }
             
@@ -330,7 +331,7 @@ namespace OCDS_Mapper.test
                 public AwardDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -338,8 +339,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "date"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Date
                     });
                     string elementDump = "<cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-02-25</cbc:AwardDate>";
 
@@ -349,6 +350,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -356,7 +358,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -397,8 +399,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "date"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Date
                     });
                     string elementDump1 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
                     string elementDump2 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Oferta más ventajosa\n</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
@@ -409,6 +411,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -416,7 +419,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -480,7 +483,7 @@ namespace OCDS_Mapper.test
                 public AwardDescriptionTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -488,8 +491,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "description_es"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Description
                     });
                     string elementDump = "<cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Art. 131 Ley 9/2007: Oferta con mejor relación calidad – precio.</cbc:Description>";
 
@@ -499,6 +502,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -506,7 +510,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -547,8 +551,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "description_es"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Description
                     });
                     string elementDump1 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
                     string elementDump2 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Oferta más ventajosa</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
@@ -559,6 +563,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -566,7 +571,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -630,7 +635,7 @@ namespace OCDS_Mapper.test
                 public AwardIdTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -638,8 +643,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "id"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Id
                     });
 
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "null") });
@@ -648,6 +653,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -655,7 +661,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -680,7 +686,7 @@ namespace OCDS_Mapper.test
 
                     JValue idValue = (JValue) idProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                 }
             
                 [Fact]
@@ -688,8 +694,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "id"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Id
                     });
                     string elementDump1 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
                     string elementDump2 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Oferta más ventajosa\n</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
@@ -700,6 +706,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -707,7 +714,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -743,8 +750,8 @@ namespace OCDS_Mapper.test
                     JValue idValue1 = (JValue) idProperty1.First;
                     JValue idValue2 = (JValue) idProperty2.First;
 
-                    Assert.True("1".Equals(idValue1.Value));
-                    Assert.True("2".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1-0".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2-1".Equals(idValue2.Value));
                 }
             }
 
@@ -755,7 +762,7 @@ namespace OCDS_Mapper.test
                 public AwardStatusTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -763,8 +770,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "status"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Status
                     });
                     string elementDump = "<cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>";
 
@@ -774,6 +781,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -781,7 +789,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -822,8 +830,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "status"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Status
                     });
                     string elementDump1 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
                     string elementDump2 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">7</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Oferta más ventajosa</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
@@ -834,6 +842,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -841,7 +850,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -905,7 +914,7 @@ namespace OCDS_Mapper.test
                 public AwardSuppliersTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -913,8 +922,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "suppliers"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Suppliers
                     });
                     string elementDump = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
 
@@ -924,6 +933,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.True(_mapper.MappedEntry.Count == 2);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -933,7 +943,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -992,12 +1002,12 @@ namespace OCDS_Mapper.test
                     JValue supplierIdValue = (JValue) supplierIdProperty.First;
                     JValue supplierNameValue = (JValue) supplierNameProperty.First;
 
-                    Assert.True("A28885614".Equals(supplierIdValue.Value));
+                    Assert.True("A28885614-0".Equals(supplierIdValue.Value));
                     Assert.True("GRASAS DEL CENTRO, S.A".Equals(supplierNameValue.Value));
 
                     JProperty parties = (JProperty) _mapper.MappedEntry.Last;
 
-                    Assert.True("parties".Equals(parties.Name));
+                    Assert.True(Mappings.MappingElements.Party.Equals(parties.Name));
                     Assert.Single(parties);
                     Assert.NotNull(parties.First);
                     Assert.IsType<JArray>(parties.First);
@@ -1040,7 +1050,7 @@ namespace OCDS_Mapper.test
                     JProperty partyIdProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(partyIdProperty.Name));
-                    Assert.True("A28885614".Equals(partyIdProperty.Value.ToString()));
+                    Assert.True("A28885614-0".Equals(partyIdProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(partyIdProperty.Next);
 
@@ -1075,7 +1085,7 @@ namespace OCDS_Mapper.test
                 public AwardValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1083,8 +1093,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "value"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Value
                     });
                     string elementDump = "<cac:LegalMonetaryTotal xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">543353.86</cbc:TaxExclusiveAmount>\n  <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">657458.17</cbc:PayableAmount>\n</cac:LegalMonetaryTotal>";
 
@@ -1094,6 +1104,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1101,7 +1112,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -1167,8 +1178,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "value"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Value
                     });
                     string elementDump1 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Mejor oferta</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48970.35</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
                     string elementDump2 = "<cac:TenderResult xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ResultCode listURI=\"http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">8</cbc:ResultCode>\n  <cbc:Description xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Oferta más ventajosa\n</cbc:Description>\n  <cbc:AwardDate xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2021-04-15</cbc:AwardDate>\n  <cbc:ReceivedTenderQuantity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ReceivedTenderQuantity>\n  <cbc:SMEAwardedIndicator xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">true</cbc:SMEAwardedIndicator>\n  <cac:WinningParty>\n    <cac:PartyIdentification>\n      <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">A28885614</cbc:ID>\n    </cac:PartyIdentification>\n    <cac:PartyName>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">GRASAS DEL CENTRO, S.A</cbc:Name>\n    </cac:PartyName>\n  </cac:WinningParty>\n  <cac:AwardedTenderedProject>\n    <cbc:ProcurementProjectLotID xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ProcurementProjectLotID>\n    <cac:LegalMonetaryTotal>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:TaxExclusiveAmount>\n      <cbc:PayableAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">48171.3</cbc:PayableAmount>\n    </cac:LegalMonetaryTotal>\n  </cac:AwardedTenderedProject>\n</cac:TenderResult>";
@@ -1179,6 +1190,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1186,7 +1198,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -1291,8 +1303,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "awards",
-                        "value"
+                        Mappings.MappingElements.Award,
+                        Mappings.MappingElements.Awards.Value
                     });
                     string elementDump = "<cac:LegalMonetaryTotal xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">543353.86</cbc:TaxExclusiveAmount>\n</cac:LegalMonetaryTotal>";
 
@@ -1302,6 +1314,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1309,7 +1322,7 @@ namespace OCDS_Mapper.test
 
                     JProperty awards = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("awards".Equals(awards.Name));
+                    Assert.True(Mappings.MappingElements.Award.Equals(awards.Name));
                     Assert.Single(awards);
                     Assert.NotNull(awards.First);
                     Assert.IsType<JArray>(awards.First);
@@ -1339,6 +1352,159 @@ namespace OCDS_Mapper.test
                 }
             }
 
+            public class ContractIdTests
+            {
+                private IMapper _mapper;
+
+                public ContractIdTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                }
+
+                [Fact]
+                public void TestContractId()
+                {
+                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                    {
+                        Mappings.MappingElements.Contract,
+                        Mappings.MappingElements.Contracts.Id
+                    });
+
+                    _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "1") });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty contracts = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True(Mappings.MappingElements.Contract.Equals(contracts.Name));
+                    Assert.Single(contracts);
+                    Assert.NotNull(contracts.First);
+                    Assert.IsType<JArray>(contracts.First);
+
+                    JArray contractsArray = (JArray) contracts.First;
+
+                    Assert.Single(contractsArray);
+                    Assert.NotNull(contractsArray.First);
+                    Assert.IsType<JObject>(contractsArray.First);
+
+                    JObject contractsObject = (JObject) contractsArray.First;
+
+                    Assert.True(contractsObject.Count == 2);
+                    Assert.IsType<JProperty>(contractsObject.First);
+                    Assert.IsType<JProperty>(contractsObject.Last);
+
+                    JProperty idProperty = (JProperty) contractsObject.First;
+                    JProperty awardIdProperty = (JProperty) contractsObject.Last;
+
+                    Assert.True("id".Equals(idProperty.Name));
+                    Assert.Single(idProperty);
+                    Assert.NotNull(idProperty.First);
+                    Assert.IsType<JValue>(idProperty.First);
+                    Assert.True("awardID".Equals(awardIdProperty.Name));
+                    Assert.Single(awardIdProperty);
+                    Assert.NotNull(awardIdProperty.First);
+                    Assert.IsType<JValue>(awardIdProperty.First);
+
+                    JValue idValue = (JValue) idProperty.First;
+                    JValue awardIDValue = (JValue) awardIdProperty.First;
+
+                    Assert.True("ocds-1xraxc--contract-0".Equals(idValue.Value));
+                    Assert.True("1".Equals(awardIDValue.Value));
+                }
+            }
+
+            public class ContractPeriodStartDateTests
+            {
+                private IMapper _mapper;
+
+                public ContractPeriodStartDateTests()
+                {
+                    Program.InitLogger();
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                }
+
+                [Fact]
+                public void TestContractPeriodStartDate()
+                {
+                    IEnumerable<string> pathMap1 = new LinkedList<string>(new string[]
+                    {
+                        Mappings.MappingElements.Contract,
+                        Mappings.MappingElements.Contracts.Id
+                    });
+                    IEnumerable<string> pathMap2 = new LinkedList<string>(new string[]
+                    {
+                        Mappings.MappingElements.Contract,
+                        Mappings.MappingElements.Contracts.Period,
+                        Mappings.MappingElements.Contracts.Periods.StartDate
+                    });
+                    string parsedElement1 = "1";
+                    string parsedElement2 = "2021-09-01";
+
+                    _mapper.MapElement(pathMap1, new XElement[]{ new XElement("null", parsedElement1) });
+                    _mapper.MapElement(pathMap2, new XElement[]{ new XElement("null", parsedElement2) });
+
+                    Assert.Empty(_mapper.MappedEntry);
+                    Assert.Null(_mapper.MappedEntry.First);
+
+                    _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
+
+                    Assert.Single(_mapper.MappedEntry);
+                    Assert.NotNull(_mapper.MappedEntry.First);
+                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
+
+                    JProperty contracts = (JProperty) _mapper.MappedEntry.First;
+
+                    Assert.True(Mappings.MappingElements.Contract.Equals(contracts.Name));
+                    Assert.Single(contracts);
+                    Assert.NotNull(contracts.First);
+                    Assert.IsType<JArray>(contracts.First);
+
+                    JArray contractsArray = (JArray) contracts.First;
+
+                    Assert.Single(contractsArray);
+                    Assert.NotNull(contractsArray.First);
+                    Assert.IsType<JObject>(contractsArray.First);
+
+                    JObject contractsObject = (JObject) contractsArray.First;
+
+                    Assert.True(contractsObject.Count == 3);
+                    Assert.IsType<JProperty>(contractsObject.Last);
+
+                    JProperty contractPeriodProperty = (JProperty) contractsObject.Last;
+
+                    Assert.Single(contractPeriodProperty);
+                    Assert.NotNull(contractPeriodProperty.First);
+                    Assert.IsType<JObject>(contractPeriodProperty.First);
+
+                    JObject contractPeriodObject = (JObject) contractPeriodProperty.First;
+
+                    Assert.Single(contractPeriodObject);
+                    Assert.NotNull(contractPeriodObject.First);
+                    Assert.IsType<JProperty>(contractPeriodObject.First);
+
+                    JProperty contractPeriodStartDateProperty = (JProperty) contractPeriodObject.First;
+
+                    Assert.True("startDate".Equals(contractPeriodStartDateProperty.Name));
+                    Assert.Single(contractPeriodStartDateProperty);
+                    Assert.NotNull(contractPeriodStartDateProperty.First);
+                    Assert.IsType<JValue>(contractPeriodStartDateProperty.First);
+
+                    JValue contractPeriodValue = (JValue) contractPeriodStartDateProperty.First;
+
+                    Assert.True("2021-09-01T00:00:00Z".Equals(contractPeriodValue.Value));
+                }
+            }
+
             public class PartyFieldsTests
             {
                 private IMapper _mapper;
@@ -1346,7 +1512,7 @@ namespace OCDS_Mapper.test
                 public PartyFieldsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1354,7 +1520,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "parties"
+                        Mappings.MappingElements.Party
                     });
                     string elementDump = "<cac:Party xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:WebsiteURI xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">https://lapalmaaguas.com</cbc:WebsiteURI>\n  <cac:PartyIdentification>\n    <cbc:ID schemeName=\"DIR3\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">L03380010</cbc:ID>\n  </cac:PartyIdentification>\n  <cac:PartyIdentification>\n    <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">P3800058D</cbc:ID>\n  </cac:PartyIdentification>\n  <cac:PartyName>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Presidencia del Consejo Insular de Aguas de La Palma</cbc:Name>\n  </cac:PartyName>\n  <cac:PostalAddress>\n    <cbc:CityName xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Santa Cruz de la Palma</cbc:CityName>\n    <cbc:PostalZone xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">38700</cbc:PostalZone>\n    <cac:AddressLine>\n      <cbc:Line xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Avda. Marítima 34</cbc:Line>\n    </cac:AddressLine>\n    <cac:Country>\n      <cbc:IdentificationCode listURI=\"http://docs.oasis-open.org/ubl/os-ubl-2.0/cl/gc/default/CountryIdentificationCode-2.0.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES</cbc:IdentificationCode>\n      <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">España</cbc:Name>\n    </cac:Country>\n  </cac:PostalAddress>\n  <cac:Contact>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Presidencia del Consejo Insular de Aguas de La Palma</cbc:Name>\n    <cbc:ElectronicMail xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">gabinete.presidencia@cablapalma.es</cbc:ElectronicMail>\n    <cbc:Telefax xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">918562480</cbc:Telefax>\n    <cbc:Telephone xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">918562479</cbc:Telephone>\n  </cac:Contact>\n</cac:Party>";
 
@@ -1364,6 +1530,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1371,7 +1538,7 @@ namespace OCDS_Mapper.test
 
                     JProperty party = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("parties".Equals(party.Name));
+                    Assert.True(Mappings.MappingElements.Party.Equals(party.Name));
                     Assert.Single(party);
                     Assert.NotNull(party.First);
                     Assert.IsType<JArray>(party.First);
@@ -1384,23 +1551,10 @@ namespace OCDS_Mapper.test
 
                     JObject partyObject = (JObject) partyArray.First;
 
-                    Assert.True(partyObject.Count == 3);
+                    Assert.True(partyObject.Count == 2);
                     Assert.IsType<JProperty>(partyObject.First);
 
-                    JProperty countryProperty = (JProperty) partyObject.First;
-
-                    Assert.True("countryName".Equals(countryProperty.Name));
-                    Assert.Single(countryProperty);
-                    Assert.NotNull(countryProperty.First);
-                    Assert.IsType<JValue>(countryProperty.First);
-
-                    JValue countryValue = (JValue) countryProperty.First;
-
-                    Assert.True("ES".Equals(countryValue.Value));
-
-                    Assert.IsType<JProperty>(countryProperty.Next);
-
-                    JProperty addressProperty = (JProperty) countryProperty.Next;
+                    JProperty addressProperty = (JProperty) partyObject.First;
 
                     Assert.Single(addressProperty);
                     Assert.NotNull(addressProperty.First);
@@ -1408,7 +1562,7 @@ namespace OCDS_Mapper.test
 
                     JObject addressObject = (JObject) addressProperty.First;
 
-                    Assert.True(addressObject.Count == 3);
+                    Assert.True(addressObject.Count == 4);
                     Assert.IsType<JProperty>(addressObject.First);
                     
                     JProperty streetProperty = (JProperty) addressObject.First;
@@ -1434,8 +1588,21 @@ namespace OCDS_Mapper.test
                     Assert.True("Santa Cruz de la Palma".Equals(localityValue.Value));
                     
                     Assert.IsType<JProperty>(localityProperty.Next);
+
+                    JProperty countryProperty = (JProperty) localityProperty.Next;
+
+                    Assert.True("countryName".Equals(countryProperty.Name));
+                    Assert.Single(countryProperty);
+                    Assert.NotNull(countryProperty.First);
+                    Assert.IsType<JValue>(countryProperty.First);
+
+                    JValue countryValue = (JValue) countryProperty.First;
+
+                    Assert.True("ES".Equals(countryValue.Value));
+
+                    Assert.IsType<JProperty>(countryProperty.Next);
                     
-                    JProperty postalCodeProperty = (JProperty) localityProperty.Next;
+                    JProperty postalCodeProperty = (JProperty) countryProperty.Next;
 
                     Assert.Single(postalCodeProperty);
                     Assert.NotNull(postalCodeProperty.First);
@@ -1525,7 +1692,7 @@ namespace OCDS_Mapper.test
                 public PartiesNameTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1533,8 +1700,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "parties",
-                        "name"
+                        Mappings.MappingElements.Party,
+                        Mappings.MappingElements.Parties.Name
                     });
                     string parsedElement = "ABCD";
 
@@ -1544,6 +1711,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1551,7 +1719,7 @@ namespace OCDS_Mapper.test
 
                     JProperty party = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("parties".Equals(party.Name));
+                    Assert.True(Mappings.MappingElements.Party.Equals(party.Name));
                     Assert.Single(party);
                     Assert.NotNull(party.First);
                     Assert.IsType<JArray>(party.First);
@@ -1588,7 +1756,7 @@ namespace OCDS_Mapper.test
                 public PartiesIdentifierTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1596,8 +1764,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "parties",
-                        "identifier"
+                        Mappings.MappingElements.Party,
+                        Mappings.MappingElements.Parties.Identifier
                     });
                     string elementDump = "<cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">S4611001A</cbc:ID>";
 
@@ -1607,6 +1775,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1614,7 +1783,7 @@ namespace OCDS_Mapper.test
 
                     JProperty party = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("parties".Equals(party.Name));
+                    Assert.True(Mappings.MappingElements.Party.Equals(party.Name));
                     Assert.Single(party);
                     Assert.NotNull(party.First);
                     Assert.IsType<JArray>(party.First);
@@ -1657,7 +1826,7 @@ namespace OCDS_Mapper.test
                     JProperty idProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(idProperty.Name));
-                    Assert.True("S4611001A".Equals(idProperty.Value.ToString()));
+                    Assert.True("S4611001A-1".Equals(idProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(idProperty.Next);
 
@@ -1682,8 +1851,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "parties",
-                        "identifier"
+                        Mappings.MappingElements.Party,
+                        Mappings.MappingElements.Parties.Identifier
                     });
                     string elementDump1 = "<cac:PartyIdentification xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"DIR3\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">L03380010</cbc:ID>\n</cac:PartyIdentification>";
                     string elementDump2 = "<cac:PartyIdentification xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"NIF\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">P3800058D</cbc:ID>\n</cac:PartyIdentification>";
@@ -1694,6 +1863,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1701,7 +1871,7 @@ namespace OCDS_Mapper.test
 
                     JProperty party = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("parties".Equals(party.Name));
+                    Assert.True(Mappings.MappingElements.Party.Equals(party.Name));
                     Assert.Single(party);
                     Assert.NotNull(party.First);
                     Assert.IsType<JArray>(party.First);
@@ -1714,31 +1884,10 @@ namespace OCDS_Mapper.test
 
                     JObject partyObject = (JObject) partyArray.First;
 
-                    Assert.True(partyObject.Count == 3);
+                    Assert.True(partyObject.Count == 4);
                     Assert.IsType<JProperty>(partyObject.First);
 
-                    JProperty identifierProperty = (JProperty) partyObject.First;
-
-                    Assert.True("identifier".Equals(identifierProperty.Name));
-                    Assert.Single(identifierProperty);
-                    Assert.NotNull(identifierProperty.First);
-                    Assert.IsType<JObject>(identifierProperty.First);
-
-                    JObject identifierObject = (JObject) identifierProperty.First;
-
-                    Assert.True(identifierObject.Count == 3);
-                    Assert.IsType<JProperty>(identifierObject.First);
-                    Assert.IsType<JProperty>(identifierObject.Last);
-
-                    JProperty schemeProperty = (JProperty) identifierObject.First;
-                    JProperty identifierIdProperty = (JProperty) schemeProperty.Next;
-                    JProperty additionalIdentifiersProperty = (JProperty) identifierIdProperty.Next;
-
-                    Assert.True("scheme".Equals(schemeProperty.Name));
-                    Assert.True("ES-DIR3".Equals(schemeProperty.Value.ToString()));
-
-                    Assert.True("id".Equals(identifierIdProperty.Name));
-                    Assert.True("L03380010".Equals(identifierIdProperty.Value.ToString()));
+                    JProperty additionalIdentifiersProperty = (JProperty) partyObject.First;
 
                     Assert.Single(additionalIdentifiersProperty);
                     Assert.IsType<JArray>(additionalIdentifiersProperty.First);
@@ -1773,12 +1922,34 @@ namespace OCDS_Mapper.test
                     Assert.True("ES-RMC".Equals(additionalSchemeValue.Value));
                     Assert.True("P3800058D".Equals(additionalIdValue.Value));
 
+                    JProperty identifierProperty = (JProperty) additionalIdentifiersProperty.Next;
+
+                    Assert.True("identifier".Equals(identifierProperty.Name));
+                    Assert.Single(identifierProperty);
+                    Assert.NotNull(identifierProperty.First);
+                    Assert.IsType<JObject>(identifierProperty.First);
+
+                    JObject identifierObject = (JObject) identifierProperty.First;
+
+                    Assert.True(identifierObject.Count == 2);
+                    Assert.IsType<JProperty>(identifierObject.First);
+                    Assert.IsType<JProperty>(identifierObject.Last);
+
+                    JProperty schemeProperty = (JProperty) identifierObject.First;
+                    JProperty identifierIdProperty = (JProperty) schemeProperty.Next;
+
+                    Assert.True("scheme".Equals(schemeProperty.Name));
+                    Assert.True("ES-DIR3".Equals(schemeProperty.Value.ToString()));
+
+                    Assert.True("id".Equals(identifierIdProperty.Name));
+                    Assert.True("L03380010".Equals(identifierIdProperty.Value.ToString()));
+
                     Assert.IsType<JProperty>(identifierProperty.Next);
 
                     JProperty idProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(idProperty.Name));
-                    Assert.True("L03380010".Equals(idProperty.Value.ToString()));
+                    Assert.True("L03380010-2".Equals(idProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(idProperty.Next);
 
@@ -1806,7 +1977,7 @@ namespace OCDS_Mapper.test
                 public PlanningBudgetAmountTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1814,9 +1985,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "planning",
-                        "budget",
-                        "amount"
+                        Mappings.MappingElements.Planning,
+                        Mappings.MappingElements.Plannings.Budget,
+                        Mappings.MappingElements.Plannings.Budgets.Amount
                     });
                     string parsedElement = "189250";
 
@@ -1893,9 +2064,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "planning",
-                        "budget",
-                        "amount"
+                        Mappings.MappingElements.Planning,
+                        Mappings.MappingElements.Plannings.Budget,
+                        Mappings.MappingElements.Plannings.Budgets.Amount
                     });
                     string parsedElement = "189250";
 
@@ -1912,9 +2083,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "planning",
-                        "budget",
-                        "amount"
+                        Mappings.MappingElements.Planning,
+                        Mappings.MappingElements.Plannings.Budget,
+                        Mappings.MappingElements.Plannings.Budgets.Amount
                     });
                     string parsedElement = "189250";
 
@@ -1935,7 +2106,7 @@ namespace OCDS_Mapper.test
                 public TenderItemsClassificationTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -1943,9 +2114,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "items",
-                        "classification"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Item,
+                        Mappings.MappingElements.Tenders.Items.Classification
                     });
 
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "45000000") });
@@ -1954,6 +2125,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -1961,7 +2133,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2073,9 +2245,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "items",
-                        "classification"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Item,
+                        Mappings.MappingElements.Tenders.Items.Classification
                     });
                     string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
                     string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
@@ -2086,6 +2258,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2093,7 +2266,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2257,7 +2430,7 @@ namespace OCDS_Mapper.test
                 public TenderLotsIdTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -2265,9 +2438,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "lots",
-                        "id"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Lot,
+                        Mappings.MappingElements.Tenders.Lots.Id
                     });
 
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "1234") });
@@ -2276,6 +2449,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2283,7 +2457,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2364,9 +2538,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "lots",
-                        "id"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Lot,
+                        Mappings.MappingElements.Tenders.Lots.Id
                     });
                     string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
                     string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
@@ -2377,6 +2551,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2384,7 +2559,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2498,7 +2673,7 @@ namespace OCDS_Mapper.test
                 public TenderLotsNameTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -2506,9 +2681,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "lots",
-                        "name"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Lot,
+                        Mappings.MappingElements.Tenders.Lots.Name
                     });
 
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "ABCD") });
@@ -2517,6 +2692,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2524,7 +2700,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2599,13 +2775,13 @@ namespace OCDS_Mapper.test
                 }
             
                 [Fact]
-                public void TestTenderLotsId2()
+                public void TestTenderLotsName2()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "lots",
-                        "name"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Lot,
+                        Mappings.MappingElements.Tenders.Lots.Name
                     });
                     string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
                     string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
@@ -2616,6 +2792,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2623,7 +2800,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2736,17 +2913,17 @@ namespace OCDS_Mapper.test
                 public TenderLotsValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
-                public void TestTenderLotsValue1()
+                public void TestTenderLotsValue()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "lots",
-                        "value"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Lot,
+                        Mappings.MappingElements.Tenders.Lots.Value_
                     });
                     string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
                     string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
@@ -2757,6 +2934,7 @@ namespace OCDS_Mapper.test
                     Assert.Null(_mapper.MappedEntry.First);
 
                     _mapper.Commit();
+                    RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
                     Assert.NotNull(_mapper.MappedEntry.First);
@@ -2764,7 +2942,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -2907,188 +3085,7 @@ namespace OCDS_Mapper.test
                     Assert.True("1".Equals(itemIdValue1.Value));
                     Assert.True("2".Equals(itemIdValue2.Value));
                 }
-            
-                [Fact]
-                public void TestTenderLotsValue2()
-                {
-                    IEnumerable<string> pathMap = new LinkedList<string>(new string[]
-                    {
-                        "tender",
-                        "items",
-                        "classification"
-                    });
-                    string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
-                    string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
-
-                    _mapper.MapElement(pathMap, new XElement[]{ XElement.Parse(elementDump1), XElement.Parse(elementDump2) });
-
-                    Assert.Empty(_mapper.MappedEntry);
-                    Assert.Null(_mapper.MappedEntry.First);
-
-                    _mapper.Commit();
-
-                    Assert.Single(_mapper.MappedEntry);
-                    Assert.NotNull(_mapper.MappedEntry.First);
-                    Assert.IsType<JProperty>(_mapper.MappedEntry.First);
-
-                    JProperty tender = (JProperty) _mapper.MappedEntry.First;
-
-                    Assert.True("tender".Equals(tender.Name));
-                    Assert.Single(tender);
-                    Assert.NotNull(tender.First);
-                    Assert.IsType<JObject>(tender.First);
-
-                    JObject tenderObject = (JObject) tender.First;
-
-                    Assert.True(tenderObject.Count == 2);
-                    Assert.IsType<JProperty>(tenderObject.First);
-                    Assert.IsType<JProperty>(tenderObject.Last);
-
-                    JProperty itemsProperty = (JProperty) tenderObject.First;
-                    JProperty lotsProperty = (JProperty) tenderObject.Last;
-
-                    Assert.True("items".Equals(itemsProperty.Name));
-                    Assert.True("lots".Equals(lotsProperty.Name));
-                    Assert.Single(itemsProperty);
-                    Assert.Single(lotsProperty);
-                    Assert.NotNull(itemsProperty.First);
-                    Assert.NotNull(lotsProperty.First);
-                    Assert.IsType<JArray>(itemsProperty.First);
-                    Assert.IsType<JArray>(lotsProperty.First);
-
-                    JArray lotsArray = (JArray) lotsProperty.First;
-                    JArray itemsArray = (JArray) itemsProperty.First;
-
-                    Assert.True(lotsArray.Count == 2);
-                    Assert.NotNull(lotsArray.First);
-                    Assert.IsType<JObject>(lotsArray.First);
-                    Assert.NotNull(lotsArray.Last);
-                    Assert.IsType<JObject>(lotsArray.Last);
-
-                    JObject lotIdObject1 = (JObject) lotsArray.First;
-                    JObject lotIdObject2 = (JObject) lotsArray.Last;
-
-                    Assert.Single(lotIdObject1);
-                    Assert.NotNull(lotIdObject1.First);
-                    Assert.IsType<JProperty>(lotIdObject1.First);
-                    Assert.Single(lotIdObject2);
-                    Assert.NotNull(lotIdObject2.First);
-                    Assert.IsType<JProperty>(lotIdObject2.First);
-
-                    JProperty lotIdProperty1 = (JProperty) lotIdObject1.First;
-                    JProperty lotIdProperty2 = (JProperty) lotIdObject2.First;
-
-                    Assert.Single(lotIdProperty1);
-                    Assert.NotNull(lotIdProperty1.First);
-                    Assert.IsType<JValue>(lotIdProperty1.First);
-                    Assert.Single(lotIdProperty2);
-                    Assert.NotNull(lotIdProperty2.First);
-                    Assert.IsType<JValue>(lotIdProperty2.First);
-
-                    JValue lotIdValue1 = (JValue) lotIdProperty1.First;
-                    JValue lotIdValue2 = (JValue) lotIdProperty2.First;
-
-                    Assert.True("lot-1".Equals(lotIdValue1.Value));
-                    Assert.True("lot-2".Equals(lotIdValue2.Value));
-
-                    Assert.True(itemsArray.Count == 2);
-                    Assert.NotNull(itemsArray.First);
-                    Assert.IsType<JObject>(itemsArray.First);
-                    Assert.NotNull(itemsArray.Last);
-                    Assert.IsType<JObject>(itemsArray.Last);
-
-                    JObject itemObject1 = (JObject) itemsArray.First;
-                    JObject itemObject2 = (JObject) itemsArray.Last;
-
-                    Assert.True(itemObject1.Count == 2);
-                    Assert.IsType<JProperty>(itemObject1.First);
-                    Assert.IsType<JProperty>(itemObject1.Last);
-                    Assert.True(itemObject2.Count == 2);
-                    Assert.IsType<JProperty>(itemObject2.First);
-                    Assert.IsType<JProperty>(itemObject2.Last);
-
-                    JProperty itemIdProperty1 = (JProperty) itemObject1.First;
-                    JProperty itemClassificationProperty1 = (JProperty) itemObject1.Last;
-                    JProperty itemIdProperty2 = (JProperty) itemObject2.First;
-                    JProperty itemClassificationProperty2 = (JProperty) itemObject2.Last;
-
-                    Assert.Single(itemIdProperty1);
-                    Assert.NotNull(itemIdProperty1.First);
-                    Assert.IsType<JValue>(itemIdProperty1.First);
-                    Assert.Single(itemIdProperty2);
-                    Assert.NotNull(itemIdProperty2.First);
-                    Assert.IsType<JValue>(itemIdProperty2.First);
-
-                    JValue itemIdValue1 = (JValue) itemIdProperty1.First;
-                    JValue itemIdValue2 = (JValue) itemIdProperty2.First;
-
-                    Assert.True("1".Equals(itemIdValue1.Value));
-                    Assert.True("2".Equals(itemIdValue2.Value));
-
-                    Assert.Single(itemClassificationProperty1);
-                    Assert.NotNull(itemClassificationProperty1.First);
-                    Assert.IsType<JObject>(itemClassificationProperty1.First);
-                    Assert.Single(itemClassificationProperty2);
-                    Assert.NotNull(itemClassificationProperty2.First);
-                    Assert.IsType<JObject>(itemClassificationProperty2.First);
-
-                    JObject itemClassificationObject1 = (JObject) itemClassificationProperty1.First;
-                    JObject itemClassificationObject2 = (JObject) itemClassificationProperty2.First;
-
-                    Assert.True(itemClassificationObject1.Count == 3);
-                    Assert.IsType<JProperty>(itemClassificationObject1.First);
-                    Assert.True(itemClassificationObject2.Count == 3);
-                    Assert.IsType<JProperty>(itemClassificationObject2.First);
-
-                    JProperty classificationIdProperty1 = (JProperty) itemClassificationObject1.First;
-                    JProperty classificationIdProperty2 = (JProperty) itemClassificationObject2.First;
-
-                    Assert.Single(classificationIdProperty1);
-                    Assert.NotNull(classificationIdProperty1.First);
-                    Assert.IsType<JValue>(classificationIdProperty1.First);
-                    Assert.Single(classificationIdProperty2);
-                    Assert.NotNull(classificationIdProperty2.First);
-                    Assert.IsType<JValue>(classificationIdProperty2.First);
-
-                    JValue classificationIdValue1 = (JValue) classificationIdProperty1.First;
-                    JValue classificationIdValue2 = (JValue) classificationIdProperty2.First;
-
-                    Assert.True("15981100".Equals(classificationIdValue1.Value));
-                    Assert.True("15981100".Equals(classificationIdValue2.Value));
-
-                    JProperty schemeProperty1 = (JProperty) classificationIdProperty1.Next;
-                    JProperty schemeProperty2 = (JProperty) classificationIdProperty2.Next;
-
-                    Assert.Single(schemeProperty1);
-                    Assert.NotNull(schemeProperty1.First);
-                    Assert.IsType<JValue>(schemeProperty1.First);
-                    Assert.Single(schemeProperty2);
-                    Assert.NotNull(schemeProperty2.First);
-                    Assert.IsType<JValue>(schemeProperty2.First);
-
-                    JValue schemeValue1 = (JValue) schemeProperty1.First;
-                    JValue schemeValue2 = (JValue) schemeProperty2.First;
-
-                    Assert.True("CPV".Equals(schemeValue1.Value));
-                    Assert.True("CPV".Equals(schemeValue2.Value));
-
-                    JProperty descriptionProperty1 = (JProperty) schemeProperty1.Next;
-                    JProperty descriptionProperty2 = (JProperty) schemeProperty2.Next;
-
-                    Assert.Single(descriptionProperty1);
-                    Assert.NotNull(descriptionProperty1.First);
-                    Assert.IsType<JValue>(descriptionProperty1.First);
-                    Assert.Single(descriptionProperty2);
-                    Assert.NotNull(descriptionProperty2.First);
-                    Assert.IsType<JValue>(descriptionProperty2.First);
-
-                    JValue descriptionValue1 = (JValue) descriptionProperty1.First;
-                    JValue descriptionValue2 = (JValue) descriptionProperty2.First;
-
-                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue1.Value));
-                    Assert.True("Agua mineral sin gas.".Equals(descriptionValue2.Value));
                 }
-            }
 
             public class TenderMainProcurementCategoryTests
             {
@@ -3097,7 +3094,7 @@ namespace OCDS_Mapper.test
                 public TenderMainProcurementCategoryTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -3105,8 +3102,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "mainProcurementCategory"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.MainProcurementCategory
                     });
                     string parsedElement = "1";
 
@@ -3118,7 +3115,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3146,8 +3143,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "mainProcurementCategory"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.MainProcurementCategory
                     });
                     string parsedElement = "2";
 
@@ -3159,7 +3156,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3191,7 +3188,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3223,7 +3220,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3251,8 +3248,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "mainProcurementCategory"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.MainProcurementCategory
                     });
                     string parsedElement = "3";
 
@@ -3264,7 +3261,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3296,7 +3293,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3328,7 +3325,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3356,8 +3353,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "mainProcurementCategory"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.MainProcurementCategory
                     });
                     string parsedElement = "null";
 
@@ -3375,7 +3372,7 @@ namespace OCDS_Mapper.test
                 public TenderNumberOfTenderersTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -3383,8 +3380,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "numberOfTenderers"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.NumberOfTenderers
                     });
                     string parsedElement = "1";
 
@@ -3396,7 +3393,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3416,7 +3413,7 @@ namespace OCDS_Mapper.test
 
                     JValue notValue = (JValue) notProperty.First;
 
-                    Assert.True("1".Equals(notValue.Value));
+                    Assert.True(1 == Convert.ToInt32(notValue.Value));
                 }
             }
 
@@ -3427,7 +3424,7 @@ namespace OCDS_Mapper.test
                 public TenderProcurementMethodTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -3435,8 +3432,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethod
                     });
                     string parsedElement = "1";
 
@@ -3448,7 +3445,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3480,7 +3477,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3512,7 +3509,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3544,7 +3541,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3576,7 +3573,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3608,7 +3605,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3640,7 +3637,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3668,8 +3665,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethod
                     });
                     string parsedElement = "2";
 
@@ -3681,7 +3678,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3713,7 +3710,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3741,8 +3738,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethod
                     });
                     string parsedElement = "3";
 
@@ -3754,7 +3751,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3786,7 +3783,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3818,7 +3815,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3850,7 +3847,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3882,7 +3879,7 @@ namespace OCDS_Mapper.test
 
                     tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3910,8 +3907,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethod
                     });
                     string parsedElement = "null";
 
@@ -3929,7 +3926,7 @@ namespace OCDS_Mapper.test
                 public TenderProcurementMethodDetailsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -3937,8 +3934,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethodDetails_es"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethodDetails
                     });
                     string parsedElement = "3";
 
@@ -3950,7 +3947,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -3978,8 +3975,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethodDetails_es"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethodDetails
                     });
                     string parsedElement = "0";
 
@@ -3994,8 +3991,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "procurementMethodDetails_es"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.ProcurementMethodDetails
                     });
                     string parsedElement = "null";
 
@@ -4013,7 +4010,7 @@ namespace OCDS_Mapper.test
                 public TenderSubmissionMethodTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4021,8 +4018,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "1";
 
@@ -4034,7 +4031,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4068,8 +4065,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "2";
 
@@ -4081,7 +4078,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4115,8 +4112,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "3";
 
@@ -4128,7 +4125,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4166,8 +4163,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "true";
 
@@ -4179,7 +4176,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4213,8 +4210,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "false";
 
@@ -4229,8 +4226,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethod"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethod
                     });
                     string parsedElement = "null";
 
@@ -4248,7 +4245,7 @@ namespace OCDS_Mapper.test
                 public TenderSubmissionMethodDetailsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4256,8 +4253,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethodDetails"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethodDetails
                     });
                     string parsedElement = "es";
 
@@ -4269,7 +4266,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4297,8 +4294,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "submissionMethodDetails"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.SubmissionMethodDetails
                     });
                     string parsedElement1 = "es";
                     string parsedElement2 = "ca";
@@ -4311,7 +4308,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4343,7 +4340,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodStartDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4351,9 +4348,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "startDate"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.StartDate
                     });
                     string parsedElement = "2021-09-01";
 
@@ -4365,7 +4362,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4409,7 +4406,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodEndDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4417,9 +4414,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "endDate"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.EndDate
                     });
                     string parsedElement = "2021-09-01";
 
@@ -4431,7 +4428,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4475,7 +4472,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodDurationInDaysTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4483,9 +4480,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "durationInDays"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.DurationInDays
                     });
                     string parsedElement = "3";
 
@@ -4500,7 +4497,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4541,9 +4538,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "durationInDays"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.DurationInDays
                     });
                     string parsedElement = "3";
 
@@ -4558,7 +4555,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4599,9 +4596,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "durationInDays"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.DurationInDays
                     });
                     string parsedElement = "3";
 
@@ -4616,7 +4613,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4657,9 +4654,9 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "tenderPeriod",
-                        "durationInDays"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.TenderPeriod,
+                        Mappings.MappingElements.Tenders.TenderPeriods.DurationInDays
                     });
                     string parsedElement = "3";
 
@@ -4680,16 +4677,16 @@ namespace OCDS_Mapper.test
                 public TenderTitleTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
-                public void TestTenderTitle1()
+                public void TestTenderTitle()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "title"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Title
                     });
                     string parsedElement = "ABCD";
 
@@ -4701,7 +4698,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4732,7 +4729,7 @@ namespace OCDS_Mapper.test
                 public TenderValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log);
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
                 }
 
                 [Fact]
@@ -4740,8 +4737,8 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
-                        "value"
+                        Mappings.MappingElements.Tender,
+                        Mappings.MappingElements.Tenders.Value
                     });
                     string parsedElement = "189250";
                     XElement element = new XElement("null", parsedElement);
@@ -4755,7 +4752,7 @@ namespace OCDS_Mapper.test
 
                     JProperty tender = (JProperty) _mapper.MappedEntry.First;
 
-                    Assert.True("tender".Equals(tender.Name));
+                    Assert.True(Mappings.MappingElements.Tender.Equals(tender.Name));
                     Assert.Single(tender);
                     Assert.NotNull(tender.First);
                     Assert.IsType<JObject>(tender.First);
@@ -4804,7 +4801,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
+                        Mappings.MappingElements.Tender,
                         "value"
                     });
                     string parsedElement = "189250";
@@ -4820,7 +4817,7 @@ namespace OCDS_Mapper.test
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
-                        "tender",
+                        Mappings.MappingElements.Tender,
                         "value"
                     });
                     string parsedElement = "189250";
@@ -4836,6 +4833,30 @@ namespace OCDS_Mapper.test
             }
         }
         
+        /* Tests unitarios del componente de empaquetado */
+        public class PackagerTests
+        {
+            private IPackager _packager;
+
+            public PackagerTests()
+            {
+                Program.InitLogger();
+                _packager = new Packager(Program.Log, "");
+            }
+
+            [Fact]
+            public void TestConstructor()
+            {
+                Assert.True(true); // TODO
+            }
+
+            [Fact]
+            public void TestGetNamespaces()
+            {
+                Assert.True(true); // TODO
+            }
+        }
+
         /* Tests unitarios del componente de parseo */
 
         public class ParserTests
@@ -4845,7 +4866,7 @@ namespace OCDS_Mapper.test
             public ParserTests()
             {
                 Program.InitLogger();
-                _parser = new Parser(Program.Log, "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom");
+                _parser = new Parser(Program.Log, new Document("Examples/xml/exampleValid0.atom"));
             }
 
             [Fact]
@@ -4900,53 +4921,53 @@ namespace OCDS_Mapper.test
             [Fact]
             public async Task TestConstructor1()
             {
-                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+                _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<AsyncCollection<string>>(_provider.Files);
+                Assert.IsType<AsyncCollection<Document>>(_provider.Files);
 
-                string filePath = await _provider.TakeFile();
+                Document document = await _provider.TakeFile();
 
-                Assert.True("./tmp/document.atom".Equals(filePath));
+                Assert.True("./tmp/document.atom".Equals(document.Path));
             }
 
             [Fact]
             public async Task TestConstructor2()
             {
                 _provider = new Provider(
-                    Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
-                    "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"
+                    Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC,
+                    "Examples/xml/exampleValid0.atom"
                 );
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<AsyncCollection<string>>(_provider.Files);
+                Assert.IsType<AsyncCollection<Document>>(_provider.Files);
 
-                string filePath = await _provider.TakeFile();
+                Document document = await _provider.TakeFile();
 
-                Assert.True("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom".Equals(filePath));
+                Assert.True("Examples/xml/exampleValid0.atom".Equals(document.Path));
             }
 
             [Fact]
             public async Task TestConstructor3()
             {
                 _provider = new Provider(
-                    Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
+                    Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC,
                     "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom"
                 );
 
                 Assert.NotNull(_provider.Files);
-                Assert.IsType<AsyncCollection<string>>(_provider.Files);
+                Assert.IsType<AsyncCollection<Document>>(_provider.Files);
 
-                string filePath = await _provider.TakeFile();
+                Document document = await _provider.TakeFile();
 
-                Assert.True("./tmp/document.atom".Equals(filePath));
+                Assert.True("./tmp/document.atom".Equals(document.Path));
             }
 
             [Fact]
             public void TestConstructor4()
             {
                 Action action = () => new Provider(
-                    Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
+                    Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC,
                     "httpz://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom"
                 );
 
@@ -4957,7 +4978,7 @@ namespace OCDS_Mapper.test
             public void TestConstructor5()
             {
                 Action action = () => new Provider(
-                    Program.Log, Provider.EProviderOperationCode.PROVIDE_ALL,
+                    Program.Log, EProviderOperationCode.PROVIDE_ALL,
                     "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom"
                 );
 
@@ -4967,7 +4988,7 @@ namespace OCDS_Mapper.test
             [Fact]
             public void TestConstructor6()
             {
-                Action action = () => new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC);
+                Action action = () => new Provider(Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC, null);
 
                 action.Should().Throw<InvalidOperationCodeException>();
             }
@@ -4976,35 +4997,35 @@ namespace OCDS_Mapper.test
             public async Task TestProviderTakeFile1()
             {
                 _provider = new Provider(
-                        Program.Log, Provider.EProviderOperationCode.PROVIDE_SPECIFIC,
-                        "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"
+                        Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC,
+                        "Examples/xml/exampleValid0.atom"
                 );
 
-                string filePath = await _provider.TakeFile();
+                Document document = await _provider.TakeFile();
 
-                Assert.True(filePath.Equals("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"));
-                Assert.True(File.Exists("Examples/xml/licitacionesPerfilesContratanteCompleto3.atom"));
+                Assert.True(document.Path.Equals("Examples/xml/exampleValid0.atom"));
+                Assert.True(File.Exists("Examples/xml/exampleValid0.atom"));
 
-                filePath = await _provider.TakeFile();
+                document = await _provider.TakeFile();
 
-                Assert.Null(filePath);
+                Assert.Null(document);
             }
 
             [Fact]
             public async Task TestProviderTakeFile2()
             {
-                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+                _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
-                string filePath = await _provider.TakeFile();
+                Document document = await _provider.TakeFile();
 
-                Assert.True(filePath.Equals("./tmp/document.atom"));
+                Assert.True(document.Path.Equals("./tmp/document.atom"));
                 Assert.True(File.Exists("./tmp/document.atom"));
             }
 
             [Fact]
             public void TestProviderRemoveFile1()
             {
-                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+                _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
                 string filePath = "./tmp/x.atom";
 
@@ -5017,13 +5038,26 @@ namespace OCDS_Mapper.test
             [Fact]
             public void TestProviderRemoveFile2()
             {
-                _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_LATEST);
+                _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
                 string filePath = "./tmp/x.atom";
 
                 _provider.RemoveFile(filePath);
                 Assert.True(!File.Exists(filePath));
             }
+        }
+    
+        /* Funciones auxiliares */
+
+        /*  función estática RemoveMetadata(JObject) => void
+         *      Elimina los metadatos de cada entrega para aislar la información para los tests unitarios
+         */
+        private static void RemoveMetadata(JObject mappedEntry)
+        {
+            mappedEntry.Remove("date");
+            mappedEntry.Remove("id");
+            mappedEntry.Remove("initiationType");
+            mappedEntry.Remove("language");
         }
     }
 }

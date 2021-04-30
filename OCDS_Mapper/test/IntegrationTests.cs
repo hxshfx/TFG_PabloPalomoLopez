@@ -8,6 +8,7 @@ using Xunit;
 using OCDS_Mapper.src.Interfaces;
 using OCDS_Mapper.src.Model;
 using OCDS_Mapper.src.Exceptions;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.test
 {
@@ -15,7 +16,6 @@ namespace OCDS_Mapper.test
 
     public class IntegrationTests
     {
-        
         private IParser _parser;
         private IProvider _provider;
 
@@ -23,20 +23,21 @@ namespace OCDS_Mapper.test
         {
             Program.InitLogger();
 
-            _parser = new Parser(Program.Log, "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom");
-            _provider = new Provider(Program.Log, Provider.EProviderOperationCode.PROVIDE_ALL);
+            _parser = new Parser(Program.Log, new Document("Examples/xml/exampleValid0.atom"));
+            _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_ALL, null);
         }
+
+        /* Tests de integración del componente de parseo */
 
         public class ParserTests
         {
-
             private IParser _parser;
 
             public ParserTests()
             {
                 Program.InitLogger();
 
-                _parser = new Parser(Program.Log, "Examples/xml/licitacionesPerfilesContratanteCompleto3.atom");
+                _parser = new Parser(Program.Log, new Document("Examples/xml/exampleValid0.atom"));
             }
 
             [Fact]
@@ -72,7 +73,7 @@ namespace OCDS_Mapper.test
             [Fact]
             public void TestParserSetEntryRootElement1()
             {
-                XElement validElement = _GetEntryElement(_parser, true);
+                XElement validElement = GetEntryElement(_parser, true);
                 _parser.SetEntryRootElement(validElement);
 
                 Assert.NotNull(_parser.EntryRoot);
@@ -83,7 +84,7 @@ namespace OCDS_Mapper.test
             [Fact]
             public void TestParserSetEntryRootElement2()
             {
-                XElement validElement = _GetEntryElement(_parser, false);
+                XElement validElement = GetEntryElement(_parser, false);
                 Assert.Throws<InvalidParsedElementException>(() => _parser.SetEntryRootElement(validElement));
             }
 
@@ -99,7 +100,7 @@ namespace OCDS_Mapper.test
                     }
                 );
 
-                XElement entry = _GetEntryElement(_parser, true);
+                XElement entry = GetEntryElement(_parser, true);
                 _parser.SetEntryRootElement(entry);
 
                 XElement[] queriedElements = _parser.GetElements(validPath);
@@ -122,7 +123,7 @@ namespace OCDS_Mapper.test
                     }
                 );
 
-                XElement entry = _GetEntryElement(_parser, true);
+                XElement entry = GetEntryElement(_parser, true);
                 _parser.SetEntryRootElement(entry);
 
                 XElement[] queriedElements = _parser.GetElements(validPath);
@@ -166,7 +167,7 @@ namespace OCDS_Mapper.test
             [Fact]
             public void TestParserGetNextFile2()
             {
-                IParser otherParser = new Parser(Program.Log, "Examples/xml/licitacionesPerfilesContratanteCompleto3_without_next.atom");
+                IParser otherParser = new Parser(Program.Log, new Document("Examples/xml/exampleInvalid.atom"));
                 Assert.Null(otherParser.GetNextFile());
             }
         }
@@ -174,13 +175,13 @@ namespace OCDS_Mapper.test
         [Fact]
         public async Task TestProviderParser()
         {
-            string filePath1 = await _provider.TakeFile();
-            Assert.True(filePath1.Equals("./tmp/document1.atom"));
+            Document file1 = await _provider.TakeFile();
+            Assert.True(file1.Path.Equals("./tmp/document1.atom"));
 
-            _provider.SetParser(new Parser(Program.Log, "./tmp/document1.atom"));
+            _provider.SetParser(new Parser(Program.Log, new Document("./tmp/document1.atom")));
 
-            string filePath2 = await _provider.TakeFile();
-            Assert.True(filePath2.Equals("./tmp/document2.atom"));
+            Document file2 = await _provider.TakeFile();
+            Assert.True(file2.Path.Equals("./tmp/document2.atom"));
 
             Assert.True(File.Exists("./tmp/document1.atom"));
             Assert.True(File.Exists("./tmp/document2.atom"));
@@ -189,7 +190,13 @@ namespace OCDS_Mapper.test
 
         /* Funciones auxiliares */
 
-        private static XElement _GetEntryElement(IParser parser, bool valid)
+        /*  función estática GetEntryElement(IParser, bool) => XElement
+         *      Devuelve una entrada aleatoria del documento de licitaciones
+         *  @param parser : parser correspondiente al documento
+         *  @param valid : si marcado como false, devuelve un elemento inválido
+         *  @return : un elemento del documento de licitaciones
+         */
+        private static XElement GetEntryElement(IParser parser, bool valid)
         {
             IEnumerable<XElement> entrySet = parser.GetEntrySet(parser.GetNamespaces());
             XElement entryElement = entrySet.OrderBy(x => new Random().Next()).Take(1).First();

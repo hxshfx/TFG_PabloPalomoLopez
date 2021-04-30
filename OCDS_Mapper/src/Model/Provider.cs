@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -9,6 +8,7 @@ using log4net.Core;
 using Nito.AsyncEx;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Model
 {
@@ -16,17 +16,6 @@ namespace OCDS_Mapper.src.Model
 
     public class Provider : IProvider
     {
-        /* Enumerado descriptor de los modos de operación de provisión */
-
-        public enum EProviderOperationCode
-        {
-            PROVIDE_ALL,        // Provee todos los documentos accesibles
-            PROVIDE_LATEST,     // Provee sólo el último documento disponible
-            PROVIDE_SPECIFIC    // Provee un documento pasado como parámetro
-        }
-
-
-
         /* Propiedades */
 
         /*  propiedad Parser => IParser
@@ -34,20 +23,28 @@ namespace OCDS_Mapper.src.Model
          */
         public IParser Parser { get; set; } 
 
-        /*  propiedad Files => BlockingCollection
+
+        /*  propiedad Files => AsyncCollection<Document>
          *      Colección thread-safe que permite una extracción
          *      ordenada de los documentos provistos
          */
-        public AsyncCollection<string> Files { get; set; }
+        public AsyncCollection<Document> Files { get; set; }
+
 
         /* propiedad AllProvider => Thread
-         *      Thread utilizado para la provisión en el caso de utilizar PROVIDER_ALL
+         *      Thread utilizado para la provisión en el caso de utilizar PROVIDE_ALL
          */
         public Thread AllProvider { get; set; }
 
 
 
         /* Atributos */
+
+        /*  atributo _Log => Action<object, string, Level>
+         *      Puntero a la función de logging
+         */
+        private readonly Action<object, string, Level> _Log;
+
 
         /*  atributo _webClient => WebClient
          *      Objeto utilizado para la descarga de documentos
@@ -59,6 +56,7 @@ namespace OCDS_Mapper.src.Model
          *      Mecanismo de sincronización para la interacción con el Parser
          */
         private ManualResetEvent _mre;
+        
         
         /*  atributo _fileName => string
          *      Nombre del fichero siendo provisto, descargado o local
@@ -76,71 +74,23 @@ namespace OCDS_Mapper.src.Model
         /*  constante _LATEST_PATH => string
          *      Path del documento publicado más reciente
          */
-        private readonly string _LATEST_PATH = ConfigurationManager.AppSettings["LatestDocument_URL"];
+        private readonly string _LATEST_PATH = Program.Configuration["LatestDocument_URL"];
 
 
-        /*  atributo _Log => Action<object, string, Level>
-         *      Puntero a la función de logging
-         */
-        private readonly Action<object, string, Level> _Log;
         
-
-
-        /* Constructores */
-
-        // @param Log : Puntero a la función de logging
-        // @param code : descriptor del modo de operación (PROVIDE_ALL o PROVIDE_LATEST)
-        public Provider(Action<object, string, Level> Log, EProviderOperationCode code)
-        {
-            _Log = Log;
-
-            // Inicializa la estructura de ficheros y crea el directirio temporal si no existe
-            Files = new AsyncCollection<string>();
-            if (!Directory.Exists("./tmp"))
-            {
-                Directory.CreateDirectory("./tmp");
-            }
-
-            // Inicializa el WebClient 
-            _webClient = new WebClient();
-            _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
-
-            if (code == EProviderOperationCode.PROVIDE_ALL)
-            {
-                // Inicializa el mecanismo de sincronización
-                _mre = new ManualResetEvent(false);
-            
-                // Lanza en background la tarea que irá proveyendo documentos
-                AllProvider = new Thread(ProvideAllTask);
-                AllProvider.IsBackground = true;
-                AllProvider.Start();
-
-                _Log.Invoke(this, "Provider background thread launched", Level.Info);
-            }
-            else if (code == EProviderOperationCode.PROVIDE_LATEST)
-            {
-                // Descarga el último fichero, siempre descrito por esta ruta
-                _fileName = _LATEST_PATH;
-                _webClient.DownloadFileAsync(new Uri(_fileName), _OUTPUT_PATH);
-            }
-            else
-            {
-                _Log.Invoke(this, "This constructor only takes PROVIDE_ALL or PROVIDE_LATEST codes", Level.Error);
-                throw new InvalidOperationCodeException();
-            }
-        }
-
+        /* Constructor */
 
         // @param Log : Puntero a la función de logging
         // @param code : descriptor del modo de operación (PROVIDE_SPECIFIC)
-        // @param filePath : ruta al documento para proveer, local o no
+        // @param filePath : ruta al documento para proveer, local o remoto
         // @throws FileNotFoundException : si el parámetro filePath no se corresponde ni a un archivo local ni a una URI correcta
+        // @throws InvalidOperationCodeException : si el parámetro code no es PROVIDE_SPECIFIC
         public Provider(Action<object, string, Level> Log, EProviderOperationCode code, string filePath)
         {
             _Log = Log;
 
             // Inicializa la estructura de ficheros y crea el directirio temporal si no existe
-            Files = new AsyncCollection<string>();
+            Files = new AsyncCollection<Document>();
             if (!Directory.Exists("./tmp"))
             {
                 Directory.CreateDirectory("./tmp");
@@ -152,7 +102,7 @@ namespace OCDS_Mapper.src.Model
                 if (File.Exists(filePath))
                 {
                     _fileName = filePath;
-                    Files.Add(filePath);
+                    Files.Add(new Document(filePath));
 
                     _Log(this, $"Retrieving local file {filePath}", Level.Info);
 
@@ -172,14 +122,39 @@ namespace OCDS_Mapper.src.Model
                 }
                 else
                 {
-                    _Log.Invoke(this, $"Path {filePath} doesn't match with any local file or correct URI", Level.Error);
+                    _Log(this, $"Path {filePath} doesn't match with any local file or correct URI", Level.Error);
                     throw new FileNotFoundException();
                 }
             }
             else
             {
-                _Log.Invoke(this, "This constructor only takes EProviderOperationCode.PROVIDE_SPECIFIC code", Level.Error);
-                throw new InvalidOperationCodeException();
+                // Inicializa el WebClient 
+                _webClient = new WebClient();
+                _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
+
+                if (code == EProviderOperationCode.PROVIDE_ALL)
+                {
+                    // Inicializa el mecanismo de sincronización
+                    _mre = new ManualResetEvent(false);
+                
+                    // Lanza en background la tarea que irá proveyendo documentos
+                    AllProvider = new Thread(ProvideAllTask);
+                    AllProvider.IsBackground = true;
+                    AllProvider.Start();
+
+                    _Log(this, "Provider background thread launched", Level.Info);
+                }
+                else if (code == EProviderOperationCode.PROVIDE_LATEST)
+                {
+                    // Descarga el último fichero, siempre descrito por esta ruta
+                    _fileName = _LATEST_PATH;
+                    _webClient.DownloadFileAsync(new Uri(_fileName), _OUTPUT_PATH);
+                }
+                else
+                {
+                    _Log(this, "Please provide a valid operational code", Level.Error);
+                    throw new InvalidOperationCodeException();
+                }
             }
         }
 
@@ -187,12 +162,11 @@ namespace OCDS_Mapper.src.Model
 
         /* Implementación de IProvider */
 
-
-        /*  función TakeFile() => string
+        /*  función asíncrona TakeFile() => Document
          *      Función bloqueante que devuelve un documento provisto cuando éste está disponible
-         *  @return : path al documento provisto, o null si no quedan más documentos que proveer
+         *  @return : stream de texto del documento provisto, o null si no quedan más documentos que proveer
          */
-        public async Task<string> TakeFile()
+        public async Task<Document> TakeFile()
         {
             try
             {
@@ -205,9 +179,23 @@ namespace OCDS_Mapper.src.Model
         }
 
 
+        /*  función SetParser(IParser) => void
+         *      (utilizada solo en modo PROVIDE_ALL)
+         *      Actualiza la instancia del Parser utilizada por el Provider
+         *      Desbloquea el thread en background que utiliza dicho componente
+         *  @param parser : Instancia del Parser para cada documento
+         */
+        public void SetParser(IParser parser)
+        {
+            Parser = parser;
+            _mre.Set();
+            _Log(this, "Provider background thread unlocking", Level.Debug);
+        }
+
+
         /*  función RemoveFile(string) => void
          *      Función que elimina un archivo provisto ya mapeado
-         *  param filePath : path del documento a eliminar
+         *  @param filePath : path del documento a eliminar
          */
         public void RemoveFile(string filePath)
         {
@@ -223,21 +211,7 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función SetParser(IParser) => void
-         *      (utilizada solo en modo PROVIDE_ALL)
-         *      Actualiza la instancia del Parser utilizada por el Provider
-         *      Desbloquea el thread en background que utiliza dicho componente
-         *  @param parser : Instancia del Parser para cada documento
-         */
-        public void SetParser(IParser parser)
-        {
-            Parser = parser;
-            _mre.Set();
-            _Log.Invoke(this, "Provider background thread unlocking", Level.Debug);
-        }
-
-
-
+        
         /* Funciones auxiliares */
 
         /*  función DownloadCompleted(object, _) => void
@@ -251,7 +225,7 @@ namespace OCDS_Mapper.src.Model
             if (_webClient.QueryString.Count == 0)
             {
                 // Añade el elemento y libera los recursos puesto que no habrá más descargas
-                Files.Add(_OUTPUT_PATH);
+                Files.Add(new Document(_OUTPUT_PATH));
 
                 Files.CompleteAdding();
                 _webClient.Dispose();
@@ -260,10 +234,10 @@ namespace OCDS_Mapper.src.Model
             else
             {
                 // Añade el elemento cuyo path está descrito por el QueryString
-                Files.Add(_webClient.QueryString["file"]);
+                Files.Add(new Document(_webClient.QueryString["file"]));
                 _webClient.QueryString.Remove("file");
             }
-            _Log.Invoke(this, $"Completed download of file {_fileName}", Level.Info);
+            _Log(this, $"Completed download of file {_fileName}", Level.Info);
         }
 
 
@@ -292,8 +266,8 @@ namespace OCDS_Mapper.src.Model
                 _webClient.QueryString.Add("file", outputFileName);
                 _webClient.DownloadFileAsync(uri, outputFileName);
 
-                _Log.Invoke(this, $"Started to download file {_fileName}", Level.Debug);
-                _Log.Invoke(this, $"Expected downloaded output file: {outputFileName}", Level.Debug);
+                _Log(this, $"Started to download file {_fileName}", Level.Debug);
+                _Log(this, $"Expected downloaded output file: {outputFileName}", Level.Debug);
 
                 // Se bloquea hasta recibir una nueva instancia de Parser (para obtener su link:next)
                 _mre.WaitOne();

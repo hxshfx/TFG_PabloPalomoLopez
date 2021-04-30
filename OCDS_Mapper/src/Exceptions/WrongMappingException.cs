@@ -8,8 +8,8 @@ namespace OCDS_Mapper.src.Exceptions
     {
         public WrongMappingException() {}
 
-        public WrongMappingException(string mappingElement) 
-            : base($"The mapping element {mappingElement} isn't correct") {}
+        public WrongMappingException(string MappingElement) 
+            : base($"The mapping element {MappingElement} isn't correct") {}
 
         protected WrongMappingException(SerializationInfo info, StreamingContext ctx)
             : base(info, ctx) {}

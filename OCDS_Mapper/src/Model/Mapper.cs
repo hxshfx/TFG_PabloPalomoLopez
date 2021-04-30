@@ -15,7 +15,7 @@ namespace OCDS_Mapper.src.Model
     {
         /* Propiedades */
 
-        /*  propiedad _mappedEntry => JObject
+        /*  propiedad MappedEntry => JObject
          *      Representa el elemento JSON con la información mapeada
          */
         public JObject MappedEntry { get; set; }
@@ -39,15 +39,40 @@ namespace OCDS_Mapper.src.Model
          */
         private readonly JObject _contractingParty;
 
-        /*  atributo _lots => JObject
+        /*  atributo _contracts => JArray
+         *      Almacén temporal del objeto representando la colección de contratos
+         */
+        private readonly JArray _contracts;
+
+        /*  atributo _lots => JArray
          *      Almacén temporal del objeto representando la colección de lotes
          */
         private readonly JArray _lots;
 
-        /*  atributo _items => JObject
+        /*  atributo _id => string
+         *      Copia del identificador único de la licitación
+         */
+        private string _id { get; set; }
+
+        /*  atributo _items => JArray
          *      Almacén temporal del objeto representando la colección de items
          */
         private readonly JArray _items;
+
+        /*  atributo _packager => IPackager
+         *      Instancia del Parser para obtener la información de identificadores
+         */
+        public IPackager _packager;
+
+        /*  atributo _prefix => string
+         *      Prefijo de los identificadores
+        */
+        private readonly string _prefix = Program.Configuration["ID_prefix"];
+
+        /*  atributo _releaseId => string
+         *      Copia del identificador único de la entrega
+         */
+        private string _releaseID { get; set; }
 
         /*  atributo _supplierParties => JArray
          *      Almacén temporal de los objetos representando las entidades adjudicatarias
@@ -55,12 +80,15 @@ namespace OCDS_Mapper.src.Model
         private readonly JArray _supplierParties;
 
 
+
         /* Constructor */
 
         // @param Log : Puntero a la función de logging
-        public Mapper(Action<object, string, Level> Log)
+        // @param packager : instancia del componente de empaquetado
+        public Mapper(Action<object, string, Level> Log, IPackager packager)
         {
             _Log = Log;
+            _packager = packager;
 
             // Inicializa el objeto JSON en el que se mapeará la información
             MappedEntry = new JObject();
@@ -71,6 +99,9 @@ namespace OCDS_Mapper.src.Model
             // Inicializa el objeto JSON para almacenar temporalmente la entidad adjudicadora
             _contractingParty = new JObject();
 
+            // Inicializa el objeto JSON para almacenar temporalmente la colección de contratos
+            _contracts = new JArray();
+
             // Inicializa el objeto JSON para almacenar temporalmente la coleccion de lotes
             _lots = new JArray();
 
@@ -80,27 +111,26 @@ namespace OCDS_Mapper.src.Model
             // Inicializa el objeto JSON para almacenar temporalmente las entidades adjudicatarias
             _supplierParties = new JArray();
 
-            _Log.Invoke(this, "JSON initialized", Level.Debug);
+            _Log(this, "JSON initialized", Level.Debug);
         }
 
 
 
         /* Implementación de IMapper */
 
-
         /*  función MapElement(IEnumerable<string>, XElement[]) => void
-         *      Realiza el mapeo de un elemento
+         *      Realiza el mapeo de elemento(s) CODICE a elemento(s) OCDS
          *  @param pathMap : ruta del elemento cuando sea mapeado
          *  @param parsedElement : elemento(s) a mapear
-         *      @ej : MapElement( [ "tender", "title" ], "ABCD" )
-         *              => _mappedEntry = { "tender": { "title": "ABCD" } }
-         *      @ej : MapElement( [ "tag" ], "PRE" )
-         *              => _mappedEntry = { "tag": [ "planning" ] }
+         *  @ej : MapElement( [ "tender", "title" ], [ "ABCD" ] )
+         *      => MappedEntry = { "tender": { "title": "ABCD" } }
+         *  @ej : MapElement( [ "tag" ], [ "PRE" ] )
+         *      => MappedEntry = { "tag": [ "planning" ] }
          */
         public void MapElement(IEnumerable<string> pathMap, XElement[] parsedElement)
         {
             // Obtiene el JToken (clase genérica) con el elemento mapeado
-            JToken toInsert;
+            JToken toInsert = null;
             try 
             {
                 toInsert = GetElementToken(pathMap, parsedElement);
@@ -153,7 +183,7 @@ namespace OCDS_Mapper.src.Model
                     {
                         jContainer = (JContainer) pathToken;
                         jContainer.Add(new JProperty(currentPath, new JObject()));
-                        _Log.Invoke(this, $"{currentPath} wasn't found, it's created", Level.Debug);
+                        _Log(this, $"{currentPath} wasn't found, it's created", Level.Debug);
                     }
 
                     // Mueve el token a la nueva ruta y mueve el 'currentPath' al siguiente elemento
@@ -172,26 +202,40 @@ namespace OCDS_Mapper.src.Model
                     jContainer[currentPath].Parent.Remove();
                 }
                 jContainer.Add(jProperty);
-                _Log.Invoke(this, $"Adding element in {currentPath}", Level.Debug);
+                _Log(this, $"Adding element in {currentPath}", Level.Debug);
             }
         }
 
 
         /*  función Commit() => void
          *      Introduce los cambios al JSON que no se pueden introducir
-         *      mediante los mapeos unitarios de elementos
+         *      mediante los mapeos unitarios de elementos (metadatos, colecciones, etc.)
          */
         public void Commit()
         {
+            // Inserta los metadatos de la entrada
+            MappedEntry.Add("date", GetDate());
+            MappedEntry.Add("id", $"{_id}-{_releaseID}");
+            MappedEntry.Add("initiationType", "tender");
+            MappedEntry.Add("language", "es");
+
+            // Incluye las adjudicaciones, si las hubiera
             if (_awards.Any())
             {
                 MappedEntry.Add("awards", _awards);
             }
 
+            // Incluye el identificador del objeto de licitación, si lo hubiera
+            JObject tender = (JObject) MappedEntry["tender"];
+            if (tender != null)
+            {
+                tender.Add("id", $"{_prefix}-{_id}-tender-{_releaseID}");
+            }
+            
+            // Incluye las colecciones de ítems y lotes, si los hubiera
             if (_items.Any() && _lots.Any())
             {
-                JObject tender = (JObject) MappedEntry["tender"];
-
+                // Si no se ha incluído el tender ya, lo crea para insertar las colecciones
                 if (tender == null)
                 {
                     MappedEntry.Add(new JProperty("tender", new JObject()));
@@ -202,16 +246,26 @@ namespace OCDS_Mapper.src.Model
                 tender.Add("lots", _lots);
             }
 
+            // Incluye la colección de contratos, si lo hubiera
+            if (_contracts.Any())
+            {
+                MappedEntry.Add("contracts", _contracts);
+            }
+
+            // Incluye en la colección de participantes los adjudicadores, si los hubiera
             JArray parties = new JArray();
             if (_contractingParty.Count != 0)
             {
                 parties.Add(_contractingParty);
             }
+
+            // Incluye en la colección de participantes los adjudicatarios, si los hubiera
             foreach (var supplierParty in _supplierParties)
             {
                 parties.Add(supplierParty);
             }
 
+            // Incluye la colección de participantes, si los hubiera
             if (parties.Any())
             {
                 MappedEntry.Add("parties", parties);
@@ -222,17 +276,18 @@ namespace OCDS_Mapper.src.Model
 
         /* Funciones auxiliares */
 
-        /*  función GetElementContainer(IEnumerable<string>, XElement[]) => JToken
+        /*  función GetElementToken(IEnumerable<string>, XElement[]) => JToken
          *      Devuelve el elemento mapeado y serializado a JSON
          *  @param pathMap : ruta del elemento cuando sea mapeado
          *  @param parsedElement : elemento(s) a mapear
+         *  @return : el elemento a introducir, o null si es un elemento inválido o para introducir en Commit()
          *  @throws EmptyMappingRuleException : si pathMap está vacío
          *  @throws WrongMappingException : si se encuentra un mapping inválido
          *  @throws InvalidPathLengthException : si pathMap tiene una longitud inválida
-         *      @ej : GetElementToken( [ "tender", "title" ], "ABCD" )
-         *              => JToken( { "tender": { "title": "ABCD" } } )
-         *      @ej : GetElementToken( [ "tag" ], "PRE" )
-         *              => JToken ( { "tag": [ "planning" ] } )
+         *  @ej : GetElementToken( [ "tender", "title" ], [ "ABCD" ] )
+         *      => JToken( { "tender": { "title": "ABCD" } } )
+         *  @ej : GetElementToken( [ "tag" ], [ "PRE" ] )
+         *      => JToken ( { "tag": [ "planning" ] } )
          */
         private JToken GetElementToken(IEnumerable<string> pathMap, XElement[] parsedElement)
         {
@@ -246,15 +301,15 @@ namespace OCDS_Mapper.src.Model
                 // Por motivos de complejidad, se definen 3 niveles de funciones para cada nivel de profundidad de path
                 if (pathMap.Count() == 1)
                 {
-                    return GetElementContainerDepth1(pathMap.GetEnumerator(), parsedElement);
+                    return GetElementTokenDepth1(pathMap.GetEnumerator(), parsedElement);
                 }
                 else if (pathMap.Count() == 2)
                 {
-                    return GetElementContainerDepth2(pathMap.GetEnumerator(), parsedElement);
+                    return GetElementTokenDepth2(pathMap.GetEnumerator(), parsedElement);
                 }
                 else if (pathMap.Count() == 3)
                 {
-                    return GetElementContainerDepth3(pathMap.GetEnumerator(), parsedElement);
+                    return GetElementTokenDepth3(pathMap.GetEnumerator(), parsedElement);
                 }
                 else
                 {
@@ -264,13 +319,14 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetElementContainerDepth1(IEnumerator<string>, XElement) => JToken
+        /*  función GetElementTokenDepth1(IEnumerator<string>, XElement[]) => JToken
          *      Devuelve el elemento mapeado y serializado a JSON (profundidad 1)
          *  @param pathEnumerator : enumerador de la ruta del elemento a mapear
          *  @param parsedElement : elemento a mapear
+         *  @return : el elemento a introducir, o null si es un elemento inválido o para introducir en Commit()
          *  @throws WrongMappingException : si se encuentra un mapping inválido
          */
-        private JToken GetElementContainerDepth1(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
+        private JToken GetElementTokenDepth1(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
         {
             // Establece el puntero a la función de mapeo
             Func<XElement[], JToken> mappingFunction = null;
@@ -280,13 +336,13 @@ namespace OCDS_Mapper.src.Model
             string path = pathEnumerator.Current;
             switch (path)
             {
-                case Mappings.MappingElement.Tag:
+                case Mappings.MappingElements.Tag:
                     mappingFunction = MapTag;
                     break;
-                case Mappings.MappingElement.OCID:
+                case Mappings.MappingElements.OCID:
                     mappingFunction = MapOCID;
                     break;
-                case Mappings.MappingElement.Party:
+                case Mappings.MappingElements.Party:
                     mappingFunction = MapPartyFields;
                     break;
                 default:
@@ -298,13 +354,14 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetElementContainerDepth2(IEnumerator<string>, XElement) => JToken
+        /*  función GetElementTokenDepth2(IEnumerator<string>, XElement[]) => JToken
          *      Devuelve el elemento mapeado y serializado a JSON (profundidad 2)
          *  @param pathEnumerator : enumerador de la ruta del elemento a mapear
          *  @param parsedElement : elemento a mapear
+         *  @return : el elemento a introducir, o null si es un elemento inválido o para introducir en Commit()
          *  @throws WrongMappingException : si se encuentra un mapping inválido
          */
-        private JToken GetElementContainerDepth2(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
+        private JToken GetElementTokenDepth2(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
         {
             // Establece el puntero a la función de mapeo
             Func<XElement[], JToken> mappingFunction = null;
@@ -314,75 +371,87 @@ namespace OCDS_Mapper.src.Model
             string path = pathEnumerator.Current;
             switch (path)
             {
-                case Mappings.MappingElement.Award:
+                case Mappings.MappingElements.Award:
                     pathEnumerator.MoveNext();
                     path = pathEnumerator.Current;
                     switch (path)
                     {
-                        case Mappings.MappingElement.Awards.Date:
+                        case Mappings.MappingElements.Awards.Date:
                             mappingFunction = MapAwardDate;
                             break;
-                        case Mappings.MappingElement.Awards.Description:
+                        case Mappings.MappingElements.Awards.Description:
                             mappingFunction = MapAwardDescription;
                             break;
-                        case Mappings.MappingElement.Awards.Id:
+                        case Mappings.MappingElements.Awards.Id:
                             mappingFunction = MapAwardId;
                             break;
-                        case Mappings.MappingElement.Awards.Status:
+                        case Mappings.MappingElements.Awards.Status:
                             mappingFunction = MapAwardStatus;
                             break;
-                        case Mappings.MappingElement.Awards.Suppliers:
+                        case Mappings.MappingElements.Awards.Suppliers:
                             mappingFunction = MapAwardSuppliers;
                             break;
-                        case Mappings.MappingElement.Awards.Value:
+                        case Mappings.MappingElements.Awards.Value:
                             mappingFunction = MapAwardValue;
                             break;
                         default:
                             throw new WrongMappingException(path);
                     }
                     break;
-                case Mappings.MappingElement.Party:
+                case Mappings.MappingElements.Contract:
                     pathEnumerator.MoveNext();
                     path = pathEnumerator.Current;
                     switch (path)
                     {
-                        case Mappings.MappingElement.Parties.Identifier:
+                        case Mappings.MappingElements.Contracts.Id:
+                            mappingFunction = MapContractId;
+                            break;
+                        default:
+                            throw new WrongMappingException(path);
+                    }
+                    break;
+                case Mappings.MappingElements.Party:
+                    pathEnumerator.MoveNext();
+                    path = pathEnumerator.Current;
+                    switch (path)
+                    {
+                        case Mappings.MappingElements.Parties.Identifier:
                             mappingFunction = MapPartiesIdentifier;
                             break;
-                        case Mappings.MappingElement.Parties.Name:
+                        case Mappings.MappingElements.Parties.Name:
                             mappingFunction = MapPartiesName;
                             break;
                         default:
                             throw new WrongMappingException(path);
                     }
                     break;
-                case Mappings.MappingElement.Tender:
+                case Mappings.MappingElements.Tender:
                     pathEnumerator.MoveNext();
                     path = pathEnumerator.Current;
                     switch (path)
                     {
-                        case Mappings.MappingElement.Tenders.MainProcurementCategory:
+                        case Mappings.MappingElements.Tenders.MainProcurementCategory:
                             mappingFunction = MapTenderMainProcurementCategory;
                             break;
-                        case Mappings.MappingElement.Tenders.NumberOfTenderers:
+                        case Mappings.MappingElements.Tenders.NumberOfTenderers:
                             mappingFunction = MapTenderNumberOfTenderers;
                             break;
-                        case Mappings.MappingElement.Tenders.ProcurementMethod:
+                        case Mappings.MappingElements.Tenders.ProcurementMethod:
                             mappingFunction = MapTenderProcurementMethod;
                             break;
-                        case Mappings.MappingElement.Tenders.ProcurementMethodDetails:
+                        case Mappings.MappingElements.Tenders.ProcurementMethodDetails:
                             mappingFunction = MapTenderProcurementMethodDetails;
                             break;
-                        case Mappings.MappingElement.Tenders.SubmissionMethod:
+                        case Mappings.MappingElements.Tenders.SubmissionMethod:
                             mappingFunction = MapTenderSubmissionMethod;
                             break;
-                        case Mappings.MappingElement.Tenders.SubmissionMethodDetails:
+                        case Mappings.MappingElements.Tenders.SubmissionMethodDetails:
                             mappingFunction = MapTenderSubmissionMethodDetails;
                             break;
-                        case Mappings.MappingElement.Tenders.Title:
+                        case Mappings.MappingElements.Tenders.Title:
                             mappingFunction = MapTenderTitle;
                             break;
-                        case Mappings.MappingElement.Tenders.Value:
+                        case Mappings.MappingElements.Tenders.Value:
                             mappingFunction = MapTenderValue;
                             break;
                         default:
@@ -398,13 +467,14 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetElementContainerDepth3(IEnumerator<string>, XElement) => JToken
+        /*  función GetElementTokenDepth3(IEnumerator<string>, XElement[]) => JToken
          *      Devuelve el elemento mapeado y serializado a JSON (profundidad 3)
          *  @param pathEnumerator : enumerador de la ruta del elemento a mapear
          *  @param parsedElement : elemento a mapear
+         *  @return : el elemento a introducir, o null si es un elemento inválido o para introducir en Commit()
          *  @throws WrongMappingException : si se encuentra un mapping inválido
          */
-        private JToken GetElementContainerDepth3(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
+        private JToken GetElementTokenDepth3(IEnumerator<string> pathEnumerator, XElement[] parsedElement)
         {
             // Establece el puntero a la función de mapeo
             Func<XElement[], JToken> mappingFunction = null;
@@ -414,53 +484,74 @@ namespace OCDS_Mapper.src.Model
             string path = pathEnumerator.Current;
             switch (path)
             {
-                case Mappings.MappingElement.Tender:
+                case Mappings.MappingElements.Contract:
                     pathEnumerator.MoveNext();
                     path = pathEnumerator.Current;
                     switch (path)
                     {
-                        case Mappings.MappingElement.Tenders.Item:
+                        case Mappings.MappingElements.Contracts.Period:
                             pathEnumerator.MoveNext();
                             path = pathEnumerator.Current;
                             switch (path)
                             {
-                                case Mappings.MappingElement.Tenders.Items.Classification:
+                                case Mappings.MappingElements.Contracts.Periods.StartDate:
+                                    mappingFunction = MapContractPeriodStartDate;
+                                    break;
+                                default:
+                                    throw new WrongMappingException(path);
+                            }
+                            break;
+                        default:
+                            throw new WrongMappingException(path);
+                    }
+                    break;
+                case Mappings.MappingElements.Tender:
+                    pathEnumerator.MoveNext();
+                    path = pathEnumerator.Current;
+                    switch (path)
+                    {
+                        case Mappings.MappingElements.Tenders.Item:
+                            pathEnumerator.MoveNext();
+                            path = pathEnumerator.Current;
+                            switch (path)
+                            {
+                                case Mappings.MappingElements.Tenders.Items.Classification:
                                     mappingFunction = MapTenderItemsClassification;
                                     break;
                                 default:
                                     throw new WrongMappingException(path);
                             }
                             break;
-                        case Mappings.MappingElement.Tenders.Lot:
+                        case Mappings.MappingElements.Tenders.Lot:
                             pathEnumerator.MoveNext();
                             path = pathEnumerator.Current;
                             switch (path)
                             {
-                                case Mappings.MappingElement.Tenders.Lots.Id:
+                                case Mappings.MappingElements.Tenders.Lots.Id:
                                     mappingFunction = MapTenderLotsId;
                                     break;
-                                case Mappings.MappingElement.Tenders.Lots.Name:
+                                case Mappings.MappingElements.Tenders.Lots.Name:
                                     mappingFunction = MapTenderLotsName;
                                     break;
-                                case Mappings.MappingElement.Tenders.Lots.Value_:
+                                case Mappings.MappingElements.Tenders.Lots.Value_:
                                     mappingFunction = MapTenderLotsValue;
                                     break;
                                 default:
                                     throw new WrongMappingException(path);
                             }
                             break;
-                        case Mappings.MappingElement.Tenders.TenderPeriod:
+                        case Mappings.MappingElements.Tenders.TenderPeriod:
                             pathEnumerator.MoveNext();
                             path = pathEnumerator.Current;
                             switch (path)
                             {
-                                case Mappings.MappingElement.Tenders.TenderPeriods.StartDate:
+                                case Mappings.MappingElements.Tenders.TenderPeriods.StartDate:
                                     mappingFunction = MapTenderTenderPeriodStartDate;
                                     break;
-                                case Mappings.MappingElement.Tenders.TenderPeriods.EndDate:
+                                case Mappings.MappingElements.Tenders.TenderPeriods.EndDate:
                                     mappingFunction = MapTenderTenderPeriodEndDate;
                                     break;
-                                case Mappings.MappingElement.Tenders.TenderPeriods.DurationInDays:
+                                case Mappings.MappingElements.Tenders.TenderPeriods.DurationInDays:
                                     mappingFunction = MapTenderTenderPeriodDurationInDays;
                                     break;
                                 default:
@@ -471,17 +562,17 @@ namespace OCDS_Mapper.src.Model
                             throw new WrongMappingException(path);
                     }
                     break;
-                case Mappings.MappingElement.Planning:
+                case Mappings.MappingElements.Planning:
                     pathEnumerator.MoveNext();
                     path = pathEnumerator.Current;
                     switch (path)
                     {
-                        case Mappings.MappingElement.Plannings.Budget:
+                        case Mappings.MappingElements.Plannings.Budget:
                             pathEnumerator.MoveNext();
                             path = pathEnumerator.Current;
                             switch (path)
                             {
-                                case Mappings.MappingElement.Plannings.Budgets.Amount:
+                                case Mappings.MappingElements.Plannings.Budgets.Amount:
                                     mappingFunction = MapPlanningBudgetAmount;
                                     break;
                                 default:
@@ -504,6 +595,8 @@ namespace OCDS_Mapper.src.Model
         /*  función SimulateElement(string, int) => JObject
          *      Simula la creación de un elemento para el testing que
          *      en condiciones normales se habría creado ya
+         *  @param type : tipo del elemento a simular
+         *  @param id : identificador del elemento a simular
          *  @return : elemento creado
          */
         private JObject SimulateElement(string type, int id)
@@ -527,6 +620,53 @@ namespace OCDS_Mapper.src.Model
             }
             
             return jobj;
+        }
+
+
+        /*  función estática IsContained(JArray, JObject) => bool
+         *      Evalúa si un objeto se encuentra dentro del array (si su ID lo está)
+         *  @param array : colección en la que buscar
+         *  @param jobj : objeto que buscar por su identificador
+         *  @return : True si lo contiene, False si no lo hace
+         */
+        private static bool IsContained(JArray array, JObject jobj)
+        {
+            if (!array.Any())
+            {
+                return false;
+            }
+            else
+            {
+                foreach (JToken item in array)
+                {
+                    if (item["id"].Equals(jobj["id"]))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+
+        /*  función estática GetDate() => string
+         *      Devuelve la fecha actual en el formato OCDS
+         *  @return : fecha actual (formato YYYY-MM-DDTHH:MM:SSZ)
+         */
+        private static string GetDate()
+        {
+            DateTime now = DateTime.Now;
+            return $@"{now.Year}-{
+                    now.Month.ToString().PadLeft(2, '0')
+                }-{
+                    now.Day.ToString().PadLeft(2, '0')
+                }T{
+                    now.Hour.ToString().PadLeft(2, '0')
+                }:{
+                    now.Minute.ToString().PadLeft(2, '0')
+                }:{
+                    now.Second.ToString().PadLeft(2, '0')
+                }Z";
         }
 
 
@@ -571,7 +711,10 @@ namespace OCDS_Mapper.src.Model
         // Mapeo del elemento OCID
         private JToken MapOCID(XElement[] toMap)
         {
-            return new JValue($"ES-{toMap[0].Value}");
+            _id = toMap[0].Value;
+            _releaseID = _packager.GetIdentifier(_id);
+
+            return new JValue($"{_prefix}-{_id}");
         }
 
         // Mapeo del elemento awards[i].date
@@ -660,7 +803,7 @@ namespace OCDS_Mapper.src.Model
             if (toMap.Length == 1)
             {
                 award = new JObject();
-                award.Add("id", "1");
+                award.Add("id", $"{_prefix}-{_id}-award-1");
                 _awards.Add(award);
             }
             else
@@ -671,12 +814,16 @@ namespace OCDS_Mapper.src.Model
                     award = new JObject();
 
                     awardedTenderedProject = Parser.GetSpecificElement(awardElement, "AwardedTenderedProject");
-                    procurementProjectLotID = Parser.GetSpecificElement(awardedTenderedProject, "ProcurementProjectLotID");
 
-                    if (procurementProjectLotID != null)
+                    if (awardedTenderedProject != null)
                     {
-                        award.Add("id", procurementProjectLotID.Value);
-                        _awards.Add(award);
+                        procurementProjectLotID = Parser.GetSpecificElement(awardedTenderedProject, "ProcurementProjectLotID");
+
+                        if (procurementProjectLotID != null)
+                        {
+                            award.Add("id", $"{_prefix}-{_id}-award-{procurementProjectLotID.Value}-{_awards.Count}");
+                            _awards.Add(award);
+                        }
                     }
                 }
             }
@@ -733,7 +880,9 @@ namespace OCDS_Mapper.src.Model
                     procurementProjectLotID = Parser.GetSpecificElement(awardedTenderedProject, "ProcurementProjectLotID");
                     resultCode = Parser.GetSpecificElement(awardElement, "ResultCode");
 
-                    if (procurementProjectLotID != null && !procurementProjectLotID.Value.Equals(award.First.First.ToString()))
+                    string[] awardIDs = award.First.First.ToString().Split("-");
+
+                    if (procurementProjectLotID != null && awardIDs.Length > 2 && !procurementProjectLotID.Value.Equals(awardIDs[awardIDs.Length - 2]))
                     {
                         _Log(this, "Award IDs discrepancy", Level.Error);
                     }
@@ -816,14 +965,18 @@ namespace OCDS_Mapper.src.Model
                         }
 
                         party.Add("identifier", identifier);
-                        party.Add("id", partyIdentification.Value);
+                        party.Add("id", $"{partyIdentification.Value}-{_supplierParties.Count}");
                         party.Add("name", partyName.Value);
                         party.Add("roles", new JArray("supplier"));
 
-                        supplier.Add("id", partyIdentification.Value);
+                        supplier.Add("id", $"{partyIdentification.Value}-{_supplierParties.Count}");
                         supplier.Add("name", partyName.Value);
 
-                        _supplierParties.Add(party);
+                        if (!IsContained(_supplierParties, party))
+                        {
+                            _supplierParties.Add(party);
+                        }
+                        
                         award.Add("suppliers", new JArray(supplier));
                     }
                 }
@@ -901,6 +1054,81 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
+        // Mapeo del elemento contracts[i].id
+        // Añade de manera adicional el elemento contracts[i].awardID
+        private JToken MapContractId(XElement[] toMap)
+        {
+            JObject contract;
+
+            if (toMap.Length == 1)
+            {
+                contract = new JObject();
+                contract.Add("id", $"{_prefix}-{_id}-contract-{_contracts.Count}");
+                contract.Add("awardID", toMap[0].Value);
+                _contracts.Add(contract);
+            }
+            else
+            {
+                XElement contractElement, idElement;
+                foreach (XElement tenderElement in toMap)
+                {
+                    contract = new JObject();
+
+                    contractElement = Parser.GetSpecificElement(tenderElement, "Contract");
+
+                    if (contractElement != null)
+                    {
+                        idElement = Parser.GetSpecificElement(contractElement, "ID");
+
+                        if (idElement != null)
+                        {
+                            contract.Add("id", $"{_prefix}-{_id}-contract-{idElement.Value}-{_contracts.Count}");
+                            contract.Add("awardID", idElement.Value);
+                            _contracts.Add(contract);
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Mapeo del elemento contracts[i].period.startDate
+        private JToken MapContractPeriodStartDate(XElement[] toMap)
+        {
+            JObject contract, period;
+
+            contract = (JObject) _contracts.First;
+
+            if (toMap.Length == 1)
+            {
+                if (contract != null)
+                {
+                    period = new JObject();
+                
+                    period.Add("startDate", $"{toMap[0].Value}T00:00:00Z");
+                    contract.Add("period", period);
+                }
+            }
+            else
+            {
+                XElement startDate;
+                foreach (XElement contractElement in toMap)
+                {
+                    period = new JObject();
+
+                    startDate = Parser.GetSpecificElement(contractElement, "StartDate");
+                    if (startDate != null)
+                    {
+                        period.Add("startDate", $"{startDate.Value}T00:00:00Z");
+                        contract.Add("period", period);
+
+                        contract = (JObject) contract.Next;
+                    }
+                }
+            }
+            return null;
+        }
+
         // Mapeo de los elementos adicionales de parties de la entidad adjudicadora
         private JToken MapPartyFields(XElement[] toMap)
         {
@@ -918,6 +1146,7 @@ namespace OCDS_Mapper.src.Model
 
             addressLine = Parser.GetSpecificElement(postalAddress, "AddressLine");
             cityName = Parser.GetSpecificElement(postalAddress, "CityName");
+            identificationCode = Parser.GetSpecificElement(countryName, "IdentificationCode");
             postalZone = Parser.GetSpecificElement(postalAddress, "PostalZone");
 
             if (addressLine != null)
@@ -927,6 +1156,10 @@ namespace OCDS_Mapper.src.Model
             if (cityName != null)
             {
                 address.Add("locality", cityName.Value);
+            }
+            if (identificationCode != null)
+            {
+                address.Add("countryName", identificationCode.Value);
             }
             if (postalZone != null)
             {
@@ -958,13 +1191,6 @@ namespace OCDS_Mapper.src.Model
             if (websiteUri != null)
             {
                 contactPoint.Add("url", websiteUri.Value);
-            }
-
-            identificationCode = Parser.GetSpecificElement(countryName, "IdentificationCode");
-
-            if (identificationCode != null)
-            {
-                _contractingParty.Add("countryName", identificationCode.Value);
             }
             
             _contractingParty.Add("address", address);
@@ -1051,12 +1277,12 @@ namespace OCDS_Mapper.src.Model
                         _Log(this, $"Identifier {id2.Value} not recognized", Level.Warn);
                     }
                     additionalIdentifier.Add("id", toMap[1].Value);
-                    identifier.Add("additionalIdentifiers", new JArray(additionalIdentifier));
+                    _contractingParty.Add("additionalIdentifiers", new JArray(additionalIdentifier));
                 }
             }
 
             _contractingParty.Add("identifier", identifier);
-            _contractingParty.Add("id", identifier["id"]);
+            _contractingParty.Add("id", $"{identifier["id"]}-{_contractingParty.Count}");
             _contractingParty.Add("roles", new JArray("procuringEntity"));
 
             return null;
@@ -1205,7 +1431,7 @@ namespace OCDS_Mapper.src.Model
                     SimulateElement("item", 1);
                 }
 
-                lot.Add("name", toMap[0].Value);
+                lot.Add("title", toMap[0].Value);
             }
             else
             {
@@ -1226,7 +1452,7 @@ namespace OCDS_Mapper.src.Model
                         name = Parser.GetSpecificElement(procurementProject, "Name");
                         if (name != null)
                         {
-                            lot.Add("name", name.Value);
+                            lot.Add("title", name.Value);
                         }
                     }
                     
@@ -1253,7 +1479,7 @@ namespace OCDS_Mapper.src.Model
 
                 value = new JObject();
 
-                value.Add("value", Convert.ToDouble(toMap[0].Value, System.Globalization.CultureInfo.InvariantCulture));
+                value.Add("amount", Convert.ToDouble(toMap[0].Value, System.Globalization.CultureInfo.InvariantCulture));
                 value.Add("currency", "EUR");
 
                 lot.Add("value", value);
@@ -1280,7 +1506,7 @@ namespace OCDS_Mapper.src.Model
                             totalAmount = Parser.GetSpecificElement(budgetAmount, "TotalAmount");
                             if (totalAmount != null)
                             {
-                                value.Add("value", Convert.ToDouble(totalAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
+                                value.Add("amount", Convert.ToDouble(totalAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
                                 value.Add("currency", "EUR");
 
                                 lot.Add("value", value);
@@ -1326,7 +1552,7 @@ namespace OCDS_Mapper.src.Model
         {
             if (toMap.Length == 1)
             {
-                return new JValue(toMap[0].Value);
+                return new JValue(Convert.ToInt32(toMap[0].Value));
             }
             return null;
         }

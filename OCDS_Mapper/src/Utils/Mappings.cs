@@ -6,13 +6,26 @@ namespace OCDS_Mapper.src.Model
     /* Clase estática con la información para realizar los mapeos */
     public static class Mappings
     {
-
         /* Clase estática con los descriptores de mapeo */
-        public static class MappingElement
+        public static class MappingElements
         {
             /* Elementos raíz */
             public const string Tag = "tag";
             public const string OCID = "ocid";
+
+            /* Elementos en 'contracts' */
+            public const string Contract = "contracts";
+            public static class Contracts
+            {
+                public const string Id = "id";
+                public const string Period = "period";
+
+                /* Elementos en 'contract'.'period' */
+                public static class Periods
+                {
+                    public const string StartDate = "startDate";
+                }
+            }
 
             /* Elementos en 'awards' */
             public const string Award = "awards";
@@ -112,18 +125,19 @@ namespace OCDS_Mapper.src.Model
          *      Obtiene el diccionario con la información necesaria para realizar los mapeos.
          *  @param namespaces : Diccionario con los espacios de nombres
          *  @return : Diccionario con los pares de rutas en los elementos en CODICE y OCDS
-         *      @ej : {
-         *              {
-         *                  [                                                       => cac-place-ext:ContractFolderStatus/ (raíz)
-         *                      XName(XNamespace("cac") + "ProcurementProject"),    => cac:ProcurementProject/
-         *                      XName(XNamespace("cbc") + "Name")                   => cbc:Name
-         *                  ],
-         *                  [
-         *                      MappingElement.Tender,                              => tender/
-         *                      MappingElement.Tenders.Title                        => title
-         *                  ]
-         *              }, ...
-         *            }
+         *  @ej :
+         *      {
+         *          {
+         *              [                                                       => cac-place-ext:ContractFolderStatus/ (raíz)
+         *                  XName(XNamespace("cac") + "ProcurementProject"),    => cac:ProcurementProject/
+         *                  XName(XNamespace("cbc") + "Name")                   => cbc:Name
+         *              ],
+         *              [
+         *                  MappingElements.Tender,                              => tender/
+         *                  MappingElements.Tenders.Title                        => title
+         *              ]
+         *          }, ...
+         *      }
          */
         public static IDictionary<IEnumerable<XName>, IEnumerable<string>> GetMappingRules(IDictionary<string, XNamespace> namespaces)
         {
@@ -136,7 +150,7 @@ namespace OCDS_Mapper.src.Model
                     }),
                     new LinkedList<string>(new string[]
                     {
-                        MappingElement.Tag
+                        MappingElements.Tag
                     })
                 },
                 {
@@ -146,7 +160,7 @@ namespace OCDS_Mapper.src.Model
                     }),
                     new LinkedList<string>(new string[]
                     {
-                        MappingElement.OCID
+                        MappingElements.OCID
                     })
                 },
                 {
@@ -157,8 +171,8 @@ namespace OCDS_Mapper.src.Model
                     }),
                     new LinkedList<string>(new string[]
                     {
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Title
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Title
                     })
                 },
                 {
@@ -168,8 +182,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "EstimatedOverallContractAmount"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Value
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Value
                     })
                 },
                 {
@@ -179,9 +193,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "TotalAmount"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Planning,
-                        MappingElement.Plannings.Budget,
-                        MappingElement.Plannings.Budgets.Amount
+                        MappingElements.Planning,
+                        MappingElements.Plannings.Budget,
+                        MappingElements.Plannings.Budgets.Amount
                     })
                 },
                 {
@@ -191,9 +205,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "StartDate"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.TenderPeriod,
-                        MappingElement.Tenders.TenderPeriods.StartDate
+                        MappingElements.Tender,
+                        MappingElements.Tenders.TenderPeriod,
+                        MappingElements.Tenders.TenderPeriods.StartDate
                     })
                 },
                 {
@@ -203,9 +217,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "EndDate"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.TenderPeriod,
-                        MappingElement.Tenders.TenderPeriods.EndDate
+                        MappingElements.Tender,
+                        MappingElements.Tenders.TenderPeriod,
+                        MappingElements.Tenders.TenderPeriods.EndDate
                     })
                 },
                 {
@@ -215,9 +229,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "DurationMeasure"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.TenderPeriod,
-                        MappingElement.Tenders.TenderPeriods.DurationInDays
+                        MappingElements.Tender,
+                        MappingElements.Tenders.TenderPeriod,
+                        MappingElements.Tenders.TenderPeriods.DurationInDays
                     })
                 },
                 {
@@ -226,8 +240,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "TypeCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.MainProcurementCategory
+                        MappingElements.Tender,
+                        MappingElements.Tenders.MainProcurementCategory
                     })
                 },
                 {
@@ -236,8 +250,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ProcedureCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.ProcurementMethod
+                        MappingElements.Tender,
+                        MappingElements.Tenders.ProcurementMethod
                     })
                 },
                 {
@@ -246,8 +260,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ContractingSystemCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.ProcurementMethodDetails
+                        MappingElements.Tender,
+                        MappingElements.Tenders.ProcurementMethodDetails
                     })
                 },
                 {
@@ -256,8 +270,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "SubmissionMethodCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.SubmissionMethod
+                        MappingElements.Tender,
+                        MappingElements.Tenders.SubmissionMethod
                     })
                 },
                 {
@@ -267,8 +281,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ID"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.SubmissionMethodDetails
+                        MappingElements.Tender,
+                        MappingElements.Tenders.SubmissionMethodDetails
                     })
                 },
                 {
@@ -278,8 +292,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "AuctionConstraintIndicator"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.SubmissionMethod
+                        MappingElements.Tender,
+                        MappingElements.Tenders.SubmissionMethod
                     })
                 },
                 {
@@ -290,8 +304,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "Name"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Party,
-                        MappingElement.Parties.Name
+                        MappingElements.Party,
+                        MappingElements.Parties.Name
                     }) 
                 },
                 {
@@ -302,8 +316,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ID"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Party,
-                        MappingElement.Parties.Identifier
+                        MappingElements.Party,
+                        MappingElements.Parties.Identifier
                     }) 
                 },
                 {
@@ -312,7 +326,7 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "Party"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Party
+                        MappingElements.Party
                     }) 
                 },
                 {
@@ -321,8 +335,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "AwardedTenderedProject"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Id
+                        MappingElements.Award,
+                        MappingElements.Awards.Id
                     }) 
                 },
                 {
@@ -331,8 +345,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ResultCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Status
+                        MappingElements.Award,
+                        MappingElements.Awards.Status
                     }) 
                 },
                 {
@@ -342,8 +356,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "LegalMonetaryTotal"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Value
+                        MappingElements.Award,
+                        MappingElements.Awards.Value
                     }) 
                 },
                 {
@@ -352,8 +366,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ReceivedTenderQuantity"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.NumberOfTenderers
+                        MappingElements.Tender,
+                        MappingElements.Tenders.NumberOfTenderers
                     })
                 },
                 {
@@ -362,8 +376,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "Description"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Description
+                        MappingElements.Award,
+                        MappingElements.Awards.Description
                     })
                 },
                 {
@@ -372,8 +386,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "AwardDate"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Date
+                        MappingElements.Award,
+                        MappingElements.Awards.Date
                     })
                 },
                 {
@@ -381,8 +395,8 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cac"] + "TenderResult"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Award,
-                        MappingElement.Awards.Suppliers
+                        MappingElements.Award,
+                        MappingElements.Awards.Suppliers
                     })
                 },
                 {
@@ -391,9 +405,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ID"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Lot,
-                        MappingElement.Tenders.Lots.Id
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Lot,
+                        MappingElements.Tenders.Lots.Id
                     })
                 },
                 {
@@ -403,9 +417,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "Name"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Lot,
-                        MappingElement.Tenders.Lots.Name
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Lot,
+                        MappingElements.Tenders.Lots.Name
                     })
                 },
                 {
@@ -416,9 +430,9 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "TotalAmount"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Lot,
-                        MappingElement.Tenders.Lots.Value_
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Lot,
+                        MappingElements.Tenders.Lots.Value_
                     })
                 },
                 {
@@ -429,9 +443,31 @@ namespace OCDS_Mapper.src.Model
                         namespaces["cbc"] + "ItemClassificationCode"
                     }),
                     new LinkedList<string>(new string[]{
-                        MappingElement.Tender,
-                        MappingElement.Tenders.Item,
-                        MappingElement.Tenders.Items.Classification
+                        MappingElements.Tender,
+                        MappingElements.Tenders.Item,
+                        MappingElements.Tenders.Items.Classification
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cac"] + "Contract",
+                        namespaces["cbc"] + "ID"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElements.Contract,
+                        MappingElements.Contracts.Id
+                    })
+                },
+                {
+                    new LinkedList<XName>(new XName[]{
+                        namespaces["cac"] + "TenderResult",
+                        namespaces["cac"] + "StartDate"
+                    }),
+                    new LinkedList<string>(new string[]{
+                        MappingElements.Contract,
+                        MappingElements.Contracts.Period,
+                        MappingElements.Contracts.Periods.StartDate
                     })
                 }
             };

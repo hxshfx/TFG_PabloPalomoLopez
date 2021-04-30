@@ -53,7 +53,7 @@ namespace OCDS_Mapper.src.Interfaces
          *  @param pathToElement : lista enlazada con la ruta del elemento deseado:
          *      @ej : [ XName(XNamespace("cac") + "ProcurementProject"),
          *              XName(XNamespace("cbc") + "Name") ]
-         *  @return : elemento buscado, o null si no se puede encontrar
+         *  @return : elemento(s) buscado(s), o null si no se puede encontrar
          *      @ej : XElement(<cbc:Name>"..."</cbc:Name>)
          */
         XElement[] GetElements(IEnumerable<XName> pathToElement);
@@ -64,5 +64,11 @@ namespace OCDS_Mapper.src.Interfaces
          *  @return : La URI que describe el fichero enlazado al siendo parseado en esta instancia
          */
         Uri GetNextFile();
+
+        /*  función GetDocumentTimestamp() => string
+         *      Devuelve el timestamp del documento, que será utilizado por el Packager como identificador
+         *  @return : timestamp (o campo "updated") del documento de licitaciones
+         */
+        string GetDocumentTimestamp();
     }
 }

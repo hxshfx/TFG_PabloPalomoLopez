@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
 using log4net.Core;
@@ -20,6 +19,7 @@ namespace OCDS_Mapper.src.Model
          */
         public XElement DocumentRoot { get; set; }
 
+
         /*  propiedad EntryRoot => XElement
          *      Representa el elemento XML raíz de la entrada siendo parseada:
          *      Elemento <cac-place-ext:ContractFolderStatus>
@@ -35,18 +35,19 @@ namespace OCDS_Mapper.src.Model
          */
         private readonly Action<object, string, Level> _Log;
 
-        /*  atributo _codeLists => IDictionary<string, XElement>
+
+        /*  atributo estático _codeLists => IDictionary<string, XElement>
          *      Colección de ficheros de códigos de acceso recurrente
          */
         private static IDictionary<string, XElement> _codeLists = new Dictionary<string, XElement>()
         {
             {
                 "CPV",
-                XElement.Load(ConfigurationManager.AppSettings["CPV_codelist"])
+                XElement.Load(Program.Configuration["CPV_codelist_URL"])
             },
             {
                 "ContractingSTC",
-                XElement.Load(ConfigurationManager.AppSettings["ContractingSTC_codelist"])
+                XElement.Load(Program.Configuration["ContractingSTC_codelist_URL"])
             }
         };
 
@@ -55,15 +56,16 @@ namespace OCDS_Mapper.src.Model
         /* Constructor */
 
         // @param Log : Puntero a la función de logging
-        // @param filepath : ruta al fichero atom a parsear
-        public Parser(Action<object, string, Level> Log, string filePath)
+        // @param document : documento atom a parsear
+        public Parser(Action<object, string, Level> Log, Document document)
         {
             _Log = Log;
 
-            // Carga el fichero a parsear y logea el tiempo gastado en ello
-            DocumentRoot = XElement.Load(filePath);
+            // Carga el fichero a parsear, cierra el stream y logea el tiempo gastado en ello
+            DocumentRoot = XElement.Load(document.Stream);
+            document.Stream.Dispose();
 
-            _Log.Invoke(this, $"XML document {filePath} loaded", Level.Info);
+            _Log(this, "XML document loaded", Level.Info);
         }
 
 
@@ -85,10 +87,10 @@ namespace OCDS_Mapper.src.Model
             {
                 // Construye un par a través del nombre del atributo y el namespace que representa su valor
                 namespaces.Add(attr.Name.LocalName, XNamespace.Get(attr.Value));
-                _Log.Invoke(this, $"Adding to namespace: {attr.Name.LocalName}", Level.Debug);
+                _Log(this, $"Adding to namespace: {attr.Name.LocalName}", Level.Debug);
             }
 
-            _Log.Invoke(this, $"Loaded namespace with {namespaces.Count} elements", Level.Debug);
+            _Log(this, $"Loaded namespace with {namespaces.Count} elements", Level.Debug);
             return namespaces;
         }
 
@@ -107,7 +109,7 @@ namespace OCDS_Mapper.src.Model
                 from entry in DocumentRoot.Elements(namespaces["xmlns"] + "entry")
                 select entry;
 
-            _Log.Invoke(this, $"Loaded entry set with {entrySet.Count()} elements", Level.Info);
+            _Log(this, $"Loaded entry set with {entrySet.Count()} elements", Level.Info);
             return entrySet;
         }
 
@@ -142,7 +144,7 @@ namespace OCDS_Mapper.src.Model
          *  @param pathToElement : lista enlazada con la ruta del elemento deseado:
          *      @ej : [ XName(XNamespace("cac") + "ProcurementProject"),
          *              XName(XNamespace("cbc") + "Name") ]
-         *  @return : elemento buscado, o null si no se puede encontrar
+         *  @return : elemento(s) buscado(s), o null si no se puede encontrar
          *      @ej : XElement(<cbc:Name>"..."</cbc:Name>)
          */
         public XElement[] GetElements(IEnumerable<XName> pathToElement)
@@ -166,6 +168,8 @@ namespace OCDS_Mapper.src.Model
                 else
                 {
                     element = query.First();
+
+                    // Si se tiene un conjunto de elementos, se devuelve su colección
                     if (query.Count() > 1)
                     {
                         return query.ToArray();
@@ -173,7 +177,7 @@ namespace OCDS_Mapper.src.Model
                 }
             }
             
-            // Una vez finalizada la iteración de búsquedas, devuelve el elemento final
+            // Una vez finalizada la iteración de búsquedas, se devuelve el único elemento
             return new XElement[]{ element };
         }
 
@@ -194,21 +198,48 @@ namespace OCDS_Mapper.src.Model
             // Si no lo encuentra, devuelve null
             if (!query.Any())
             {
-                _Log.Invoke(this, "Link to next file couldn't be found", Level.Warn);
+                _Log(this, "Link to next file couldn't be found", Level.Warn);
                 return null;
             }
             // Si existe, devuelve la URI correspondiente al siguiente fichero
             else
             {
-                _Log.Invoke(this, $"Linked next file: {query.First().FirstAttribute.Value}", Level.Debug);
+                _Log(this, $"Linked next file: {query.First().FirstAttribute.Value}", Level.Debug);
                 return new Uri(query.First().FirstAttribute.Value);
             }
         }
 
 
+        /*  función GetDocumentTimestamp() => string
+         *      Devuelve el timestamp del documento, que será utilizado por el Packager como identificador
+         *  @return : timestamp (o campo "updated") del documento de licitaciones
+         */
+        public string GetDocumentTimestamp()
+        {
+            // Realiza una consulta Linq desde la raíz del documento para encontrar el elemento de actualización que será utilizado como ID
+            IEnumerable<XElement> query =
+                from node in DocumentRoot.Elements()
+                where node.Name.LocalName.Equals("updated")
+                select node;
+            
+            // Si no lo encuentra, devuelve null
+            if (!query.Any())
+            {
+                _Log(this, "Updated element couldn't be found", Level.Warn);
+                return null;
+            }
+            // Si existe, devuelve el timestamp del documento
+            else
+            {
+                return query.First().Value;
+            }
+        }
+
+
+
         /* Funciones estáticas */
 
-        /*  función GetSpecificElement(IEnumerable<XName>) => XElement[]
+        /*  función estática GetSpecificElement(IEnumerable<XName>) => XElement
          *      Devuelve el elemento XML desde el elemento provisto, y con el nombre pasado como parámetro
          *  @param element : elemento a partir del cual buscar
          *  @param toSearch : nombre local del elemento a buscar
@@ -236,27 +267,31 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetCodeValue() => string
+        /*  función estática GetCodeValue() => string
          *      Carga el documento de códigos provisto como parámetro y devuelve el valor
          *      de la entrada cuyo código casa con el segundo parámetro
          *  @param name : nombre descriptor del fichero de códigos
          *  @param code : código buscado
-         *  @return : valor del código buscado
+         *  @return : valor del código buscado, o null si el documento o el código no se encuentran
          */
         public static string GetCodeValue(string name, string code)
         {
+            // Carga el documento de códigos buscado
             XElement document = _codeLists[name];
 
+            // Si el documento no está registrado, sale
             if (document == null)
             {
                 return null;
             }
 
+            // Realiza una consulta Linq en el documento de códigos para recuperar su lista
             IEnumerable<XElement> query =
                 from node in document.Elements()
                 where node.Name.LocalName.Equals("SimpleCodeList")
                 select node;
             
+            // Realiza una segunda consulta para encontrar el código específico
             query =
                 from node in query.First().Elements()
                 where node.Elements().First().Value.Equals(code)
@@ -267,7 +302,7 @@ namespace OCDS_Mapper.src.Model
             {
                 return null;
             }
-            // Si existe, devuelve el valor de la entrada
+            // Si existe, devuelve el valor de la entrada con otra consulta Linq
             else
             {
                 query =

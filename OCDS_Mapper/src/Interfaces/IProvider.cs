@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nito.AsyncEx;
+using OCDS_Mapper.src.Model;
 
 namespace OCDS_Mapper.src.Interfaces
 {
@@ -15,25 +16,25 @@ namespace OCDS_Mapper.src.Interfaces
          */
         IParser Parser { get; set; }
 
-        /*  propiedad Files => BlockingCollection
+        /*  propiedad Files => AsyncCollection<Document>
          *      Colección thread-safe que permite una extracción
          *      ordenada de los documentos provistos
          */
-        AsyncCollection<string> Files { get; set; }
+        AsyncCollection<Document> Files { get; set; }
 
         /* propiedad AllProvider => Thread
-         *      Thread utilizado para la provisión en el caso de utilizar PROVIDER_ALL
+         *      Thread utilizado para la provisión en el caso de utilizar PROVIDE_ALL
          */
         Thread AllProvider { get; set; }
 
 
         /* Funciones */
 
-        /*  función asíncrona TakeFile() => string
+        /*  función asíncrona TakeFile() => Document
          *      Función bloqueante que devuelve un documento provisto cuando éste está disponible
-         *  @return : path al documento provisto
+         *  @return : stream de texto del documento provisto, o null si no quedan más documentos que proveer
          */
-        Task<string> TakeFile();
+        Task<Document> TakeFile();
 
         /*  función SetParser(IParser) => void
          *      (utilizada solo en modo PROVIDE_ALL)
@@ -45,7 +46,7 @@ namespace OCDS_Mapper.src.Interfaces
 
         /*  función RemoveFile(string) => void
          *      Función que elimina un archivo provisto ya mapeado
-         *  param filePath : path del documento a eliminar
+         *  @param filePath : path del documento a eliminar
          */
         void RemoveFile(string filePath);
     }
