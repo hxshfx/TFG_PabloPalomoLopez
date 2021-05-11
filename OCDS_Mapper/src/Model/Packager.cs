@@ -52,7 +52,7 @@ namespace OCDS_Mapper.src.Model
             _idOccurrences = new Dictionary<string,int>();
             _packaged = new JObject();
 
-            DateTime dt = DateTime.Parse(timestamp);
+            //DateTime dt = DateTime.Parse(timestamp);
 
             // Forma la URI del objeto a publicar mediante el hash del timestamp TODO ?
             byte[] hash = SHA1.Create().ComputeHash(ASCIIEncoding.Default.GetBytes(timestamp));
@@ -74,17 +74,6 @@ namespace OCDS_Mapper.src.Model
         /* Implementación de IPackager */
 
 
-        /*  función Package(JObject) => void
-         *      Introduce una entrada al paquete
-         *  @param entry : objeto JSON que introducir
-         */
-        public void Package(JObject entry)
-        {
-            JArray releases = (JArray) _packaged["releases"];
-            releases.Add(entry);
-        }
-
-
         /*  función GetIdentifier(string) => string
          *      Obtiene el número de ocurrencias del identificador hasta el momento
          *      con el objetivo de evitar colisiones de ids no únicos
@@ -99,9 +88,20 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _idOccurrences[entryID] = 0;
+                _idOccurrences[entryID] = 1;
             }
             return _idOccurrences[entryID].ToString();
+        }
+
+
+        /*  función Package(JObject) => void
+         *      Introduce una entrada al paquete
+         *  @param entry : objeto JSON que introducir
+         */
+        public void Package(JObject entry)
+        {
+            JArray releases = (JArray) _packaged["releases"];
+            releases.Add(entry);
         }
 
 

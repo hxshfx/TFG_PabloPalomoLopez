@@ -25,9 +25,9 @@
 	pdfnewwindow    = true,             % Open the links in a new PDF window
 	colorlinks      = true,             % Use colored links
 	linkcolor       = blue,             % Internal links color
-	citecolor       = green,            % Bibliographic links color
-	filecolor       = cyan,             % File links color
-	urlcolor        = magenta           % External links color
+	citecolor       = blue,             % Bibliographic links color
+	filecolor       = blue,             % File links color
+	urlcolor        = blue              % External links color
 ]{hyperref}
 \pdfstringdefDisableCommands{\let\uppercase}
 
@@ -84,14 +84,23 @@
 \usepackage{graphicx}
 
 % Hyperlinks
+\PassOptionsToPackage{obeyspaces}{url}
+\usepackage{breakurl}
 \usepackage{hyperref}
 \hypersetup{
+    breaklinks=true,
     colorlinks=true,
+    filecolor=magenta, 
     linkcolor=blue,
-    filecolor=magenta,      
     urlcolor=blue,
 }
 \urlstyle{same}
+
+% Colour definitions
+\usepackage[dvipsnames]{xcolor}
+\definecolor{DarkGreen}{rgb}{0.0,0.34,0.25}
+\definecolor{DarkRed}{rgb}{0.42,0.07,0.02}
+\definecolor{DarkViolet}{rgb}{0.4,0.0,0.4}
 
 % Language highlighting
 \usepackage{listings}
@@ -116,6 +125,7 @@
         BudgetAmount,
         CityName,
         Contact,
+        Contract,
         Country,
         Description,
         ElectronicMail,
@@ -174,7 +184,33 @@
     morestring=[s][]{\#\{}{\}},
     rulecolor=\color{black},
     showstringspaces=false,
-    stringstyle=\color{OrangeRed}, 
+    stringstyle=\color{OrangeRed},
+    tabsize=10
+}
+\lstdefinelanguage{lXML2}{
+    alsoletter={.,:,/,-,\#},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    gobble=20,
+    keywordstyle=[1]{\color{Cerulean}},
+    keywordstyle=[2]{\color{ForestGreen}},
+    keywordstyle=[3]{\color{BrickRed}},
+    keywords=[1]{
+        http://dbpedia.org/resource/Spain
+    },
+    morekeywords=[2]{
+        http://www.w3.org/1999/02/22-rdf-syntax-ns\#type,
+        http://dbpedia.org/ontology/currencyCode,
+        http://www.w3.org/2002/07/owl\#sameAs
+    },
+    morekeywords=[3]{
+        http://schema.org/Country,
+        EUR,
+        http://openei.org/resources/Spain
+    },
+    rulecolor=\color{black},
     tabsize=10
 }
 \lstdefinelanguage{lJSON}{
@@ -190,6 +226,7 @@
     keywords=[1]{\{,\},\[,\]},
     morekeywords=[2]{
         awards,
+        contracts,
         parties,
         planning,
         tender
@@ -218,6 +255,7 @@
         mainProcurementCategory,
         name,
         ocid,
+        period,
         postalCode,
         procurementMethod,
         procurementMethodDetails_es,
@@ -243,21 +281,136 @@
     stringstyle=\color{BrickRed},
     tabsize=10
 }
+\lstdefinelanguage{lCSharp}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    breakatwhitespace=true,
+    commentstyle=\color{DarkViolet},
+    escapeinside={(*@}{@*)},
+    frame=single,
+    gobble=16,
+    keywordstyle=[1]{\textit},
+    keywordstyle=[2]{\color{DarkGreen}},
+    keywordstyle=[3]{\color{DarkRed}},
+    keywordstyle=[4]{\color{PineGreen}},
+    keywords=[1]{
+        from,
+        enum,
+        get,
+        in,
+        interface,
+        namespace,
+        null,
+        public,
+        select,
+        set,
+        using,
+        where
+    },
+    morekeywords=[2]{
+        AsyncCollection,
+        Document,
+        EPackagerOperationCode,
+        EProviderOperationCode,
+        IDictionary,
+        IEnumerable,
+        IMapper,
+        IPackager,
+        IParser,
+        IProvider,
+        LocalName,
+        Name,
+        JObject,
+        string,
+        Task,
+        Thread,
+        Uri,
+        void,
+        XElement,
+        XName,
+        XNamespace
+    },
+    morekeywords=[3]{
+        AllProvider,
+        Commit,
+        Files,
+        DocumentRoot,
+        Elements,
+        EntryRoot,
+        Equals,
+        GetDocumentTimestamp,
+        GetElements,
+        GetEntrySet,
+        GetIdentifier,
+        GetNamespaces,
+        GetNextFile,
+        MapElement,
+        MappedEntry,
+        Package,
+        Parser,
+        Publish,
+        PROVIDE_ALL,
+        PROVIDE_LATEST,
+        PROVIDE_SPECIFIC,
+        SetEntryRootElement,
+        SetParser,
+        RemoveFile,
+        TakeFile
+    },
+    morekeywords=[4]{
+        code,
+        entry,
+        entryID,
+        filePath,
+        namespaces,
+        node,
+        parsedElement,
+        pathMap,
+        pathToElement,
+        parser,
+        query,
+    },
+    morecomment=[l]{//}, 
+    morecomment=[l]{///},
+    morecomment=[s]{/*}{*/},
+    morestring=*[d]{"},
+    morestring=[s][]{\#\{}{\}},
+    sensitive=true,
+    showspaces=false,
+    showstringspaces=false,
+    stringstyle=\color{BrickRed},
+    tabsize=10
+}
 % Fixed tabbing
 \usepackage{tabto}
 
-% Paragraph sections
+% Sections depth
 \usepackage{titlesec}
 \setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+% Table centered wrapping
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} %% horizontal centering
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} %% vertical centering
+
+% Multipage tables
+\usepackage{longtable}
 
 % Indexes name change
 \renewcommand*\contentsname{Índice}
-\renewcommand*\listtablename{Lista de tablas}
+\renewcommand*\listtablename{Índice de tablas}
+\renewcommand*\listfigurename{Índice de figuras}
+
+% Subitem bullets style
+\renewcommand{\labelitemii}{\circ}
+\renewcommand{\labelitemiii}{\diamond}
 
 % Configure style aspects of the document
 \usepackage{caption}            % To configure the captions
 \usepackage{siunitx}            % For SI units
 \usepackage{graphicx}           % To include graphics
+\graphicspath{ {schemes/} {images/} }     % Images folder path
 \usepackage[dvipsnames]{xcolor} % To configure colors
 \usepackage{fancyhdr}           % To configure the header and footer
 \pagestyle{fancy}               % Use a fancy header style
@@ -267,8 +420,9 @@
 \rhead{\name}                   % Set the header left-side contents
 \cfoot{\thepage}                % Set the footer page number
 
-% Table label change
+% Label changes
 \captionsetup[table]{name=Tabla}
+\captionsetup[figure]{name=Figura}
 
 % Create a custom command shortcut
 \renewcommand{\arraystretch}{1.3} % Modify the vertical spacing of the tables
@@ -333,20 +487,20 @@
 \begin{document}
     % Include the cover
     \afterpage{\blankpage}
-    \input{cover.tex}
+    \input{portada.tex}
     % Include the different sections
     \input{includes/abstract}
     \input{includes/resumen}
-    \input{includes/acknowledgement}
-    \input{includes/index}
-    \input{includes/index_tables}
-    \input{includes/index_figures}
-    \input{includes/index_equations}
-    \input{includes/intro}
-    %\input{includes/software}
+    \input{includes/agradecimientos}
+    \input{includes/indice}
+    \input{includes/indice_tablas}
+    \input{includes/indice_figuras}
+    \input{includes/introduccion}
+    \input{includes/estado_arte}
+    \input{includes/software}
     \input{includes/correspondencias}
-    \input{includes/conclusions}
-    \input{includes/references}
-    \input{includes/annex}
+    \input{includes/conclusiones}
+    \input{includes/referencias}
+    \input{includes/anexos}
 \end{document}
 % Finish the document

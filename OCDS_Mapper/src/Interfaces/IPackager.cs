@@ -9,12 +9,6 @@ namespace OCDS_Mapper.src.Interfaces
     {
         /* Funciones */
 
-        /*  función Package(JObject) => void
-         *      Introduce una entrada al paquete
-         *  @param entry : objeto JSON que introducir
-         */
-        void Package(JObject entry);
-
         /*  función GetIdentifier(string) => string
          *      Obtiene el número de ocurrencias del identificador hasta el momento
          *      con el objetivo de evitar colisiones de ids no únicos
@@ -22,6 +16,12 @@ namespace OCDS_Mapper.src.Interfaces
          *  @return : número de ocurrencias del identificador
          */
         string GetIdentifier(string entryID);
+
+        /*  función Package(JObject) => void
+         *      Introduce una entrada al paquete
+         *  @param entry : objeto JSON que introducir
+         */
+        void Package(JObject entry);
 
         /*  TODO
          *

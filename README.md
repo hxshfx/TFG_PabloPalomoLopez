@@ -17,7 +17,7 @@
 
 * Documentar la aplicación mediante diagramas UML, etc.
 
-* Una vez se tengan más reglas de mapeo revisadas, irlas introduciendo en la memoria
+* ~~Una vez se tengan más reglas de mapeo revisadas, irlas introduciendo en la memoria~~
 
 * Ver como atribuir la autoría de la plantilla (licencia Creative Commons CC BY 4.0)
 
@@ -59,6 +59,7 @@
         /Exceptions -> excepciones lanzadas por la aplicación
         /Interfaces -> interfaces que son implementadas por los módulos de la aplicación
         /Model      -> módulos que implementan las funcionalidades de la aplicación
+        /Utils      -> módulos de funcionalidades extra de la aplicación
     /test       -> pruebas unitarias y de integración de la aplicación
 
 **Descripción**
@@ -69,11 +70,9 @@ La aplicación está compuesta por cinco diferentes módulos que constituyen un 
 
 * ***Parser***: módulo encargado del parseo de los datos de los documentos de la Plataforma de Contratación Pública. Provee servicios para extraer los espacios de nombres, los elementos dadas sus rutas, etcétera. Ofrece asimismo un servicio para obtener los documentos enlazados a los siendo parseados.
 
-* ***Mappings***: módulo estático que recoge las reglas de mapeo entre los dos esquemas.
-
 * ***Mapper***: módulo encargado del mapeo de los datos al estándar OCDS. A través de los elementos XML provistos por el Parser y las reglas especificadas en Mappings, construye el fichero JSON correspondiente al mapeo de cada entrada XML.
 
-* ***Packager***: módulo encargado del empaquetado de los datos ya mapeados. Actualmente sólo vuelca las entradas mapeadas en un fichero.
+* ***Packager***: módulo encargado del empaquetado de los datos ya mapeados. Publica los paquetes de datos de manera local o remota.
 
 **Próximos pasos**
 
@@ -89,9 +88,13 @@ La aplicación está compuesta por cinco diferentes módulos que constituyen un 
 
 * ~~Llegar al 80% de cobertura del código~~
 
-* Ir mapeando las nuevas reglas revisadas
+* ~~Ir mapeando las nuevas reglas revisadas~~
 
-* Empaquetar los datos mapeados para poder introducirlos en la [Herramienta de Revisión de Datos de OCDS](https://standard.open-contracting.org/review/)
+* ~~Empaquetar los datos mapeados para poder introducirlos en la [Herramienta de Revisión de Datos de OCDS](https://standard.open-contracting.org/review/)~~
+
+* Completar el publicado remoto de los paquetes de datos
+
+* Realizar una revisión final del código para la publicación final
 
 **Enlaces de interés**
 

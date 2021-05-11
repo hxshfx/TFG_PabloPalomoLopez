@@ -750,8 +750,8 @@ namespace OCDS_Mapper.test
                     JValue idValue1 = (JValue) idProperty1.First;
                     JValue idValue2 = (JValue) idProperty2.First;
 
-                    Assert.True("ocds-1xraxc--award-1-0".Equals(idValue1.Value));
-                    Assert.True("ocds-1xraxc--award-2-1".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1-1".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2-2".Equals(idValue2.Value));
                 }
             }
 
@@ -1417,8 +1417,8 @@ namespace OCDS_Mapper.test
                     JValue idValue = (JValue) idProperty.First;
                     JValue awardIDValue = (JValue) awardIdProperty.First;
 
-                    Assert.True("ocds-1xraxc--contract-0".Equals(idValue.Value));
-                    Assert.True("1".Equals(awardIDValue.Value));
+                    Assert.True("ocds-1xraxc--contract-1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(awardIDValue.Value));
                 }
             }
 
@@ -1826,7 +1826,7 @@ namespace OCDS_Mapper.test
                     JProperty idProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(idProperty.Name));
-                    Assert.True("S4611001A-1".Equals(idProperty.Value.ToString()));
+                    Assert.True("S4611001A".Equals(idProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(idProperty.Next);
 
@@ -1949,7 +1949,7 @@ namespace OCDS_Mapper.test
                     JProperty idProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(idProperty.Name));
-                    Assert.True("L03380010-2".Equals(idProperty.Value.ToString()));
+                    Assert.True("L03380010".Equals(idProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(idProperty.Next);
 
@@ -4975,26 +4975,7 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public void TestConstructor5()
-            {
-                Action action = () => new Provider(
-                    Program.Log, EProviderOperationCode.PROVIDE_ALL,
-                    "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom"
-                );
-
-                action.Should().Throw<InvalidOperationCodeException>();
-            }
-
-            [Fact]
-            public void TestConstructor6()
-            {
-                Action action = () => new Provider(Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC, null);
-
-                action.Should().Throw<InvalidOperationCodeException>();
-            }
-
-            [Fact]
-            public async Task TestProviderTakeFile1()
+            public async Task TestTakeFile1()
             {
                 _provider = new Provider(
                         Program.Log, EProviderOperationCode.PROVIDE_SPECIFIC,
@@ -5012,7 +4993,7 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public async Task TestProviderTakeFile2()
+            public async Task TestTakeFile2()
             {
                 _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
@@ -5023,7 +5004,7 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public void TestProviderRemoveFile1()
+            public void TestRemoveFile1()
             {
                 _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 
@@ -5036,7 +5017,7 @@ namespace OCDS_Mapper.test
             }
              
             [Fact]
-            public void TestProviderRemoveFile2()
+            public void TestRemoveFile2()
             {
                 _provider = new Provider(Program.Log, EProviderOperationCode.PROVIDE_LATEST, null);
 

@@ -96,12 +96,12 @@ namespace OCDS_Mapper
             EStatusCodes statusCode;
             IEnumerator<string> argsEnumerator = args.AsEnumerable<string>().GetEnumerator();
 
-            if ((statusCode = CheckProviderCode(argsEnumerator)) != 0)
+            if ((statusCode = CheckProviderCode(argsEnumerator)) != EStatusCodes.OK)
             {
                 Environment.Exit((int) statusCode);
             }
 
-            if ((statusCode = CheckPackagerCode(argsEnumerator)) != 0)
+            if ((statusCode = CheckPackagerCode(argsEnumerator)) != EStatusCodes.OK)
             {
                 Environment.Exit((int) statusCode);
             }

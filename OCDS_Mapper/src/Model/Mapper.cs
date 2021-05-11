@@ -29,55 +29,65 @@ namespace OCDS_Mapper.src.Model
          */
         private readonly Action<object, string, Level> _Log;
 
+
         /*  atributo _awards => JArray
          *      Almacén temporal del objeto representando la colección de adjudicaciones
          */
         private readonly JArray _awards;
+
 
         /*  atributo _contractingParty => JObject
          *      Almacén temporal del objeto representando la entidad adjudicadora
          */
         private readonly JObject _contractingParty;
 
+
         /*  atributo _contracts => JArray
          *      Almacén temporal del objeto representando la colección de contratos
          */
         private readonly JArray _contracts;
+
 
         /*  atributo _lots => JArray
          *      Almacén temporal del objeto representando la colección de lotes
          */
         private readonly JArray _lots;
 
+
         /*  atributo _id => string
          *      Copia del identificador único de la licitación
          */
         private string _id { get; set; }
+
 
         /*  atributo _items => JArray
          *      Almacén temporal del objeto representando la colección de items
          */
         private readonly JArray _items;
 
+
         /*  atributo _packager => IPackager
          *      Instancia del Parser para obtener la información de identificadores
          */
-        public IPackager _packager;
+        private IPackager _packager;
 
-        /*  atributo _prefix => string
-         *      Prefijo de los identificadores
-        */
-        private readonly string _prefix = Program.Configuration["ID_prefix"];
 
         /*  atributo _releaseId => string
          *      Copia del identificador único de la entrega
          */
-        private string _releaseID { get; set; }
+        private string _releaseId { get; set; }
+
 
         /*  atributo _supplierParties => JArray
          *      Almacén temporal de los objetos representando las entidades adjudicatarias
          */
         private readonly JArray _supplierParties;
+
+
+        /*  constante _PREFIX => string
+         *      Prefijo de los identificadores
+        */
+        private static string _PREFIX = Program.Configuration["ID_prefix"];
 
 
 
@@ -214,8 +224,8 @@ namespace OCDS_Mapper.src.Model
         public void Commit()
         {
             // Inserta los metadatos de la entrada
-            MappedEntry.Add("date", GetDate());
-            MappedEntry.Add("id", $"{_id}-{_releaseID}");
+            MappedEntry.Add("date", GetDate()); // TODO ?
+            MappedEntry.Add("id", $"{_id}-{_releaseId}");
             MappedEntry.Add("initiationType", "tender");
             MappedEntry.Add("language", "es");
 
@@ -229,7 +239,7 @@ namespace OCDS_Mapper.src.Model
             JObject tender = (JObject) MappedEntry["tender"];
             if (tender != null)
             {
-                tender.Add("id", $"{_prefix}-{_id}-tender-{_releaseID}");
+                tender.Add("id", $"{_PREFIX}-{_id}-tender-{_releaseId}");
             }
             
             // Incluye las colecciones de ítems y lotes, si los hubiera
@@ -712,9 +722,9 @@ namespace OCDS_Mapper.src.Model
         private JToken MapOCID(XElement[] toMap)
         {
             _id = toMap[0].Value;
-            _releaseID = _packager.GetIdentifier(_id);
+            _releaseId = _packager.GetIdentifier(_id);
 
-            return new JValue($"{_prefix}-{_id}");
+            return new JValue($"{_PREFIX}-{_id}");
         }
 
         // Mapeo del elemento awards[i].date
@@ -803,7 +813,7 @@ namespace OCDS_Mapper.src.Model
             if (toMap.Length == 1)
             {
                 award = new JObject();
-                award.Add("id", $"{_prefix}-{_id}-award-1");
+                award.Add("id", $"{_PREFIX}-{_id}-award-1");
                 _awards.Add(award);
             }
             else
@@ -821,7 +831,7 @@ namespace OCDS_Mapper.src.Model
 
                         if (procurementProjectLotID != null)
                         {
-                            award.Add("id", $"{_prefix}-{_id}-award-{procurementProjectLotID.Value}-{_awards.Count}");
+                            award.Add("id", $"{_PREFIX}-{_id}-award-{procurementProjectLotID.Value}-{_awards.Count + 1}");
                             _awards.Add(award);
                         }
                     }
@@ -1063,11 +1073,11 @@ namespace OCDS_Mapper.src.Model
             if (toMap.Length == 1)
             {
                 contract = new JObject();
-                contract.Add("id", $"{_prefix}-{_id}-contract-{_contracts.Count}");
-                contract.Add("awardID", toMap[0].Value);
+                contract.Add("id", $"{_PREFIX}-{_id}-contract-{toMap[0].Value}");
+                contract.Add("awardID", $"{_PREFIX}-{_id}-award-1");
                 _contracts.Add(contract);
             }
-            else
+            else    
             {
                 XElement contractElement, idElement;
                 foreach (XElement tenderElement in toMap)
@@ -1082,9 +1092,14 @@ namespace OCDS_Mapper.src.Model
 
                         if (idElement != null)
                         {
-                            contract.Add("id", $"{_prefix}-{_id}-contract-{idElement.Value}-{_contracts.Count}");
-                            contract.Add("awardID", idElement.Value);
-                            _contracts.Add(contract);
+                            string[] awardIDs = _awards[_contracts.Count]["id"].ToString().Split("-");
+
+                            if (awardIDs.Length > 1)
+                            {
+                                contract.Add("id", $"{_PREFIX}-{_id}-contract-{idElement.Value}-{_contracts.Count + 1}");
+                                contract.Add("awardID", $"{_PREFIX}-{_id}-award-{awardIDs[awardIDs.Length - 2]}-{awardIDs[awardIDs.Length - 1]}");
+                                _contracts.Add(contract);
+                            }
                         }
                     }
                 }
@@ -1117,7 +1132,7 @@ namespace OCDS_Mapper.src.Model
                     period = new JObject();
 
                     startDate = Parser.GetSpecificElement(contractElement, "StartDate");
-                    if (startDate != null)
+                    if (startDate != null && contract != null)
                     {
                         period.Add("startDate", $"{startDate.Value}T00:00:00Z");
                         contract.Add("period", period);
@@ -1282,7 +1297,7 @@ namespace OCDS_Mapper.src.Model
             }
 
             _contractingParty.Add("identifier", identifier);
-            _contractingParty.Add("id", $"{identifier["id"]}-{_contractingParty.Count}");
+            _contractingParty.Add("id", identifier["id"]);
             _contractingParty.Add("roles", new JArray("procuringEntity"));
 
             return null;

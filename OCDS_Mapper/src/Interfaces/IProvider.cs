@@ -1,4 +1,3 @@
-using System.Threading;
 using System.Threading.Tasks;
 using Nito.AsyncEx;
 using OCDS_Mapper.src.Model;
@@ -21,11 +20,6 @@ namespace OCDS_Mapper.src.Interfaces
          *      ordenada de los documentos provistos
          */
         AsyncCollection<Document> Files { get; set; }
-
-        /* propiedad AllProvider => Thread
-         *      Thread utilizado para la provisión en el caso de utilizar PROVIDE_ALL
-         */
-        Thread AllProvider { get; set; }
 
 
         /* Funciones */

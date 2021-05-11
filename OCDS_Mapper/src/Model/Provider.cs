@@ -31,12 +31,6 @@ namespace OCDS_Mapper.src.Model
         public AsyncCollection<Document> Files { get; set; }
 
 
-        /* propiedad AllProvider => Thread
-         *      Thread utilizado para la provisión en el caso de utilizar PROVIDE_ALL
-         */
-        public Thread AllProvider { get; set; }
-
-
 
         /* Atributos */
 
@@ -46,45 +40,46 @@ namespace OCDS_Mapper.src.Model
         private readonly Action<object, string, Level> _Log;
 
 
-        /*  atributo _webClient => WebClient
-         *      Objeto utilizado para la descarga de documentos
-         */
-        private readonly WebClient _webClient;
-
-
-        /*  atributo _mre => ManualResetEvent
-         *      Mecanismo de sincronización para la interacción con el Parser
-         */
-        private ManualResetEvent _mre;
-        
-        
         /*  atributo _fileName => string
          *      Nombre del fichero siendo provisto, descargado o local
          */
         private string _fileName;
 
 
-        /*  constante _OUTPUT_PATH => sring
-         *      Path de los documentos provistos en modo PROVIDE_LATEST y PROVIDE_SPECIFIC
-         *      y path base de los documentos provistos en modo PROVIDE_ALL (document{1:N}.atom)
+        /*  atributo _mre => ManualResetEvent
+         *      Mecanismo de sincronización para la interacción con el Parser
          */
-        private const string _OUTPUT_PATH = "./tmp/document.atom";
+        private ManualResetEvent _mre;
+
+
+        /*  atributo _webClient => WebClient
+         *      Objeto utilizado para la descarga de documentos
+         */
+        private readonly WebClient _webClient;
 
 
         /*  constante _LATEST_PATH => string
          *      Path del documento publicado más reciente
          */
-        private readonly string _LATEST_PATH = Program.Configuration["LatestDocument_URL"];
+        private readonly static string _LATEST_PATH = Program.Configuration["LatestDocument_URL"];
 
 
+        /*  constante _OUTPUT_PATH => sring
+         *      Path de los documentos provistos en modo PROVIDE_LATEST y PROVIDE_SPECIFIC
+         *      y path base de los documentos provistos en modo PROVIDE_ALL (document{1:N}.atom)
+         */
+        private readonly static string _OUTPUT_PATH = "./tmp/document.atom";
+
+
+        
         
         /* Constructor */
 
         // @param Log : Puntero a la función de logging
-        // @param code : descriptor del modo de operación (PROVIDE_SPECIFIC)
+        // @param code : descriptor del modo de operación
         // @param filePath : ruta al documento para proveer, local o remoto
         // @throws FileNotFoundException : si el parámetro filePath no se corresponde ni a un archivo local ni a una URI correcta
-        // @throws InvalidOperationCodeException : si el parámetro code no es PROVIDE_SPECIFIC
+        // @throws InvalidOperationCodeException : si el parámetro code no es vaĺido
         public Provider(Action<object, string, Level> Log, EProviderOperationCode code, string filePath)
         {
             _Log = Log;
@@ -138,9 +133,9 @@ namespace OCDS_Mapper.src.Model
                     _mre = new ManualResetEvent(false);
                 
                     // Lanza en background la tarea que irá proveyendo documentos
-                    AllProvider = new Thread(ProvideAllTask);
-                    AllProvider.IsBackground = true;
-                    AllProvider.Start();
+                    Thread allProvider = new Thread(ProvideAllTask);
+                    allProvider.IsBackground = true;
+                    allProvider.Start();
 
                     _Log(this, "Provider background thread launched", Level.Info);
                 }

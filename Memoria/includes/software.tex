@@ -1,29 +1,497 @@
-\section{Software}
-
-    \begin{center}
-        \begin{tabular}{|| c | c | c ||} 
-            \hline
-            Código del requisito & Descripción del requisito & Código del elemento de testeo \\
-            \hline\hline
-            \texttt{\textit{RF-1}} & N/A & \texttt{N/A} \\ 
-            \hline
-            \texttt{\textit{RF-2}} & N/A & \texttt{N/A}  \\
-            \hline
-        \end{tabular}
-    \end{center}
-    \captionof{table}{Tabla de requisitos funcionales}
+\section{Software desarrollado} \label{sec:software}
+    La presente sección describe el sistema software desarrollado, \textit{OCDS\_Mapper}, mediante el formato de un documento de diseño software (SDD). En esta sección se proporcionar una visión general del sistema, desde su descripción hasta sus funcionalidades, de las que se derivan las características concretas que han sido implementadas.
+    \\ \\
+    La documentación del software que se describirá a continuación estará guiada por la norma \texttt{J-STD-016-1995} \cite{JSTD}, un estándar para el ciclo de vida de los procesos de desarrollo de software promulgado por dos de los organismos más relevantes en el área de las tecnologías de la información; la EIA (\textit{Electronic Industries Association}) y el IEEE (\textit{The Institute of Electrical and Electronics Engineers}).
+    \\ \\
+    En esta sección que especifica el diseño de la arquitectura del sistema previamente citado, se incluyen los siguientes apartados:
+    \\
+    \begin{itemize}
+        \item Consideraciones de diseño
+        \item Estructura de la aplicación
+        \item Diseño de la arquitectura
+        \item Diseño detallado del sistema
+        \item Trazabilidad de requisitos
+    \end{itemize}
     
-    \begin{center}
-        \begin{tabular}{|| c | c | c ||} 
-            \hline
-            Código del requisito & Descripción del requisito & Código del elemento de testeo \\
-            \hline\hline
-            \texttt{\textit{RNF-1}} & N/A & \texttt{N/A} \\ 
-            \hline
-            \texttt{\textit{RNF-2}} & N/A & \texttt{N/A}  \\
-            \hline
-        \end{tabular}
-    \end{center}
-    \captionof{table}{Tabla de requisitos no funcionales}
+    \subsection{Consideraciones de diseño}
+        \subsubsection{Lenguaje de programación}
+            La implementación del sistema se ha realizado mediante el \textit{framework} \texttt{.NET Core 5.0.202}, usando el lenguaje \texttt{C\#} bajo el estándar que describe su sintaxis e interpretación \cite{ISOCS}.
+            
+        \subsubsection{Arquitectura de componentes orientada a servicios}
+            Con el objetivo de alcanzar la máxima abstracción de tareas posible, el sistema se ha diseñado de tal forma que cada componente realice un servicio concreto, con una funcionalidad bien definida, capaz de integrarse con el resto de componentes del sistema.
+            \\ \\
+            El \textit{OCDS\_Mapper}, por tanto, estará compuesto de componentes individuales, concretamente 4, descritos en la subsección \hyperref[subsubsec:componentes]{Componentes software}.
+            
+        \subsubsection{Patrón de productor-consumidor}
+            El sistema implementará el patrón de diseño software de productor-consumidor de la siguiente manera:
+            \\ \\
+            Las funcionalidades que implementen la recogida de datos, sea de manera local o remota, serán los productores, y las funcionalidades que implementen el procesado de los datos, esto es, el mapeado entre estándares, serán los consumidores.
+            \\ \\
+            Para asegurar un correcto flujo de recursos entre los componentes que sigan dichos roles se implementan mecanismos de sincronización y exclusión mutua entre ellos (ref TODO).
+        
+        \subsubsection{Mecanismo de consultas}
+            Para realizar las búsquedas de elementos sobre los documentos de licitaciones de la Plataforma de Contratacíon Pública del Estado se ha utilizado la tecnología \textit{Language Integrated Query} (\texttt{LINQ}), propia del framework \texttt{.NET}.
+            \\ \\
+            A través de \texttt{LINQ} se pueden realizar consultas sobre estructuras de datos mediante una sintaxis parecida a la del lenguaje \textit{Structured Query Language} (\texttt{SQL}). En concreto, para el tipo de datos que la aplicación obtiene (extensión \texttt{.atom}, formato \texttt{XML}), la rama de \texttt{LINQ} utilizada es \texttt{LINQ to XML} \cite{LINQXML}.
+            \\ \\
+            Para ejemplificar el funcionamiento de \texttt{LINQ}, se utilizará una sentencia utilizada en esta aplicación. Concretamente, el ejemplo provisto en la \hyperref[fig:linq]{figura 1} representa una consulta que busca el elemento raíz (\texttt{ContractFolderStatus}) de cada entrada de un documento de licitaciones.
+            \\ \\
+            \begin{lstlisting}[language=lCSharp,gobble=14]
+                IEnumerable<XElement> query =
+                    from node in entry.Elements()
+                    where node.Name.LocalName.Equals("ContractFolderStatus")
+                    select node;
+            \end{lstlisting}
+            \captionof{figure}{Ejemplo de una sentencia de \texttt{LINQ}}
+            \label{fig:linq}
+        
+        \subsubsection{Librerías utilizadas}
+            El sistema utiliza distintas librerías para realizar la implementación de las funcionalidades requeridas. En concreto, estas librerías son:
+            
+            \begin{itemize}
+                \item AsyncEx \cite{LIBASYNC}: Librería utilizada para el uso de colecciones aptas para la exclusión mutua.
+                \item FluentAssertions \cite{LIBASSERT}: Librería de ayuda en la codificación de tests.
+                \item log4net \cite{LIBLOG4}: Librería para llevar el registro del funcionamiento del sistema.
+                \item Microsoft.Extensions.Configuration \cite{LIBCONFIG}: Librería utilizada para pasar información a la aplicación mediante ficheros de configuración.
+                \item Json.NET \cite{LIBJSON}: Librería utilizada para la construcción de documentos en formato JSON.
+                \item xUnit \cite{LIBXUNIT}: Librería para realizar el testing del sistema.
+            \end{itemize}   
+    
+    \subsection{Estructura de la aplicación}
+        La aplicación \textit{OCDS\_Mapper} (una \textit{solución}, en el ámbito de estructuras de proyectos en \textit{Visual Studio} \cite{VSPROJSOL}) está estructurada en dos \textit{proyectos}; \texttt{src} y \texttt{test}, con el código fuente del programa y el módulo de testeo de la aplicación, respectivamente. En la \hyperref[fig:estructura]{figura 2} se puede visualizar la estructura de directorios de la aplicación.
+        \\ \\
+        Además del fichero \texttt{Program.cs}, que incluye el punto de entrada de la aplicación, y los ficheros de configuración \texttt{appsettings.json} y \texttt{log4net.config}, dentro del proyecto del código fuente de la aplicación se han estructurado los ficheros en los siguientes directorios:
+        
+        \begin{itemize}
+            \item \texttt{Examples}: ejemplos de casos de uso de la aplicación.
+                \begin{itemize}
+                    \item \texttt{json}: ejemplos de documentos mapeados por la aplicación.
+                    \item \texttt{xml}: ejemplos de documentos de la Plataforma de Contratación Pública del Estado.
+                \end{itemize}
+            \item \texttt{Exceptions}: excepciones propias del funcionamiento de la aplicación.
+                \begin{itemize}
+                    \item \texttt{EmptyMappingRuleException.cs}: se lanza si se provee una regla de mapeado vacía.
+                    \item \texttt{InvalidOperationCodeException.cs}: se lanza si no se provee un modo de operación válido.
+                    \item \texttt{InvalidParsedElementException.cs}: se lanza si no se encuentra el elemento raíz en una entrada de un documento de licitaciones.
+                    \item \texttt{InvalidPathLengthException.cs}: se lanza si se provee una regla de mapeado de longitud inválida.
+                    \item \texttt{WrongMappingException.cs}: se lanza si se encuentra un elemento inesperado en el mapeado de los datos.
+                \end{itemize}
+            \item \texttt{Interfaces}: interfaces de los componentes de la arquitectura.
+                \begin{itemize}
+                    \item \texttt{IMapper.cs}: interfaz del componente de mapeado de datos.
+                    \item \texttt{IPackager.cs}: interfaz del componente de empaquetado de datos.
+                    \item \texttt{IParser.cs}: interfaz del componente de parseo de datos.
+                    \item \texttt{IProvider.cs}: interfaz del componente de provisión de datos.
+                \end{itemize}
+            \item \texttt{Model}: implementación de los componentes de la arquitectura.
+                \begin{itemize}
+                    \item \texttt{Mapper.cs}: implementación del componente de mapeado de datos.
+                    \item \texttt{Packager.cs}: implementación del componente de empaquetado de datos.
+                    \item \texttt{Parser.cs}: implementación del componente de parseo de datos.
+                    \item \texttt{Provider.cs}: implementación del componente de provisión de datos.
+                \end{itemize}
+            \item \texttt{Utils}: ficheros con funcionalidades extra.
+                \begin{itemize}
+                    \item \texttt{Document.cs}: tipo de datos que abstrae una instancia de un documento de licitaciones.
+                    \item \texttt{EnumCodes.cs}: fichero con los tipos enumerados del programa.
+                    \item \texttt{Mappings.cs}: clase estática con las reglas de mapeado.
+                \end{itemize}
+        \end{itemize}
+        
+        En cuanto al proyecto de \textit{testing}, en los ficheros \texttt{UnitTests.cs} y \texttt{IntegrationTests.cs} se pueden encontrar las pruebas unitarias y de integración, respectivamente.
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{estructura.pdf}
+            \captionof{figure}{Diagrama de estructura de la aplicación}
+            \label{fig:estructura}
+        \end{figure}
+        
+    \subsection{Diseño de la arquitectura}
+        \subsubsection{Componentes software} \label{subsubsec:componentes}
+            Dado que el sistema está diseñado mediante una arquitectura de componentes orientada a servicios, el diseño de la arquitectura se limita a la propia descripción de los componentes que lo integran.
+            \\ \\
+            Posteriormente, en el \hyperref[subsec:detallado]{diseño detallado del sistema}, se incluirán los diagramas \texttt{UML} individuales de cada componente, acompañados por un diagrama de flujo con la representación de la ejecución del sistema.
+            
+            \begin{center}
+                \begin{tabular}{|| M{3cm} | M{12cm} ||} 
+                    \hline
+                        Nombre del componente & Descripción del componente \\
+                    \hline\hline
+                        \textit{\large Provider} & Componente encargado de la provisión de los datos. Admite tres modos de operación: proveer el documento más reciente disponible, proveer un documento específico (ya sea local o en forma de URL), o proveer un flujo continuo de documentos desde el más reciente hasta no encontrar un fichero enlazado más o abortar la aplicación \\ 
+                    \hline
+                        \textit{\large Parser} & Componente encargado del parseo de los datos de los documentos de la Plataforma de Contratación Pública. Provee servicios para extraer los espacios de nombres, los elementos dadas sus rutas, etcétera  \\
+                    \hline
+                        \textit{\large Mapper} & Componente encargado del mapeado de los datos al estándar \texttt{OCDS}. A través de los elementos \texttt{XML} provistos por el \textit{Parser} y las reglas especificadas en \textit{Mappings}, construye el fichero \texttt{JSON} correspondiente al mapeado de cada entrada \texttt{XML} \\
+                    \hline
+                        \textit{\large Packager} & Componente encargado del empaquetado de los datos ya mapeados. Publica los paquetes de datos de manera local o remota \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \captionof{table}{Tabla de descripción de componentes}
+            
+            \vspace{0.3cm}
+            
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.5\textwidth]{componentes.pdf}
+                \captionof{figure}{Diagrama de los componentes del sistema}
+                \label{fig:componentes}
+            \end{figure}
+            
+            En el diagrama de interrelación de componentes (véase \hyperref[fig:componentes]{figura 3}) se pueden apreciar dos tipos de flujo distintos.
+            \\ \\
+            El principal, el flujo de recursos, representa el funcionamiento básico del sistema: el componente de provisión de datos (\textit{Provider}) suministra los documentos con los datos de contrataciones públicas bajo el esquema \texttt{CODICE} al componente de extracción de datos (\textit{Parser}). Una vez los datos del documento han sido extraídos, por cada entrada del documento de contrataciones se genera una nueva instancia del componente de mapeado (\textit{Mapper}), que implementa las reglas de mapeado descritas en el componente estático \textit{Mappings}. Cuando el documento ha sido totalmente procesado, el componente de empaquetado de datos (\textit{Packager}) finaliza el pipeline del sistema, publicando los datos de manera local o remota.
+            \\ \\
+            El flujo secundario representa el uso de métodos entre los distintos componentes, ya sea de manera estática o mediante llamadas a instancias de los componentes.
+            
+        \subsubsection{Especificación de requisitos}
+            Este apartado recoge todos los requisitos, funcionales y de calidad del sistema, que han sido diseñados para la arquitectura del sistema.
 
+            \begin{longtable}{|| M{3cm} | M{12cm} ||} 
+                \hline
+                    Código del requisito & Descripción del requisito \\
+                \hline\hline
+                    \texttt{\textit{RF-1}} & El sistema debe ser capaz de descargar documentos de la Plataforma de Contratación Pública \\ 
+                \hline
+                    \texttt{\textit{RF-2}} & El sistema debe ser capaz de recuperar el documento de licitaciones más reciente \\
+                \hline
+                    \texttt{\textit{RF-3}} & El sistema debe ser capaz de descargar un documento provisto con una ruta, sea de manera local o remota \\
+                \hline
+                    \texttt{\textit{RF-4}} & El sistema debe ser capaz de detectar que una ruta a un documento provisto, local o remota, sea incorrecta \\
+                \hline
+                    \texttt{\textit{RF-5}} & El sistema debe ser capaz de otorgar los documentos provistos de manera asíncrona y bloqueante \\
+                \hline
+                    \texttt{\textit{RF-6}} & El sistema debe ser capaz de eliminar aquellos documentos que ya hayan sido procesados \\
+                \hline
+                    \texttt{\textit{RF-7}} & El sistema debe ser capaz de descargar los documentos de códigos usados en la aplicación \\
+                \hline
+                    \texttt{\textit{RF-8}} & El sistema debe ser capaz de recuperar los espacios de nombres del XML del documento de licitationes \\
+                \hline
+                    \texttt{\textit{RF-9}} & El sistema debe ser capaz de recopilar el conjunto de entradas que aparecen en cada documento de licitaciones \\
+                \hline
+                    \texttt{\textit{RF-10}} & El sistema debe ser capaz de establecer el elemento raíz de cada documento de licitaciones \\
+                \hline
+                    \texttt{\textit{RF-11}} & El sistema debe ser capaz de detectar que a un documento de licitaciones le falta el elemento raíz \\
+                \hline
+                    \texttt{\textit{RF-12}} & El sistema debe ser capaz de encontrar un elemento específico en el documento de licitaciones dada su ruta \\
+                \hline
+                    \texttt{\textit{RF-13}} & El sistema debe ser capaz de encontrar un conjunto de elementos específicos en el documento de licitaciones dada su ruta \\
+                \hline
+                    Código del requisito & Descripción del requisito \\
+                \hline
+                \hline
+                    \texttt{\textit{RF-14}} & El sistema debe ser capaz de devolver el documento de licitaciones enlazado al que está siendo procesado actualmente \\
+                \hline
+                    \texttt{\textit{RF-15}} & El sistema debe ser capaz de encontrar un elemento específico a partir de otro en el documento de licitaciones \\
+                \hline
+                    \texttt{\textit{RF-16}} & El sistema debe ser capaz de devolver el valor de un código descrito en un documento de códigos \\
+                \hline
+                    \texttt{\textit{RF-17}} & El sistema debe ser capaz de construir un documento en formato JSON con el documento de licitaciones procesado \\
+                \hline
+                    \texttt{\textit{RF-18}} & El sistema debe ser capaz de detectar una regla de mapeado vacía \\
+                \hline
+                    \texttt{\textit{RF-19}} & El sistema debe ser capaz de detectar una regla de mapeado de longitud inválida \\
+                \hline
+                    \texttt{\textit{RF-20}} & El sistema debe ser capaz de detectar una regla de mapeado sin definir \\
+                \hline
+                    \texttt{\textit{RF-21}} & El sistema debe ser capaz de construir las colecciones de objetos JSON en el documento siendo mapeado \\
+                \hline
+                    \texttt{\textit{RF-22}} & El sistema debe ser capaz de mapear el elemento \texttt{ContractFolderStatusCode} en el elemento \texttt{tag} \\
+                \hline
+                    \texttt{\textit{RF-23}} & El sistema debe ser capaz de mapear el eleemnto \texttt{ContractFolderID} en el elemento \texttt{OCID} \\
+                \hline
+                    \texttt{\textit{RF-24}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/Name} en el elemento \texttt{tender.title} \\
+                \hline
+                    \texttt{\textit{RF-25}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/BudgetAmount/
+                    EstimatedOverallContractAmount} en el elemento \texttt{tender.value} \\
+                \hline
+                    \texttt{\textit{RF-26}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/BudgetAmount/TotalAmount} en el elemento \texttt{budget.amount} \\
+                \hline
+                    \texttt{\textit{RF-27}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/PlannedPeriod/StartDate} en el elemento \texttt{tender.period.startDate} \\
+                \hline
+                    \texttt{\textit{RF-28}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/PlannedPeriod/EndDate} en el elemento \texttt{tender.period.endDate} \\
+                \hline
+                    \texttt{\textit{RF-29}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/PlannedPeriod/DurationMeasure} en el elemento \texttt{tender.period.durationInDays} \\
+                \hline
+                    \texttt{\textit{RF-30}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProject/TypeCode} en el elemento \texttt{tender.mainProcurementCategory} \\
+                \hline
+\newpage
+                \hline
+                    Código del requisito & Descripción del requisito \\
+                \hline
+                \hline
+                    \texttt{\textit{RF-31}} & El sistema debe ser capaz de mapear los elementos \texttt{\{Additional, Legal, Technical\}DocumentReference} en el elemento \texttt{tender.documents[i]} \\
+                \hline
+                    \texttt{\textit{RF-32}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProjectLot/ID} en los elementos \texttt{tender.lots.id, tender.items\{id, relatedLot\}} \\
+                \hline
+                    \texttt{\textit{RF-33}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProjectLot/ProcurementProject/BudgetAmount/
+                    TotalAmount} en el elemento \texttt{tender.lots.value} \\
+                \hline
+                    \texttt{\textit{RF-34}} & El sistema debe ser capaz de mapear el elemento \texttt{ProcurementProjectLot/ProcurementProject/
+                    RequiredCommodityClassification/ItemClassificationCode} en el elemento \texttt{tender.items.classification} \\
+                \hline
+                    \texttt{\textit{RF-35}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderingProcess/ProcedureCode} en el elemento \texttt{tender.procurementMethod} \\
+                \hline
+                    \texttt{\textit{RF-36}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderingProcess/ContractingSystemCode} en el elemento \texttt{tender.procurementMethodDetails\_es} \\
+                \hline
+                    \texttt{\textit{RF-37}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderingProcess/SubmissionMethodCode} en el elemento \texttt{tender.submissionMethod} \\
+                \hline
+                    \texttt{\textit{RF-38}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderingTerms/Language/ID} en el elemento \texttt{tender.submissionMethodDetails} \\
+                \hline
+                    \texttt{\textit{RF-39}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderingProcess/AuctionTerms/AuctionConstraintIndicator} en el elemento \texttt{tender.submissionMethod} \\
+                \hline
+                    \texttt{\textit{RF-40}} & El sistema debe ser capaz de mapear el elemento \texttt{LocatedContractingParty/Party/PartyName/Name} en el elemento \texttt{parties[i].name} \\
+                \hline
+                    \texttt{\textit{RF-41}} & El sistema debe ser capaz de mapear el elemento \texttt{LocatedContractingParty/Party/PartyIdentification/ID} en los elementos \texttt{parties[i].\{additionalIdentifiers, id, identifier.\{id, schema\}, roles\}} \\
+                \hline
+                    \texttt{\textit{RF-42}} & El sistema debe ser capaz de mapear el elemento \texttt{LocatedContractingParty/Party/PostalAddress/Contact} en el elemento \texttt{parties[i].\{address, countryName, contactPoint\}} \\
+                \hline
+                    \texttt{\textit{RF-43}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/AwardedTenderedProject/ProcurementProjectID} en el elemento \texttt{awards[i].id} \\
+                \hline
+                    Código del requisito & Descripción del requisito \\
+                \hline
+                \hline
+                    \texttt{\textit{RF-44}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/ResultCode} en el elemento \texttt{awards[i].status} \\
+                \hline
+                    \texttt{\textit{RF-45}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/WinningParty} en los elementos \texttt{\{awards[i].suppliers, parties[j]\}} \\
+                \hline
+                    \texttt{\textit{RF-46}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/AwardedTenderedProject/LegalMonetaryTotal/
+                    PayableAmount} en el elemento \texttt{awards[i].value} \\
+                \hline
+                    \texttt{\textit{RF-47}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/ReceivedTenderQuantity} en el elemento \texttt{tender.numberOfTenderers} \\
+                \hline
+                    \texttt{\textit{RF-48}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/AwardDate} en el elemento \texttt{awards[i].date} \\
+                \hline
+                    \texttt{\textit{RF-49}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/Description} en el elemento \texttt{awards[i].description\_es} \\
+                \hline
+                    \texttt{\textit{RF-50}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/Contract/ID} en el elemento \texttt{contracts[i].id} \\
+                \hline
+                    \texttt{\textit{RF-51}} & El sistema debe ser capaz de mapear el elemento \texttt{TenderResult/StartDate} en el elemento \texttt{contracts[i].period.startDate} \\
+                \hline
+                    \texttt{\textit{RF-52}} & El sistema debe ser capaz de detectar las ocurrencias de los identificadores para prevenir los duplicados \\
+                \hline
+                    \texttt{\textit{RF-53}} & El sistema debe ser capaz de crear un paquete de entrega siguiendo el formato \texttt{OCDS} \\
+                \hline
+                    \texttt{\textit{RF-54}} & El sistema debe ser capaz de publicar un paquete de entrega de manera local \\
+                \hline
+                    \texttt{\textit{RF-55}} & El sistema debe ser capaz de publicar un paquete de entrega de manera remota \\
+                \hline
+            \end{longtable}
+            \addtocounter{table}{-1}
+            \captionof{table}{Tabla de requisitos funcionales}
+            
+            \begin{center}
+                \begin{tabular}{|| c | c ||} 
+                    \hline
+                    Código del requisito & Descripción del requisito \\
+                    \hline\hline
+                    \texttt{\textit{RNF-1}} & TODO \\ 
+                    \hline
+                \end{tabular}
+            \end{center}
+            \captionof{table}{Tabla de requisitos no funcionales}
+            
+    \vspace{3cm}
+    
+    \subsection{Diseño detallado del sistema} \label{subsec:detallado}
+        \subsubsection{Casos de uso del componente de provisión de datos}
+    
+            \begin{figure}[h]
+                \centering
+                \includegraphics[]{provider.pdf}
+                \captionof{figure}{Diagrama \texttt{UML} del componente \textit{Provider}}
+                \label{fig:provider}
+            \end{figure}
+            
+            \paragraph{Caso de uso I: modo de carga local} \mbox{}\\
+                El componente de provisión de datos debe ser capaz de cargar en memoria para su posterior procesado un fichero localizado en el sistema de ficheros local de la máquina ejecutando el proceso. También debe notificar si la ruta al fichero local especificado no es correcta o si en ella no existe dicho fichero.
+                
+            \paragraph{Caso de uso II: modo de descarga remota} \mbox{}\\
+                El componente de provisión de datos debe ser capaz de descargar para su posterior procesado un documento de licitaciones desde la Plataforma de Contratación Pública. También debe notificar si la URL no es correcta.
+            
+            \paragraph{Caso de uso III: provisión simple} \mbox{}\\
+                El componente de provisión de datos debe ser, si así se especifica, capaz de proveer un único documento de licitaciones, el cual podrá ser cargado o descargado de manera local o remota, respectivamente. En el caso de una provisión simple de manera remota, el componente tratará de descargar aquel documento más reciente, cuya URL \cite{LICIDIA} queda descrita en el portal de datos abiertos del Ministerio de Hacienda \cite{PORTALHAC}.
+                
+            \paragraph{Caso de uso IV: provisión continua} \mbox{}\\
+                El componente de provisión de datos debe ser capaz, si así se especifica, y sólo en el modo de carga remota, de encontrar en el documento de licitaciones siendo descargado el enlace al siguiente documento, con el fin de proveer un flujo continuo de recursos para el procesado en el sistema. El primer documento del flujo será el más reciente, descrito en el apartado anterior.
+                
+        \subsubsection{Casos de uso del componente de parseo de datos}
+    
+            \begin{figure}[h]
+                \centering
+                \includegraphics[]{parser.pdf}
+                \captionof{figure}{Diagrama \texttt{UML} del componente \textit{Parser}}
+                \label{fig:parser}
+            \end{figure}
+            
+            \paragraph{Caso de uso I: extracción de elementos} \mbox{}\\
+                El componente de parseo de datos debe ser capaz de extraer todos los elementos requeridos dado un documento de licitaciones. Los elementos de interés para ser extraídos son, entre otros, el \textit{timestamp} de la publicación, el conjunto de entradas, el conjunto de espacios de nombres, o la ruta al documento enlazado.
+                
+            \paragraph{Caso de uso II: extracción específica de elementos} \mbox{}\\
+                El componente de parseo de datos debe ser capaz de, dada una ruta que iterar o un punto del que partir, bajar por los niveles del documento y extraer un elemento específico, con el objetivo de realizar posteriores mapeados lo más independientes posible.
+            
+            \paragraph{Caso de uso III: obtención de códigos} \mbox{}\\
+                El componente de parseo de datos debe ser capaz de descargar en memoria aquellos documentos de códigos usados por el sistema y poder extraer de ellos los valores necesitados en cada momento.
+                
+        \subsubsection{Casos de uso del componente de mapeado de datos}
+    
+            \begin{figure}[h]
+                \centering
+                \includegraphics[]{mapper.pdf}
+                \captionof{figure}{Diagrama \texttt{UML} del componente \textit{Mapper}}
+                \label{fig:mapper}
+            \end{figure}
+            
+            \paragraph{Caso de uso I: mapeado unitario de elementos} \mbox{}\\
+                El componente de mapeado de datos debe ser capaz de realizar mapeados unitarios de elementos extraídos de los documentos de licitaciones (esquema \texttt{CODICE}) al esquema \texttt{OCDS}. Para ello, al componente se le indicará tanto el elemento a procesar como la ruta en la que debe almacenar el resultado.
+                
+            \paragraph{Caso de uso II: mapeado múltiple de elementos} \mbox{}\\
+                El componente de mapeado de datos debe ser capaz de realizar mapeados múltiples de elementos siempre y cuando no pueda realizar mapeados unitarios de dichos elementos. Para ello, al componente se le proveera un conjunto de elementos emparentados de la forma más próxima posible. Cuando finalice la ejecución del mapeado, el componente deberá persistir las estructuras de datos en el objeto final para su posterior empaquetado.
+                
+        \subsubsection{Casos de uso del componente de empaquetado de datos}
+    
+            \begin{figure}[h]
+                \centering
+                \includegraphics[]{packager.pdf}
+                \captionof{figure}{Diagrama \texttt{UML} del componente \textit{Packager}}
+                \label{fig:packager}
+            \end{figure}
+            
+            \paragraph{Caso de uso I: empaquetado de manera local} \mbox{}\\
+                TODO
+                
+            \paragraph{Caso de uso II: empaquetado de manera remota} \mbox{}\\
+                TODO
+        
+    \subsection{Trazabilidad de requisitos}
+        \begin{longtable}{|| M{3cm} | M{12cm} ||} 
+                \hline
+                    Código del requisito & Ruta del elemento de prueba \\
+                \hline\hline
+                    \texttt{\textit{RF-1}} & \texttt{UnitTests.ProviderTests.\textit{TestConstructor\{1:4\}}} \\ 
+                \hline
+                    \texttt{\textit{RF-2}} & \texttt{UnitTests.ProviderTests.\textit{TestConstructor1}} \\
+                \hline
+                    \texttt{\textit{RF-3}} & \texttt{UnitTests.ProviderTests.\textit{TestConstructor\{2:3\}}} \\
+                \hline
+                    \texttt{\textit{RF-4}} & \texttt{UnitTests.ProviderTests.\textit{TestConstructor4}} \\
+                \hline
+                    \texttt{\textit{RF-5}} & \texttt{UnitTests.ProviderTests.\textit{TestTakeFile\{1:2\}}} \\
+                \hline
+                    \texttt{\textit{RF-6}} & \texttt{UnitTests.ProviderTests.\textit{TestRemoveFile\{1:2\}}} \\
+                \hline
+                    \texttt{\textit{RF-7}} & \texttt{TODO} \\
+                \hline
+                    \texttt{\textit{RF-8}} & \texttt{UnitTests.ParserTests.\textit{TestGetNamespaces}} \\
+                \hline
+                    \texttt{\textit{RF-9}} & \texttt{IntegrationTests.ParserTests.\textit{TestGetEntrySet}} \\
+                \hline
+                    \texttt{\textit{RF-10}} & \texttt{IntegrationTests.ParserTests.\textit{TestSetEntryRootElement1}} \\
+                \hline
+                    \texttt{\textit{RF-11}} & \texttt{IntegrationTests.ParserTests.\textit{TestSetEntryRootElement2}} \\
+                \hline
+                    \texttt{\textit{RF-12}} & \texttt{IntegrationTests.ParserTests.\textit{TestGetElements1}} \\
+                \hline
+                    \texttt{\textit{RF-13}} & \texttt{IntegrationTests.ParserTests.\textit{TestGetElements2}} \\
+                \hline
+                    \texttt{\textit{RF-14}} & \texttt{IntegrationTests.ParserTests.\textit{TestGetElements\{1:2\}}} \\
+                \hline
+                    \texttt{\textit{RF-15}} & \texttt{TODO} \\
+                \hline
+                    \texttt{\textit{RF-16}} & \texttt{TODO} \\
+                \hline
+                    \texttt{\textit{RF-17}} & \texttt{UnitTests.MapperTests.\textit{TestConstructor}} \\
+                \hline
+                    \texttt{\textit{RF-18}} & \texttt{UnitTests.MapperTests.\textit{TestMapElement1}} \\
+                \hline
+                    \texttt{\textit{RF-19}} & \texttt{UnitTests.MapperTests.\textit{TestMapElement2}} \\
+                \hline
+                    \texttt{\textit{RF-20}} & \texttt{UnitTests.MapperTests.\textit{TestMapElement3}} \\
+                \hline
+                    \texttt{\textit{RF-21}} & \texttt{TODO} \\
+                \hline
+                    \texttt{\textit{RF-22}} & \texttt{UnitTests.MapperTests.\textit{TagTests}} \\
+                \hline
+                    \texttt{\textit{RF-23}} & \texttt{UnitTests.MapperTests.\textit{OCIDTests}} \\
+                \hline
+                    \texttt{\textit{RF-24}} & \texttt{UnitTests.MapperTests.\textit{TenderTitleTests}} \\
+                \hline
+                    \texttt{\textit{RF-25}} & \texttt{UnitTests.MapperTests.\textit{TenderValueTests}} \\
+                \hline
+                    \texttt{\textit{RF-26}} & \texttt{UnitTests.MapperTests.\textit{BudgetAmountTests}} \\
+                \hline
+                    \texttt{\textit{RF-27}} & \texttt{UnitTests.MapperTests.\textit{TenderPeriodStartDateTests}} \\
+                \hline
+                    \texttt{\textit{RF-28}} & \texttt{UnitTests.MapperTests.\textit{TenderPeriodEndDateTests}} \\
+                \hline
+                    \texttt{\textit{RF-29}} & \texttt{UnitTests.MapperTests.\textit{TenderPeriodDurationInDaysTests}} \\
+                \hline
+                    \texttt{\textit{RF-30}} & \texttt{UnitTests.MapperTests.\textit{TenderMainProcurementCategoryTests}} \\
+                \hline
+                    \texttt{\textit{RF-31}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-32}} & \texttt{UnitTests.MapperTests.\textit{TenderLotsIdTests}} \\
+                \hline
+                    \texttt{\textit{RF-33}} & \texttt{UnitTests.MapperTests.\textit{TenderLotsValueTests}} \\
+                \hline
+                    \texttt{\textit{RF-34}} & \texttt{UnitTests.MapperTests.\textit{TenderItemsClassificationTests}} \\
+                \hline
+                    \texttt{\textit{RF-35}} & \texttt{UnitTests.MapperTests.\textit{TenderProcurementMethodTests}} \\
+                \hline
+                    \texttt{\textit{RF-36}} & \texttt{UnitTests.MapperTests.\textit{TenderProcurementMethodDetailsTests}} \\
+                \hline
+                    \texttt{\textit{RF-37}} & \texttt{UnitTests.MapperTests.\textit{TenderSubmissionMethodTests}} \\
+                \hline
+                    \texttt{\textit{RF-38}} & \texttt{UnitTests.MapperTests.\textit{TenderSubmissionMethodDetailsTests}} \\
+                \hline
+                    \texttt{\textit{RF-39}} & \texttt{UnitTests.MapperTests.\textit{TenderSubmissionMethodTests}} \\
+                \hline
+                    \texttt{\textit{RF-40}} & \texttt{UnitTests.MapperTests.\textit{PartiesNameTests}} \\
+                \hline
+                    \texttt{\textit{RF-41}} & \texttt{UnitTests.MapperTests.\textit{PartiesIdentifierTests}} \\
+                \hline
+                    \texttt{\textit{RF-42}} & \texttt{UnitTests.MapperTests.\textit{PartiesFieldsTests}} \\
+                \hline
+                    \texttt{\textit{RF-43}} & \texttt{UnitTests.MapperTests.\textit{AwardIdTests}} \\
+                \hline
+                    \texttt{\textit{RF-44}} & \texttt{UnitTests.MapperTests.\textit{AwardStatusTests}} \\
+                \hline
+                    \texttt{\textit{RF-45}} & \texttt{UnitTests.MapperTests.\textit{AwardSupplierTests}} \\
+                \hline
+                    \texttt{\textit{RF-46}} & \texttt{UnitTests.MapperTests.\textit{AwardValueTests}} \\
+                \hline
+                    \texttt{\textit{RF-47}} & \texttt{UnitTests.MapperTests.\textit{TenderNumberOfTenderersTests}} \\
+                \hline
+                    \texttt{\textit{RF-48}} & \texttt{UnitTests.MapperTests.\textit{AwardDateTests}} \\
+                \hline
+                    \texttt{\textit{RF-49}} & \texttt{UnitTests.MapperTests.\textit{AwardDescriptionTests}} \\
+                \hline
+                    \texttt{\textit{RF-50}} & \texttt{UnitTests.MapperTests.\textit{ContractIdTests}} \\
+                \hline
+                    \texttt{\textit{RF-51}} & \texttt{UnitTests.MapperTests.\textit{ContractPeriodStartDateTests}} \\
+                \hline
+                    \texttt{\textit{RF-52}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-53}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-54}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-55}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-56}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+                    \texttt{\textit{RF-57}} & \texttt{UnitTests.MapperTests.\textit{TODO}} \\
+                \hline
+        \end{longtable}
+        \addtocounter{table}{-1}
+        \captionof{table}{Tabla de trazabilidad de requisitos}
+        
+    \vspace{1cm}
+        
+    \subsection{Cobertura de código}
+        Con el objetivo de proveer un software de calidad, el sistema desarrollado ha sido analizado mediante la plataforma SonarQube \cite{SONARQUBE}, capaz de realizar una evaluación del código fuente de manera estática para obtener métricas que sirvan para mejorar la calidad y la seguridad del sistema siendo desarrollado.
+        \\ \\
+        
+    
 \newpage

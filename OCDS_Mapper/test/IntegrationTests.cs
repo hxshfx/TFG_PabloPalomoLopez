@@ -119,24 +119,6 @@ namespace OCDS_Mapper.test
 
                 IEnumerable<XName> validPath = new LinkedList<XName>(new XName[]
                     {
-                        namespaces["cac"] + "Invalid"
-                    }
-                );
-
-                XElement entry = GetEntryElement(_parser, true);
-                _parser.SetEntryRootElement(entry);
-
-                XElement[] queriedElements = _parser.GetElements(validPath);
-                Assert.Null(queriedElements);
-            }
-
-            [Fact]
-            public void TestParserGetElements3()
-            {
-                IDictionary<string, XNamespace> namespaces = _parser.GetNamespaces();
-
-                IEnumerable<XName> validPath = new LinkedList<XName>(new XName[]
-                    {
                         namespaces["cac"] + "AdditionalDocumentReference"
                     }
                 );
@@ -155,6 +137,24 @@ namespace OCDS_Mapper.test
                     Assert.Equal(queriedElement.Name.Namespace, namespaces["cac"]);
                     Assert.True("AdditionalDocumentReference".Equals(queriedElement.Name.LocalName));
                 }
+            }
+
+            [Fact]
+            public void TestParserGetElements3()
+            {
+                IDictionary<string, XNamespace> namespaces = _parser.GetNamespaces();
+
+                IEnumerable<XName> validPath = new LinkedList<XName>(new XName[]
+                    {
+                        namespaces["cac"] + "Invalid"
+                    }
+                );
+
+                XElement entry = GetEntryElement(_parser, true);
+                _parser.SetEntryRootElement(entry);
+
+                XElement[] queriedElements = _parser.GetElements(validPath);
+                Assert.Null(queriedElements);
             }
 
             [Fact]
