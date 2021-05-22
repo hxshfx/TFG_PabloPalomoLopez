@@ -1,12 +1,14 @@
 namespace OCDS_Mapper.src.Utils
 {
-    /* Enumerado descriptor del estado del proceso */
+    /* Enumerado descriptor del estado de terminación proceso */
     public enum EStatusCodes : int
     {
         OK              = 0,
         DISPLAY_HELP    = 1,
-        WRONG_ARGUMENTS = 2,
-        PATH_UNPROVIDED = 3
+        INVALID_DIR     = 2,
+        WRONG_CODE      = 3,
+        PATH_UNPROVIDED = 4,
+        FAILED          = 5
     }
 
 
@@ -15,16 +17,8 @@ namespace OCDS_Mapper.src.Utils
     public enum EProviderOperationCode
     {
         PROVIDE_ALL,        // Provee todos los documentos accesibles
+        PROVIDE_DAILY,      // Provee los documentos publicados en el día
         PROVIDE_LATEST,     // Provee sólo el último documento disponible
         PROVIDE_SPECIFIC    // Provee un documento pasado como parámetro
-    }
-
-
-    /* Enumerado descriptor de los modos de operación de empaquetado */
-
-    public enum EPackagerOperationCode
-    {
-        PACKAGE_REMOTE, // Empaqueta los datos de manera remota
-        PACKAGE_LOCAL,  // Empaqueta los datos de manera local
     }
 }

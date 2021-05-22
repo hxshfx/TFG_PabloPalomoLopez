@@ -110,10 +110,11 @@ namespace OCDS_Mapper.src.Model
 
                     // Crea el cliente Web e inicia la descarga
                     _webClient = new WebClient();
+
                     _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
                     _webClient.DownloadFileAsync(uri, _OUTPUT_PATH);
 
-                    _Log(this, $"Downloading {filePath} file", Level.Info);
+                    _Log(this, $"Downloading {_fileName} file", Level.Info);
                 }
                 else
                 {
@@ -127,23 +128,25 @@ namespace OCDS_Mapper.src.Model
                 _webClient = new WebClient();
                 _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
 
-                if (code == EProviderOperationCode.PROVIDE_ALL)
+                if (code == EProviderOperationCode.PROVIDE_ALL || code == EProviderOperationCode.PROVIDE_DAILY)
                 {
                     // Inicializa el mecanismo de sincronización
                     _mre = new ManualResetEvent(false);
                 
                     // Lanza en background la tarea que irá proveyendo documentos
-                    Thread allProvider = new Thread(ProvideAllTask);
-                    allProvider.IsBackground = true;
-                    allProvider.Start();
+                    Thread downloader = new Thread(ProvideAllAndDailyTask);
+                    downloader.IsBackground = true;
+                    downloader.Start();
 
-                    _Log(this, "Provider background thread launched", Level.Info);
+                    _Log(this, "Provider background downloader thread launched", Level.Info);
                 }
                 else if (code == EProviderOperationCode.PROVIDE_LATEST)
                 {
                     // Descarga el último fichero, siempre descrito por esta ruta
                     _fileName = _LATEST_PATH;
                     _webClient.DownloadFileAsync(new Uri(_fileName), _OUTPUT_PATH);
+
+                    _Log(this, $"Downloading {_fileName} file", Level.Info);
                 }
                 else
                 {
@@ -174,17 +177,22 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función SetParser(IParser) => void
-         *      (utilizada solo en modo PROVIDE_ALL)
+        /*  función SetParser(IParser) => bool
+         *      (utilizada solo en modo PROVIDE_ALL y PROVIDE_DAILY)
          *      Actualiza la instancia del Parser utilizada por el Provider
          *      Desbloquea el thread en background que utiliza dicho componente
          *  @param parser : Instancia del Parser para cada documento
          */
-        public void SetParser(IParser parser)
+        public bool SetParser(IParser parser)
         {
             Parser = parser;
             _mre.Set();
             _Log(this, "Provider background thread unlocking", Level.Debug);
+
+            DateTime documentDate = DateTime.Parse(Parser.GetDocumentTimestamp(true));
+            DateTime mock = DateTime.Parse("2021-05-20");
+
+            return mock.Day == documentDate.Day;
         }
 
 
@@ -236,11 +244,11 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función ProvideAllTask() => void
-         *      Función para el thread del código de operacion PROVIDE_ALL
+        /*  función ProvideAllAndDailyTask() => void
+         *      Función para el thread del código de operacion PROVIDE_ALL y PROVIDE_DAILY
          *      Va proveyendo documentos enlazados utilizando el componente de Parseo
          */
-        private void ProvideAllTask()
+        private void ProvideAllAndDailyTask()
         {
             // Contador para los documentos provistos (forma ./tmp/document{1:N}.atom)
             int outputCount = 0;
@@ -261,8 +269,7 @@ namespace OCDS_Mapper.src.Model
                 _webClient.QueryString.Add("file", outputFileName);
                 _webClient.DownloadFileAsync(uri, outputFileName);
 
-                _Log(this, $"Started to download file {_fileName}", Level.Debug);
-                _Log(this, $"Expected downloaded output file: {outputFileName}", Level.Debug);
+                _Log(this, $"Downloading {_fileName} file", Level.Info);
 
                 // Se bloquea hasta recibir una nueva instancia de Parser (para obtener su link:next)
                 _mre.WaitOne();

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using log4net.Core;
 using Newtonsoft.Json.Linq;
@@ -69,7 +71,7 @@ namespace OCDS_Mapper.src.Model
         /*  atributo _packager => IPackager
          *      Instancia del Parser para obtener la información de identificadores
          */
-        private IPackager _packager;
+        private readonly IPackager _packager;
 
 
         /*  atributo _releaseId => string
@@ -217,15 +219,16 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función Commit() => void
+        /*  función Commit(string) => void
          *      Introduce los cambios al JSON que no se pueden introducir
          *      mediante los mapeos unitarios de elementos (metadatos, colecciones, etc.)
+         *  @param publishDate : fecha de publicación de la entrega
          */
-        public void Commit()
+        public void Commit(string publishDate)
         {
             // Inserta los metadatos de la entrada
-            MappedEntry.Add("date", GetDate()); // TODO ?
-            MappedEntry.Add("id", $"{_id}-{_releaseId}");
+            MappedEntry.Add("date", publishDate);
+            MappedEntry.Add("id", $"{_id}-{ParseId(_releaseId)}");
             MappedEntry.Add("initiationType", "tender");
             MappedEntry.Add("language", "es");
 
@@ -233,6 +236,16 @@ namespace OCDS_Mapper.src.Model
             if (_awards.Any())
             {
                 MappedEntry.Add("awards", _awards);
+            }
+
+            // Incluye el identificador del objeto de presupuesto de planificación, si lo hubiera
+            JObject planning = (JObject) MappedEntry["planning"];
+            if (planning != null)
+            {
+                JObject planningBudget = (JObject) planning["budget"];
+                if (planningBudget != null) {
+                    planningBudget.Add("id", $"{_PREFIX}-{_id}-plan");
+                }
             }
 
             // Incluye el identificador del objeto de licitación, si lo hubiera
@@ -540,8 +553,8 @@ namespace OCDS_Mapper.src.Model
                                 case Mappings.MappingElements.Tenders.Lots.Id:
                                     mappingFunction = MapTenderLotsId;
                                     break;
-                                case Mappings.MappingElements.Tenders.Lots.Name:
-                                    mappingFunction = MapTenderLotsName;
+                                case Mappings.MappingElements.Tenders.Lots.Title_:
+                                    mappingFunction = MapTenderLotsTitle;
                                     break;
                                 case Mappings.MappingElements.Tenders.Lots.Value_:
                                     mappingFunction = MapTenderLotsValue;
@@ -604,18 +617,19 @@ namespace OCDS_Mapper.src.Model
 
         /*  función SimulateElement(string, int) => JObject
          *      Simula la creación de un elemento para el testing que
-         *      en condiciones normales se habría creado ya
+         *      en condiciones normales se habría creado ya, o en condiciones
+         *      de ejecución estándar debido a datos insuficientes
          *  @param type : tipo del elemento a simular
          *  @param id : identificador del elemento a simular
          *  @return : elemento creado
          */
-        private JObject SimulateElement(string type, int id)
+        private JObject SimulateElement(string type, string id)
         {
             JObject jobj = new JObject();
 
             if (type.Equals("award"))
             {
-                jobj.Add("id", $"{id}");
+                jobj.Add("id", id);
                 _awards.Add(jobj);
             }
             else if (type.Equals("lot"))
@@ -625,7 +639,7 @@ namespace OCDS_Mapper.src.Model
             }
             else if (type.Equals("item"))
             {
-                jobj.Add("id", $"{id}");
+                jobj.Add("id", id);
                 _items.Add(jobj);
             }
             
@@ -659,24 +673,35 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función estática GetDate() => string
-         *      Devuelve la fecha actual en el formato OCDS
-         *  @return : fecha actual (formato YYYY-MM-DDTHH:MM:SSZ)
+        /*  función estática ParseId(string) => string
+         *      Devuelve un string reemplazando caracteres conflictivos, como "/", "º" o acentos,
+         *      entre otros, por "-", dado que son erróneamente procesados por RML
+         *  @param id : identificador a procesar
+         *  @return : identificador reemplazado
          */
-        private static string GetDate()
+        private static string ParseId(string id)
         {
-            DateTime now = DateTime.Now;
-            return $@"{now.Year}-{
-                    now.Month.ToString().PadLeft(2, '0')
-                }-{
-                    now.Day.ToString().PadLeft(2, '0')
-                }T{
-                    now.Hour.ToString().PadLeft(2, '0')
-                }:{
-                    now.Minute.ToString().PadLeft(2, '0')
-                }:{
-                    now.Second.ToString().PadLeft(2, '0')
-                }Z";
+            var normalizedString = id.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+            
+            stringBuilder = stringBuilder
+                .Replace("/", "-")
+                .Replace(" ", "-")
+                .Replace("(", "-")
+                .Replace(")", "-")
+                .Replace("º", "o")
+                .Replace("ª", "a");
+            
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
 
@@ -711,7 +736,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tag unrecognized", Level.Warn);
+                _Log(this, $"Mapping code {element.Value} at element tag unrecognized", Level.Debug);
                 return null;
             }
 
@@ -721,7 +746,7 @@ namespace OCDS_Mapper.src.Model
         // Mapeo del elemento OCID
         private JToken MapOCID(XElement[] toMap)
         {
-            _id = toMap[0].Value;
+            _id = ParseId(toMap[0].Value);
             _releaseId = _packager.GetIdentifier(_id);
 
             return new JValue($"{_PREFIX}-{_id}");
@@ -738,7 +763,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement("award", 1);
+                    award = SimulateElement("award", $"{_PREFIX}-{_id}-award-1");
                 }
 
                 award.Add("date", $"{toMap[0].Value}T00:00:00Z");
@@ -751,7 +776,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement("award", count++);
+                        award = SimulateElement("award", $"{_PREFIX}-{_id}-award-{count++}");
                     }
 
                     date = Parser.GetSpecificElement(awardElement, "AwardDate");
@@ -777,7 +802,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement("award", 1);
+                    award = SimulateElement("award", $"{_PREFIX}-{_id}-award-1");
                 }
 
                 award.Add("description_es", toMap[0].Value);
@@ -790,7 +815,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement("award", count++);
+                        award = SimulateElement("award", $"{_PREFIX}-{_id}-award-{count++}");
                     }
 
                     description = Parser.GetSpecificElement(awardElement, "Description");
@@ -831,7 +856,7 @@ namespace OCDS_Mapper.src.Model
 
                         if (procurementProjectLotID != null)
                         {
-                            award.Add("id", $"{_PREFIX}-{_id}-award-{procurementProjectLotID.Value}-{_awards.Count + 1}");
+                            award.Add("id", $"{_PREFIX}-{_id}-award-{ParseId(procurementProjectLotID.Value)}-{_awards.Count + 1}");
                             _awards.Add(award);
                         }
                     }
@@ -849,7 +874,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement("award", 1);
+                    award = SimulateElement("award", $"{_PREFIX}-{_id}-award-1");
                 }
 
                 if (toMap[0].Value.Equals("1") || toMap[0].Value.Equals("6"))
@@ -871,7 +896,7 @@ namespace OCDS_Mapper.src.Model
                 }
                 else
                 {
-                    _Log(this, $"Mapping code {toMap[0].Value} at element awards.status unrecognized", Level.Warn);
+                    _Log(this, $"Mapping code {toMap[0].Value} at element awards.status unrecognized", Level.Debug);
                     return null;
                 }
             }
@@ -883,7 +908,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement("award", count++);
+                        award = SimulateElement("award", $"{_PREFIX}-{_id}-award-{count++}");
                     }
 
                     awardedTenderedProject = Parser.GetSpecificElement(awardElement, "AwardedTenderedProject");
@@ -916,7 +941,7 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Mapping code {resultCode.Value} at element awards.status unrecognized", Level.Warn);
+                        _Log(this, $"Mapping code {resultCode.Value} at element awards.status unrecognized", Level.Debug);
                         return null;
                     }
                     award = (JObject) award.Next;
@@ -938,7 +963,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement("award", count++);
+                    award = SimulateElement("award", $"{_PREFIX}-{_id}-award-{count++}");
                 }
 
                 winningParty = Parser.GetSpecificElement(tenderElement, "WinningParty");
@@ -969,17 +994,17 @@ namespace OCDS_Mapper.src.Model
                             }
                             else
                             {
-                                _Log(this, $"Identifier {attribute.Value} not recognized", Level.Warn);
+                                _Log(this, $"Identifier {attribute.Value} not recognized", Level.Debug);
                             }
-                            identifier.Add("id", partyIdentification.Value);
+                            identifier.Add("id", ParseId(partyIdentification.Value));
                         }
 
                         party.Add("identifier", identifier);
-                        party.Add("id", $"{partyIdentification.Value}-{_supplierParties.Count}");
+                        party.Add("id", $"{ParseId(partyIdentification.Value)}");
                         party.Add("name", partyName.Value);
                         party.Add("roles", new JArray("supplier"));
 
-                        supplier.Add("id", $"{partyIdentification.Value}-{_supplierParties.Count}");
+                        supplier.Add("id", $"{ParseId(partyIdentification.Value)}");
                         supplier.Add("name", partyName.Value);
 
                         if (!IsContained(_supplierParties, party))
@@ -1008,7 +1033,7 @@ namespace OCDS_Mapper.src.Model
             {
                 if (award == null)
                 {
-                    award = SimulateElement("award", 1);
+                    award = SimulateElement("award", $"{_PREFIX}-{_id}-award-1");
                 }
                 
                 payableAmount = Parser.GetSpecificElement(toMap[0], "PayableAmount");
@@ -1016,7 +1041,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
                     {
-                        _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Warn);
+                        _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Debug);
                         return null;
                     }
                     value.Add("amount", Convert.ToDouble(payableAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
@@ -1033,7 +1058,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (award == null)
                     {
-                        award = SimulateElement("award", count++);
+                        award = SimulateElement("award", $"{_PREFIX}-{_id}-award-{count++}");
                     }
 
                     value = new JObject();
@@ -1048,7 +1073,7 @@ namespace OCDS_Mapper.src.Model
                         {
                             if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
                             {
-                                _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Warn);
+                                _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Debug);
                                 return null;
                             }
 
@@ -1073,7 +1098,7 @@ namespace OCDS_Mapper.src.Model
             if (toMap.Length == 1)
             {
                 contract = new JObject();
-                contract.Add("id", $"{_PREFIX}-{_id}-contract-{toMap[0].Value}");
+                contract.Add("id", $"{_PREFIX}-{_id}-contract-{ParseId(toMap[0].Value)}");
                 contract.Add("awardID", $"{_PREFIX}-{_id}-award-1");
                 _contracts.Add(contract);
             }
@@ -1096,7 +1121,7 @@ namespace OCDS_Mapper.src.Model
 
                             if (awardIDs.Length > 1)
                             {
-                                contract.Add("id", $"{_PREFIX}-{_id}-contract-{idElement.Value}-{_contracts.Count + 1}");
+                                contract.Add("id", $"{_PREFIX}-{_id}-contract-{ParseId(idElement.Value)}-{_contracts.Count + 1}");
                                 contract.Add("awardID", $"{_PREFIX}-{_id}-award-{awardIDs[awardIDs.Length - 2]}-{awardIDs[awardIDs.Length - 1]}");
                                 _contracts.Add(contract);
                             }
@@ -1242,13 +1267,13 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {attribute.Value} not recognized", Level.Warn);
+                        _Log(this, $"Identifier {attribute.Value} not recognized", Level.Debug);
                     }
-                    identifier.Add("id", toMap[0].Value);
+                    identifier.Add("id", ParseId(toMap[0].Value));
                 }
                 else
                 {
-                    _Log(this, $"Identifier without scheme", Level.Warn);
+                    _Log(this, $"Identifier without scheme", Level.Debug);
                 }
             }
             else
@@ -1268,13 +1293,13 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {id1.Value} not recognized", Level.Warn);
+                        _Log(this, $"Identifier {id1.Value} not recognized", Level.Debug);
                     }
-                    identifier.Add("id", toMap[0].Value);
+                    identifier.Add("id", ParseId(toMap[0].Value));
                 }
                 else
                 {
-                    _Log(this, $"Identifier without scheme", Level.Warn);
+                    _Log(this, $"Identifier without scheme", Level.Debug);
                 }
                 if (id2 != null)
                 {
@@ -1289,9 +1314,9 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {id2.Value} not recognized", Level.Warn);
+                        _Log(this, $"Identifier {id2.Value} not recognized", Level.Debug);
                     }
-                    additionalIdentifier.Add("id", toMap[1].Value);
+                    additionalIdentifier.Add("id", ParseId(toMap[1].Value));
                     _contractingParty.Add("additionalIdentifiers", new JArray(additionalIdentifier));
                 }
             }
@@ -1309,7 +1334,7 @@ namespace OCDS_Mapper.src.Model
             XElement element = toMap[0];
             if (element.FirstAttribute == null || element.FirstAttribute.Value != "EUR")
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element planning.budget.amount unrecognized", Level.Warn);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element planning.budget.amount unrecognized", Level.Debug);
                 return null;
             }
             return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));
@@ -1327,8 +1352,8 @@ namespace OCDS_Mapper.src.Model
             {
                 if (item == null)
                 {
-                    item = SimulateElement("item", 1);
-                    SimulateElement("lot", 1);
+                    item = SimulateElement("item", "1");
+                    SimulateElement("lot", "1");
                 }
 
                 classification = new JObject();
@@ -1339,7 +1364,7 @@ namespace OCDS_Mapper.src.Model
                 code = Parser.GetCodeValue("CPV", toMap[0].Value);
                 if (code == null)
                 {
-                    _Log(this, $"CPV element {toMap[0].Value} unrecognized", Level.Warn);
+                    _Log(this, $"CPV element {toMap[0].Value} unrecognized", Level.Debug);
                 }
                 classification.Add("description_es", code);
 
@@ -1353,8 +1378,8 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (item == null)
                     {
-                        item = SimulateElement("item", count);
-                        SimulateElement("lot", count++);
+                        item = SimulateElement("item", $"{count}");
+                        SimulateElement("lot", $"{count++}");
                     }
 
                     classification = new JObject();
@@ -1374,7 +1399,7 @@ namespace OCDS_Mapper.src.Model
                                 code = Parser.GetCodeValue("CPV", itemClassificationCode.Value);
                                 if (code == null)
                                 {
-                                    _Log(this, $"CPV element {itemClassificationCode.Value} unrecognized", Level.Warn);
+                                    _Log(this, $"CPV element {itemClassificationCode.Value} unrecognized", Level.Debug);
                                 }
                                 classification.Add("description_es", code);
 
@@ -1400,8 +1425,8 @@ namespace OCDS_Mapper.src.Model
                 item = new JObject();
                 lot = new JObject();
 
-                item.Add("id", toMap[0].Value);
-                item.Add("relatedLot", $"lot-{toMap[0].Value}");
+                item.Add("id", ParseId(toMap[0].Value));
+                item.Add("relatedLot", $"lot-{ParseId(toMap[0].Value)}");
                 _items.Add(item);
 
                 lot.Add("id", $"lot-{toMap[0].Value}");
@@ -1419,11 +1444,11 @@ namespace OCDS_Mapper.src.Model
                     
                     if (id != null)
                     {
-                        item.Add("id", id.Value);
-                        item.Add("relatedLot", $"lot-{id.Value}");
+                        item.Add("id", ParseId(id.Value));
+                        item.Add("relatedLot", $"lot-{ParseId(id.Value)}");
                         _items.Add(item);
 
-                        lot.Add("id", $"lot-{id.Value}");
+                        lot.Add("id", $"lot-{ParseId(id.Value)}");
                         _lots.Add(lot);
                     }
                 }
@@ -1431,8 +1456,8 @@ namespace OCDS_Mapper.src.Model
             return null;
         }
 
-        // Mapeo del elemento tender.lots.name
-        private JToken MapTenderLotsName(XElement[] toMap)
+        // Mapeo del elemento tender.lots.title
+        private JToken MapTenderLotsTitle(XElement[] toMap)
         {
             JObject lot;
 
@@ -1442,8 +1467,8 @@ namespace OCDS_Mapper.src.Model
             {
                 if (lot == null)
                 {
-                    lot = SimulateElement("lot", 1);
-                    SimulateElement("item", 1);
+                    lot = SimulateElement("lot", "1");
+                    SimulateElement("item", "1");
                 }
 
                 lot.Add("title", toMap[0].Value);
@@ -1456,8 +1481,8 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (lot == null)
                     {
-                        lot = SimulateElement("lot", count);
-                        SimulateElement("item", count++);
+                        lot = SimulateElement("lot", $"{count}");
+                        SimulateElement("item", $"{count++}");
                     }
 
                     procurementProject = Parser.GetSpecificElement(awardElement, "ProcurementProject");
@@ -1488,8 +1513,8 @@ namespace OCDS_Mapper.src.Model
             {
                 if (lot == null)
                 {
-                    lot = SimulateElement("lot", 1);
-                    SimulateElement("item", 1);
+                    lot = SimulateElement("lot", "1");
+                    SimulateElement("item", "1");
                 }
 
                 value = new JObject();
@@ -1507,8 +1532,8 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (lot == null)
                     {
-                        lot = SimulateElement("lot", count);
-                        SimulateElement("item", count++);
+                        lot = SimulateElement("lot", $"{count}");
+                        SimulateElement("item", $"{count++}");
                     }
                     value = new JObject();
 
@@ -1555,7 +1580,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tender.mainProcurementCategory unrecognized", Level.Warn);
+                _Log(this, $"Mapping code {element.Value} at element tender.mainProcurementCategory unrecognized", Level.Debug);
                 return null;
             }
 
@@ -1594,7 +1619,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tender.procurementMethod unrecognized", Level.Warn);
+                _Log(this, $"Mapping code {element.Value} at element tender.procurementMethod unrecognized", Level.Debug);
                     return null;
             }
 
@@ -1610,7 +1635,7 @@ namespace OCDS_Mapper.src.Model
                 string mapped = Parser.GetCodeValue("ContractingSTC", element.Value);
                 if (mapped == null)
                 {
-                    _Log(this, $"Mapping code {element.Value} at element tender.procurementMethodDetails unrecognized", Level.Warn);
+                    _Log(this, $"Mapping code {element.Value} at element tender.procurementMethodDetails unrecognized", Level.Debug);
                     return null;
                 }
                 return new JValue(mapped);
@@ -1654,7 +1679,7 @@ namespace OCDS_Mapper.src.Model
                 }
                 else
                 {
-                    _Log(this, $"Mapping code {element.Value} at element tender.submissionMethod unrecognized", Level.Warn);
+                    _Log(this, $"Mapping code {element.Value} at element tender.submissionMethod unrecognized", Level.Debug);
                     return null;
                 }
             }
@@ -1707,7 +1732,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.tenderPeriod.durationInDays unrecognized", Level.Warn);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.tenderPeriod.durationInDays unrecognized", Level.Debug);
                 return null;
             }
         }
@@ -1724,7 +1749,7 @@ namespace OCDS_Mapper.src.Model
             XElement element = toMap[0];
             if (element.FirstAttribute == null || element.FirstAttribute.Value != "EUR")
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.value unrecognized", Level.Warn);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.value unrecognized", Level.Debug);
                 return null;
             }
             return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));

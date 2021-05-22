@@ -27,6 +27,6 @@ namespace OCDS_Mapper.src.Interfaces
          *
          *
          */
-        void Publish(EPackagerOperationCode code, string filePath = null);
+        void Publish(string dirPath);
     }
 }

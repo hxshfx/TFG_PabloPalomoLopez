@@ -65,10 +65,11 @@ namespace OCDS_Mapper.src.Interfaces
          */
         Uri GetNextFile();
 
-        /*  función GetDocumentTimestamp() => string
-         *      Devuelve el timestamp del documento, que será utilizado por el Packager como identificador
-         *  @return : timestamp (o campo "updated") del documento de licitaciones
+        /*  función GetDocumentTimestamp(bool) => string
+         *      Devuelve el timestamp del documento o de una entrada específica
+         *  @param document : True si se quiere recuperar el timestamp del documento, False si se quiere el de la entrada
+         *  @return : timestamp (o campo "updated") del documento de licitaciones o de la entrada
          */
-        string GetDocumentTimestamp();
+        string GetDocumentTimestamp(bool document);
     }
 }

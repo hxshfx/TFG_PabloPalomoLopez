@@ -210,17 +210,30 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función GetDocumentTimestamp() => string
-         *      Devuelve el timestamp del documento, que será utilizado por el Packager como identificador
-         *  @return : timestamp (o campo "updated") del documento de licitaciones
+        /*  función GetDocumentTimestamp(bool) => string
+         *      Devuelve el timestamp del documento o de una entrada específica
+         *  @param document : True si se quiere recuperar el timestamp del documento, False si se quiere el de la entrada
+         *  @return : timestamp (o campo "updated") del documento de licitaciones o de la entrada
          */
-        public string GetDocumentTimestamp()
+        public string GetDocumentTimestamp(bool document)
         {
-            // Realiza una consulta Linq desde la raíz del documento para encontrar el elemento de actualización que será utilizado como ID
-            IEnumerable<XElement> query =
-                from node in DocumentRoot.Elements()
-                where node.Name.LocalName.Equals("updated")
-                select node;
+            IEnumerable<XElement> query;
+            if (document)
+            {
+                // Realiza una consulta Linq desde la raíz del documento
+                query =
+                    from node in DocumentRoot.Elements()
+                    where node.Name.LocalName.Equals("updated")
+                    select node;
+            }
+            else
+            {
+                // Realiza una consulta Linq desde la raíz de la entrada
+                query =
+                    from node in EntryRoot.Parent.Elements()
+                    where node.Name.LocalName.Equals("updated")
+                    select node;
+            }
             
             // Si no lo encuentra, devuelve null
             if (!query.Any())

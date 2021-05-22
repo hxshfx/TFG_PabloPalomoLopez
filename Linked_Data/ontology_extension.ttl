@@ -1,0 +1,54 @@
+@prefix : <http://data.tbfy.eu/ontology/ocds#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ocds: <http://data.tbfy.eu/ontology/ocds#> .
+@prefix ocdsext: <http://data.tbfy.eu/ontology/ocds_extension#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@base <http://data.tbfy.eu/ontology/ocds#> .
+
+<http://data.tbfy.eu/ontology/ocds_extension#> rdf:type owl:Ontology .
+
+
+##  *****************
+#   Object properties
+##  *****************
+
+### http://data.tbfy.eu/ontology/ocds_extension#relatedLot
+ocdsext:relatedLot rdf:type owl:ObjectProperty ;
+    rdfs:domain ocds:Item ;
+    rdfs:range ocdsext:Lot ;
+    rdfs:label "has lot associated" .
+
+### http://data.tbfy.eu/ontology/ocds_extension#hasLotValue
+ocdsext:hasLotValue rdf:type owl:ObjectProperty ;
+    rdfs:domain ocdsext:Lot ;
+    rdfs:range ocds:Value ;
+    rdfs:label "has value associated" .
+
+
+##  ***************
+#   Data properties
+##  ***************
+
+###  http://data.tbfy.eu/ontology/ocds_extension#lotId
+ocdsext:lotId rdf:type owl:DatatypeProperty ;
+    rdfs:domain ocdsext:Lot ;
+    rdfs:range xsd:string ;
+    rdfs:label "lot identifier" .
+
+
+##  *******
+#   Classes
+##  *******
+
+### http://data.tbfy.eu/ontology/ocds_extension#Lot
+ocdsext:Lot rdf:type owl:Class ;
+    ocds:usesDataProperty ocdsext:lotID ,
+                          dc:title ,
+                          ocdsext:hasLotValue ;
+    rdfs:label "Lot" .

@@ -105,7 +105,7 @@ namespace OCDS_Mapper.src.Model
                 public static class Lots
                 {
                     public const string Id = "id";
-                    public const string Name = "name";
+                    public const string Title_ = "title";
                     public const string Value_ = "value";
                 }
 
@@ -419,7 +419,7 @@ namespace OCDS_Mapper.src.Model
                     new LinkedList<string>(new string[]{
                         MappingElements.Tender,
                         MappingElements.Tenders.Lot,
-                        MappingElements.Tenders.Lots.Name
+                        MappingElements.Tenders.Lots.Title_
                     })
                 },
                 {

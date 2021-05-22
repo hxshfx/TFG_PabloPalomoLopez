@@ -44,13 +44,7 @@ namespace OCDS_Mapper
         /*  atributo estático _logger => ILog
          *      Objeto de logging de la aplicación
          */        
-        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-
-        /*  atributo estático _packagerCode => EPackagerOperationCode
-        *      Modo de operación del componente de empaquetado
-        */ 
-        private static EPackagerOperationCode _packagerCode;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Program));
 
 
         /*  atributo estático _providerCode => EProviderOperationCode
@@ -65,16 +59,16 @@ namespace OCDS_Mapper
         private static string _providerFilePath;
 
 
-        /*  atributo estático _packagerFilePath => string
-         *      Ruta donde se quiere escribir el documento mapeado de manera local
+        /*  atributo estático _packagerDirPath => string
+         *      Ruta donde se quieren escribir los documentos procseados
          */ 
-        private static string _packagerFilePath;
+        private static string _packagerDirPath;
 
 
 
         /* Punto de entrada asíncrono */
 
-        public static async Task Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             // Inicializa el logger
             InitLogger();
@@ -82,15 +76,14 @@ namespace OCDS_Mapper
             // Realiza la comprobación de argumentos
             if (!args.Any())
             {
-                Log(null, "Please input the operation codes:", Level.Warn);
                 DisplayHelp();
-                Environment.Exit((int) EStatusCodes.DISPLAY_HELP);
+                return (int) EStatusCodes.DISPLAY_HELP;
             }
 
             if (args[0].Equals("-h") || args[0].Equals("--help"))
             {
                 DisplayHelp();
-                Environment.Exit((int) EStatusCodes.DISPLAY_HELP);
+                return (int) EStatusCodes.DISPLAY_HELP;
             }
 
             EStatusCodes statusCode;
@@ -98,29 +91,32 @@ namespace OCDS_Mapper
 
             if ((statusCode = CheckProviderCode(argsEnumerator)) != EStatusCodes.OK)
             {
-                Environment.Exit((int) statusCode);
-            }
-
-            if ((statusCode = CheckPackagerCode(argsEnumerator)) != EStatusCodes.OK)
-            {
-                Environment.Exit((int) statusCode);
+                return (int) statusCode;
             }
 
             // Lanza el método de cómputo del procesado de datos
-            await Compute();
-            Environment.Exit((int) EStatusCodes.OK);
+            try
+            {
+                statusCode = await Compute();
+            }
+            catch (Exception)
+            {
+                statusCode = EStatusCodes.FAILED;
+            }
+            
+            return (int) statusCode;
         }
 
 
 
         /* Funciones auxiliares */
 
-        /*  función estática asíncrona Compute(IProvider, EProviderOperationCode) => void
+        /*  función estática asíncrona Compute() => EStatusCodes
          *      Realiza el procesado de documentos CODICE al esquema OCDS
          *      Pipeline completo desde la provisión de documentos hasta el empaquetado de los documentos mapeados
          *      TODO
          */
-        public async static Task Compute()
+        public async static Task<EStatusCodes> Compute()
         {
             // Inicializa el pipeline con el componente de provisión de datos
             IProvider provider = new Provider(Log, _providerCode, _providerFilePath);
@@ -129,16 +125,25 @@ namespace OCDS_Mapper
             Document document = await provider.TakeFile();
 
             // Itera a través de los documentos hasta que no quede ninguno pendiente
-            for (int count = 1; document != null; count++)
+            while (document != null)
             {
                 // Lanza las instancias de parseo y empaquetado
                 IParser parser = new Parser(Log, document);
-                IPackager packager = new Packager(Log, parser.GetDocumentTimestamp());
+                IPackager packager = new Packager(Log, parser.GetDocumentTimestamp(true));
 
                 // En caso de estar en caso de proveer todos los documentos disponibles, actualiza el Parser en el Provider
                 if (_providerCode == EProviderOperationCode.PROVIDE_ALL)
                 {
-                    provider.SetParser(parser);
+                    _ = provider.SetParser(parser);
+                }
+                else if (_providerCode == EProviderOperationCode.PROVIDE_DAILY)
+                {
+                    bool sameDay = provider.SetParser(parser);
+                    if (!sameDay)
+                    {
+                        Log(null, "Today's documents processed", Level.Info);
+                        return EStatusCodes.OK;
+                    }
                 }
 
                 // Obtiene los espacios de nombres y las reglas de mapeo
@@ -167,23 +172,21 @@ namespace OCDS_Mapper
                     }
 
                     // Introduce los cambios finales necesarios
-                    mapper.Commit();
+                    mapper.Commit(parser.GetDocumentTimestamp(false));
                     packager.Package(mapper.MappedEntry);
                 }
 
-                if (_providerCode == EProviderOperationCode.PROVIDE_ALL && _packagerCode == EPackagerOperationCode.PACKAGE_LOCAL)
-                {
-                    packager.Publish(_packagerCode, _packagerFilePath.Insert(_packagerFilePath.IndexOf(".json"), count.ToString()));
-                }
-                else
-                {
-                    packager.Publish(_packagerCode, _packagerFilePath);
-                }
+                packager.Publish(_packagerDirPath);
 
-                provider.RemoveFile(document.Path);
+                if (_providerCode != EProviderOperationCode.PROVIDE_SPECIFIC)
+                {
+                    provider.RemoveFile(document.Path);
+                }
                 
                 document = await provider.TakeFile();
             }
+
+            return EStatusCodes.OK;
         }
 
         
@@ -205,7 +208,15 @@ namespace OCDS_Mapper
          */
         public static void Log(object component, string message, Level level)
         {
-            if (component is Parser)
+            if (component == null)
+            {
+                message = $"Program - {message}";
+            }
+            else if (component is Packager)
+            {
+                message = $"Packager - {message}";
+            }
+            else if (component is Parser)
             {
                 message = $"Parser - {message}";
             }
@@ -247,14 +258,14 @@ namespace OCDS_Mapper
         public static void DisplayHelp()
         {
             Log(null, Regex.Replace(@"
-                        |Usage: ProviderCode [file] PackagerCode [file]
-                        |ProviderCode values:
-                        |--all (will attempt to map every available file starting from latest),
-                        |--latest (will map latest available file),
-                        |--specific <file> (will map provided <file>, local or remote),
-                        |PackagerCode values:
-                        |--local <file> (will publish mapped data into <file> path),
-                        |--remote (will publish data remotely)",
+                        |Usage: <dir> OperationCode [file]
+                        |
+                        |<dir> : path where processed documents will be stored
+                        |
+                        |OperationCode values:
+                        |--all : (will attempt to map every available file starting from latest),
+                        |--latest : (will map latest available file),
+                        |--specific : <file> (will map provided <file>, local or remote)",
                         @"[ \t]+\|", 
                     string.Empty),
                 Level.Info);
@@ -265,16 +276,35 @@ namespace OCDS_Mapper
         /* Funciones auxiliares */
 
         /*  función estática CheckProviderCode(string) => bool
-         *      Comprueba si el primer argumento (modo de operación del Provider) es correcto
+         *      Comprueba si el primer argumento (modo de operación del Provider) es correcto,
+         *      y actualiza los campos _providerCode, _providerFilePath y _packagerDirPath
          *      @return 0 si es correcto, o el código de error en otro caso
          */
         private static EStatusCodes CheckProviderCode(IEnumerator<string> args)
         {
             args.MoveNext();
 
+            if (!Directory.Exists(args.Current))
+            {
+                Log(null, "Please provide a valid directory to store processed documents", Level.Warn);
+                return EStatusCodes.INVALID_DIR;
+            }
+
+            _packagerDirPath = args.Current;
+
+            if (!args.MoveNext())
+            {
+                DisplayHelp();
+                return EStatusCodes.DISPLAY_HELP;
+            }
+
             if (args.Current.Equals("--all"))
             {
                 _providerCode = EProviderOperationCode.PROVIDE_ALL;
+            }
+            else if (args.Current.Equals("--daily"))
+            {
+                _providerCode = EProviderOperationCode.PROVIDE_DAILY;
             }
             else if (args.Current.Equals("--latest"))
             {
@@ -296,57 +326,10 @@ namespace OCDS_Mapper
             {
                 // En caso de no proveer un argumento correcto, muestra el mensaje de ayuda
                 DisplayHelp();
-                return EStatusCodes.WRONG_ARGUMENTS;
+                return EStatusCodes.WRONG_CODE;
             }
+
             return EStatusCodes.OK;
-        }
-
-
-        /*  función estática CheckPackagerCode(string) => bool
-         *      Comprueba si el segundo argumento (modo de operación del Packager) es correcto
-         *      @return 0 si es correcto, o el código de error en otro caso
-         */
-        private static EStatusCodes CheckPackagerCode(IEnumerator<string> args)
-        {
-            if (args.MoveNext())
-            {
-                if (args.Current.Equals("--local"))
-                {
-
-                    // En caso de querer publicar a una ruta local, comprueba si se ha pasado como argumento
-                    if (!args.MoveNext())
-                    {
-                        Log(null, "Please provide a path to the mapped data", Level.Warn);
-                        return EStatusCodes.PATH_UNPROVIDED;
-                    }
-
-                    if (!args.Current.EndsWith(".json"))
-                    {
-                        Log(null, "Please provide a path with .json extension", Level.Warn);
-                        return EStatusCodes.WRONG_ARGUMENTS;
-                    }
-
-                    _packagerCode = EPackagerOperationCode.PACKAGE_LOCAL;
-                    _packagerFilePath = args.Current;
-                }
-                else if (args.Current.Equals("--remote"))
-                {
-                    _packagerCode = EPackagerOperationCode.PACKAGE_REMOTE;
-                }
-                else
-                {
-                    // En caso de no proveer un argumento correcto, muestra el mensaje de ayuda
-                    DisplayHelp();
-                    return EStatusCodes.WRONG_ARGUMENTS;
-                }
-                return EStatusCodes.OK;
-            }
-            else
-            {
-                // En caso de no proveer un argumento correcto, muestra el mensaje de ayuda
-                DisplayHelp();
-                return EStatusCodes.WRONG_ARGUMENTS;
-            }
         }
     }
 }

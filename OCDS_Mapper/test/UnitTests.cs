@@ -8,7 +8,6 @@ using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Nito.AsyncEx;
 using Xunit;
-using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
 using OCDS_Mapper.src.Model;
 using OCDS_Mapper.src.Utils;
@@ -28,7 +27,7 @@ namespace OCDS_Mapper.test
             public MapperTests()
             {
                 Program.InitLogger();
-                _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
             }
 
             [Fact]
@@ -79,7 +78,7 @@ namespace OCDS_Mapper.test
                 public TagTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -293,7 +292,7 @@ namespace OCDS_Mapper.test
                 public OCIDTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
                 
                 [Fact]
@@ -331,7 +330,7 @@ namespace OCDS_Mapper.test
                 public AwardDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -349,7 +348,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -390,7 +389,7 @@ namespace OCDS_Mapper.test
                     JValue idValue = (JValue) idProperty.First;
                     JValue dateValue = (JValue) dateProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                     Assert.True("2021-02-25T00:00:00Z".Equals(dateValue.Value));
                 }
 
@@ -410,7 +409,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -469,8 +468,8 @@ namespace OCDS_Mapper.test
                     JValue dateValue1 = (JValue) dateProperty1.First;
                     JValue dateValue2 = (JValue) dateProperty2.First;
 
-                    Assert.True("1".Equals(idValue1.Value));
-                    Assert.True("2".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2".Equals(idValue2.Value));
                     Assert.True("2021-04-15T00:00:00Z".Equals(dateValue1.Value));
                     Assert.True("2021-04-15T00:00:00Z".Equals(dateValue2.Value));
                 }
@@ -483,7 +482,7 @@ namespace OCDS_Mapper.test
                 public AwardDescriptionTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -501,7 +500,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -562,7 +561,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -635,7 +634,7 @@ namespace OCDS_Mapper.test
                 public AwardIdTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -652,7 +651,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -705,7 +704,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -762,7 +761,7 @@ namespace OCDS_Mapper.test
                 public AwardStatusTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -780,7 +779,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -841,7 +840,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -914,7 +913,7 @@ namespace OCDS_Mapper.test
                 public AwardSuppliersTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -932,7 +931,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.True(_mapper.MappedEntry.Count == 2);
@@ -1085,7 +1084,7 @@ namespace OCDS_Mapper.test
                 public AwardValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1103,7 +1102,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1189,7 +1188,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1313,7 +1312,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1359,7 +1358,7 @@ namespace OCDS_Mapper.test
                 public ContractIdTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1376,7 +1375,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1429,7 +1428,7 @@ namespace OCDS_Mapper.test
                 public ContractPeriodStartDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1455,7 +1454,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1512,7 +1511,7 @@ namespace OCDS_Mapper.test
                 public PartyFieldsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1529,7 +1528,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1692,7 +1691,7 @@ namespace OCDS_Mapper.test
                 public PartiesNameTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1710,7 +1709,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1756,7 +1755,7 @@ namespace OCDS_Mapper.test
                 public PartiesIdentifierTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -1774,7 +1773,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1862,7 +1861,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -1977,7 +1976,7 @@ namespace OCDS_Mapper.test
                 public PlanningBudgetAmountTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -2106,7 +2105,7 @@ namespace OCDS_Mapper.test
                 public TenderItemsClassificationTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -2124,7 +2123,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2257,7 +2256,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2430,7 +2429,7 @@ namespace OCDS_Mapper.test
                 public TenderLotsIdTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -2448,7 +2447,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2550,7 +2549,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2666,24 +2665,24 @@ namespace OCDS_Mapper.test
                 }
             }
 
-            public class TenderLotsNameTests
+            public class TenderLotsTitleTests
             {
                 private IMapper _mapper;
 
-                public TenderLotsNameTests()
+                public TenderLotsTitleTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
-                public void TestTenderLotsName1()
+                public void TestTenderLotsTitle1()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
                         Mappings.MappingElements.Tender,
                         Mappings.MappingElements.Tenders.Lot,
-                        Mappings.MappingElements.Tenders.Lots.Name
+                        Mappings.MappingElements.Tenders.Lots.Title_
                     });
 
                     _mapper.MapElement(pathMap, new XElement[]{ new XElement("null", "ABCD") });
@@ -2691,7 +2690,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2775,13 +2774,13 @@ namespace OCDS_Mapper.test
                 }
             
                 [Fact]
-                public void TestTenderLotsName2()
+                public void TestTenderLotsTitle2()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
                         Mappings.MappingElements.Tender,
                         Mappings.MappingElements.Tenders.Lot,
-                        Mappings.MappingElements.Tenders.Lots.Name
+                        Mappings.MappingElements.Tenders.Lots.Title_
                     });
                     string elementDump1 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Baleares</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2215.68</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">1965.12</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
                     string elementDump2 = "<cac:ProcurementProjectLot xmlns:cac=\"urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2\">\n  <cbc:ID schemeName=\"ID_LOTE\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">2</cbc:ID>\n  <cac:ProcurementProject>\n    <cbc:Name xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Suministro de Agua natural mineral mediante botellones, vasos de papel y uso de fuentes refrigeradas para los centros de mutua universal en la CCAA de Canarias</cbc:Name>\n    <cac:BudgetAmount>\n      <cbc:TotalAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">6584.78</cbc:TotalAmount>\n      <cbc:TaxExclusiveAmount currencyID=\"EUR\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">5840.16</cbc:TaxExclusiveAmount>\n    </cac:BudgetAmount>\n    <cac:RequiredCommodityClassification>\n      <cbc:ItemClassificationCode listURI=\"http://contrataciondelestado.es/codice/cl/1.04/CPV2007-1.04.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">15981100</cbc:ItemClassificationCode>\n    </cac:RequiredCommodityClassification>\n    <cac:RealizedLocation>\n      <cbc:CountrySubentity xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">Barcelona</cbc:CountrySubentity>\n      <cbc:CountrySubentityCode listURI=\"http://contrataciondelestado.es/codice/cl/2.06/NUTS-2016.gc\" xmlns:cbc=\"urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2\">ES511</cbc:CountrySubentityCode>\n    </cac:RealizedLocation>\n  </cac:ProcurementProject>\n</cac:ProcurementProjectLot>";
@@ -2791,7 +2790,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -2913,7 +2912,7 @@ namespace OCDS_Mapper.test
                 public TenderLotsValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -2933,7 +2932,7 @@ namespace OCDS_Mapper.test
                     Assert.Empty(_mapper.MappedEntry);
                     Assert.Null(_mapper.MappedEntry.First);
 
-                    _mapper.Commit();
+                    _mapper.Commit("null");
                     RemoveMetadata(_mapper.MappedEntry);
 
                     Assert.Single(_mapper.MappedEntry);
@@ -3094,7 +3093,7 @@ namespace OCDS_Mapper.test
                 public TenderMainProcurementCategoryTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -3372,7 +3371,7 @@ namespace OCDS_Mapper.test
                 public TenderNumberOfTenderersTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -3424,7 +3423,7 @@ namespace OCDS_Mapper.test
                 public TenderProcurementMethodTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -3926,7 +3925,7 @@ namespace OCDS_Mapper.test
                 public TenderProcurementMethodDetailsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4010,7 +4009,7 @@ namespace OCDS_Mapper.test
                 public TenderSubmissionMethodTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4245,7 +4244,7 @@ namespace OCDS_Mapper.test
                 public TenderSubmissionMethodDetailsTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4340,7 +4339,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodStartDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4406,7 +4405,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodEndDateTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4472,7 +4471,7 @@ namespace OCDS_Mapper.test
                 public TenderPeriodDurationInDaysTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4677,7 +4676,7 @@ namespace OCDS_Mapper.test
                 public TenderTitleTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4729,7 +4728,7 @@ namespace OCDS_Mapper.test
                 public TenderValueTests()
                 {
                     Program.InitLogger();
-                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, ""));
+                    _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
                 }
 
                 [Fact]
@@ -4841,7 +4840,7 @@ namespace OCDS_Mapper.test
             public PackagerTests()
             {
                 Program.InitLogger();
-                _packager = new Packager(Program.Log, "");
+                _packager = new Packager(Program.Log, "2021-01-01");
             }
 
             [Fact]

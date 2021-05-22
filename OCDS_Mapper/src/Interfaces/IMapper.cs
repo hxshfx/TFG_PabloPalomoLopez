@@ -29,10 +29,11 @@ namespace OCDS_Mapper.src.Interfaces
          */
         void MapElement(IEnumerable<string> pathMap, XElement[] parsedElement);
 
-        /*  función Commit() => void
+        /*  función Commit(string) => void
          *      Introduce los cambios al JSON que no se pueden introducir
          *      mediante los mapeos unitarios de elementos (metadatos, colecciones, etc.)
+         *  @param publishDate : fecha de publicación de la entrega
          */
-        void Commit();
+        void Commit(string publishDate);
     }
 }

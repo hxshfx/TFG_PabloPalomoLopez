@@ -30,13 +30,13 @@ namespace OCDS_Mapper.src.Interfaces
          */
         Task<Document> TakeFile();
 
-        /*  función SetParser(IParser) => void
+        /*  función SetParser(IParser) => bool
          *      (utilizada solo en modo PROVIDE_ALL)
          *      Actualiza la instancia del Parser utilizada por el Provider
          *      Desbloquea el thread en background que utiliza dicho componente
          *  @param parser : Instancia del Parser para cada documento
          */
-        void SetParser(IParser parser);
+        bool SetParser(IParser parser);
 
         /*  función RemoveFile(string) => void
          *      Función que elimina un archivo provisto ya mapeado

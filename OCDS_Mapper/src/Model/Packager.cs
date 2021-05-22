@@ -1,13 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using log4net.Core;
 using Newtonsoft.Json.Linq;
-using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
-using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Model
 {
@@ -21,6 +17,13 @@ namespace OCDS_Mapper.src.Model
          *      Puntero a la función de logging
          */
         private readonly Action<object, string, Level> _Log;
+
+
+        /*  atributo _filename => string
+         *      Nombre del fichero donde se escribirán los datos
+         */
+        private readonly string _filename;
+
 
         /*  atributo _idOccurrences => IDictionary<string, int>
          *      Diccionario accedido por el Mapper para obtener ids únicos
@@ -38,32 +41,38 @@ namespace OCDS_Mapper.src.Model
          */
         private readonly string _uri;
 
+        /*  atributo _uriOccurrences => IDictionary<string, int>
+         *      Diccionario que controla si hay documentos con mismas URIs
+         */
+        private static readonly IDictionary<string, int> _uriOccurrences = new Dictionary<string, int>();
+
 
 
         /* Constructor */
 
         // @param Log : Puntero a la función de logging
-        // @param timestamp : timestamp del documento de licitaciones a partir del cual se construirá el id mediante hash
+        // @param timestamp : timestamp del documento de licitaciones
         public Packager(Action<object, string, Level> Log, string timestamp)
         {
             _Log = Log;
 
             // Inicializa las estructuras de la instancia
-            _idOccurrences = new Dictionary<string,int>();
             _packaged = new JObject();
+            _idOccurrences = new Dictionary<string, int>();
 
-            //DateTime dt = DateTime.Parse(timestamp);
+            string id = GetDate(DateTime.Parse(timestamp));
 
-            // Forma la URI del objeto a publicar mediante el hash del timestamp TODO ?
-            byte[] hash = SHA1.Create().ComputeHash(ASCIIEncoding.Default.GetBytes(timestamp));
-            StringBuilder id = new StringBuilder();
-
-            foreach(byte b in hash)
+            if (!_uriOccurrences.ContainsKey(id))
             {
-                id.AppendFormat("{0:x2}", b);
+                _uriOccurrences[id] = 1;
+            }
+            else
+            {
+                id = $"{id}_{_uriOccurrences[id]++}";
             }
 
-            _uri = $"{Program.Configuration["Upload_URL"]}/document_{id.ToString()}.json";
+            _filename = $"document_{id}.json";
+            _uri = $"{Program.Configuration["Upload_URL"]}{_filename}";
 
             // Inserta los metadatos del paquete
             InsertMetadata();
@@ -105,30 +114,22 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  TODO
-         *
-         *  @param opcional filePath : path en el que escribir el documento
-         *  @throws InvalidOperationCodeException : si el parámetro code no es PACKAGE_LOCAL o PACKAGE_REMOTE
+        /*  función Publish(string) => void
+         *      TODO
+         *  @param dirPath : path en el que escribir el documento
          */
-        public void Publish(EPackagerOperationCode code, string filePath = null)
+        public void Publish(string dirPath)
         {
-            if (code == EPackagerOperationCode.PACKAGE_LOCAL)
+            string filePath = $"{dirPath}/{_filename}";
+            using (StreamWriter sw = new StreamWriter(filePath))
             {
-                WriteToFile(filePath);
+                sw.Write(_packaged.ToString());
             }
-            else if (code == EPackagerOperationCode.PACKAGE_REMOTE)
-            {
-                UploadData();
-            }
-            else
-            {
-                _Log(this, "This method only takes PACKAGE_LOCAL or PACKAGE_REMOTE codes", Level.Error);
-                throw new InvalidOperationCodeException();
-            }
+            _Log(this, $"Document {filePath} mapped and written", Level.Info);
         }
 
 
-        
+
         /* Funciones auxiliares */
 
         /*  función InsertMetadata() => void
@@ -138,53 +139,30 @@ namespace OCDS_Mapper.src.Model
         {
             _packaged.Add("extensions", new JArray(Program.Configuration["Lot_extension_URL"]));
             _packaged.Add("publisher", new JObject(new JProperty("name", "Ontology Engineering Group"), new JProperty("uri", "https://oeg.fi.upm.es/")));
-            _packaged.Add("publishedDate", GetDate());
+            _packaged.Add("publishedDate", GetDate(DateTime.Now));
             _packaged.Add("uri", _uri);
             _packaged.Add("version", "1.1");
             _packaged.Add("releases", new JArray());
         }
 
 
-        /*  función UploadData() => void
-         *      TODO
+        /*  función estática GetDate(DateTime) => string
+         *      Devuelve la fecha provista en el formato OCDS
+         *  @param dt : fecha a procesar
+         *  @return : fecha provista, formato YYYY-MM-DDTHH:MM:SSZ
          */
-        private void UploadData()
+        private static string GetDate(DateTime dt)
         {
-            _Log(this, "TODO", Level.Info);
-        }
-
-
-        /*  función WriteToFile(string) => void
-         *      Escribe el documento empaquetado de manera local
-         *  @param opcional filePath : path en el que escribir el documento
-         */
-        private void WriteToFile(string filePath)
-        {
-            using (StreamWriter sw = new StreamWriter(filePath))
-            {
-                sw.Write(_packaged.ToString());
-            }
-            _Log(this, $"Document {filePath} mapped and written", Level.Info);
-        }
-
-
-        /*  función estática GetDate() => string
-         *      Devuelve la fecha actual en el formato OCDS
-         *  @return : fecha actual (formato YYYY-MM-DDTHH:MM:SSZ)
-         */
-        private static string GetDate()
-        {
-            DateTime now = DateTime.Now;
-            return $@"{now.Year}-{
-                    now.Month.ToString().PadLeft(2, '0')
+            return $@"{dt.Year}-{
+                    dt.Month.ToString().PadLeft(2, '0')
                 }-{
-                    now.Day.ToString().PadLeft(2, '0')
+                    dt.Day.ToString().PadLeft(2, '0')
                 }T{
-                    now.Hour.ToString().PadLeft(2, '0')
+                    dt.Hour.ToString().PadLeft(2, '0')
                 }:{
-                    now.Minute.ToString().PadLeft(2, '0')
+                    dt.Minute.ToString().PadLeft(2, '0')
                 }:{
-                    now.Second.ToString().PadLeft(2, '0')
+                    dt.Second.ToString().PadLeft(2, '0')
                 }Z";
         }
     }
