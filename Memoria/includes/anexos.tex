@@ -1,13 +1,8 @@
-\section{Anexos}
+\mysection{Anexos}
 
     \subsection{Anexo I: Interfaces de los componentes del \textit{OCDS\_Mapper}}
         \subsubsection{Componente \textit{Provider}}
             \begin{lstlisting}[language=lCSharp]
-                using System.Threading;
-                using System.Threading.Tasks;
-                using Nito.AsyncEx;
-                using OCDS_Mapper.src.Model;
-                
                 namespace OCDS_Mapper.src.Interfaces
                 {
                     /* Interfaz del componente de provisión de datos */
@@ -27,27 +22,25 @@
                          */
                         AsyncCollection<Document> Files { get; set; }
                 
-                        /* propiedad AllProvider => Thread
-                         *      Thread utilizado para la provisión en el caso de utilizar PROVIDE_ALL
-                         */
-                        Thread AllProvider { get; set; }
-                
                 
                         /* Funciones */
                 
                         /*  función asíncrona TakeFile() => Document
-                         *      Función bloqueante que devuelve un documento provisto cuando éste está disponible
-                         *  @return : stream de texto del documento provisto, o null si no quedan más documentos que proveer
+                         *      Función bloqueante que devuelve un documento provisto cuando éste
+                         *      está disponible
+                         *  @return : stream de texto del documento provisto, o null si no quedan
+                         *      más documentos que proveer
                          */
                         Task<Document> TakeFile();
                 
-                        /*  función SetParser(IParser) => void
-                         *      (utilizada solo en modo PROVIDE_ALL)
-                         *      Actualiza la instancia del Parser utilizada por el Provider
-                         *      Desbloquea el thread en background que utiliza dicho componente
+                        /*  función SetParser(IParser) => bool
+                         *      (utilizada solo en modo PROVIDE_ALL y PROVIDE_DAILY)
+                         *      Desbloquea el thread en background que integra al Provider y al Parser
                          *  @param parser : Instancia del Parser para cada documento
+                         *  @return : true si el documento del Parser es día anterior al actual,
+                         *      false e.o.c
                          */
-                        void SetParser(IParser parser);
+                        bool SetParser(IParser parser);
                 
                         /*  función RemoveFile(string) => void
                          *      Función que elimina un archivo provisto ya mapeado
@@ -60,10 +53,6 @@
 \newpage
         \subsubsection{Componente \textit{Parser}}
             \begin{lstlisting}[language=lCSharp]
-                using System;
-                using System.Collections.Generic;
-                using System.Xml.Linq;
-                
                 namespace OCDS_Mapper.src.Interfaces
                 {
                     /* Interfaz del componente de parseo */
@@ -87,10 +76,12 @@
                         /* Funciones */
                 
                         /*  función GetNamespaces() => IDictionary<string, XNamespace>
-                         *      Representa mediante pares de nombres y espacios de nombres los namespaces del documento
-                         *      Recupera dicha información de los atributos del elemento feed en los ficheros atom
+                         *      Representa mediante pares de nombres y espacios de nombres los 
+                         *      namespaces del documento
+                         *      Recupera dicha información de los atributos del elemento feed en los
+                         *      ficheros atom
                          *  @return : Diccionario con los pares de espacios de nombres
-                         *      @ej : { {"cac" : XNamespace("urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2")}, ... }
+                         *      @ej : { {"cac" : XNamespace("...:CommonAggregateComponents-2")}, ... }
                          */
                         IDictionary<string, XNamespace> GetNamespaces();
                 
@@ -106,12 +97,17 @@
                         /*  función SetEntryRootElement(XElement) => void
                          *      Actualiza la propiedad del objeto EntryRoot
                          *      Extrae el elemento XML correspondiente a "ContractFolderStatus"
-                         *  @throws InvalidParsedElementException : si el elemento no contiene "ContractFolderStatus"
+                         *  @throws InvalidParsedElementException : si el elemento no contiene 
+                         *      "ContractFolderStatus"
                          */
                         void SetEntryRootElement(XElement entry);
                 
+                
+                
+                
                         /*  función GetElements(IEnumerable<XName>) => XElement[]
-                         *      Devuelve el (los) elemento(s) XML descrito por la ruta pasada como parámetro
+                         *      Devuelve el (los) elemento(s) XML descrito por la ruta pasada
+                         *      como parámetro
                          *  @param pathToElement : lista enlazada con la ruta del elemento deseado:
                          *      @ej : [ XName(XNamespace("cac") + "ProcurementProject"),
                          *              XName(XNamespace("cbc") + "Name") ]
@@ -123,25 +119,25 @@
                         /*  función GetNextFile() => Uri
                          *      Devuelve la URI correspondiente al siguiente fichero, descrito por el
                          *      elemento "link" y el atributo "rel=next"
-                         *  @return : La URI que describe el fichero enlazado al siendo parseado en esta instancia
+                         *  @return : La URI que describe el fichero enlazado al siendo parseado en
+                         *      esta instancia
                          */
                         Uri GetNextFile();
                 
-                        /*  función GetDocumentTimestamp() => string
-                         *      Devuelve el timestamp del documento, que será utilizado por el Packager como identificador
+                        /*  función GetDocumentTimestamp(bool) => string
+                         *      Devuelve el timestamp del documento o de una entrada específica
+                         *  @param document : True si se quiere recuperar el timestamp del documento, 
+                         *      False si se quiere el de la entrada
                          *  @return : timestamp (o campo "updated") del documento de licitaciones
+                         *      o de la entrada
                          */
-                        string GetDocumentTimestamp();
+                        string GetDocumentTimestamp(bool document);
                     }
                 }
             \end{lstlisting}
 \newpage
         \subsubsection{Componente \textit{Mapper}}
             \begin{lstlisting}[language=lCSharp]
-                using System.Collections.Generic;
-                using System.Xml.Linq;
-                using Newtonsoft.Json.Linq;
-                
                 namespace OCDS_Mapper.src.Interfaces
                 {
                     /* Interfaz del componente de mapeo */
@@ -169,20 +165,18 @@
                          */
                         void MapElement(IEnumerable<string> pathMap, XElement[] parsedElement);
                 
-                        /*  función Commit() => void
+                        /*  función Commit(string) => void
                          *      Introduce los cambios al JSON que no se pueden introducir
                          *      mediante los mapeos unitarios de elementos (metadatos, colecciones, etc.)
+                         *  @param publishDate : fecha de publicación de la entrega
                          */
-                        void Commit();
+                        void Commit(string publishDate);
                     }
                 }
             \end{lstlisting}
 \newpage
         \subsubsection{Componente \textit{Packager}}
             \begin{lstlisting}[language=lCSharp]
-                using Newtonsoft.Json.Linq;
-                using OCDS_Mapper.src.Utils;
-                
                 namespace OCDS_Mapper.src.Interfaces
                 {
                     /* Interfaz del componente de empaquetado de datos  */
@@ -190,12 +184,6 @@
                     public interface IPackager
                     {
                         /* Funciones */
-                
-                        /*  función Package(JObject) => void
-                         *      Introduce una entrada al paquete
-                         *  @param entry : objeto JSON que introducir
-                         */
-                        void Package(JObject entry);
                 
                         /*  función GetIdentifier(string) => string
                          *      Obtiene el número de ocurrencias del identificador hasta el momento
@@ -205,11 +193,17 @@
                          */
                         string GetIdentifier(string entryID);
                 
-                        /*  TODO
-                         *
-                         *
+                        /*  función Package(JObject) => void
+                         *      Introduce una entrada al paquete
+                         *  @param entry : objeto JSON que introducir
                          */
-                        void Publish(EPackagerOperationCode code, string filePath = null);
+                        void Package(JObject entry);
+                
+                        /*  función Publish(string) => void
+                         *      Publica los datos escribiéndolos en el directorio de salida
+                         *  @param dirPath : path del directorio de salida
+                         */
+                        void Publish(string dirPath);
                     }
                 }
             \end{lstlisting}
@@ -1129,3 +1123,267 @@
                 \end{lstlisting}
 
 \newpage
+
+    \subsection{Anexo III: Consultas \texttt{SPARQL} sobre los datos enlazados} \label{annex:sparql}
+        \subsubsection{Prefijos de los espacios de nombres utilizados}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    @prefix dc:       <http://purl.org/dc/terms/> .
+                    @prefix ocds:     <http://data.tbfy.eu/ontology/ocds#> .
+                    @prefix ocdsext:  <http://data.tbfy.eu/ontology/ocds_extension#> .
+                    @prefix org:      <http://www.w3.org/ns/org#> .
+                    @prefix rdf:      <http://www.w3.org/TR/rdf-schema/> .
+                    @prefix schema:   <http://schema.org/> .
+                    @prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+                    @prefix tbfy:     <http://data.tbfy.eu/ontology/tbfy#> .
+                \end{lstlisting}
+            \end{minipage}
+            
+        \subsubsection{Consulta para la búsqueda de \textit{releases}}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?date ?id ?tag
+                    WHERE {
+                        ?release a tbfy:Release .
+                        ?release tbfy:releaseDate ?date .
+                        ?release tbfy:releaseId ?id .
+                        ?release tbfy:releaseTag ?tag .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+        
+        \subsubsection{Consulta para la búsqueda de procesos de contratación}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?ocid ?award ?contract ?plan ?release ?tender
+                    WHERE {
+                            ?contractingProcess a ocds:ContractingProcess .
+                            ?contractingProcess ocds:ocid ?ocid .
+                            OPTIONAL {
+                                ?contractingProcess ocds:hasAward ?award 
+                            } .
+                            OPTIONAL {
+                                ?contractingProcess ocds:hasContract ?contract
+                            } .
+                            OPTIONAL {
+                                ?contractingProcess ocds:hasPlan ?plan
+                            } .
+                            OPTIONAL {
+                                ?contractingProcess ocds:hasRelease ?release
+                            } .
+                            OPTIONAL {
+                                ?contractingProcess ocds:hasTender ?tender
+                            } .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+
+        \subsubsection{Consulta para la búsqueda de adjudicaciones}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?awardId ?tender ?awardDate ?awardStatus ?awardDescription ?awardAmount
+                           ?awardCurrency ?awardSupplier ?supplierName ?supplierId
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?contractingProcess ocds:hasAward ?award .
+                        ?award ocds:awardId ?awardId .
+                        ?award ocds:isIssuedForTender ?tender .
+                        ?award ocds:awardDate ?awardDate .
+                        ?award ocds:awardStatus ?awardStatus .
+                        OPTIONAL {
+                            ?award dc:description ?awardDescription
+                        } .
+                        OPTIONAL {
+                            ?award ocds:hasAwardValue ?awardValue
+                            OPTIONAL {
+                                ?awardValue ocds:valueAmount ?awardAmount .
+                                ?awardValue ocds:valueCurrency ?awardCurrency .
+                            } .
+                        } .
+                        OPTIONAL {
+                            ?awardSupplier ocds:isSupplierFor ?award
+                            OPTIONAL {
+                                OPTIONAL {
+                                    ?awardSupplier ocds:legalName ?supplierName
+                                } .
+                                OPTIONAL {
+                                    ?awardSupplier org:identifier ?supplierId
+                                } .
+                            } .
+                        } .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+
+        \subsubsection{Consulta para la búsqueda de contratos}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?contractId ?award ?contractStartDate ?contractEndDate
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?contractingProcess ocds:hasContract ?contract .
+                        ?contract ocds:contractId ?contractId .
+                        ?contract ocds:isIssuedForAward ?award .
+                        OPTIONAL {
+                            ?contract ocds:hasContractPeriod ?contractPeriod
+                            OPTIONAL {
+                                OPTIONAL {
+                                    ?contractPeriod ocds:periodStartDate ?contractStartDate
+                                } .
+                                OPTIONAL {
+                                    ?contractPeriod ocds:periodEndDate ?contractEndDate
+                                } .
+                            } .
+                        } .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+            
+        \subsubsection{Consulta para la búsqueda de planificaciones}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?plan ?planBudgetAmount ?planBudgetCurrency
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?contractingProcess ocds:hasPlan ?plan .
+                        ?plan ocds:hasBudget ?planBudget .
+                        ?planBudget ocds:budgetId ?planBudgetId .
+                        ?planBudget ocds:hasReservedValue ?planBudgetValue .
+                        ?planBudgetValue ocds:valueAmount ?planBudgetAmount .
+                        ?planBudgetValue ocds:valueCurrency ?planBudgetCurrency .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+            
+        \subsubsection{Consulta para la búsqueda de licitaciones}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?tenderId ?tenderTitle ?tenderProcCategory ?tenderProcMethod
+                           ?tenderProcMethodDetails ?tenderSubMethod ?tenderSubMethodDetails 
+                           ?tenderTenderers ?tenderValue ?tenderAmount ?tenderCurrency
+                           ?tenderPeriod ?tenderPeriodStartDate 
+                           ?tenderPeriodEndDate ?tenderPeriodDurationInDays
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?contractingProcess ocds:hasTender ?tender .
+                        ?tender ocds:tenderId ?tenderId .
+                        ?tender dc:title ?tenderTitle .
+                        OPTIONAL {
+                            ?tender ocds:mainProcurementCategory ?tenderProcCategory
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:procurementMethod ?tenderProcMethod
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:procurementMethodDetails ?tenderProcMethodDetails
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:submissionMethod ?tenderSubMethod
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:submissionMethodDetails ?tenderSubMethodDetails
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:numberOfTenderers ?tenderTenderers
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:hasMaxEstimatedValue ?tenderValue .
+                            ?tenderValue ocds:valueAmount ?tenderAmount .
+                            ?tenderValue ocds:valueCurrency ?tenderCurrency .
+                        } .
+                        OPTIONAL {
+                            ?tender ocds:hasTenderPeriod ?tenderPeriod
+                            OPTIONAL {
+                                OPTIONAL {
+                                    ?tenderPeriod ocds:periodStartDate ?tenderPeriodStartDate
+                                } .
+                                OPTIONAL {
+                                    ?tenderPeriod ocds:periodEndDate ?tenderPeriodEndDate
+                                } .
+                                OPTIONAL {
+                                    ?tenderPeriod ocds:periodDurationInDays ?tenderPeriodDurationInDays
+                                } .
+                            } .
+                        } .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+            
+        \subsubsection{Consulta para la búsqueda de artículos y lotes de licitaciones}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?tenderId ?tenderItem ?tenderItemClassification ?tenderItemScheme 
+                           ?tenderItemDescription ?tenderLot ?tenderLotTitle ?tenderLotValue 
+                           ?tenderLotAmount ?tenderLotCurrency
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?contractingProcess ocds:hasTender ?tender .
+                        ?tender ocds:tenderId ?tenderId .
+                        ?tender ocds:hasItemToBeProcured ?tenderItem .
+                        ?tenderItem ocds:hasClassification ?tenderItemClassification .
+                        ?tenderItem ocds:classificationScheme ?tenderItemScheme .
+                        ?tenderItem dc:description ?tenderItemDescription .
+                        ?tenderItem ocdsext:relatedLot ?tenderLot .
+                        ?tenderLot ocdsext:lotId ?tenderLotId .
+                        ?tenderLot dc:title ?tenderLotTitle .
+                        OPTIONAL {
+                            ?tenderLot ocdsext:hasLotValue ?tenderLotValue .
+                            ?tenderLotValue ocds:valueAmount ?tenderLotAmount .
+                            ?tenderLotValue ocds:valueCurrency ?tenderLotCurrency .
+                        } .
+                    }
+                \end{lstlisting}
+            \end{minipage}
+            
+        \subsubsection{Consulta para la búsqueda de organizaciones involucradas}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lSPARQL]
+                    SELECT ?party ?partyName ?partyId ?partyIdScheme ?partyAddress
+                           ?partyAddressCountry ?partyAddressLocality ?partyAddressPostalCode 
+                           ?partyAddressStreet ?partyContact ?partyContactEmail
+                           ?partyContactName ?partyContactFax ?partyContactTelephone 
+                           ?partyContactUrl
+                    WHERE {
+                        ?contractingProcess a ocds:ContractingProcess .
+                        ?party ocds:playsRoleIn ?contractingProcess .
+                        ?party ocds:legalName ?partyName .
+                        ?party org:identifier ?partyId .
+                        OPTIONAL {
+                            ?party skos:notation ?partyIdScheme .
+                        } .
+                        OPTIONAL {
+                            ?party ocds:hasAddress ?partyAddress .
+                            OPTIONAL {
+                                ?partyAddress schema:addressCountry ?partyAddressCountry
+                            } .
+                            OPTIONAL {
+                                ?partyAddress schema:addressLocality ?partyAddressLocality
+                            } .
+                            OPTIONAL {
+                                ?partyAddress schema:postalCode ?partyAddressPostalCode
+                            } .
+                            OPTIONAL {
+                                ?partyAddress schema:streetAddress ?partyAddressStreet
+                            } .
+                        } .
+                        OPTIONAL {
+                            ?party ocds:hasContactPoint ?partyContact .
+                            OPTIONAL {
+                                ?partyContact schema:email ?partyContactEmail
+                            } .
+                            OPTIONAL {
+                                ?partyContact schema:name ?partyContactName
+                            } .
+                            OPTIONAL {
+                                ?partyContact schema:faxNumber ?partyContactFax
+                            } .
+                            OPTIONAL {
+                                ?partyContact schema:telephone ?partyContactTelephone
+                            } .
+                            OPTIONAL {
+                                ?partyContact schema:URL ?partyContactUrl
+                            } .
+                        } .
+                    }
+                \end{lstlisting}
+            \end{minipage}

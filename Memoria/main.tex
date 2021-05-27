@@ -6,8 +6,9 @@
 \newcommand{\school}{Escuela\ Técnica\ Superior\ de\ Ingenieros Informáticos}
 \newcommand{\degree}{Grado\ Universitario\ en\ Ingeniería Informática}    
 \newcommand{\tfg}{Trabajo de Fin de Grado}
-\newcommand{\name}{XXXXX}
+\newcommand{\name}{Transformación de los datos de licitaciones de la Plataforma de Contratación Pública al estándar OCDS y su publicación como datos enlazados}
 \newcommand{\me}{Pablo Palomo López}
+\newcommand{\tutor}{María Poveda Villalón}
 \newcommand{\supervisor}{Óscar Corcho García}
 
 % Configure the metadata of the PDF document
@@ -48,9 +49,6 @@
 \usepackage[protrusion = true, expansion = true]{microtype} 
 % Use multiple columns
 \usepackage{multicol}
-% Display two figures next to each other
-\usepackage{subfigure}
-\usepackage[subfigure]{tocloft}
 % Display list of Equations
 \usepackage{tocloft}
 % Insert empty pages
@@ -98,6 +96,7 @@
 
 % Colour definitions
 \usepackage[dvipsnames]{xcolor}
+\definecolor{DarkGray}{rgb}{0.4,0.4,0.4}
 \definecolor{DarkGreen}{rgb}{0.0,0.34,0.25}
 \definecolor{DarkRed}{rgb}{0.42,0.07,0.02}
 \definecolor{DarkViolet}{rgb}{0.4,0.0,0.4}
@@ -110,7 +109,7 @@
     breaklines=true,
     breakatwhitespace=true,
     frame=single,
-    gobble=20,
+    gobble=19,
     keywordstyle=[1]{\bfseries\color{RoyalBlue}},
     keywordstyle=[2]{\itshape\color{PineGreen}},
     keywordstyle=[3]{\color{RedViolet}},
@@ -193,7 +192,7 @@
     breaklines=true,
     breakatwhitespace=true,
     frame=single,
-    gobble=20,
+    gobble=19,
     keywordstyle=[1]{\color{Cerulean}},
     keywordstyle=[2]{\color{ForestGreen}},
     keywordstyle=[3]{\color{BrickRed}},
@@ -219,7 +218,7 @@
     breaklines=true,
     breakatwhitespace=true,
     frame=single,
-    gobble=20,
+    gobble=19,
     keywordstyle=[1]{\bfseries},
     keywordstyle=[2]{\color{Brown}},
     keywordstyle=[3]{\color{Red}},
@@ -288,7 +287,7 @@
     commentstyle=\color{DarkViolet},
     escapeinside={(*@}{@*)},
     frame=single,
-    gobble=16,
+    gobble=14,
     keywordstyle=[1]{\textit},
     keywordstyle=[2]{\color{DarkGreen}},
     keywordstyle=[3]{\color{DarkRed}},
@@ -304,7 +303,6 @@
         public,
         select,
         set,
-        using,
         where
     },
     morekeywords=[2]{
@@ -359,6 +357,8 @@
     },
     morekeywords=[4]{
         code,
+        dirPath,
+        document,
         entry,
         entryID,
         filePath,
@@ -368,6 +368,7 @@
         pathMap,
         pathToElement,
         parser,
+        publishDate,
         query,
     },
     morecomment=[l]{//}, 
@@ -381,8 +382,43 @@
     stringstyle=\color{BrickRed},
     tabsize=10
 }
+\lstdefinelanguage{lSPARQL}{
+    alsoletter={@},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    gobble=19,
+    keywordstyle=[1]{\bfseries\color{DarkGray}},
+    keywordstyle=[2]{\itshape\color{DarkGray}},
+    keywords=[1]{
+        OPTIONAL,
+        @prefix,
+        SELECT,
+        WHERE,
+    },
+    morekeywords=[2]{
+        dc,
+        ocds,
+        ocdsext,
+        org,
+        rdf,
+        schema,
+        skos,
+        tbfy
+    },
+    morestring=[s]{<}{>},
+    rulecolor=\color{black},
+    stringstyle=\color{black},
+    tabsize=10
+}
 % Fixed tabbing
 \usepackage{tabto}
+
+% Section label commands
+\usepackage{nameref}
+\newcommand{\currentsection}{}
+\newcommand{\mysection}[1]{\section{#1}\renewcommand{\currentsection}{#1}}
 
 % Sections depth
 \usepackage{titlesec}
@@ -410,14 +446,17 @@
 \usepackage{caption}            % To configure the captions
 \usepackage{siunitx}            % For SI units
 \usepackage{graphicx}           % To include graphics
-\graphicspath{ {schemes/} {images/} }     % Images folder path
+\usepackage{subcaption}         % To include subgraphics
+\graphicspath{
+    {schemes/} {images/}        % Images folder path
+}
 \usepackage[dvipsnames]{xcolor} % To configure colors
 \usepackage{fancyhdr}           % To configure the header and footer
 \pagestyle{fancy}               % Use a fancy header style
 \fancyhf{}                      % Set the header format
 \fancyheadoffset{0.0 cm}        % Set the header offset
-\lhead{\tfg}                    % Set the header right-side contents
-\rhead{\name}                   % Set the header left-side contents
+\lhead{\tfg}                    % Set the header left-side contents
+\rhead{\currentsection}         % Set the header right-side contents
 \cfoot{\thepage}                % Set the footer page number
 
 % Label changes
@@ -456,6 +495,7 @@
 	\begin{tabbing}
         \hspace*{0.4\linewidth} \= \hspace*{0.5\linewidth} \= \kill
     	\> Autor: \' \textbf{\me} \\[0.25cm]
+    	\> Tutora: \' \textbf{\tutor} \\[0.25cm]
     	\> Supervisor: \' \textbf{\supervisor} \\
     \end{tabbing}
     
@@ -489,16 +529,20 @@
     \afterpage{\blankpage}
     \input{portada.tex}
     % Include the different sections
+    \pagenumbering{roman}
     \input{includes/abstract}
     \input{includes/resumen}
     \input{includes/agradecimientos}
     \input{includes/indice}
     \input{includes/indice_tablas}
     \input{includes/indice_figuras}
+    \pagenumbering{arabic}
     \input{includes/introduccion}
     \input{includes/estado_arte}
     \input{includes/software}
     \input{includes/correspondencias}
+    \input{includes/datos_enlazados}
+    \input{includes/analisis_impacto}
     \input{includes/conclusiones}
     \input{includes/referencias}
     \input{includes/anexos}

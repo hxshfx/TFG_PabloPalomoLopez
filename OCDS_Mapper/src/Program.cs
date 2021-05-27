@@ -99,7 +99,7 @@ namespace OCDS_Mapper
             {
                 statusCode = await Compute();
             }
-            catch (Exception)
+            catch
             {
                 statusCode = EStatusCodes.FAILED;
             }

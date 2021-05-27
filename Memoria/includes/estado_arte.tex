@@ -1,4 +1,4 @@
-\section{Estado del arte}
+\mysection{Estado del arte}
 
     \subsection{Datos abiertos y datos enlazados}
         Para poder valorar este proyecto, es fundamental comprender las bases sobre las que se sustenta el mismo: los datos abiertos y los datos enlazados.
@@ -31,7 +31,7 @@
             \label{fig:linked}
         \end{figure}
 
-        \noindent A modo de ejemplo, y con el objetivo de reflejar algunos de los principios básicos de los datos enlazados, se muestra en la \hyperref[fig:linked]{figura 2} un caso de uso de una consulta sobre datos enlazados. La consulta es simple: un equipo solicita el recurso que representa la entidad de España al servidor de DBpedia \cite{DBPEDIA}, uno de los proyectos más ambiciosos de la \textit{Web Semántica}, que busca extraer la información de la más amplica enciclopedia \textit{online}, Wikipedia, para generar datos enlazados.
+        \noindent A modo de ejemplo, y con el objetivo de reflejar algunos de los principios básicos de los datos enlazados, se muestra en la \hyperref[fig:linked]{figura 2} un caso de uso de una consulta sobre datos enlazados. La consulta es simple: un equipo solicita el recurso que representa la entidad de España al servidor de \textit{DBpedia} \cite{DBPEDIA}, uno de los proyectos más ambiciosos de la ``Web Semántica", que busca extraer la información de la más amplia enciclopedia \textit{online}, \textit{Wikipedia}, para generar datos enlazados.
         \\ \\
         En el ejemplo se pueden ver algunas de las peculiaridades de los datos enlazados:
         \begin{itemize}
@@ -41,7 +41,7 @@
         \end{itemize}
         
         \subsubsection{Modelo de datos \texttt{RDF}} \label{subsubsec:RDF}
-            Si bien debido a la comparación previa entre la Web estándar y la denominada \textit{Web Semántica} podría parecer que \texttt{RDF} es un lenguaje de marcado de texto como lo es \texttt{HTML}, esto no es así: \texttt{RDF} es un \textit{framework} de representación de información: un modelo que permite codificar la información, sus propiedades, y las relaciones entre sí.
+            Si bien debido a la comparación previa entre la Web estándar y la denominada ``Web Semántica" podría parecer que \texttt{RDF} es un lenguaje de marcado de texto como lo es \texttt{HTML}, esto no es así: \texttt{RDF} es un \textit{framework} de representación de información: un modelo que permite codificar la información, sus propiedades, y las relaciones entre sí.
             \\ \\
             La sintaxis de este modelo es simple: se basa en conjuntos de tripletas de la forma sujeto-predicado-objeto, donde éstos pueden ser \texttt{URI}s, literales o elementos vacíos. Mediante estos conjuntos de definiciones se pueden construir \textit{datasets}, que a su vez se pueden organizar en grafos de conocimiento; estructuras con una alta riqueza en términos de información.
             \\ \\
@@ -68,7 +68,7 @@
             \\ \\
             En este ejemplo también pueden ser destacados otros elementos característicos de \texttt{RDF}: los vocabularios. Para expresar las propiedades (como \textcolor{ForestGreen}{\texttt{type}} o \textcolor{ForestGreen}{\texttt{sameAs}}), que potencialmente pueden aparecer en múltiples \textit{datasets}, es de interés poder contar con un índice de términos que poder reutilizar, siguiendo uno de los principios fundamentales de los datos abiertos y enlazados. Ésa es la función de proyectos como \textit{Linked Open Vocabularies} \cite{LOV}, que recoge a modo de códice todos los términos publicados como datos abiertos.
             \\ \\
-            Un último apunte sobre \texttt{RDF} y el ejemplo provisto; como previamente se explicó sobre \texttt{RML}, éste no es un lenguaje de marcado sino un \textit{framework} que refleja cómo deben de ser los datos enlazados para que sigan los principios que los rigen. El ejemplo de la \hyperref[fig:linked]{figura 2} está codificado mediante el formato \texttt{N-Triples} \cite{NTRIPLES} (un subconjunto del formato \texttt{Turtle} \cite{TURTLE}). Sin embargo, existen otros formatos, como \texttt{JSON-LD} \cite{JSONLD}, \texttt{RDF/XML} \cite{RDFXML}, \texttt{RDFa} \cite{RDFA} o \texttt{N-Quads} \cite{NQUADS}.
+            Un último apunte sobre \texttt{RDF} y el ejemplo provisto; como previamente se explicó sobre \texttt{RML}, éste no es un lenguaje de marcado sino un \textit{framework} que refleja cómo deben de ser los datos enlazados para que sigan los principios que los rigen. El ejemplo de la \hyperref[fig:linked]{figura 3} está codificado mediante el formato \texttt{N-Triples} \cite{NTRIPLES} (un subconjunto del formato \texttt{Turtle} \cite{TURTLE}). Sin embargo, existen otros formatos, como \texttt{JSON-LD} \cite{JSONLD}, \texttt{RDF/XML} \cite{RDFXML}, \texttt{RDFa} \cite{RDFA} o \texttt{N-Quads} \cite{NQUADS}.
         
         \subsubsection{Consultas sobre datos enlazados} \label{subsubsec:SPARQL}
             De la misma manera que para la realización de consultas sobre bases de datos convencionales se tiene el lenguaje \texttt{SQL} \cite{ISOSQL}, para construir búsquedas estructuradas sobre grafos de conocimiento de datos enlazados se utiliza \texttt{SPARQL} \cite{SPARQL}.
@@ -89,7 +89,7 @@
             \\
             \begin{itemize}
                 \item Apache Jena \cite{JENA}: \textit{framework} de código abierto escrito en el lenguaje \texttt{Java} para el desarrollo de aplicaciones sobre datos \texttt{RDF}.
-                \item RDFLib \cite{RDFLIB}: biblioteca en \texttt{Python} para el procesado de datos en formato \texttt{RDF/XML} y sus grafos de conocimiento asociados.
+                \item RDFLib \cite{RDFLIB}: biblioteca en \texttt{Python} para el procesado de datos en formato \texttt{RDF/XML} y sus grafos de conocimiento asociados. Utilizada  \hyperref[subsec:rdflib]{posteriormente} en el trabajo.
                 \item RDF4J \cite{RDF4J}: previamente conocido como \textit{OpenRDF Sesame}, es otro \textit{framework} de código abierto escrito en el lenguaje \texttt{Java}.
                 \item Virtuoso \cite{VIRTUOSO}: \textit{middleware} que combina las funcionalidades de un gestor de bases de datos relacionales convencionales con el procesado de datos enlazados.
             \end{itemize}
@@ -115,7 +115,7 @@
             \\ \\
             Las normas y estándares internacionales existentes, tales como las normas ISO 11179 \cite{ISOMDR} y 15000 \cite{ISOEBXML}, los estándares ebXML de OASIS \cite{EBXML} y UN/CEFACT \cite{UNCEFACT}, y las Recomendaciones del W3C sobre lenguaje y esquema XML \cite{XML}, junto con las iniciativas promovidas por el programa IDA de la Unión Europea en relación con la contratación electrónica \cite{UEIDA}, han proporcionado la base para la definición y construcción de una arquitectura interoperable de información \cite{CODICE}.
             \\ \\
-            En el portal institucional del Ministerio de Hacienda, concretamente en la sección de licitaciones publicadas en la Plataforma de Contratación del Sector Público \cite{PORTALHAC}, podemos encontrar los documentos de licitaciones elaborados por la Dirección General del Patrimonio del Estado a partir de los datos que introducen los órganos de contratación como responsables de sus perfiles de contratantes. Estos documentos siguen el esquema \texttt{CODICE}, si bien no en todos los documentos van a aparecer los mismos elementos, dado que se proporcionan tres distintos tipos de documentos: licitaciones publicadas en la Plataforma de Contratación del Sector Público (excluyendo contratos menores), licitaciones publicadas mediante mecanismos de agregación y licitaciones correspondientes a contratos menores \cite{CODICETIPOS}. Este trabajo se ha centrado en el primero de los tipos previamente descritos, que incluye como superconjunto al tercero, el de los contratos menores.
+            En el portal institucional del Ministerio de Hacienda, concretamente en la sección de licitaciones publicadas en la Plataforma de Contratación del Sector Público \cite{PORTALHAC}, se pueden encontrar los documentos de licitaciones elaborados por la Dirección General del Patrimonio del Estado a partir de los datos que introducen los órganos de contratación como responsables de sus perfiles de contratantes. Estos documentos siguen el esquema \texttt{CODICE}, si bien no en todos los documentos van a aparecer los mismos elementos, dado que se proporcionan tres distintos tipos de documentos: licitaciones publicadas en la Plataforma de Contratación del Sector Público (excluyendo contratos menores), licitaciones publicadas mediante mecanismos de agregación y licitaciones correspondientes a contratos menores \cite{CODICETIPOS}. Este trabajo se ha centrado en el primero de los tipos previamente descritos, que incluye como superconjunto al tercero, el de los contratos menores.
             
         \subsubsection{Estándar \texttt{OCDS}}
             El Estándar de Datos para las Contrataciones Abiertas (\texttt{OCDS}, por sus siglas en inglés) permite la divulgación de datos y documentos de todas las etapas del proceso de contratación mediante la definición de un modelo de datos común. Se creó para apoyar a las organizaciones a aumentar la transparencia de la contratación y permitir un análisis más profundo de los datos de contrataciones por una amplia gama de usuarios \cite{OCDS}.
@@ -175,4 +175,29 @@
                 \end{itemize}
             \end{itemize}
             
+    \subsection{\textit{TheyBuyForYou}}
+        \textit{TheyBuyForYou} (en adelante, \texttt{TBFY}) es un consorcio de empresas, universidades, centros de investigación, departamentos gubernamentales y autoridades locales de diversos países europeos, concretamente Reino Unido, Noruega, Italia, España y Eslovenia.
+        \\ \\
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.5\textwidth]{tbfy.png}
+            \captionof{figure}{Logo del proyecto \texttt{TBFY}}
+        \end{figure}
+        
+        \noindent El proyecto de \texttt{TBFY} comenzó en enero de 2018 con el objetivo de mejorar el estado del mercado de adquisiciones europeo mediante el desarrollo de herramientas y funcionalidades que permitan explorar los datos abiertos en el ámbito de las licitaciones públicas. Para situarlo en contexto, ya hay diferentes organizaciones aprovechando el uso de las herramientas desarrolladas por el equipo de \texttt{TBFY}; el gobierno de Eslovenia las utiliza para identificar patrones que pudieran ser indicadores de fraude y autoridades españolas las usan para tomar decisiones de contrataciones más transparentes, entre otros casos.
+        \\ \\
+        El mercado de licitaciones europeo es tan grande que su navegación por parte de administraciones públicas, licitadores y empresas es complejas; es por ello que habitualmente grandes compañías consiguen contratos por encima de pequeños suministradores. \texttt{TBFY} quiere cambiar esto mediante la construcción de un gran grafo de conocimiento que recoja millones de datos sobre contrataciones públicas en el ámbito europeo. Siguiendo los principios que rigen los datos abiertos, los recursos de \texttt{TBFY} son públicos y de acceso abierto \cite{TBFY}.
+        \\ \\
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.625\textwidth]{tbfykg.png}
+            \captionof{figure}{Dimensiones del grafo de conocimiento de \texttt{TBFY} (mayo de 2021)}
+        \end{figure}
+        
+        \noindent Los datos recogidos en el grafo de conocimiento de \texttt{TBFY} son accesibles mediante \textit{endpoints} \texttt{SPARQL}, nodos sobre los cuales se pueden realizar peticiones mediante el protocolo \texttt{HTTP} y obtener respuestas en distintos formatos. Además, \texttt{TBFY} proporciona otras herramientas; el repositorio central \cite{TBFYREPOS}, una aplicación de búsquedas construida mediante \texttt{OptiqueVQS} (\textit{Visual Query System over Ontologies}) \cite{TBFYVQS}, una herramienta capaz de encontrar patrones anómalos en datos de contrataciones \cite{TBFYANOM}, etc.
+        \\ \\
+        Mediante el uso de la aplicación desarrollada en la \hyperref[sec:software]{posterior sección}, se generarán datos abiertos y enlazados capaces de ser explotados mediante algunas de las herramientas de \texttt{TBFY}.
+
 \newpage

@@ -1,8 +1,8 @@
-\section{Correspondencias entre \texttt{CODICE} y \texttt{OCDS}}
+\mysection{Correspondencias entre \texttt{CODICE} y \texttt{OCDS}}
 
     En esta sección se describirán las correspondencias que se han establecido entre los elementos del estándar \texttt{CODICE} y el estándar \texttt{OCDS}. Dichas correspondencias han sido las implementadas en el \hyperref[sec:software]{software desarrollado}.
     \\ \\
-    No todos los elementos de \texttt{CODICE} han sido mapeados, ni todos los campos de \texttt{OCDS} han sido cubiertos, pero sí se han considerado aquellos elementos de mayor interés. Una lista exhaustiva sobre el estado de los elementos puede encontrarse en la siguiente hoja de cálculo \cite{CHECKLIST}.
+    No todos los elementos de \texttt{CODICE} han sido mapeados, ni todos los campos de \texttt{OCDS} han sido cubiertos, pero sí se han considerado aquellos elementos de mayor interés.
 
     \vspace{0.3cm}
     
@@ -35,7 +35,7 @@
                     \tabto{7.6cm} \texttt{\textit{cbc:ContractFolderID}}
                 \item \textbf{Elemento en el esquema \texttt{OCDS}}:
                     \tabto{7.6cm} \texttt{\textit{ocid}}
-                \item \textbf{Comentarios}: En el esquema de \texttt{OCDS}, los procesos de contratación deben identificarse mediante un código unívoco que será idéntico en cualquier posterior entrega del mismo proceso de contratación. Para asegurar que dichos códigos no puedan colisionar, \texttt{OCDS} provee a los publicadores prefijos que concatenar a los identificadores internos para así asegurar la creación de identificadores globales únicos.
+                \item \textbf{Comentarios}: En el esquema de \texttt{OCDS}, los procesos de contratación deben identificarse mediante un código unívoco que será idéntico en cualquier posterior entrega del mismo proceso de contratación. Para asegurar que dichos códigos no puedan colisionar, \texttt{OCDS} provee a los publicadores prefijos que concatenar a los identificadores internos para así asegurar la creación de identificadores globales únicos. Debido a que \texttt{OCDS} no provee prefijos válidos a particulares, se ha utilizado el prefijo otorgado al Ayuntamiento de Zaragoza (\texttt{ocds-1xraxc}) como \textit{placeholder} para superar la herramienta de validación de datos de \texttt{OCDS} \cite{OCDSREVIEWTOOL}. Para cambiar dicho parámetro, sólo hace falta modificar el campo \texttt{ID\_prefix} del fichero de configuración del \textit{OCDS\_Mapper}, ubicado en la ruta \texttt{OCDS\_Mapper/src/appsettings.json} (véase \hyperref[fig:estructura]{figura 11}).
             \end{itemize}
         
         \subsubsection{Objeto del contrato}
@@ -93,25 +93,6 @@
                         \subitem - \texttt{22} (Gestión de servicios) $\rightarrow$ \texttt{services}
                         \subitem - \texttt{31} (Concesión de obras públicas) $\rightarrow$ \texttt{works}
                         \subitem - \texttt{32} (Concesión de obras) $\rightarrow$ \texttt{works}
-            \end{itemize}
-        
-        \subsubsection{Enlaces de descarga de pliegos}
-            \begin{itemize}
-                \item \textbf{Elementos en el esquema \texttt{CODICE}}:
-                    \tabto{7.7cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
-                    \tabto{7.7cm} \{\texttt{cac:LegalDocumentReference/}, \\
-                    \tabto{7.7cm} \texttt{cac:TechnicalDocumentReference/}, \\
-                    \tabto{7.7cm} \texttt{cac:AdditionalDocumentReference/}\} \\
-                    \tabto{7.7cm} \texttt{\textit{cbc:ID}},\\
-                    \tabto{7.7cm} \texttt{cac:Attachment/} \\
-                    \tabto{7.7cm} \texttt{cac:ExternalReference/} \\
-                    \tabto{7.7cm} \texttt{\textit{cbc:URI}}
-                \item \textbf{Elemento en el esquema \texttt{OCDS}}:
-                    \tabto{7.7cm} \texttt{tender.\textit{documents}}
-                \item \textbf{Comentarios}: Los distintos pliegos que pueden documentar un proceso de contratación vienen descritos, en su tipo, por el elemento inmediatamente inferior a \texttt{ContractFolderStatus}, y su mapeo al esquema \texttt{OCDS} se representa mediante la lista de códigos documentType \cite{CR5}.
-                        \subitem - LegalDocumentReference $\rightarrow$ \texttt{?}
-                        \subitem - TechnicalDocumentReference $\rightarrow$ \texttt{technicalSpecifications}
-                        \subitem - AdditionalDocumentReference $\rightarrow$ \texttt{?}
             \end{itemize}
 
     \vspace{0.3cm}
@@ -249,7 +230,7 @@
                     \tabto{7.6cm} \texttt{\textit{cbc:AuctionConstraintIndicator}}
                 \item \textbf{Elemento en el esquema \texttt{OCDS}}:
                     \tabto{7.6cm} \texttt{tender.\textit{submissionMethod}}
-                \item \textbf{Comentarios}: Si en el elemento \texttt{AuctionConstraintIndicator} está indicado el valor \texttt{true}, significa que la licitación estará sujeta a subasta electrónica, por lo que el valor \texttt{electronicAuction} de la lista de códigos \texttt{submissionMethod} \cite{CR11} se sobreescribe en el campo \texttt{tender.submissionMethod}, que ya había sido inicializado por el elemento \hyperref[subsec:PresentacionOferta]{Presentación de la oferta}.
+                \item \textbf{Comentarios}: Si en el elemento \texttt{AuctionConstraintIndicator} está indicado el valor \texttt{true}, significa que la licitación estará sujeta a subasta electrónica, por lo que el valor \texttt{electronicAuction} de la lista de códigos \texttt{submissionMethod} \cite{CR11} se sobreescribe en el campo \texttt{tender.submissionMethod}, que ya había sido inicializado por el elemento \hyperref[subsec:PresentacionOferta]{presentación de la oferta}.
             \end{itemize}
         
     \vspace{0.3cm}
@@ -285,7 +266,7 @@
                     \tabto{7.6cm} \texttt{parties[i].\textit{identifier.id}} \\
                     \tabto{7.6cm} \texttt{parties[i].\textit{additionalIdentifiers}} \\
                     \tabto{7.6cm} \texttt{parties[i].\textit{roles}}
-                \item \textbf{Comentarios}: Siguiendo la directriz del estándar \texttt{OCDS} sobre los esquemas de identificación de organizaciones \cite{CR13}, estos elementos se procesan dependiendo de su esquema: \texttt{DIR3} \cite{CR14} o \texttt{NIF} \cite{CR15} (\texttt{RMC}). Adicionalmente, si \texttt{PartyIdentification} contiene ambos identificadores, se utilizará el campo \texttt{additionalIdentifiers} para mapear la máxima cantidad de información. Por último, en este elemento de mapeo se ha añadido el rol de la parte adjudicadora (\texttt{procuringEntity}).
+                \item \textbf{Comentarios}: Siguiendo la directriz del estándar \texttt{OCDS} sobre los esquemas de identificación de organizaciones \cite{CR13}, estos elementos se procesan dependiendo de su esquema: \texttt{DIR3} \cite{CR14} o \texttt{NIF} \cite{CR15} (\texttt{RMC}). Adicionalmente, si \texttt{PartyIdentification} contiene ambos identificadores, se utilizará el campo \texttt{additionalIdentifiers} para mapear la máxima cantidad de información. Por último, en este elemento de mapeado se ha añadido el rol de la parte adjudicadora (\texttt{procuringEntity}).
             \end{itemize}
         
         \subsubsection{Otros campos}
@@ -354,7 +335,7 @@
                 \item \textbf{Elementos en el esquema \texttt{OCDS}}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{suppliers}} \\
                     \tabto{7.6cm} \texttt{\textit{parties[j]}}
-                \item \textbf{Comentarios}: Debido a que este mapeo introduce en el documento la identidad del adjudicatario, también debe introducir en el campo \texttt{parties} la referencia a dicha parte involucrada. De manera análoga al mapeo que realiza  \hyperref[subsec:UbicacionOrganica]{Ubicación orgánica}, el campo \texttt{identifier} tanto en el campo \texttt{suppliers} como en la colección \texttt{parties} detecta si la identificación de la entidad es del tipo DIR3 o NIF, indicándolo en el campo \texttt{schema}. Por último, este mapeo también introduce en la referencia al adjudicatario en \texttt{parties} en el campo \texttt{roles} el valor \texttt{supplier}, tal y como se indica en la lista de códigos de \texttt{OCDS} sobre roles de las partes involucradas \cite{CR18}.
+                \item \textbf{Comentarios}: Debido a que este mapeado introduce en el documento la identidad del adjudicatario, también debe introducir en el campo \texttt{parties} la referencia a dicha parte involucrada. De manera análoga al mapeado que realiza  \hyperref[subsec:UbicacionOrganica]{ubicación orgánica}, el campo \texttt{identifier} tanto en el campo \texttt{suppliers} como en la colección \texttt{parties} detecta si la identificación de la entidad es del tipo DIR3 o NIF, indicándolo en el campo \texttt{schema}. Por último, este mapeado también introduce en la referencia al adjudicatario en \texttt{parties} en el campo \texttt{roles} el valor \texttt{supplier}, tal y como se indica en la lista de códigos de \texttt{OCDS} sobre roles de las partes involucradas \cite{CR18}.
             \end{itemize}
             
         \subsubsection{Importe de adjudicación}
@@ -377,7 +358,7 @@
                     \tabto{7.6cm} \texttt{\textit{cbc:ReceivedTenderQuantity}}
                 \item \textbf{Elemento en el esquema \texttt{OCDS}}:
                     \tabto{7.6cm} \texttt{tender.\textit{numberOfTenderers}}
-                \item \textbf{Comentarios}: Dado que \texttt{OCDS} no provee el campo \texttt{numberOfTenderers} dentro de la colección de \texttt{awards}, este mapeo sólo se realizará en el caso de que el proceso de adjudicación sólo contenga un lote, es decir, la longitud de la colección \texttt{awards} sea 1 y, por tanto, \texttt{numberOfTenderers} refleje efectivamente el número de participantes.
+                \item \textbf{Comentarios}: Dado que \texttt{OCDS} no provee el campo \texttt{numberOfTenderers} dentro de la colección de \texttt{awards}, este mapeado sólo se realizará en el caso de que el proceso de adjudicación sólo contenga un lote, es decir, la longitud de la colección \texttt{awards} sea 1 y, por tanto, \texttt{numberOfTenderers} refleje efectivamente el número de participantes.
             \end{itemize}
             
         \subsubsection{Fecha de la adjudicación}
