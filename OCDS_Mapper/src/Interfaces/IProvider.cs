@@ -31,10 +31,10 @@ namespace OCDS_Mapper.src.Interfaces
         Task<Document> TakeFile();
 
         /*  función SetParser(IParser) => bool
-         *      (utilizada solo en modo PROVIDE_ALL)
-         *      Actualiza la instancia del Parser utilizada por el Provider
-         *      Desbloquea el thread en background que utiliza dicho componente
+         *      (utilizada solo en modo PROVIDE_ALL y PROVIDE_DAILY)
+         *      Desbloquea el thread en background que integra al Provider y al Parser
          *  @param parser : Instancia del Parser para cada documento
+         *  @return : true si el documento del Parser es día anterior al actual, false e.o.c
          */
         bool SetParser(IParser parser);
 

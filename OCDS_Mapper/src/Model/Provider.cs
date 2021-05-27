@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using log4net.Core;
 using Nito.AsyncEx;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
@@ -34,10 +33,10 @@ namespace OCDS_Mapper.src.Model
 
         /* Atributos */
 
-        /*  atributo _Log => Action<object, string, Level>
+        /*  atributo _Log => Action<object, string, ELogLevel>
          *      Puntero a la función de logging
          */
-        private readonly Action<object, string, Level> _Log;
+        private readonly Action<object, string, ELogLevel> _Log;
 
 
         /*  atributo _fileName => string
@@ -80,7 +79,7 @@ namespace OCDS_Mapper.src.Model
         // @param filePath : ruta al documento para proveer, local o remoto
         // @throws FileNotFoundException : si el parámetro filePath no se corresponde ni a un archivo local ni a una URI correcta
         // @throws InvalidOperationCodeException : si el parámetro code no es vaĺido
-        public Provider(Action<object, string, Level> Log, EProviderOperationCode code, string filePath)
+        public Provider(Action<object, string, ELogLevel> Log, EProviderOperationCode code, string filePath)
         {
             _Log = Log;
 
@@ -99,7 +98,7 @@ namespace OCDS_Mapper.src.Model
                     _fileName = filePath;
                     Files.Add(new Document(filePath));
 
-                    _Log(this, $"Retrieving local file {filePath}", Level.Info);
+                    _Log(this, $"Retrieving local file {filePath}", ELogLevel.INFO);
 
                     Files.CompleteAdding();
                 }
@@ -114,11 +113,11 @@ namespace OCDS_Mapper.src.Model
                     _webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
                     _webClient.DownloadFileAsync(uri, _OUTPUT_PATH);
 
-                    _Log(this, $"Downloading {_fileName} file", Level.Info);
+                    _Log(this, $"Downloading {_fileName} file", ELogLevel.INFO);
                 }
                 else
                 {
-                    _Log(this, $"Path {filePath} doesn't match with any local file or correct URI", Level.Error);
+                    _Log(this, $"Path {filePath} doesn't match with any local file or correct URI", ELogLevel.ERROR);
                     throw new FileNotFoundException();
                 }
             }
@@ -134,11 +133,11 @@ namespace OCDS_Mapper.src.Model
                     _mre = new ManualResetEvent(false);
                 
                     // Lanza en background la tarea que irá proveyendo documentos
-                    Thread downloader = new Thread(ProvideAllAndDailyTask);
+                    Thread downloader = new Thread(BackgroundDownloader);
                     downloader.IsBackground = true;
                     downloader.Start();
 
-                    _Log(this, "Provider background downloader thread launched", Level.Info);
+                    _Log(this, "Provider background downloader thread launched", ELogLevel.INFO);
                 }
                 else if (code == EProviderOperationCode.PROVIDE_LATEST)
                 {
@@ -146,11 +145,11 @@ namespace OCDS_Mapper.src.Model
                     _fileName = _LATEST_PATH;
                     _webClient.DownloadFileAsync(new Uri(_fileName), _OUTPUT_PATH);
 
-                    _Log(this, $"Downloading {_fileName} file", Level.Info);
+                    _Log(this, $"Downloading {_fileName} file", ELogLevel.INFO);
                 }
                 else
                 {
-                    _Log(this, "Please provide a valid operational code", Level.Error);
+                    _Log(this, "Please provide a valid operational code", ELogLevel.ERROR);
                     throw new InvalidOperationCodeException();
                 }
             }
@@ -166,6 +165,7 @@ namespace OCDS_Mapper.src.Model
          */
         public async Task<Document> TakeFile()
         {
+            // Devuelve el documento o null si no quedan más
             try
             {
                 return await Files.TakeAsync();
@@ -179,20 +179,21 @@ namespace OCDS_Mapper.src.Model
 
         /*  función SetParser(IParser) => bool
          *      (utilizada solo en modo PROVIDE_ALL y PROVIDE_DAILY)
-         *      Actualiza la instancia del Parser utilizada por el Provider
-         *      Desbloquea el thread en background que utiliza dicho componente
+         *      Desbloquea el thread en background que integra al Provider y al Parser
          *  @param parser : Instancia del Parser para cada documento
+         *  @return : true si el documento del Parser es día anterior al actual, false e.o.c
          */
         public bool SetParser(IParser parser)
         {
+            // Actualiza el parser y desbloquea el thread
             Parser = parser;
             _mre.Set();
-            _Log(this, "Provider background thread unlocking", Level.Debug);
+            _Log(this, "Provider background thread unlocking", ELogLevel.DEBUG);
 
+            // Devuelve si el documento actual es del mismo día que el anterior al día actual
+            // para que el programa principal sepa cuando parar en el modo de PROVIDE_DAILY
             DateTime documentDate = DateTime.Parse(Parser.GetDocumentTimestamp(true));
-            DateTime mock = DateTime.Parse("2021-05-20");
-
-            return mock.Day == documentDate.Day;
+            return DateTime.Today.AddDays(-1).Day == documentDate.Day;
         }
 
 
@@ -205,11 +206,11 @@ namespace OCDS_Mapper.src.Model
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
-                _Log(this, $"Completed file {filePath} deleted", Level.Info);
+                _Log(this, $"Completed file {filePath} deleted", ELogLevel.INFO);
             }
             else
             {
-                _Log(this, $"Tried to delete unexisting file {filePath}", Level.Error);
+                _Log(this, $"Tried to delete unexisting file {filePath}", ELogLevel.ERROR);
             }
         }
 
@@ -240,15 +241,15 @@ namespace OCDS_Mapper.src.Model
                 Files.Add(new Document(_webClient.QueryString["file"]));
                 _webClient.QueryString.Remove("file");
             }
-            _Log(this, $"Completed download of file {_fileName}", Level.Info);
+            _Log(this, $"Completed download of file {_fileName}", ELogLevel.INFO);
         }
 
 
-        /*  función ProvideAllAndDailyTask() => void
+        /*  función BackgroundDownloader() => void
          *      Función para el thread del código de operacion PROVIDE_ALL y PROVIDE_DAILY
          *      Va proveyendo documentos enlazados utilizando el componente de Parseo
          */
-        private void ProvideAllAndDailyTask()
+        private void BackgroundDownloader()
         {
             // Contador para los documentos provistos (forma ./tmp/document{1:N}.atom)
             int outputCount = 0;
@@ -269,7 +270,7 @@ namespace OCDS_Mapper.src.Model
                 _webClient.QueryString.Add("file", outputFileName);
                 _webClient.DownloadFileAsync(uri, outputFileName);
 
-                _Log(this, $"Downloading {_fileName} file", Level.Info);
+                _Log(this, $"Downloading {_fileName} file", ELogLevel.INFO);
 
                 // Se bloquea hasta recibir una nueva instancia de Parser (para obtener su link:next)
                 _mre.WaitOne();

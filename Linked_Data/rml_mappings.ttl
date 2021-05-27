@@ -1,13 +1,10 @@
-###################################################################################################
-# RML mapping rules for OCDS 1.0 (https://standard.open-contracting.org/1.0/en/release-schema.json)
-# 
-# Copyright: SINTEF 2018-2021
-# Author   : Brian Elvesæter (brian.elvesater@sintef.no)
-# License  : Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
-# Project  : Developed as part of the TheyBuyForYou project (https://theybuyforyou.eu/)
-# Funding  : TheyBuyForYou has received funding from the European Union's Horizon 2020
-#            research and innovation programme under grant agreement No 780247
-###################################################################################################
+#######################################################################################
+# Reglas de mapeado RML para la transformación a RDF
+# de los datos generados por la aplicación OCDS_Mapper
+#
+# Template recogido del repositorio de TBFY:
+# https://github.com/TBFY/knowledge-graph/blob/master/rml-mappings/openopps_mapping.ttl
+#######################################################################################
 
 
 # RML prefixes
@@ -43,7 +40,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/release/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{ocid}/release/{id}" ;
     rr:class tbfy:Release
   ];
 
@@ -142,7 +139,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}" ;
+    rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{ocid}" ;
     rr:class ocds:ContractingProcess
   ];
   
@@ -157,35 +154,35 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasAward ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{awards/id}"
+      rr:template "https://publiccontracting.linkeddata.es/award/{awards/id}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasContract ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{contracts/id}"
+      rr:template "https://publiccontracting.linkeddata.es/contract/{contracts/id}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasPlan ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{planning/budget/id}"
+      rr:template "https://publiccontracting.linkeddata.es/plan/{planning/budget/id}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasTender ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{tender/id}"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{tender/id}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasRelease ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/release/{id}"
+      rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{ocid}/release/{id}"
     ]
   ].
 
@@ -204,7 +201,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/award/{id}" ;
     rr:class ocds:Award
   ];
 
@@ -227,7 +224,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasAwardValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{value/../id}/value"
+      rr:template "https://publiccontracting.linkeddata.es/award/{value/../id}/value"
     ]
   ];
 
@@ -250,7 +247,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:isIssuedForTender ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{../tender/id}"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{../tender/id}"
     ]
   ].
    
@@ -264,7 +261,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{../id}/value" ;
+    rr:template "https://publiccontracting.linkeddata.es/award/{../id}/value" ;
     rr:class ocds:Value
   ];
 
@@ -294,7 +291,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{../id}/supplier" ;
+    rr:template "https://publiccontracting.linkeddata.es/award/{../id}/supplier" ;
     rr:class ocds:Organisation
   ];
 
@@ -325,7 +322,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:isSupplierFor ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{../id}"
+      rr:template "https://publiccontracting.linkeddata.es/award/{../id}"
     ]
   ].
 
@@ -344,7 +341,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/contract/{id}" ;
     rr:class ocds:Contract
   ];
   
@@ -359,14 +356,14 @@
   rr:predicateObjectMap [
     rr:predicate ocds:isIssuedForAward ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{awardID}"
+      rr:template "https://publiccontracting.linkeddata.es/award/{awardID}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasContractPeriod ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{period/../id}/contractPeriod"
+      rr:template "https://publiccontracting.linkeddata.es/contract/{period/../id}/contractPeriod"
     ]
   ].
 
@@ -380,7 +377,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{../id}/contractPeriod" ;
+    rr:template "https://publiccontracting.linkeddata.es/contract/{../id}/contractPeriod" ;
     rr:class ocds:Period
   ];
     
@@ -415,14 +412,14 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{budget/id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/plan/{budget/id}" ;
     rr:class ocds:Plan
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasBudget ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{budget/id}/budget"
+      rr:template "https://publiccontracting.linkeddata.es/plan/{budget/id}/budget"
     ]
   ].
 
@@ -436,7 +433,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{id}/budget" ;
+    rr:template "https://publiccontracting.linkeddata.es/plan/{id}/budget" ;
     rr:class ocds:Budget
   ];
   
@@ -451,7 +448,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasReservedValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{id}/budget/reservedValue"
+      rr:template "https://publiccontracting.linkeddata.es/plan/{id}/budget/reservedValue"
     ]
   ].
 
@@ -465,7 +462,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{../id}/budget/reservedValue" ;
+    rr:template "https://publiccontracting.linkeddata.es/plan/{../id}/budget/reservedValue" ;
     rr:class ocds:Value
   ];
 
@@ -500,7 +497,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{id}" ;
     rr:class ocds:Tender
   ];
       
@@ -571,21 +568,21 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasItemToBeProcured ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{id}/item/{items/id}"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{id}/item/{items/id}"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasMaxEstimatedValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{value/../id}/maxValue"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{value/../id}/maxValue"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasTenderPeriod ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{tenderPeriod/../id}/period"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{tenderPeriod/../id}/period"
     ]
   ].
 
@@ -599,7 +596,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{../id}/maxValue" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/maxValue" ;
     rr:class ocds:Value
   ];
       
@@ -629,7 +626,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{../id}/period" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/period" ;
     rr:class ocds:Period
   ];
      
@@ -667,7 +664,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{../id}/item/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/item/{id}" ;
     rr:class ocds:Item
   ];
 
@@ -704,7 +701,7 @@
   rr:predicateObjectMap [
     rr:predicate ocdsext:relatedLot ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{../id}/lot/lot-{id}"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/lot/lot-{id}"
     ]
   ].
 
@@ -718,7 +715,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{../id}/lot/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/lot/{id}" ;
     rr:class ocdsext:Lot
   ];
      
@@ -741,7 +738,7 @@
   rr:predicateObjectMap [
     rr:predicate ocdsext:hasLotValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{../id}/lot/{id}/value"
+      rr:template "https://publiccontracting.linkeddata.es/tender/{../id}/lot/{id}/value"
     ]
   ].
 
@@ -755,7 +752,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{../../id}/lot/{../id}/value" ;
+    rr:template "https://publiccontracting.linkeddata.es/tender/{../../id}/lot/{../id}/value" ;
     rr:class ocds:Value
   ];
 
@@ -790,7 +787,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{../ocid}/party/{id}" ;
+    rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../ocid}/party/{id}" ;
     rr:class ocds:Organisation
   ];
       
@@ -805,14 +802,14 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasAddress ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{../ocid}/party/{id}/address"
+      rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../ocid}/party/{id}/address"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasContactPoint ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{../ocid}/party/{id}/contactPoint"
+      rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../ocid}/party/{id}/contactPoint"
     ]
   ];
       
@@ -835,7 +832,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:playsRoleIn ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{../ocid}"
+      rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../ocid}"
     ]
   ].
 
@@ -849,7 +846,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{../../ocid}/party/{../id}/address";
+    rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../../ocid}/party/{../id}/address";
     rr:class ocds:Address
   ];
 
@@ -895,7 +892,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{../../ocid}/party/{../id}/contactPoint" ;
+    rr:template "https://publiccontracting.linkeddata.es/contractingProcess/{../../ocid}/party/{../id}/contactPoint" ;
     rr:class ocds:ContactPoint
   ];
   

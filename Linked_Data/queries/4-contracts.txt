@@ -1,0 +1,1188 @@
+
+ContractID: ocds-1xraxc-TFS-8-2021-contract-TFS-8-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TFS-8-2021-award-1
+ContractID: ocds-1xraxc-41-2020-contract-04-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-41-2020-award-1
+ContractID: ocds-1xraxc-2021-SP01491010-00000273-contract-2021-SP01491010-00000273, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-SP01491010-00000273-award-1
+ContractID: ocds-1xraxc-202100010-contract-CS-12-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202100010-award-1
+ContractID: ocds-1xraxc-2020008534-contract-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020008534-award-1
+ContractID: ocds-1xraxc-29-2019-contract-19-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-29-2019-award-2-2
+ContractID: ocds-1xraxc-29-2019-contract-13-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-29-2019-award-1-1	ContractStartDate: 2021-07-01 00:00:00+00:00
+ContractID: ocds-1xraxc-29-2019-contract-14-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-29-2019-award-3-3
+ContractID: ocds-1xraxc-000120-20-CMAY-contract-000120-20-CMAY, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000120-20-CMAY-award-1
+ContractID: ocds-1xraxc-SER-42-21-MB-contract-SER-42-20MB, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SER-42-21-MB-award-1
+ContractID: ocds-1xraxc-2020-CAA-000003-contract-2020-CAA-000003-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-CAA-000003-award-1-1	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-conc-237-expte-3-2020-2-06-141-contract-contrato-conc-237, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-conc-237-expte-3-2020-2-06-141-award-1
+ContractID: ocds-1xraxc-000008-21-CMAY-contract-000008-21-CMAY, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000008-21-CMAY-award-1
+ContractID: ocds-1xraxc-ASS-1-2021-contract-COASS-1-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASS-1-2021-award-1
+ContractID: ocds-1xraxc-2021-0013-contract-2021-0013, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0013-award-1
+ContractID: ocds-1xraxc-702701Z-contract-702701Z, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-702701Z-award-1
+ContractID: ocds-1xraxc-2021-00026-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00026-award-1
+ContractID: ocds-1xraxc-20-ANT-44758-contract-20-ANT-44758, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-ANT-44758-award-1
+ContractID: ocds-1xraxc-563139N-contract-563139N, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-563139N-award-1
+ContractID: ocds-1xraxc-A2021-000205-contract-A2021-000205-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000205-award-1
+ContractID: ocds-1xraxc-2-2020-contract-2-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-2020-award-1
+ContractID: ocds-1xraxc-4-21-contract-4-21-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-2-2	ContractStartDate: 2021-05-04 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-3-3	ContractStartDate: 2021-04-29 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-7-7	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-4-4	ContractStartDate: 2021-04-29 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-5-5	ContractStartDate: 2021-05-04 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-6-6	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-1-1	ContractStartDate: 2021-05-04 00:00:00+00:00
+ContractID: ocds-1xraxc-4-21-contract-4-21-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-21-award-8-8	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-004216-contract-010442-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004216-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0904-00000087E-contract-2021-ETSAE0904-00000087ELOTE-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0904-00000087E-award-2-2
+ContractID: ocds-1xraxc-2021-ETSAE0904-00000087E-contract-2021-ETSAE0904-00000087E-LOTE-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0904-00000087E-award-1-1
+ContractID: ocds-1xraxc-ALC-117-2020-contract-ALC-117-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ALC-117-2020-award-1
+ContractID: ocds-1xraxc-2021-E-4---2020011630--contract-4610012693, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-4---2020011630--award-1
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-1-1	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-5-5	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-4-4	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-3-3	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-6-6	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-12024-2020-contract-24-2020-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12024-2020-award-2-2	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-sumin-abr-2021000001-contract-contrato-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-sumin-abr-2021000001-award-1-1
+ContractID: ocds-1xraxc-032021-contract-032021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-032021-award-1
+ContractID: ocds-1xraxc-SU-2019-10-contract-SU-2019-10-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-10-award-5-5
+ContractID: ocds-1xraxc-SU-2019-10-contract-SU-2019-10--1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-10-award-1-1
+ContractID: ocds-1xraxc-SU-2019-10-contract-SU-2019-10-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-10-award-3-3
+ContractID: ocds-1xraxc-SU-2019-10-contract-SU-2019-10-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-10-award-4-4
+ContractID: ocds-1xraxc-SU-2019-10-contract-SU-2019-10-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-10-award-2-2
+ContractID: ocds-1xraxc-2020-C004-000008-contract-2020-C004-000008, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-C004-000008-award-1
+ContractID: ocds-1xraxc-CONTMAY-2021-42-contract-0, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTMAY-2021-42-award-1
+ContractID: ocds-1xraxc-PEA-104-2021-contract-PEA-104-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PEA-104-2021-award-1
+ContractID: ocds-1xraxc-OC-2021-012-contract-OC-21-12-LOTE-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OC-2021-012-award-1-1	ContractStartDate: 2021-06-06 00:00:00+00:00
+ContractID: ocds-1xraxc-OC-2021-012-contract-OC-21-12-LOTE-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OC-2021-012-award-2-2	ContractStartDate: 2021-06-06 00:00:00+00:00
+ContractID: ocds-1xraxc-21-001766-contract-1766, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-001766-award-1
+ContractID: ocds-1xraxc-8993-2020-contract-0011, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8993-2020-award-1
+ContractID: ocds-1xraxc-SVQ-105-2020-contract-SVQ-105-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SVQ-105-2020-award-1
+ContractID: ocds-1xraxc-LPA-84-2021-contract-LPA-84-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LPA-84-2021-award-1
+ContractID: ocds-1xraxc-2020011280-contract-4610012744, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020011280-award-1
+ContractID: ocds-1xraxc-A2021-002127-contract-A2021-002127-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-002127-award-1
+ContractID: ocds-1xraxc-362021PA1005-contract-1005-01-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-362021PA1005-award-1-1	ContractStartDate: 2021-05-31 00:00:00+00:00
+ContractID: ocds-1xraxc-362021PA1005-contract-1005-02-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-362021PA1005-award-2-2	ContractStartDate: 2021-05-31 00:00:00+00:00
+ContractID: ocds-1xraxc-362021PA1005-contract-1005-04-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-362021PA1005-award-4-4	ContractStartDate: 2021-05-31 00:00:00+00:00
+ContractID: ocds-1xraxc-362021PA1005-contract-1005-03-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-362021PA1005-award-3-3	ContractStartDate: 2021-05-31 00:00:00+00:00
+ContractID: ocds-1xraxc-SUMIN-ABR_SMPL-AY-2021000008-contract-SUMIN-ABR_SMPL-AY-2021000008, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SUMIN-ABR_SMPL-AY-2021000008-award-1
+ContractID: ocds-1xraxc-S6O-011-2020---L4-contract-S6O-011-2020-L4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-011-2020---L4-award-1
+ContractID: ocds-1xraxc-FUE-9-2021-contract-FUE-9-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-FUE-9-2021-award-1
+ContractID: ocds-1xraxc-2021-00000673l-contract-2021-00000673L, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00000673l-award-1
+ContractID: ocds-1xraxc-20AA0261-contract-20AA0261-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20AA0261-award-2-2	ContractStartDate: 2021-05-11 00:00:00+00:00
+ContractID: ocds-1xraxc-20AA0261-contract-20AA0261-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20AA0261-award-1-1	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-20AA0261-contract-20AA0261-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20AA0261-award-3-3	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-357-2021-contract-9-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-357-2021-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-TF-JULIO2020-contract-0000118462-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-TF-JULIO2020-award-1
+ContractID: ocds-1xraxc-5688-2020-contract-1-5688-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-5688-2020-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-79-contract-EMERGECOVID2-79, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-79-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-63-contract-EMERGECOVID2-63, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-63-award-1
+ContractID: ocds-1xraxc-EXG21-0054-contract-EXG21-0054, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXG21-0054-award-1
+ContractID: ocds-1xraxc-20214020-V-contract-20214020-V, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20214020-V-award-1
+ContractID: ocds-1xraxc-563-2021-contract-563-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-563-2021-award-1
+ContractID: ocds-1xraxc-20-SE-146-contract-0000136279-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-SE-146-award-1
+ContractID: ocds-1xraxc-LCG-11-2021-contract-LCG-11-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LCG-11-2021-award-1
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-16-8
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-20-13
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-12-4
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-21-14
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-3-15
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-13-5
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-18-10
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-10-2
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-2-12
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-19-11
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-1-1
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-15-7
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-17-9
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-11-3
+ContractID: ocds-1xraxc-42021801-1d-2020-contract-42021801-1d-2020-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-42021801-1d-2020-award-14-6
+ContractID: ocds-1xraxc-35-2021-contract-35-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-35-2021-award-1
+ContractID: ocds-1xraxc-A2021-000313-contract-A2021-000313-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000313-award-1
+ContractID: ocds-1xraxc-2020-GENSLC-10181-contract-2020-GENSLC-10181, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-GENSLC-10181-award-1
+ContractID: ocds-1xraxc-V-149A-O-contract-V-149A-O, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-V-149A-O-award-1
+ContractID: ocds-1xraxc-2020-D31000-006-013-00173-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-D31000-006-013-00173-award-1
+ContractID: ocds-1xraxc-3-21-contract-3-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-21-award-1
+ContractID: ocds-1xraxc-2021-AR44U-00000721E-contract-2021-AR44U-00000721E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR44U-00000721E-award-1
+ContractID: ocds-1xraxc-75-20-contract-75-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-75-20-award-1
+ContractID: ocds-1xraxc-2020-PJ-R-19-contract-001-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-PJ-R-19-award-1
+ContractID: ocds-1xraxc-91-2020-contract-91-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-91-2020-award-1
+ContractID: ocds-1xraxc-11-2021-contract-112021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-11-2021-award-1
+ContractID: ocds-1xraxc-2020-01506-contract-4500037054, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-01506-award-1
+ContractID: ocds-1xraxc-209-2021-contract-209-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-209-2021-award-1
+ContractID: ocds-1xraxc-PAS-06-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PAS-06-2021-award-1
+ContractID: ocds-1xraxc-03-21-contract-03-21-L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-03-21-award-1-1
+ContractID: ocds-1xraxc-03-21-contract-03-21-L2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-03-21-award-2-2
+ContractID: ocds-1xraxc-103-2021-contract-103-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-103-2021-award-1
+ContractID: ocds-1xraxc-1314-2020-contract-1314-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1314-2020-award-1
+ContractID: ocds-1xraxc-CON-7-2021-contract-CON-7-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-7-2021-award-1
+ContractID: ocds-1xraxc-462-2020-contract-462-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-462-2020-award-1
+ContractID: ocds-1xraxc-460-2020-contract-460-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-460-2020-award-1
+ContractID: ocds-1xraxc-S-01509-2021-contract-S-01509-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S-01509-2021-award-1
+ContractID: ocds-1xraxc-43076J-2020-contract-2020-43076J, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-43076J-2020-award-1
+ContractID: ocds-1xraxc-20-02894-contract-2021C360000016, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-02894-award-1
+ContractID: ocds-1xraxc-5451-2020PAS-contract-24-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-5451-2020PAS-award-1
+ContractID: ocds-1xraxc-SUM-15-21-ML-contract-SUM-15-21-ML, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SUM-15-21-ML-award-1
+ContractID: ocds-1xraxc-CON21-2021-0068-contract-CON21-2021-0068-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON21-2021-0068-award-award-2	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-CON21-2021-0068-contract-CON21-2021-0068-2-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON21-2021-0068-award-award-1	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020003436-contract-2020003436, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020003436-award-1
+ContractID: ocds-1xraxc-43-2020-CMA-contract-43-2020-CMA, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-43-2020-CMA-award-1
+ContractID: ocds-1xraxc-SE10-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE10-2021-award-1
+ContractID: ocds-1xraxc-2021-0001-contract-2021-0001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0001-award-1
+ContractID: ocds-1xraxc-A2021-003825-contract-A2021-003825, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-003825-award-1
+ContractID: ocds-1xraxc-PP-V-2019-326-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PP-V-2019-326-award-1
+ContractID: ocds-1xraxc-21AS0082-contract-21AS0082, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21AS0082-award-1
+ContractID: ocds-1xraxc-MAD-72-2020-contract-MAD-72-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MAD-72-2020-award-1
+ContractID: ocds-1xraxc-P4105900G-2019-000014-PEA-contract-14-2019-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4105900G-2019-000014-PEA-award-1-1
+ContractID: ocds-1xraxc-P4105900G-2019-000014-PEA-contract-14-2019-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4105900G-2019-000014-PEA-award-2-2
+ContractID: ocds-1xraxc-P4105900G-2019-000014-PEA-contract-14-2019-4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4105900G-2019-000014-PEA-award-4-4
+ContractID: ocds-1xraxc-P4105900G-2019-000014-PEA-contract-14-2019-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4105900G-2019-000014-PEA-award-3-3
+ContractID: ocds-1xraxc-2020-00009528a-contract-2020-00009528A, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009528a-award-1
+ContractID: ocds-1xraxc-2021-0008-contract-2021-0008, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0008-award-1
+ContractID: ocds-1xraxc-SP21-00102-contract-SP21-00102-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SP21-00102-award-1
+ContractID: ocds-1xraxc-DGRE-4771-COVID-19-contract-105449-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-4771-COVID-19-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-JUNIO-2020-contract-0000118459-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-JUNIO-2020-award-1
+ContractID: ocds-1xraxc-A-0011-2021-contract-A-0011-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A-0011-2021-award-1
+ContractID: ocds-1xraxc-2020-00009223c-contract-2020-00009223C, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009223c-award-1
+ContractID: ocds-1xraxc-2021-010-contract-2021-010, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-010-award-1
+ContractID: ocds-1xraxc-TSA0070501-contract-425534, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TSA0070501-award-1
+ContractID: ocds-1xraxc-2021-EA14-00000660E-contract-2021-EA14-00000660, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA14-00000660E-award-1
+ContractID: ocds-1xraxc-55-M-20-SS-GE-A-0073-contract-0000059333-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-55-M-20-SS-GE-A-0073-award-1
+ContractID: ocds-1xraxc-5230A-2021-15-contract-5230A-2021-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-5230A-2021-15-award-1
+ContractID: ocds-1xraxc-P-A-S-A--2021-3-GME-contract-P-A-S-A--2021-3-GME, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P-A-S-A--2021-3-GME-award-1
+ContractID: ocds-1xraxc-013-2021-CONTR-contract-013-2021-CONTR, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-013-2021-CONTR-award-1
+ContractID: ocds-1xraxc-CNMY19-AT00A-17-contract-6910-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNMY19-AT00A-17-award-1
+ContractID: ocds-1xraxc-2235-2021-contract-2235-2021-unico, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2235-2021-award-1
+ContractID: ocds-1xraxc-692963Z-contract-3579, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-692963Z-award-1
+ContractID: ocds-1xraxc-XX-C-2021-09-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-XX-C-2021-09-award-1
+ContractID: ocds-1xraxc-OB-025-20-contract-2016-2-PPOYS-124, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-025-20-award-1
+ContractID: ocds-1xraxc-2020-000562-PEN-contract-1-562-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000562-PEN-award-award-1	ContractStartDate: 2021-03-23 00:00:00+00:00
+ContractID: ocds-1xraxc-E-71-HMS-2020-contract-4612000878-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-71-HMS-2020-award-award-1	ContractStartDate: 2020-03-20 00:00:00+00:00
+ContractID: ocds-1xraxc-E-71-HMS-2020-contract-4612000877-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-71-HMS-2020-award-award-5	ContractStartDate: 2020-03-20 00:00:00+00:00
+ContractID: ocds-1xraxc-E-71-HMS-2020-contract-4612000880-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-71-HMS-2020-award-award-4	ContractStartDate: 2020-03-20 00:00:00+00:00
+ContractID: ocds-1xraxc-E-71-HMS-2020-contract-4612000879-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-71-HMS-2020-award-award-2	ContractStartDate: 2020-03-20 00:00:00+00:00
+ContractID: ocds-1xraxc-E-71-HMS-2020-contract-4612000876-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-71-HMS-2020-award-award-3	ContractStartDate: 2020-03-20 00:00:00+00:00
+ContractID: ocds-1xraxc-21-05240-contract-21-05240, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-05240-award-1
+ContractID: ocds-1xraxc-20200252-contract-20200252, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20200252-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-65-contract-EMERGECOVID2-65, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-65-award-1
+ContractID: ocds-1xraxc-300-2020-00324-contract-300-2020-00324, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00324-award-1
+ContractID: ocds-1xraxc-2021-E-7---2020011633--contract-4610012709, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-7---2020011633--award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-SEPT2020-carp7-contract-0000116654-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-SEPT2020-carp7-award-1
+ContractID: ocds-1xraxc-VLC-64-2021-contract-VLC-64-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-VLC-64-2021-award-1
+ContractID: ocds-1xraxc-SUMIN-NEG_SINP-2020000084-contract-SUMIN-NEG_SINP-2020000084, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SUMIN-NEG_SINP-2020000084-award-1
+ContractID: ocds-1xraxc-07-2021-contract-07-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-07-2021-award-1
+ContractID: ocds-1xraxc-24-2021-contract-24-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-24-2021-award-1
+ContractID: ocds-1xraxc-CONTMAY-2021-53-contract-CONTMAY-2021-53, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTMAY-2021-53-award-1
+ContractID: ocds-1xraxc-CO-2020-204-contract-CO-2020-204, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CO-2020-204-award-1
+ContractID: ocds-1xraxc-CM-15-21-contract-CM-15-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CM-15-21-award-1
+ContractID: ocds-1xraxc-70002-2021-72-contract-70002-2021-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-70002-2021-72-award-1
+ContractID: ocds-1xraxc-34-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-34-2021-award-1
+ContractID: ocds-1xraxc-040-2021-contract-040-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-040-2021-award-1
+ContractID: ocds-1xraxc-000038-2020-CONT-contract-000038-2020-CONT, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000038-2020-CONT-award-1
+ContractID: ocds-1xraxc-Covid109-contract-Covid109, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Covid109-award-1
+ContractID: ocds-1xraxc-301503SE21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-301503SE21-award-1
+ContractID: ocds-1xraxc-PMI-10-2021-contract-PMI-10-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PMI-10-2021-award-1
+ContractID: ocds-1xraxc-000017-2020-2-06-03-01-contract-13-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000017-2020-2-06-03-01-award-1
+ContractID: ocds-1xraxc-PDSU-contract-36-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PDSU-award-1
+ContractID: ocds-1xraxc-21-001758-contract-1758, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-001758-award-1
+ContractID: ocds-1xraxc-61-03-20O-contract-2021-26, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-61-03-20O-award-1
+ContractID: ocds-1xraxc-1396-2021-contract-1396-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1396-2021-award-1
+ContractID: ocds-1xraxc-2020010073-contract-2020010073, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020010073-award-1
+ContractID: ocds-1xraxc-PR21-0113-contract-PR21-0113, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PR21-0113-award-1
+ContractID: ocds-1xraxc-2021-AR46U-00000169-contract-169-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR46U-00000169-award-1
+ContractID: ocds-1xraxc-EC-12-20-contract-EC-12-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-12-20-award-1
+ContractID: ocds-1xraxc-2-2021-contract-ACEPTACION, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-2021-award-1
+ContractID: ocds-1xraxc-2-2021-contract-263_2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-2021-award-1
+ContractID: ocds-1xraxc-CON-23-2020-contract-CON-23-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-23-2020-award-1
+ContractID: ocds-1xraxc-2021-00_101298-contract-2021-00_101298-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00_101298-award-1-1
+ContractID: ocds-1xraxc-2021-00_101298-contract-2021-00_101298-LOTE-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00_101298-award-2-2
+ContractID: ocds-1xraxc-2021-00_101298-contract-2021-00_101298-LOTE-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00_101298-award-3-3
+ContractID: ocds-1xraxc-202100000000-contract-202100000000, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202100000000-award-1
+ContractID: ocds-1xraxc-SE0005-21-contract-2021-25, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE0005-21-award-1
+ContractID: ocds-1xraxc-04-2021-contract-contra2087, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04-2021-award-1
+ContractID: ocds-1xraxc-04-2021-contract-C-L3-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04-2021-award-2-2	ContractStartDate: 2021-05-16 00:00:00+00:00
+ContractID: ocds-1xraxc-04-2021-contract-04-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04-2021-award-1
+ContractID: ocds-1xraxc-04-2021-contract-C-L2-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04-2021-award-1-1	ContractStartDate: 2021-05-16 00:00:00+00:00
+ContractID: ocds-1xraxc-L011-2021-contract-L011-2021-LOTE-1-C-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-L011-2021-award-1-1	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-L011-2021-contract-L011-2021-LOTE-2-C-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-L011-2021-award-2-2	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-TF-DICIEMBRE-2020-contract-0000145739-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-TF-DICIEMBRE-2020-award-1
+ContractID: ocds-1xraxc-10002-2020-contract-14-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-10002-2020-award-2-2	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-10002-2020-contract-13-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-10002-2020-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-000380-contract-010453-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-000380-award-1
+ContractID: ocds-1xraxc-60-2020-SV-PASS-contract-2021-342, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-60-2020-SV-PASS-award-1
+ContractID: ocds-1xraxc-102-2021-contract-102-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-102-2021-award-1
+ContractID: ocds-1xraxc-19020-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19020-2020-award-1
+ContractID: ocds-1xraxc-PRO11-2021-7094-contract-PRO11-2021-7094, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRO11-2021-7094-award-1
+ContractID: ocds-1xraxc-2021-EA24-00000073E-contract-2021-EA24-00000073E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA24-00000073E-award-1
+ContractID: ocds-1xraxc-1217-2021-contract-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1217-2021-award-1
+ContractID: ocds-1xraxc-2-20-41110-0540-contract-2-20-41110-0540-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-20-41110-0540-award-1
+ContractID: ocds-1xraxc-19-09563-ADS-0064-contract-2020C330000024, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19-09563-ADS-0064-award-1
+ContractID: ocds-1xraxc-65-2021-contract-65-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-65-2021-award-1
+ContractID: ocds-1xraxc-2021-471-contract-471, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-471-award-1
+ContractID: ocds-1xraxc-13378-2020-PAS-OBR-contract-23-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-13378-2020-PAS-OBR-award-1
+ContractID: ocds-1xraxc-MAD-23-2021-contract-MAD-23-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MAD-23-2021-award-1
+ContractID: ocds-1xraxc-60-20-C-contract-60-20-C, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-60-20-C-award-1
+ContractID: ocds-1xraxc-7636-2020-contract-15-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-7636-2020-award-1
+ContractID: ocds-1xraxc-J200043-contract-J200043, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-J200043-award-1
+ContractID: ocds-1xraxc-553531T-contract-553531T, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-553531T-award-1
+ContractID: ocds-1xraxc-2021-004359-contract-010466-2021-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-04-4
+ContractID: ocds-1xraxc-2021-004359-contract-010472-2021-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-10-10
+ContractID: ocds-1xraxc-2021-004359-contract-010468-2021-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-06-6
+ContractID: ocds-1xraxc-2021-004359-contract-010458-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-01-1
+ContractID: ocds-1xraxc-2021-004359-contract-010467-2021-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-05-5
+ContractID: ocds-1xraxc-2021-004359-contract-010469-2021-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-07-7
+ContractID: ocds-1xraxc-2021-004359-contract-010471-2021-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-09-9
+ContractID: ocds-1xraxc-2021-004359-contract-010465-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-03-3
+ContractID: ocds-1xraxc-2021-004359-contract-010463-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-02-2
+ContractID: ocds-1xraxc-2021-004359-contract-010470-2021-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004359-award-08-8
+ContractID: ocds-1xraxc-2020-D31000-006-013-00004-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-D31000-006-013-00004-award-1
+ContractID: ocds-1xraxc-19-33508-contract-19-33508, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19-33508-award-1
+ContractID: ocds-1xraxc-CON-SUM-02-2021-contract-CON-SUM-02-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-SUM-02-2021-award-1
+ContractID: ocds-1xraxc-12-21-contract-12-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12-21-award-1
+ContractID: ocds-1xraxc-02012021AF47-contract-02012021AF47, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02012021AF47-award-1
+ContractID: ocds-1xraxc-0026-2021-2005-contract-4610012745-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0026-2021-2005-award-award-1	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-0026-2021-2005-contract-4610012747-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0026-2021-2005-award-award-3	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-0026-2021-2005-contract-4610012746-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0026-2021-2005-award-award-2	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-752-2020-contract-752-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-752-2020-award-1
+ContractID: ocds-1xraxc-8466-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8466-2020-award-1
+ContractID: ocds-1xraxc-XP1243-2020-contract-2021-733, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-XP1243-2020-award-1
+ContractID: ocds-1xraxc-A2021-000280-contract-A2021-000280, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000280-award-1
+ContractID: ocds-1xraxc-CG-2021-2821-0105-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CG-2021-2821-0105-award-1
+ContractID: ocds-1xraxc-3469-2021---ref--C-2021-006-contract-2021-0054, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3469-2021---ref--C-2021-006-award-1
+ContractID: ocds-1xraxc-2020-057-O--2----LOTE-2-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-057-O--2----LOTE-2-award-1
+ContractID: ocds-1xraxc-174-20-contract-174-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-174-20-award-1
+ContractID: ocds-1xraxc-2-21-contract-2-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-21-award-1
+ContractID: ocds-1xraxc-CNMY17-DGTIC-18-contract--CNMY17-DGTIC-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNMY17-DGTIC-18-award-1
+ContractID: ocds-1xraxc-2021-1026-contract-2021_1026_LOTE_1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-1026-award-1-1	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-1026-contract-2021_1026_LOTE_2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-1026-award-2-2	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-5000024178-contract-9Z40001422, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-5000024178-award-1
+ContractID: ocds-1xraxc-con-2019-15-contract-con-2019-15-5-1-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-con-2019-15-award-1-3
+ContractID: ocds-1xraxc-con-2019-15-contract-con-2019-15-5-3-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-con-2019-15-award-1-1
+ContractID: ocds-1xraxc-con-2019-15-contract-con-2019-15-5-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-con-2019-15-award-1-2
+ContractID: ocds-1xraxc-OB-019-20-contract-2016-2018-2-PPOYS-59, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-019-20-award-1
+ContractID: ocds-1xraxc-C0481-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-C0481-21-award-1
+ContractID: ocds-1xraxc-132-20-contract-132-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-132-20-award-1
+ContractID: ocds-1xraxc-3290-2021-contract-3290-2021-unico, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3290-2021-award-1
+ContractID: ocds-1xraxc-28-21-DT-PA-OB-contract-M1-444-233-2111, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-28-21-DT-PA-OB-award-1
+ContractID: ocds-1xraxc-PIC2019_25069-contract-sin-numero, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PIC2019_25069-award-1
+ContractID: ocds-1xraxc-2019N0073080-contract-003-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2019N0073080-award-10-2	ContractStartDate: 2021-05-11 00:00:00+00:00
+ContractID: ocds-1xraxc-2019N0073080-contract-002-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2019N0073080-award-1-1	ContractStartDate: 2021-05-11 00:00:00+00:00
+ContractID: ocds-1xraxc-ASU-2018-103-contract-ASU-2018-103-L2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASU-2018-103-award-2-2
+ContractID: ocds-1xraxc-ASU-2018-103-contract-ASU-2018-103-L4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASU-2018-103-award-4-4
+ContractID: ocds-1xraxc-ASU-2018-103-contract-ASU-2018-103-L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASU-2018-103-award-1-1	ContractStartDate: 2020-07-03 00:00:00+00:00
+ContractID: ocds-1xraxc-ASU-2018-103-contract-ASU-2018-103-L3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASU-2018-103-award-3-3
+ContractID: ocds-1xraxc-ASU-2018-103-contract-ASU-2018-103-L5-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASU-2018-103-award-5-5
+ContractID: ocds-1xraxc-2021-213-00001-contract-2021-213-00001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-213-00001-award-1
+ContractID: ocds-1xraxc-LSV172021-contract-6358, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LSV172021-award-1
+ContractID: ocds-1xraxc-SC-73-2020-contract-SC-73-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SC-73-2020-award-1
+ContractID: ocds-1xraxc-3001-2020-contract-05-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3001-2020-award-1
+ContractID: ocds-1xraxc-PA-SUM-1-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PA-SUM-1-21-award-1
+ContractID: ocds-1xraxc-97-2021-contract-97-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-97-2021-award-1
+ContractID: ocds-1xraxc-2499-1-2020-contract-16-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2499-1-2020-award-award-2
+ContractID: ocds-1xraxc-2499-1-2020-contract-18-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2499-1-2020-award-award-1
+ContractID: ocds-1xraxc-2499-1-2020-contract-17-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2499-1-2020-award-award-3
+ContractID: ocds-1xraxc-2019-021332-contract-010412-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2019-021332-award-1
+ContractID: ocds-1xraxc-54-S-21-SS-GE-N-0010-contract-54-S-21-SS-GE-N-0010, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-54-S-21-SS-GE-N-0010-award-1
+ContractID: ocds-1xraxc-000015-2019-2-06-03-01-contract-19-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000015-2019-2-06-03-01-award-1-1	ContractStartDate: 2020-09-01 00:00:00+00:00
+ContractID: ocds-1xraxc-AM2-21-contract-AM2-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM2-21-award-1
+ContractID: ocds-1xraxc-2021-0027-SU-008-contract-2021-0027-SU008, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0027-SU-008-award-1
+ContractID: ocds-1xraxc-OB-031-20-contract-OB-031-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-031-20-award-1
+ContractID: ocds-1xraxc-SC-02-2020-contract-SC-02-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SC-02-2020-award-1
+ContractID: ocds-1xraxc-A2021-000337-contract-A2021-000337-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000337-award-1
+ContractID: ocds-1xraxc-OBR-ABR_SMPL-2021000018-contract-OBR-ABR_SMPL-2021000018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OBR-ABR_SMPL-2021000018-award-1
+ContractID: ocds-1xraxc-l2106_desrat-contract-L_2106-DESRAT, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-l2106_desrat-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-61-contract-EMERGECOVID2-61, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-61-award-1
+ContractID: ocds-1xraxc-121-20F-O-AS-contract-25052021-1PAS, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-121-20F-O-AS-award-1
+ContractID: ocds-1xraxc-77-2020-CMA-contract-77-2020-CMA, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-77-2020-CMA-award-1
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-8-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-7-14	ContractStartDate: 2021-04-06 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-6-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-5-12	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-5-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-4-11	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-15-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-14-6	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-2-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-16-8	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-14-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-13-5	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-7-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-6-13	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-16-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-15-7	ContractStartDate: 2021-04-09 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-1-1	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-11-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-11-3	ContractStartDate: 2021-04-06 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-12-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-12-4	ContractStartDate: 2021-04-07 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-10-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-10-2	ContractStartDate: 2021-04-06 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-3-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-2-9	ContractStartDate: 2021-04-13 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-9-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-8-15	ContractStartDate: 2021-04-06 00:00:00+00:00
+ContractID: ocds-1xraxc-44P-20-contract-44P-20-Lote-4-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-44P-20-award-3-10	ContractStartDate: 2021-04-13 00:00:00+00:00
+ContractID: ocds-1xraxc-SER-21-0121-AJP-contract-2021-25, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SER-21-0121-AJP-award-1
+ContractID: ocds-1xraxc-25115O00B-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-25115O00B-award-1-1	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-25115O00B-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-25115O00B-award-2-2	ContractStartDate: 2021-05-05 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-0012-contract-2021-0012, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0012-award-1
+ContractID: ocds-1xraxc-2020-0006-contract-2020-0006, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0006-award-1
+ContractID: ocds-1xraxc-I-21020012-contract-I-21020012-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-I-21020012-award-2-2	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-I-21020012-contract-I-21020012-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-I-21020012-award-1-1	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-GMZ-12-2021-contract-GMZ-12-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GMZ-12-2021-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-68-contract-EMERGECOVID2-68, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-68-award-1
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L6-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-4-7	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L11-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-11-3	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L5-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-5-8	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L12-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-11-3	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L10-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-1-1	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L9-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-6-9	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L11-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-10-2	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L4-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-4-7	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L7-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-5-8	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L2-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-2-5	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L5-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-3-6	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L7-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-7-10	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L10-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-10-2	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L12-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-12-4	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L2-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-12-4	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L9-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-8-11	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L3-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-3-6	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-1-1	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L6-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-6-9	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-02021-PAS-contract-02021-PAS-L3-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02021-PAS-award-2-5	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001116-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-1	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001119-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-5	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001118-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-6	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-1120002091-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-4	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001117-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-3	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001120-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-7	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-E--77-HMS-2020-contract-4612001115-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E--77-HMS-2020-award-award-2	ContractStartDate: 2020-06-08 00:00:00+00:00
+ContractID: ocds-1xraxc-12-2020-contract-12-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-12-2020-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0327-00001147E-contract--2021-ETSAE0327-00001147, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0327-00001147E-award-1
+ContractID: ocds-1xraxc-300-2020-691-contract-300-2020-00691-Lote-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-691-award-1-1	ContractStartDate: 2021-03-18 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-023-PASS-contract-2021-023-PASS, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-023-PASS-award-1
+ContractID: ocds-1xraxc-39-2020-CAM-contract-39-2020-CAM, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-39-2020-CAM-award-1
+ContractID: ocds-1xraxc-001-2020-2466-1983-contract-001-2020-2466, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-2466-1983-award-1
+ContractID: ocds-1xraxc-21B20026900-contract-21B20026900, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21B20026900-award-1
+ContractID: ocds-1xraxc-300-2020-00508-contract-300-2020-00508--Contrato-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00508-award-1
+ContractID: ocds-1xraxc-1130-2019-contract-1130-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1130-2019-award-1
+ContractID: ocds-1xraxc-A2021-003842-contract-A2021-003842, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-003842-award-1
+ContractID: ocds-1xraxc-2021_11094_SS-contract-09_2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021_11094_SS-award-3-3	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2021_11094_SS-contract-07_2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021_11094_SS-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2021_11094_SS-contract-08_2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021_11094_SS-award-2-2	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2021CON00126-contract-2021CON00126, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021CON00126-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-62-contract-EMERGECOVID2-62, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-62-award-1
+ContractID: ocds-1xraxc-A5O-145-2020-contract-A5O-145-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A5O-145-2020-award-1
+ContractID: ocds-1xraxc-Covid107-contract-Covid107, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Covid107-award-1
+ContractID: ocds-1xraxc-202000000249-contract-2020_249, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202000000249-award-1
+ContractID: ocds-1xraxc-6100A-2020-07-contract-A-20-10-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6100A-2020-07-award-3-3
+ContractID: ocds-1xraxc-6100A-2020-07-contract-A-20-07-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6100A-2020-07-award-1-1
+ContractID: ocds-1xraxc-6100A-2020-07-contract-A-20-11-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6100A-2020-07-award-4-4
+ContractID: ocds-1xraxc-6100A-2020-07-contract-B-20-62-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6100A-2020-07-award-2-2
+ContractID: ocds-1xraxc-S6O-141-2020---L2-contract-S6O-141-2020-L2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-141-2020---L2-award-1
+ContractID: ocds-1xraxc-20-SU-113-contract-20-SU-113, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-SU-113-award-1
+ContractID: ocds-1xraxc-04101-2020-200-O-contract-102, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04101-2020-200-O-award-1
+ContractID: ocds-1xraxc-75-2021-contract-75-Lote-2-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-75-2021-award-2-2
+ContractID: ocds-1xraxc-75-2021-contract-75-Lote-1-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-75-2021-award-1-1
+ContractID: ocds-1xraxc-75-2021-contract-75-Lote-3-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-75-2021-award-3-3
+ContractID: ocds-1xraxc-75-2021-contract-75-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-75-2021-award-1
+ContractID: ocds-1xraxc-Expdte-08-2020-contract-08-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Expdte-08-2020-award-1-1	ContractStartDate: 2021-04-21 00:00:00+00:00
+ContractID: ocds-1xraxc-Expdte-08-2020-contract-08-2020-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Expdte-08-2020-award-2-2	ContractStartDate: 2021-04-21 00:00:00+00:00
+ContractID: ocds-1xraxc-CNPA-2021-8-contract-CNPA-2021-8-6895-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNPA-2021-8-award-1
+ContractID: ocds-1xraxc-2021-004214-contract-010419-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004214-award-1
+ContractID: ocds-1xraxc-ASUECO-2021-250-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASUECO-2021-250-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0906-00000880E-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0906-00000880E-award-1
+ContractID: ocds-1xraxc-2020-D31000-006-013-00166-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-D31000-006-013-00166-award-1
+ContractID: ocds-1xraxc-G-2959-2020-contract-G-2959-2020-, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-G-2959-2020-award-1
+ContractID: ocds-1xraxc-TVPC_07S_21-contract-TVPC_07S_21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TVPC_07S_21-award-1
+ContractID: ocds-1xraxc-070-2021-contract-070-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-070-2021-award-1
+ContractID: ocds-1xraxc-2021-000205-contract-2021-000205, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-000205-award-1
+ContractID: ocds-1xraxc-2019-23-contract-2019-23, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2019-23-award-1
+ContractID: ocds-1xraxc-2020-AR46U-00000833-contract-833-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-AR46U-00000833-award-1
+ContractID: ocds-1xraxc-CO2017224-contract-C02017224, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CO2017224-award-1
+ContractID: ocds-1xraxc-2021-6-contract-PRCNIBSAL-EXOMAGEN-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-6-award-1
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-1375-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-2-2	ContractStartDate: 2021-05-05 00:00:00+00:00
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-1375-4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-4-4
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-1375-5-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-5-5
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-6-6
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-1375-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-3-3
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-8-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-7-7
+ContractID: ocds-1xraxc-001-2020-1726-1375-contract-001-2020-1726-1375-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-001-2020-1726-1375-award-1-1	ContractStartDate: 2021-05-05 00:00:00+00:00
+ContractID: ocds-1xraxc-19DT0060-NE-contract-19DT0060-NE, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19DT0060-NE-award-1
+ContractID: ocds-1xraxc-2021-002454-contract-010156-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-002454-award-1
+ContractID: ocds-1xraxc-202100000065-contract-202100000065, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202100000065-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-60-contract-EMERGECOVID2-60, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-60-award-1
+ContractID: ocds-1xraxc-202000032-contract-202000032, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202000032-award-1
+ContractID: ocds-1xraxc-2020N0059005-contract-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020N0059005-award-1
+ContractID: ocds-1xraxc-2021CON00141-contract-2021CON00141, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021CON00141-award-1
+ContractID: ocds-1xraxc-21A40026500-contract-21A40026500, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21A40026500-award-1
+ContractID: ocds-1xraxc-2030008837-contract-4610011007, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2030008837-award-1
+ContractID: ocds-1xraxc-S6O-011-2020---L1-contract-S6O-011-2020-L1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-011-2020---L1-award-1
+ContractID: ocds-1xraxc-2021-CONTRAT-000008-contract-2021-CONTRAT-000008-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-CONTRAT-000008-award-1-1	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-GRX-215-2018-contract-GRX-215-2018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GRX-215-2018-award-1
+ContractID: ocds-1xraxc-P4100058I-2018-000011-PAA-contract-11-2018-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4100058I-2018-000011-PAA-award-1
+ContractID: ocds-1xraxc-CONTR-2020-9955-contract-CONTR-2020-9955, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTR-2020-9955-award-1
+ContractID: ocds-1xraxc-P4101700E-2019-000025-PEA-contract-25-2019-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4101700E-2019-000025-PEA-award-1-1
+ContractID: ocds-1xraxc-P4101700E-2019-000025-PEA-contract-25-2019-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4101700E-2019-000025-PEA-award-2-2
+ContractID: ocds-1xraxc-2021-0009-contract-2021-0009, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0009-award-1
+ContractID: ocds-1xraxc-PA-1-2021-contract-PA-01-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PA-1-2021-award-1
+ContractID: ocds-1xraxc-SU3-2021-contract-SU3-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU3-2021-award-1
+ContractID: ocds-1xraxc-43-21-contract-43-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-43-21-award-1
+ContractID: ocds-1xraxc-CAA-2019-367-contract-2021-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CAA-2019-367-award-1
+ContractID: ocds-1xraxc-2021-000467-contract-2021-000467, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-000467-award-1
+ContractID: ocds-1xraxc-2021ETSAE090600000731E-contract-2021ETSAE090600000731E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021ETSAE090600000731E-award-1
+ContractID: ocds-1xraxc-194-2021-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-194-2021-award-1-1	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-194-2021-contract-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-194-2021-award-2-2	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-G-2020-03-0020-contract-G-2020-03-0020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-G-2020-03-0020-award-1
+ContractID: ocds-1xraxc-774087X-contract-1806, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-774087X-award-1
+ContractID: ocds-1xraxc-AM-33-2020-contract-2565-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-33-2020-award-1
+ContractID: ocds-1xraxc-A2021-000156-contract-A2021-000156-009-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000156-award-002-2	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-A2021-000156-contract-A2021-000156-006-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000156-award-001-1	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-PASA-06-2021-contract-PASA-06-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PASA-06-2021-award-1
+ContractID: ocds-1xraxc-20-152-NCE751-CC-01-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-152-NCE751-CC-01-award-1
+ContractID: ocds-1xraxc-PD-V-2020-09-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PD-V-2020-09-award-1
+ContractID: ocds-1xraxc-301505SE21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-301505SE21-award-1
+ContractID: ocds-1xraxc-CONSU02020023OP-contract-CONSU02020023OP, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONSU02020023OP-award-1
+ContractID: ocds-1xraxc-2021-0044-contract-2021-0044, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0044-award-1
+ContractID: ocds-1xraxc-222-2021-contract-222, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-222-2021-award-1
+ContractID: ocds-1xraxc-58-2021-contract-2021-0007, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-58-2021-award-1
+ContractID: ocds-1xraxc-6631-contract-234649, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6631-award-1
+ContractID: ocds-1xraxc-A31-2021-12-contract-A31-2021-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A31-2021-12-award-1
+ContractID: ocds-1xraxc-C-056-2020-contract-C-056-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-C-056-2020-award-1
+ContractID: ocds-1xraxc-DNA-126-2020-contract-DNA-126-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DNA-126-2020-award-1
+ContractID: ocds-1xraxc-7-2020-Suministros--Mixto--contract-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-7-2020-Suministros--Mixto--award-1
+ContractID: ocds-1xraxc-020120210037-contract-020120210037, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-020120210037-award-1
+ContractID: ocds-1xraxc-2020-4207-contract-PT1-PCCNTR-2563266, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-4207-award-1
+ContractID: ocds-1xraxc-9582-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-9582-2020-award-1
+ContractID: ocds-1xraxc-2021-003324-contract-010318-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-003324-award-1
+ContractID: ocds-1xraxc-BCN-50-2018-contract-BCN-50-2018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-BCN-50-2018-award-1
+ContractID: ocds-1xraxc-CMAYOR-2019-01Y30-127-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CMAYOR-2019-01Y30-127-award-1
+ContractID: ocds-1xraxc-0078-2020-contract-0078-2020-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0078-2020-award-2-2	ContractStartDate: 2021-03-24 00:00:00+00:00
+ContractID: ocds-1xraxc-0078-2020-contract-0078-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0078-2020-award-1-1	ContractStartDate: 2021-03-24 00:00:00+00:00
+ContractID: ocds-1xraxc-0078-2020-contract-0078-2020-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0078-2020-award-3-3	ContractStartDate: 2021-03-24 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-07-SUB-contract-07-2020-SUB, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-07-SUB-award-1
+ContractID: ocds-1xraxc-MAD-207-2020-contract-MAD-207-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MAD-207-2020-award-1
+ContractID: ocds-1xraxc-2021-O00001-contract-2021-O00001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-O00001-award-1
+ContractID: ocds-1xraxc-2021-00171-contract-2021-00171, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00171-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-TENERIFE-AGOSTO2020-contract-0000125363-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-TENERIFE-AGOSTO2020-award-1
+ContractID: ocds-1xraxc-PA-S03-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PA-S03-2020-award-1
+ContractID: ocds-1xraxc-PA-28-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PA-28-2021-award-1
+ContractID: ocds-1xraxc-2020-0851-contract-2020-0851, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0851-award-1
+ContractID: ocds-1xraxc-2021-00008681W-contract-1-2021-8681W, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00008681W-award-1
+ContractID: ocds-1xraxc-XRY-5-2021-contract-XRY-5-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-XRY-5-2021-award-1
+ContractID: ocds-1xraxc-55-E-21-SU-GE-A-0058-contract-0000059496, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-55-E-21-SU-GE-A-0058-award-1
+ContractID: ocds-1xraxc-SP00091-2020-contract--A202101221, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SP00091-2020-award-1
+ContractID: ocds-1xraxc-23-02-01-2020-0002-contract-23-02-01-2020-0001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-23-02-01-2020-0002-award-1
+ContractID: ocds-1xraxc-11343-2020-contract-2021-0014, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-11343-2020-award-1
+ContractID: ocds-1xraxc-2020-000901-contract-2020-000901, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000901-award-1
+ContractID: ocds-1xraxc-02-2021-OBR-contract-02-2021-OBR, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-02-2021-OBR-award-1
+ContractID: ocds-1xraxc-S6O-141-2020---L1-contract-S6O-141-2020-L1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-141-2020---L1-award-1
+ContractID: ocds-1xraxc-21-05313-contract-21-05313, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-05313-award-1
+ContractID: ocds-1xraxc-2021-CBAM00002-contract-125-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-CBAM00002-award-1
+ContractID: ocds-1xraxc-LPA-10-2021-contract-LPA-10-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LPA-10-2021-award-1
+ContractID: ocds-1xraxc-86-20-C-contract-86-20-C, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-86-20-C-award-1
+ContractID: ocds-1xraxc-2020-29_100183-contract-202-29_100183, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-29_100183-award-1
+ContractID: ocds-1xraxc-2021-1-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-1-award-2-2	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-1-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-1-award-1-1	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-PAS-1-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PAS-1-2021-award-1
+ContractID: ocds-1xraxc-22974-2020-contract-22974-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-22974-2020-award-1
+ContractID: ocds-1xraxc-2020028112-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020028112-award-1
+ContractID: ocds-1xraxc-CSE-08-1121016079-21-PAS-contract-1121016079, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CSE-08-1121016079-21-PAS-award-1
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-5-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-5-5	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-3-3	ContractStartDate: 2021-05-21 00:00:00+00:00
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-6-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-6-6	ContractStartDate: 2021-05-21 00:00:00+00:00
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-2-2	ContractStartDate: 2021-05-14 00:00:00+00:00
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-1-1	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-PRC-2020-0000093448-contract-PRC93448-LOTE-4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRC-2020-0000093448-award-4-4	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-B070010-2020-0014-contract-PRI-14-2020-4-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-B070010-2020-0014-award-4-2
+ContractID: ocds-1xraxc-B070010-2020-0014-contract-PRI-14-2020-2-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-B070010-2020-0014-award-2-1
+ContractID: ocds-1xraxc-2392-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2392-2021-award-1
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-19	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-16-2021-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-21-13	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-6-19	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-32-2021-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-15-6	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-17	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-19	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-15	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-31-2021-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-18-9	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-29-2021-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-16-7	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-15-2021-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-19-10	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-11-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-1-1	ContractStartDate: 2021-04-12 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-15	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-15	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-6-18	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-12-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-26-17	ContractStartDate: 2021-04-15 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-17-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-10-2	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-21-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-11-3	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-25-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-23-14	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-12-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-24-15	ContractStartDate: 2021-04-15 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-19-2021-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-21-13	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-28-2021-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-13-5	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-20	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-25-2021-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-20-12	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-25-2021-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-21-13	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-18	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-14	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-23-14	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-26-17	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-13-2021-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-2-11	ContractStartDate: 2021-04-16 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-16-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-24-15	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-16	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-22-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-23-14	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-17	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-20	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-20-2021-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-18	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-12-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-25-16	ContractStartDate: 2021-04-15 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-25-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-25-16	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-16-2021-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-2-11	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-16-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-23-14	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-27-2021-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-12-4	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-17	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-6-17	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-3-16	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-18-2021-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-20-12	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-30-2021-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-17-8	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-16	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-26-2021-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-4-16	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-14-2021-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-5-21	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-12-2021-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-23-14	ContractStartDate: 2021-04-15 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-16-2021-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-20-12	ContractStartDate: 2021-04-27 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-23-2021-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-29-18	ContractStartDate: 2021-05-06 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-25-2021-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-24-15	ContractStartDate: 2021-05-07 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-000005-contract-12-2021-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000005-award-21-13	ContractStartDate: 2021-04-15 00:00:00+00:00
+ContractID: ocds-1xraxc-202100000014-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202100000014-award-1
+ContractID: ocds-1xraxc-228-20-contract-022820, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-228-20-award-1
+ContractID: ocds-1xraxc-SSCC-PA-109-21-contract-SSCC-PA-109-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SSCC-PA-109-21-award-1
+ContractID: ocds-1xraxc-2017-247-contract-2017-247, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2017-247-award-1
+ContractID: ocds-1xraxc-SEC15B004-contract-SEC15B004, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SEC15B004-award-1
+ContractID: ocds-1xraxc-851-2020-100-contract-851-2020-100, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-851-2020-100-award-1
+ContractID: ocds-1xraxc-CAN-426-2019-contract-CAN-426-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CAN-426-2019-award-1
+ContractID: ocds-1xraxc-conc-245-expte-4-2021-2-06-141--contract-CONTRATO-No-228-CONC-245, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-conc-245-expte-4-2021-2-06-141--award-1
+ContractID: ocds-1xraxc-S6O-141-2020---L3-contract-S6O-141-2020-L3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-141-2020---L3-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-DICIEMBRE2020-contract-0000145731-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-DICIEMBRE2020-award-1
+ContractID: ocds-1xraxc-CONTR-2021-5217-contract-CONTR-2021-5217, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTR-2021-5217-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0904-00000106E-contract-2021-ETSAE0904-00000106E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0904-00000106E-award-1
+ContractID: ocds-1xraxc-ST-INF-20-039-contract-ST-INF-20-039, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ST-INF-20-039-award-1
+ContractID: ocds-1xraxc-8004330008-2020-0008308-contract-2021-117, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8004330008-2020-0008308-award-1
+ContractID: ocds-1xraxc-2021-003694-contract-010404-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-003694-award-1
+ContractID: ocds-1xraxc-165-2021-contract-3-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-165-2021-award-1
+ContractID: ocds-1xraxc-005-21-SP-contract-005-21-SP-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-005-21-SP-award-3-3
+ContractID: ocds-1xraxc-005-21-SP-contract-005-21-SP-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-005-21-SP-award-1-1
+ContractID: ocds-1xraxc-005-21-SP-contract-005-21-SP-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-005-21-SP-award-2-2
+ContractID: ocds-1xraxc-005-21-SP-contract-005-21-SP-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-005-21-SP-award-4-4
+ContractID: ocds-1xraxc-20200873-contract-20200873-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20200873-award-1-1
+ContractID: ocds-1xraxc-2021-0040-contract-2021-0040, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-0040-award-1
+ContractID: ocds-1xraxc-314-20-contract-314-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-314-20-award-1
+ContractID: ocds-1xraxc-20-118-contract-20-118, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-118-award-1
+ContractID: ocds-1xraxc-SP21--00139-contract-SP21--00139-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SP21--00139-award-1
+ContractID: ocds-1xraxc-2020-3120011235-370-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-3120011235-370-award-1
+ContractID: ocds-1xraxc-2022SU1TE017-contract-1-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2022SU1TE017-award-3-3
+ContractID: ocds-1xraxc-2022SU1TE017-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2022SU1TE017-award-2-2
+ContractID: ocds-1xraxc-2022SU1TE017-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2022SU1TE017-award-1-1
+ContractID: ocds-1xraxc-2022SU1TE017-contract-1-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2022SU1TE017-award-4-4
+ContractID: ocds-1xraxc-26-2021-054-TGSS-contract-26-2021-054-TGSS, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-26-2021-054-TGSS-award-1
+ContractID: ocds-1xraxc-OBR-ABR_SMPL-2020000091-contract-OBR-ABR_SMPL-2020000091, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OBR-ABR_SMPL-2020000091-award-1
+ContractID: ocds-1xraxc-VLC-45-2021-contract-VLC-45-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-VLC-45-2021-award-1
+ContractID: ocds-1xraxc-759991T-contract-1802, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-759991T-award-1
+ContractID: ocds-1xraxc-OB-018-21-contract-2020-PPCGR-1-13-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-018-21-award-2-2
+ContractID: ocds-1xraxc-OB-018-21-contract-2020-4-DANAC-27-28-29-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-018-21-award-1-1
+ContractID: ocds-1xraxc-233-2020-contract-233-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-233-2020-award-1
+ContractID: ocds-1xraxc-2020-0-40--2020010548--contract-4610012715-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0-40--2020010548--award-3-3	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-0-40--2020010548--contract-4610012715-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0-40--2020010548--award-2-2	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-0-40--2020010548--contract-4610012714-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0-40--2020010548--award-1-1	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-0-40--2020010548--contract-4610012716-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0-40--2020010548--award-4-4	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-20200725-contract-20200725, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20200725-award-1
+ContractID: ocds-1xraxc-60-VC-78-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-60-VC-78-21-award-1
+ContractID: ocds-1xraxc-SO2020-214-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SO2020-214-award-1
+ContractID: ocds-1xraxc-2020-221-SER-contract-2020-221-SER, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-221-SER-award-1
+ContractID: ocds-1xraxc-2021-001802-contract-010414-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-001802-award-1
+ContractID: ocds-1xraxc-2021-003290-contract-010323-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-003290-award-1
+ContractID: ocds-1xraxc-29-PASA-2-21X-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-29-PASA-2-21X-award-1
+ContractID: ocds-1xraxc-2021AR42U00000198-contract-2021AR42U00000198, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021AR42U00000198-award-1
+ContractID: ocds-1xraxc-2021-S00027-contract-2021-S00027, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-S00027-award-1
+ContractID: ocds-1xraxc-VLC-17-2021-contract-VLC-17-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-VLC-17-2021-award-1
+ContractID: ocds-1xraxc-DGRE-4248-COVID-19-contract-107588-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-4248-COVID-19-award-1
+ContractID: ocds-1xraxc-PRO11-2021-4136-contract-PRO11-2021-4136, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRO11-2021-4136-award-1
+ContractID: ocds-1xraxc-ASE-2019-137-contract-ASE-2019-137, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-ASE-2019-137-award-1
+ContractID: ocds-1xraxc-S6O-011-2020---L3-contract-S6O-011-2020-L3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-011-2020---L3-award-1
+ContractID: ocds-1xraxc-269-21-contract-269-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-269-21-award-1
+ContractID: ocds-1xraxc-191-2021-contract-191, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-191-2021-award-1
+ContractID: ocds-1xraxc-2020-D31000-006-013-00002-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-D31000-006-013-00002-award-1
+ContractID: ocds-1xraxc-41-2020-G-contract-41-2020-G, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-41-2020-G-award-1
+ContractID: ocds-1xraxc-21B60030700-contract-21B60030700, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21B60030700-award-1
+ContractID: ocds-1xraxc-4665-2018-contract-4665-2018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4665-2018-award-1
+ContractID: ocds-1xraxc-476448J-contract-476448J, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-476448J-award-1
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18734-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-6-7	ContractStartDate: 2021-03-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18857-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-1-1	ContractStartDate: 2021-08-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-19058-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-5-6	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18733-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-2-3	ContractStartDate: 2021-03-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18859-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-3-4	ContractStartDate: 2021-04-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18735-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-10-2	ContractStartDate: 2021-03-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0063-contract-18903-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0063-award-4-5	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-TELEVISION-COVID-HOSPITALINSULARGC-contract-0000136619-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TELEVISION-COVID-HOSPITALINSULARGC-award-1
+ContractID: ocds-1xraxc-SU-2019-7-contract-SU-2019-7-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-7-award-1-1
+ContractID: ocds-1xraxc-SU-2019-7-contract-SU-2019-7-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-7-award-3-3
+ContractID: ocds-1xraxc-SU-2019-7-contract-SU-2019-7-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-7-award-4-4
+ContractID: ocds-1xraxc-SU-2019-7-contract-SU-2019-7-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SU-2019-7-award-2-2
+ContractID: ocds-1xraxc-113-20-SP-Codigo-contract-113-20-SP-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-20-SP-Codigo-award-1-1
+ContractID: ocds-1xraxc-113-20-SP-Codigo-contract-113-20-SP-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-20-SP-Codigo-award-3-3
+ContractID: ocds-1xraxc-113-20-SP-Codigo-contract-113-20-SP-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-20-SP-Codigo-award-5-5
+ContractID: ocds-1xraxc-113-20-SP-Codigo-contract-113-20-SP-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-20-SP-Codigo-award-4-4
+ContractID: ocds-1xraxc-113-20-SP-Codigo-contract-113-20-SP-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-20-SP-Codigo-award-2-2
+ContractID: ocds-1xraxc-SOLPED8067-contract-SOLPED8067, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SOLPED8067-award-1
+ContractID: ocds-1xraxc-2021-001614-contract-010361-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-001614-award-2-2
+ContractID: ocds-1xraxc-2021-001614-contract-010362-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-001614-award-3-3
+ContractID: ocds-1xraxc-2021-001614-contract-009856-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-001614-award-1-1
+ContractID: ocds-1xraxc-51-T-21-SU-GE-AS-0031-contract-62-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-51-T-21-SU-GE-AS-0031-award-1
+ContractID: ocds-1xraxc-300-2020-00357-contract-6-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00357-award-3-3	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-300-2020-00357-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00357-award-1-1	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-300-2020-00357-contract-3-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00357-award-2-2	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-005-2021-contract-005-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-005-2021-award-1
+ContractID: ocds-1xraxc-201-000466-contract-2021-000466, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-201-000466-award-1
+ContractID: ocds-1xraxc-LICT-99-139-2020-0183-contract-LICT-99-139-2020-0183-L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LICT-99-139-2020-0183-award-1-1	ContractStartDate: 2021-10-01 00:00:00+00:00
+ContractID: ocds-1xraxc-LICT-99-139-2020-0183-contract-LICT-99-139-2020-0183-L5-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LICT-99-139-2020-0183-award-4-4	ContractStartDate: 2021-04-01 00:00:00+00:00
+ContractID: ocds-1xraxc-LICT-99-139-2020-0183-contract-LICT-99-139-2020-0183-L3-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LICT-99-139-2020-0183-award-2-2	ContractStartDate: 2021-04-01 00:00:00+00:00
+ContractID: ocds-1xraxc-LICT-99-139-2020-0183-contract-LICT-99-139-2020-0183-L4-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LICT-99-139-2020-0183-award-3-3	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-SE-08-17-contract-SE-08-17-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-08-17-award-2-2	ContractStartDate: 2017-09-21 00:00:00+00:00
+ContractID: ocds-1xraxc-SE-08-17-contract-SE-08-17-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-08-17-award-3-3	ContractStartDate: 2017-11-16 00:00:00+00:00
+ContractID: ocds-1xraxc-SE-08-17-contract-SE-08-17-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-08-17-award-1-1	ContractStartDate: 2017-09-21 00:00:00+00:00
+ContractID: ocds-1xraxc-CONTR-2021-2068-contract-CONTR-2021-2068-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTR-2021-2068-award-1-1
+ContractID: ocds-1xraxc-S-01960-2021-contract-S-01960-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S-01960-2021-award-1
+ContractID: ocds-1xraxc-CONTR-2020-16449-contract-CONTR-2020-16449, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTR-2020-16449-award-1
+ContractID: ocds-1xraxc-TSA000070254-contract-421-838, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TSA000070254-award-1
+ContractID: ocds-1xraxc-CN-256-2019-contract-CN-256-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CN-256-2019-award-1
+ContractID: ocds-1xraxc-2021-004129-contract-010401-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-004129-award-1
+ContractID: ocds-1xraxc-OBR-ABR_SMPL-2020000090-contract-OBR-ABR_SMPL-2020000090, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OBR-ABR_SMPL-2020000090-award-1
+ContractID: ocds-1xraxc-SE-29-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-29-21-award-1
+ContractID: ocds-1xraxc-2020-00009724s-contract-2020-00009724S-LOTE1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009724s-award-1-1
+ContractID: ocds-1xraxc-2020-00009724s-contract-2020-00009724S-LOTE3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009724s-award-3-3
+ContractID: ocds-1xraxc-2020-00009724s-contract-2020-00009724S-LOTE5-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009724s-award-4-4
+ContractID: ocds-1xraxc-2020-00009724s-contract-2020-00009724S-LOTE2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00009724s-award-2-2
+ContractID: ocds-1xraxc-EMERGECOVID2-74-contract-EMERGECOVID2-74, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-74-award-1
+ContractID: ocds-1xraxc-2020-0860-contract-2020-0860, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0860-award-1
+ContractID: ocds-1xraxc-OBRAG20003-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OBRAG20003-award-1
+ContractID: ocds-1xraxc-L03380011-LA0001737-SERVICIOS9-contract-40-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-L03380011-LA0001737-SERVICIOS9-award-1
+ContractID: ocds-1xraxc-174-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-174-2021-award-1
+ContractID: ocds-1xraxc-2021-11-contract-2021-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-11-award-1
+ContractID: ocds-1xraxc-CON21-2021-0017-contract-CON21-2021-0017, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON21-2021-0017-award-1
+ContractID: ocds-1xraxc-CG-2021-3360-0004--contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CG-2021-3360-0004--award-1
+ContractID: ocds-1xraxc-4-2021-contract-4-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-2021-award-1
+ContractID: ocds-1xraxc-2020-000537-PCA-contract-537-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-000537-PCA-award-1
+ContractID: ocds-1xraxc-2021_013-contract-2021_013, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021_013-award-1
+ContractID: ocds-1xraxc-53-M-21-SS-GE-A-0003-contract-48-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-53-M-21-SS-GE-A-0003-award-1
+ContractID: ocds-1xraxc-3-19-28510-0198-contract-3-19-28510-0199-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-28510-0198-award-001-1
+ContractID: ocds-1xraxc-3-19-28510-0198-contract-3-19-28510-0200-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-28510-0198-award-002-2
+ContractID: ocds-1xraxc-0039-C-P--contract-0039-C-P-, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0039-C-P--award-1
+ContractID: ocds-1xraxc-P-A-S--2021-2806-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P-A-S--2021-2806-award-1
+ContractID: ocds-1xraxc-15-2021-contract-15-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-15-2021-award-1
+ContractID: ocds-1xraxc-2021-EA23-00000180E-BIS-contract-2021-EA23-00000180, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA23-00000180E-BIS-award-1
+ContractID: ocds-1xraxc-062021-contract-062021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-062021-award-1
+ContractID: ocds-1xraxc-PMI-224-2018-contract-PMI-224-2018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PMI-224-2018-award-1
+ContractID: ocds-1xraxc-CNMY20-0301-226-contract-CNMY20-0301-226-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNMY20-0301-226-award-1-2
+ContractID: ocds-1xraxc-CNMY20-0301-226-contract-CNMY20-0301-226-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNMY20-0301-226-award-1-1
+ContractID: ocds-1xraxc-605-2021-contract-605-21-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-605-2021-award-2-2
+ContractID: ocds-1xraxc-605-2021-contract-605-21-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-605-2021-award-1-1
+ContractID: ocds-1xraxc-605-2021-contract-605-21-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-605-2021-award-3-3
+ContractID: ocds-1xraxc-PMI-5-2021-contract-PMI-5-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PMI-5-2021-award-1
+ContractID: ocds-1xraxc-DNA-234-2019-contract-DNA-234-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DNA-234-2019-award-1
+ContractID: ocds-1xraxc-S6O-011-2020---L6-contract-S6O-011-2020-L6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-011-2020---L6-award-1
+ContractID: ocds-1xraxc-C-1585-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-C-1585-2020-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-72-contract-EMERGECOVID2-72, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-72-award-1
+ContractID: ocds-1xraxc-300-2020-00584-contract-300-2020-00584, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00584-award-1
+ContractID: ocds-1xraxc-3-20-27507-0078-contract-3-20-27507-0078-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-20-27507-0078-award-1
+ContractID: ocds-1xraxc-008-2020-contract-8-20-2-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-19-11	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-25-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-22-15	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-14-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-14-6	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-43-31, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-37-31	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-8-36, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-41-36	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-13-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-13-5	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-24-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-21-14	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-38-28, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-34-28	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-19-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-18-10	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-37-27, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-33-27	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-35-25, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-31-25	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-44-32, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-38-32	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-28-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-25-18	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-27-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-24-17	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-15-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-15-7	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-30-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-27-20	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-20-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-2-12	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-1-1	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-12-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-12-4	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-18-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-17-9	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-36-26, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-32-26	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-26-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-23-16	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-34-24, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-30-24	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-5-33, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-39-33	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-16-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-16-8	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-23-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-20-13	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-32-22, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-29-22	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-9-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-10-2	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-3-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-26-19	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-33-23, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-3-23	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-6-34, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-4-34	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-31-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-28-21	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-10-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-11-3	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-42-30, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-36-30	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-7-35, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-40-35	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-008-2020-contract-8-20-4-29, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-008-2020-award-35-29	ContractStartDate: 2021-04-19 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-003-AM-contract-2021-003-, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-003-AM-award-1
+ContractID: ocds-1xraxc-2021-003207-contract-010449-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-003207-award-1
+ContractID: ocds-1xraxc-1121-2021-contract-2021-0009, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1121-2021-award-1
+ContractID: ocds-1xraxc-TSA000070240-contract-421-968-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TSA000070240-award-2-2	ContractStartDate: 2021-05-11 00:00:00+00:00
+ContractID: ocds-1xraxc-TSA000070240-contract-421-967-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TSA000070240-award-1-1	ContractStartDate: 2021-05-11 00:00:00+00:00
+ContractID: ocds-1xraxc-PES200157-contract-PES200157, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PES200157-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0906-00000760E-contract-2021-ETSAE0906-00000760E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0906-00000760E-award-1
+ContractID: ocds-1xraxc-300-2020-00805-contract-300-2020-00805, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2020-00805-award-1
+ContractID: ocds-1xraxc-SP00057-2020-contract-A202100949-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SP00057-2020-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-DIN-364-2020-contract-DIN-364-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DIN-364-2020-award-1
+ContractID: ocds-1xraxc-177-2021-contract-4-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-177-2021-award-1
+ContractID: ocds-1xraxc-CP-02-21-contract-CP-02-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CP-02-21-award-1
+ContractID: ocds-1xraxc-AM1-20-conformeTACRC-contract-AM1-20---AIR-LIQUIDE-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM1-20-conformeTACRC-award-award-4
+ContractID: ocds-1xraxc-AM1-20-conformeTACRC-contract-AM1-20---NIPPON-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM1-20-conformeTACRC-award-award-3
+ContractID: ocds-1xraxc-AM1-20-conformeTACRC-contract-AM1-20---CARBUROS-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM1-20-conformeTACRC-award-award-2
+ContractID: ocds-1xraxc-AM1-20-conformeTACRC-contract-AM1-20---LINDE-GAS-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM1-20-conformeTACRC-award-award-1
+ContractID: ocds-1xraxc-2021CON00115-contract-2021CON00115-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021CON00115-award-2-2
+ContractID: ocds-1xraxc-2021CON00115-contract-2021CON00115-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021CON00115-award-3-3
+ContractID: ocds-1xraxc-2021CON00115-contract-2021CON00115-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021CON00115-award-1-1
+ContractID: ocds-1xraxc-SERV-NEG_SINP-2020000085-contract-SERV-NEG_SINP-2020000085-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SERV-NEG_SINP-2020000085-award-2-2	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-SERV-NEG_SINP-2020000085-contract-SERV-NEG_SINP-2020000085-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SERV-NEG_SINP-2020000085-award-1-1	ContractStartDate: 2021-04-22 00:00:00+00:00
+ContractID: ocds-1xraxc-CN-255-2019-contract-CN-255-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CN-255-2019-award-1
+ContractID: ocds-1xraxc-A2021-003835-contract-A2021-003835, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-003835-award-1
+ContractID: ocds-1xraxc-AYT-7074-2020-contract-7074-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AYT-7074-2020-award-1
+ContractID: ocds-1xraxc-1370-2021-contract-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1370-2021-award-1
+ContractID: ocds-1xraxc-2323-2019-contract-7615-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2323-2019-award-1
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-7-7	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-5-5	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-3-3	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-6-6	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-4-4	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-2-2	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-30-UC-67-21-contract-30-UC-67-21-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-30-UC-67-21-award-1-1	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-079-2021-contract-079-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-079-2021-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0814-00000963E-contract-2021-ETSAE0814-00000963E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0814-00000963E-award-1
+ContractID: ocds-1xraxc-300-2021-00073-contract-300-2021-00073, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2021-00073-award-1
+ContractID: ocds-1xraxc-2021-00003-contract-2021-00003, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-00003-award-1
+ContractID: ocds-1xraxc-2021-AR46U-00000109-contract-109-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR46U-00000109-award-1
+ContractID: ocds-1xraxc-202000000051-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202000000051-award-1
+ContractID: ocds-1xraxc-3351-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3351-2020-award-1
+ContractID: ocds-1xraxc-Z21SC003-010-contract-Z21SC003-010-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Z21SC003-010-award-3-3	ContractStartDate: 2021-05-10 00:00:00+00:00
+ContractID: ocds-1xraxc-Z21SC003-010-contract-Z21SC003-010-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Z21SC003-010-award-2-2	ContractStartDate: 2021-05-12 00:00:00+00:00
+ContractID: ocds-1xraxc-Z21SC003-010-contract-Z21SC003-010-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Z21SC003-010-award-1-1	ContractStartDate: 2021-05-12 00:00:00+00:00
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-NOVIEMBRE2020-contract-0000125360-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-NOVIEMBRE2020-award-1
+ContractID: ocds-1xraxc-2165-2021-contract-16-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2165-2021-award-1
+ContractID: ocds-1xraxc-Divertia-Turismo-NSP-01-2021-contract-Divertia-Turismo-NSP-01-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Divertia-Turismo-NSP-01-2021-award-1
+ContractID: ocds-1xraxc-2021-86Q-contract-2021-86Q, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-86Q-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-70-contract-EMERGECOVID2-70, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-70-award-1
+ContractID: ocds-1xraxc-PRR-489-2017-contract-PRR-489-2017, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PRR-489-2017-award-1
+ContractID: ocds-1xraxc-2020-D31000-006-013-00029-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-D31000-006-013-00029-award-1
+ContractID: ocds-1xraxc-013-2021-contract-013-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-013-2021-award-1
+ContractID: ocds-1xraxc-48804-446-contract-48804-446, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-48804-446-award-1
+ContractID: ocds-1xraxc-984-2021-contract-984-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-984-2021-award-2-2	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-984-2021-contract-984-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-984-2021-award-1-1	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-EA26-00000255E-contract-2021-EA26-255E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA26-00000255E-award-1
+ContractID: ocds-1xraxc-2021-E-3--2020011629--contract-4610012722, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-3--2020011629--award-1
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-3-3	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-2-2	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-2-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-6-6	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-1-1	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-4-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-5-5	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-GEX-1348-2020-contract-4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GEX-1348-2020-award-4-4	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-06-VC-116-21-contract-06-VC-116-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-06-VC-116-21-award-1
+ContractID: ocds-1xraxc-484514M-contract-484514M, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-484514M-award-1
+ContractID: ocds-1xraxc-EXP048-2020-19-contract-EXP048-2020-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP048-2020-19-award-1
+ContractID: ocds-1xraxc-2021AR42U00000351E-contract-351-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021AR42U00000351E-award-1
+ContractID: ocds-1xraxc-397-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-397-2021-award-1
+ContractID: ocds-1xraxc-914-2019-contract-914-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-914-2019-award-1
+ContractID: ocds-1xraxc-8881-2017-contract-8881-2017, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8881-2017-award-1
+ContractID: ocds-1xraxc-CON-15-2021-contract-CON-15-2021-I-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-15-2021-award-1-1	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-CON-15-2021-contract-CON-15-2021-II-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-15-2021-award-2-2	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-0856-contract-2020-0856, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-0856-award-1
+ContractID: ocds-1xraxc-2021-000263-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-000263-award-1
+ContractID: ocds-1xraxc-I-2020-30-contract-I-2020-30, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-I-2020-30-award-1
+ContractID: ocds-1xraxc-EC-ADS-003-2021-contract-EC-ADS-003-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-003-2021-award-1-1
+ContractID: ocds-1xraxc-EC-ADS-003-2021-contract-EC-ADS-003-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-003-2021-award-3-3
+ContractID: ocds-1xraxc-EC-ADS-003-2021-contract-EC-ADS-003-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-003-2021-award-2-2
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-61-56, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-56
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-52-78, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-78
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-2-10, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-03-10
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-52-51, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-51
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-52-45, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-45
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-7-108, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-108
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-15-94, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-94
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-67-68, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-68
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-2-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-03-8
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-70-71, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-71
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-37-63, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-63
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-66-58, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-58
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-78-100, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-100
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-44-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-19
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-47-29, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-29
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-71-48, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-48
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-76-70, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-70
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-25-121, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-11-121
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-37-14, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-06-14
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-18-116, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-116
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-74-61, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-61
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-58-66, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-66
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-74-73, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-73
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-20-87, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-87
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-12-81, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-81
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-23-113, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-113
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-5-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-02-5
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-80-102, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-102
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-60-69, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-69
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-6-96, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-96
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-39-15, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-06-15
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-36-11, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-04-11
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-38-50, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-50
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-40-64, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-64
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-43-23, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-23
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-8-93, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-93
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-35-32, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-32
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-2-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-01-4
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-64-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-21
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-65-80, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-80
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-45-28, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-28
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-70-65, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-65
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-54-18, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-18
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-60-16, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-06-16
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-26-123, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-11-123
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-18-95, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-95
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-56-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-20
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-30-98, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-98
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-72-59, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-59
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-14-97, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-97
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-75-75, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-75
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-39-22, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-22
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-28-83, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-83
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-35-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-05-12
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-15-114, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-114
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-3-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-01-1
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-33-106, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-106
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-32-84, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-84
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-46-17, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-17
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-16-88, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-88
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-21-90, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-90
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-42-31, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-31
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-39-62, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-62
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-42-55, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-55
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-10-109, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-109
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-17-82, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-82
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-31-86, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-86
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-4-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-03-7
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-69-53, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-53
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-29-91, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-91
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-77-119, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-119
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-11-85, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-85
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-63-38, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-38
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-79-104, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-104
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-27-103, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-103
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-60-52, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-52
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-48-39, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-39
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-10-124, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-11-124
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-49-49, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-49
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-30-120, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-11-120
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-13-115, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-115
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-4-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-01-3
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-38-76, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-76
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-37-72, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-72
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-01-2
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-59-46, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-46
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-53-79, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-79
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-41-57, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-57
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-73-67, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-67
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-62-34, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-34
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-65-47, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-47
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-38-35, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-35
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-26-89, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-89
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-57-30, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-30
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-19-92, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-92
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-66-36, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-36
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-24-107, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-107
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-1-9, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-03-9
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-81-99, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-99
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-41-33, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-33
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-55-42, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-42
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-22-111, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-111
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-38-13, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-05-13
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-49-43, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-43
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-59-44, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-44
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-50-41, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-41
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-61-24, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-24
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-65-40, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-40
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-2-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-02-6
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-40-25, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-25
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-51-37, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-37
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-68-60, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-60
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-34-122, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-11-122
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-33-118, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-118
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-53-26, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-26
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-8-117, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-117
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-44-54, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-08-54
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-39-77, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-77
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-25-112, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-112
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-9-110, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-110
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-13-105, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-105
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-44-74, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-09-74
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-58-27, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-07-27
+ContractID: ocds-1xraxc-AM-2020-070-contract-70-77-101, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AM-2020-070-award-10-101
+ContractID: ocds-1xraxc-AST_2021_005-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AST_2021_005-award-1-1	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-AST_2021_005-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AST_2021_005-award-2-2	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-fgcs04-contract-2021FGCS04, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-fgcs04-award-1
+ContractID: ocds-1xraxc-1-2021-contract-1-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1-2021-award-1
+ContractID: ocds-1xraxc-0046-2020-contract-0046-2020-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0046-2020-award-3-3	ContractStartDate: 2021-03-24 00:00:00+00:00
+ContractID: ocds-1xraxc-0046-2020-contract-0046-2020-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0046-2020-award-4-4	ContractStartDate: 2021-04-20 00:00:00+00:00
+ContractID: ocds-1xraxc-0046-2020-contract-0046-2020-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0046-2020-award-2-2	ContractStartDate: 2021-03-24 00:00:00+00:00
+ContractID: ocds-1xraxc-0046-2020-contract-0046-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0046-2020-award-1-1	ContractStartDate: 2021-03-23 00:00:00+00:00
+ContractID: ocds-1xraxc-A2021-001225-contract-A2021-001225-001-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-001225-award-001-1
+ContractID: ocds-1xraxc-A-2-4-2021-contract-A-2-4-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A-2-4-2021-award-1
+ContractID: ocds-1xraxc-26-2021-043-INSS-contract-26-2021-043-INSS, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-26-2021-043-INSS-award-1
+ContractID: ocds-1xraxc-04-UC-72-2021-contract-04-UC-72-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-04-UC-72-2021-award-1
+ContractID: ocds-1xraxc-PMI-21-2021-contract-PMI-21-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PMI-21-2021-award-1
+ContractID: ocds-1xraxc-2021ETSAE090600000681E-contract-2021ETSAE090600000681E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021ETSAE090600000681E-award-1
+ContractID: ocds-1xraxc-Prorroga-AB13-2020-contract-Prorroga-AB13-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-Prorroga-AB13-2020-award-1
+ContractID: ocds-1xraxc-PAS-2021-007-GCE-AE-contract-PAS-2021-007-GCE-AE, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PAS-2021-007-GCE-AE-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-AGOSTO2020-contract--0000110345-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-AGOSTO2020-award-1
+ContractID: ocds-1xraxc-2021-AR40U-00000531E-contract-2021-AR40U-00000531E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR40U-00000531E-award-1
+ContractID: ocds-1xraxc-3-19-41110-0106-contract-3-20-41110-0086-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-41110-0106-award-002-2
+ContractID: ocds-1xraxc-3-19-41110-0106-contract-3-20-41110-0085-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-41110-0106-award-001-1
+ContractID: ocds-1xraxc-3-19-41110-0106-contract-3-20-41110-0089-1-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-41110-0106-award-005-5
+ContractID: ocds-1xraxc-3-19-41110-0106-contract-3-20-41110-0088-1-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-41110-0106-award-004-4
+ContractID: ocds-1xraxc-3-19-41110-0106-contract-3-20-41110-0087-1-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-19-41110-0106-award-003-3
+ContractID: ocds-1xraxc-SUM-12-21-ML-contract-SUM-12-21-ML, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SUM-12-21-ML-award-1
+ContractID: ocds-1xraxc-MAD-21-2021-contract-MAD-21-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MAD-21-2021-award-1
+ContractID: ocds-1xraxc-SE-DT--4280-contract-SE-DT--4280, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-DT--4280-award-1
+ContractID: ocds-1xraxc-9365-2020-contract-20-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-9365-2020-award-1
+ContractID: ocds-1xraxc-O-06-19-03-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-O-06-19-03-award-1-1
+ContractID: ocds-1xraxc-O-06-19-03-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-O-06-19-03-award-2-2
+ContractID: ocds-1xraxc-2021-AR21U-00000103E-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR21U-00000103E-award-1
+ContractID: ocds-1xraxc-AGP-35-2021-contract-AGP-35-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AGP-35-2021-award-1
+ContractID: ocds-1xraxc-9363-2020-contract-18-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-9363-2020-award-1
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-8, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-6-8
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-2-3
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-1-2
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-5-7
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-3-4
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-1-1
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-5-6
+ContractID: ocds-1xraxc-21-963-0013-0412-contract-21-963-0013-0412-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-963-0013-0412-award-4-5
+ContractID: ocds-1xraxc-DNA-259-2019-contract-DNA-259-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DNA-259-2019-award-1
+ContractID: ocds-1xraxc-SDR-19-2021-contract-SDR-19-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SDR-19-2021-award-1
+ContractID: ocds-1xraxc-67-2021-contract-67-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-67-2021-award-1
+ContractID: ocds-1xraxc-2020CT04TC-contract-EXPEDIENTE-CT004TC---LOTE-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020CT04TC-award-1-1	ContractStartDate: 2021-01-30 00:00:00+00:00
+ContractID: ocds-1xraxc-202100000032-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202100000032-award-1
+ContractID: ocds-1xraxc-079-CO-IN-2020-0003-contract-0079E00613, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-079-CO-IN-2020-0003-award-1
+ContractID: ocds-1xraxc-CON-42-2020-contract-CON-42-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CON-42-2020-award-1
+ContractID: ocds-1xraxc-2020030016-contract-C2020030016, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020030016-award-1
+ContractID: ocds-1xraxc-T-0091-A-20-2-contract-T-0091-A-20-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-T-0091-A-20-2-award-1
+ContractID: ocds-1xraxc-104599-contract-104599, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-104599-award-1
+ContractID: ocds-1xraxc-29997-2017-contract-2021-0022, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-29997-2017-award-1
+ContractID: ocds-1xraxc-4-1-78-20-contract-4-1-78-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4-1-78-20-award-1
+ContractID: ocds-1xraxc-140-13-21-contract-1E40-13-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-140-13-21-award-1
+ContractID: ocds-1xraxc-DGRE-6680-COVID-19-contract-120620-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-6680-COVID-19-award-1
+ContractID: ocds-1xraxc-2021-C003-000001-contract-2021-C003-1000001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-C003-000001-award-1
+ContractID: ocds-1xraxc-06-2020-contract-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-06-2020-award-1
+ContractID: ocds-1xraxc-TSA000070245-contract-423-070, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TSA000070245-award-1
+ContractID: ocds-1xraxc-16303-2020-contract-2021-0008, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-16303-2020-award-1
+ContractID: ocds-1xraxc-6-2021-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-6-2021-award-1
+ContractID: ocds-1xraxc-SERV-09-2020-contract-SERV-09-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SERV-09-2020-award-1
+ContractID: ocds-1xraxc-20214012-V-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20214012-V-award-1
+ContractID: ocds-1xraxc-0FB6B017-contract-0FB6B017, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-0FB6B017-award-1
+ContractID: ocds-1xraxc-2021-AR46U-00000101-contract-101-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR46U-00000101-award-1
+ContractID: ocds-1xraxc-SC-56-2019-contract-SC-56-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SC-56-2019-award-1
+ContractID: ocds-1xraxc-2020-AR46U-00001554-contract-1554-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-AR46U-00001554-award-1
+ContractID: ocds-1xraxc-SE-8-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SE-8-21-award-1
+ContractID: ocds-1xraxc-SPD-2021-021-contract-SPD-2021-021-L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPD-2021-021-award-1-1
+ContractID: ocds-1xraxc-SPD-2021-021-contract-SPD-2021-021-L2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPD-2021-021-award-2-2
+ContractID: ocds-1xraxc-P4104900H-00114-contract-19-114, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-P4104900H-00114-award-1
+ContractID: ocds-1xraxc-056-20-SI-contract-056-20-SI-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-056-20-SI-award-1-1
+ContractID: ocds-1xraxc-056-20-SI-contract-056-20-SI--2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-056-20-SI-award-2-2
+ContractID: ocds-1xraxc-20210028-contract-20210028, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20210028-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-64-contract-EMERGECOVID2-64, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-64-award-1
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-Lote-4-1SS-SUMLIC--2021-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-4-4	ContractStartDate: 2021-04-14 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-Lote-5-1SS-SUMLIC--2021-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-5-5	ContractStartDate: 2021-04-14 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-Lote-7-1SS-SUMLIC--2021-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-7-7	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-lote-2-1SS-SUMLIC--2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-2-2	ContractStartDate: 2021-04-14 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-Lote-3-1SS-SUMLIC--2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-3-3	ContractStartDate: 2021-04-14 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-Lote-6-1SS-SUMLIC--2021-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-6-6	ContractStartDate: 2021-04-20 00:00:00+00:00
+ContractID: ocds-1xraxc-EXP-1SS-SUMLIC--2021-contract-lote-1-1SS-SUMLIC--2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EXP-1SS-SUMLIC--2021-award-1-1	ContractStartDate: 2021-04-14 00:00:00+00:00
+ContractID: ocds-1xraxc-4023020037200-contract-20217103, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4023020037200-award-1
+ContractID: ocds-1xraxc-50-PAs-10-21T-contract-50-PAs-10-21T, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-50-PAs-10-21T-award-1
+ContractID: ocds-1xraxc-MAD-2021-03-05-SERVICIOS-SAP-EN-AWS--5-28640--contract-1A30007928, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MAD-2021-03-05-SERVICIOS-SAP-EN-AWS--5-28640--award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-TF-JUNIO-2020-contract-0000118461-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-TF-JUNIO-2020-award-1
+ContractID: ocds-1xraxc-2-20-04110-0109-contract-2-20-04110-0109-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-20-04110-0109-award-1
+ContractID: ocds-1xraxc-CONTR-2021-5216-contract-CONTR-2021-5216, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTR-2021-5216-award-1
+ContractID: ocds-1xraxc-8-9-2021-contract-8-9-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8-9-2021-award-1
+ContractID: ocds-1xraxc-DGRE-6473-COVID-19-contract-115399-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-6473-COVID-19-award-1
+ContractID: ocds-1xraxc-4047-2020-contract-16-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-4047-2020-award-1
+ContractID: ocds-1xraxc-2-4-8-21-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-4-8-21-award-2-2
+ContractID: ocds-1xraxc-2-4-8-21-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2-4-8-21-award-1-1
+ContractID: ocds-1xraxc-CNMY21-CVMC-29-contract-CNMY21-CVMC-29, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CNMY21-CVMC-29-award-1
+ContractID: ocds-1xraxc-2020-1718024-contract-2020024, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-1718024-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0038-00000711E-contract-2021-ETSAE0038-00000711E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0038-00000711E-award-1
+ContractID: ocds-1xraxc-113-2021-00609_CB9-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-113-2021-00609_CB9-award-1
+ContractID: ocds-1xraxc-202000000335-contract-202000000335, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202000000335-award-1
+ContractID: ocds-1xraxc-18-2020-contract-18-2020-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-18-2020-award-1-1	ContractStartDate: 2021-05-12 00:00:00+00:00
+ContractID: ocds-1xraxc-43021801-contract-43021801, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-43021801-award-1
+ContractID: ocds-1xraxc-146-2021-contract-4-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-146-2021-award-1
+ContractID: ocds-1xraxc-DPM-51-2020-contract-DPM-51-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DPM-51-2020-award-1
+ContractID: ocds-1xraxc-2021-678-contract-678, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-678-award-1
+ContractID: ocds-1xraxc-DGRE-395-COVID-19-contract-118293-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-395-COVID-19-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0427-00000946E-contract-0946, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0427-00000946E-award-1
+ContractID: ocds-1xraxc-E20-0142-contract-E20-0142-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E20-0142-award-1
+ContractID: ocds-1xraxc-240-21-contract-240-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-240-21-award-1
+ContractID: ocds-1xraxc-002182-2020Negociado-contract-211406, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-002182-2020Negociado-award-1
+ContractID: ocds-1xraxc-CO-2019-1052-contract-CO-2019-1052, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CO-2019-1052-award-1
+ContractID: ocds-1xraxc-cc-9-2021-contract-CC-9-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-cc-9-2021-award-1
+ContractID: ocds-1xraxc-1250-2021-contract-12, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1250-2021-award-1
+ContractID: ocds-1xraxc-EC-AGI-C-001-2021-contract-EC-AGI-C-001-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-AGI-C-001-2021-award-1
+ContractID: ocds-1xraxc-977-2019-contract-977-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-977-2019-award-1
+ContractID: ocds-1xraxc-1-2021--Acerado-Acceso-Carretera-de-Villacarrillo-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1-2021--Acerado-Acceso-Carretera-de-Villacarrillo-award-1
+ContractID: ocds-1xraxc-2021-96-contract-2021-96, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-96-award-1
+ContractID: ocds-1xraxc-09-123-0173-0513-contract-09-123-0173-0513, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-09-123-0173-0513-award-1
+ContractID: ocds-1xraxc-2020-00327-contract-2020-00370, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-00327-award-1
+ContractID: ocds-1xraxc-2020-7279P-contract-2020-7279P-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-7279P-award-2-2
+ContractID: ocds-1xraxc-2020-7279P-contract-2020-7279P-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-7279P-award-1-1
+ContractID: ocds-1xraxc-2020-7279P-contract-2020-7279P-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-7279P-award-4-4
+ContractID: ocds-1xraxc-2020-7279P-contract-2020-7279P-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-7279P-award-3-3
+ContractID: ocds-1xraxc-EMERGECOVID2-69-contract-EMERGECOVID2-69, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-69-award-1
+ContractID: ocds-1xraxc-000182-2021-contract-000182-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000182-2021-award-1
+ContractID: ocds-1xraxc-1E40-07-21-contract-1e40-07-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1E40-07-21-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-SEPT2020-contract-0000111507-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-SEPT2020-award-1
+ContractID: ocds-1xraxc-2020001478-contract-2020001478, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020001478-award-1
+ContractID: ocds-1xraxc-SO2020-215-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SO2020-215-award-1
+ContractID: ocds-1xraxc-LPA-69-2020-contract-LPA-69-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-LPA-69-2020-award-1
+ContractID: ocds-1xraxc-072021-contract-072021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-072021-award-1
+ContractID: ocds-1xraxc-3-20-05110-0191-contract-3-20-05110-0191-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-20-05110-0191-award-1
+ContractID: ocds-1xraxc-PSU-2021-0000036886-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PSU-2021-0000036886-award-1
+ContractID: ocds-1xraxc-E-70017-2021-000012-contract-E-70017-2021-000012, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-E-70017-2021-000012-award-1
+ContractID: ocds-1xraxc-32-2021-contract-32-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-32-2021-award-1
+ContractID: ocds-1xraxc-CSERV22-19C-contract-CSERV22-19, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CSERV22-19C-award-1
+ContractID: ocds-1xraxc--588-2020B-contract-588-2020B-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc--588-2020B-award-1-1	ContractStartDate: 2021-05-17 00:00:00+00:00
+ContractID: ocds-1xraxc-20210086-contract-20210086, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20210086-award-1
+ContractID: ocds-1xraxc-20-07388-contract-2021C330000023, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20-07388-award-1
+ContractID: ocds-1xraxc-21CS0039-contract-21CS0039, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21CS0039-award-1
+ContractID: ocds-1xraxc-45213-2020-contract-45213-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-45213-2020-award-1
+ContractID: ocds-1xraxc-5083-2020-contract-13-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-5083-2020-award-1
+ContractID: ocds-1xraxc-21-07432-contract-21-07432, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-07432-award-1
+ContractID: ocds-1xraxc-252-2021-contract-252-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-252-2021-award-1-1	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-252-2021-contract-252-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-252-2021-award-2-2	ContractStartDate: 2021-05-24 00:00:00+00:00
+ContractID: ocds-1xraxc-23-02-01-2020-0001-contract-23-02-01-2020-0001-LOTE-2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-23-02-01-2020-0001-award-2-2
+ContractID: ocds-1xraxc-23-02-01-2020-0001-contract-23-02-01-2020-0001-LOTE-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-23-02-01-2020-0001-award-1-1
+ContractID: ocds-1xraxc-DGRE-4105-COVID-19-contract-105524-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-4105-COVID-19-award-1
+ContractID: ocds-1xraxc-2020-A-ASC-0037-contract-18935-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0037-award-4-4	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0037-contract-18932-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0037-award-5-5	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0037-contract-19036-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0037-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0037-contract-18936-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0037-award-3-3	ContractStartDate: 2021-05-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-A-ASC-0037-contract-18937-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-A-ASC-0037-award-2-2	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-ES-09-contract-2021-ES-09, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ES-09-award-1
+ContractID: ocds-1xraxc-000-CO-SV-2020-0013-contract-0000E00614-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000-CO-SV-2020-0013-award-1-1	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-000-CO-SV-2020-0013-contract-0000E00615-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-000-CO-SV-2020-0013-award-2-2	ContractStartDate: 2021-05-25 00:00:00+00:00
+ContractID: ocds-1xraxc-2019052657-contract-2019052657, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2019052657-award-1
+ContractID: ocds-1xraxc-CONT-3-2021-contract-CONT-3-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONT-3-2021-award-1
+ContractID: ocds-1xraxc-731-2021-contract-731-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-731-2021-award-1
+ContractID: ocds-1xraxc-OB-017-20-contract-OB-017-20, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-017-20-award-1
+ContractID: ocds-1xraxc-OB-017-20-contract-2018-2-PPOYS-145-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-OB-017-20-award-1
+ContractID: ocds-1xraxc-A2021-004558-contract-A2021-004558-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-004558-award-1
+ContractID: ocds-1xraxc-A2021-000308-contract-A2021-000308-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000308-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-OCTUBRE2020-contract--0000125112-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-OCTUBRE2020-award-1
+ContractID: ocds-1xraxc-T-0020-P-20-2-contract-T-0020-P-20-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-T-0020-P-20-2-award-1
+ContractID: ocds-1xraxc-N202100133-contract-N202100133, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-N202100133-award-1
+ContractID: ocds-1xraxc-SUM-34-21-NA-contract-SUM-34-21-NA, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SUM-34-21-NA-award-1
+ContractID: ocds-1xraxc-2021AR42U00000230E-contract-230E-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021AR42U00000230E-award-1
+ContractID: ocds-1xraxc-2021-ETSAE0906-00000868E-contract-0868E-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0906-00000868E-award-1
+ContractID: ocds-1xraxc-11790-2017-contract-06-2018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-11790-2017-award-1
+ContractID: ocds-1xraxc-A2021-000983-contract-A2021-000983-001, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A2021-000983-award-1
+ContractID: ocds-1xraxc-382021PA1001-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-382021PA1001-award-1
+ContractID: ocds-1xraxc-2021-002876-contract-010406-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-002876-award-1-1
+ContractID: ocds-1xraxc-2021-002876-contract-010408-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-002876-award-3-3
+ContractID: ocds-1xraxc-2021-002876-contract-010407-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-002876-award-2-2
+ContractID: ocds-1xraxc-2021-002876-contract-010410-2021-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-002876-award-4-4
+ContractID: ocds-1xraxc-DGRE-5770-COVID-19-contract-111671-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DGRE-5770-COVID-19-award-1
+ContractID: ocds-1xraxc-20F-1-1-0022-contract-20F-1-0022, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20F-1-1-0022-award-1
+ContractID: ocds-1xraxc-S6O-011-2020---L2-contract-S6O-011-2020-L2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-S6O-011-2020---L2-award-1
+ContractID: ocds-1xraxc-EMERGECOVIS2-67-contract-EMERGECOVID2-67, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVIS2-67-award-1
+ContractID: ocds-1xraxc-2020-121-030-contract-2021-348, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-121-030-award-1
+ContractID: ocds-1xraxc-087-2021-contract-087-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-087-2021-award-1
+ContractID: ocds-1xraxc-52-UC-9-21-contract-52-UC-9-21-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-52-UC-9-21-award-3-3	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-52-UC-9-21-contract-52-UC-9-21-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-52-UC-9-21-award-1-1	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-52-UC-9-21-contract-52-uc-9-21-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-52-UC-9-21-award-2-2	ContractStartDate: 2021-05-26 00:00:00+00:00
+ContractID: ocds-1xraxc-48PAS14-2021-contract-48PAS1472021-LOTE1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-48PAS14-2021-award-1-1	ContractStartDate: 2021-05-21 00:00:00+00:00
+ContractID: ocds-1xraxc-48PAS14-2021-contract-48PAS14-2021-LOTE2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-48PAS14-2021-award-2-2	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-48PAS14-2021-contract-48PAS14-2021-LOTE3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-48PAS14-2021-award-3-3
+ContractID: ocds-1xraxc-8000-55-contract-5567-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8000-55-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-8000-55-contract-5738-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-8000-55-award-2-2	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-2020-aas-000003-BIS--EDUSI--contract-2020-ASS-000003, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-aas-000003-BIS--EDUSI--award-1
+ContractID: ocds-1xraxc-2021-ETSAE0427-00000425E-contract-425E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-ETSAE0427-00000425E-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-73-contract-EMERGECOVID2-73, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-73-award-1
+ContractID: ocds-1xraxc-202000000152-contract-202000000152, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-202000000152-award-1
+ContractID: ocds-1xraxc-2021-E-5---2020011631--contract-4610012703, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-5---2020011631--award-1
+ContractID: ocds-1xraxc-2345-2020-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2345-2020-award-1
+ContractID: ocds-1xraxc-AGP-10-2021-contract-AGP-10-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-AGP-10-2021-award-1
+ContractID: ocds-1xraxc-SV28-2016-contract-SV28-2016, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SV28-2016-award-1
+ContractID: ocds-1xraxc-2021-EA41-00000109E-contract-2021-EA41-00000221L-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA41-00000109E-award-2-2	ContractStartDate: 2021-05-04 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-EA41-00000109E-contract-2021-EA41-00000220L-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA41-00000109E-award-1-1	ContractStartDate: 2021-05-04 00:00:00+00:00
+ContractID: ocds-1xraxc-3815-2021-contract-3815-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3815-2021-award-1
+ContractID: ocds-1xraxc-CG-2021-2751-0001-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CG-2021-2751-0001-award-1
+ContractID: ocds-1xraxc-2021-SP03032003-00000462E-contract-2021-SP03032003-00000462E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-SP03032003-00000462E-award-1
+ContractID: ocds-1xraxc-3-18-20830-0164-contract-3-18-20830-0164-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-3-18-20830-0164-award-1
+ContractID: ocds-1xraxc-IVF-07-21-contract-IVF07-21, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-IVF-07-21-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-66-contract-EMERGECOVID2-66, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-66-award-1
+ContractID: ocds-1xraxc-2021-5-S562-contract-2021-5-S562, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-5-S562-award-1
+ContractID: ocds-1xraxc-2021-59-contract-102, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-59-award-1
+ContractID: ocds-1xraxc-2021-EA24-00000069E-contract-2021-EA24-00000069E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA24-00000069E-award-1
+ContractID: ocds-1xraxc-2021-AR30U-00000026-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR30U-00000026-award-2-1	ContractStartDate: 2021-05-18 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-AR30U-00000026-contract-1-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR30U-00000026-award-4-3	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-2021-AR30U-00000026-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR30U-00000026-award-3-2	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-PD-A-2020-10-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PD-A-2020-10-award-1
+ContractID: ocds-1xraxc-504-2021-contract-504-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-504-2021-award-1
+ContractID: ocds-1xraxc-SER-20-024-contract-SER-20-024, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SER-20-024-award-1
+ContractID: ocds-1xraxc-GC21_03_SER_4S-contract-C130404, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-GC21_03_SER_4S-award-1
+ContractID: ocds-1xraxc-54-S-21-SU-GE-AM2020-070-01-contract-54-S-21-SU-GE-AM2020-070-01, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-54-S-21-SU-GE-AM2020-070-01-award-1
+ContractID: ocds-1xraxc-2021-E-8---2020011660--contract-4010012694, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-8---2020011660--award-1
+ContractID: ocds-1xraxc-002-21-SP-contract-002-21-SP, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-002-21-SP-award-1
+ContractID: ocds-1xraxc-68-2021-contract-68-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-68-2021-award-1
+ContractID: ocds-1xraxc-M200056-contract-2020CC000002L7-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-M200056-award-1-1	ContractStartDate: 2021-06-01 00:00:00+00:00
+ContractID: ocds-1xraxc-00044-2021-IPE-contract-00044-2021-IPE, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-00044-2021-IPE-award-1
+ContractID: ocds-1xraxc-2021PASB3959-contract-2021PASB3959, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021PASB3959-award-1
+ContractID: ocds-1xraxc-19-175-RCP1026-OB-08-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19-175-RCP1026-OB-08-award-1
+ContractID: ocds-1xraxc-CO-9999-1100974891-20-PAS-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CO-9999-1100974891-20-PAS-award-1
+ContractID: ocds-1xraxc-2020-03-SER-contract-03-2020-SER, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2020-03-SER-award-1
+ContractID: ocds-1xraxc-370-2021-contract-SUM-ASS-2-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-370-2021-award-1
+ContractID: ocds-1xraxc-41021801-9b-2021--contract-41021801-9b-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-41021801-9b-2021--award-1
+ContractID: ocds-1xraxc-21-09335-contract-21-09335, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-21-09335-award-1
+ContractID: ocds-1xraxc-2021-EA24-00000072E-contract-2021-EA24-00000072E, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-EA24-00000072E-award-1
+ContractID: ocds-1xraxc-01-06-05-2021-contract-01-25-05-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-01-06-05-2021-award-1
+ContractID: ocds-1xraxc-1848-2020-contract-1848-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1848-2020-award-1
+ContractID: ocds-1xraxc-2021-AR43U-00000544E-contract-2021-AR43U-00000544E-2021-AR43U-00000544, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-AR43U-00000544E-award-1
+ContractID: ocds-1xraxc-2021-000161-PAA-contract-1-161-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-000161-PAA-award-1
+ContractID: ocds-1xraxc-2021-E-6---2020011632--contract-4610012705, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-E-6---2020011632--award-1
+ContractID: ocds-1xraxc-2021-018-contract-2021-018, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021-018-award-1
+ContractID: ocds-1xraxc-TELEVISION-COVID-HOSPITALMATERNOGC-contract-0000125215-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TELEVISION-COVID-HOSPITALMATERNOGC-award-1
+ContractID: ocds-1xraxc-PSS20200000087082-contract-1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PSS20200000087082-award-1-1	ContractStartDate: 2021-04-30 00:00:00+00:00
+ContractID: ocds-1xraxc-PSS20200000087082-contract-1-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PSS20200000087082-award-3-3	ContractStartDate: 2021-05-15 00:00:00+00:00
+ContractID: ocds-1xraxc-PSS20200000087082-contract-1-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PSS20200000087082-award-2-2	ContractStartDate: 0201-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-EC-ADS-E-002-2021-contract-EC-ADS-E-002-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-E-002-2021-award-3-3
+ContractID: ocds-1xraxc-EC-ADS-E-002-2021-contract-EC-ADS-E-002-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-E-002-2021-award-1-1
+ContractID: ocds-1xraxc-EC-ADS-E-002-2021-contract-EC-ADS-E-002-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EC-ADS-E-002-2021-award-2-2
+ContractID: ocds-1xraxc-PASA02-2021-contract-PASA02-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PASA02-2021-award-1
+ContractID: ocds-1xraxc-SGT-32-2020-contract-SGT-32-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SGT-32-2020-award-1
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L2-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-2-2	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L5-5, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-5-5	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L7-7, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-7-7	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L6-6, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-6-6	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L4-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-4-4	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L1-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-1-1	ContractStartDate: 2021-05-13 00:00:00+00:00
+ContractID: ocds-1xraxc-19620-2020-contract-19620-2020L3-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-19620-2020-award-3-3	ContractStartDate: 2021-05-22 00:00:00+00:00
+ContractID: ocds-1xraxc-097-20-RI-contract-097-20-RI, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-097-20-RI-award-1
+ContractID: ocds-1xraxc-20210123-contract-20210123, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-20210123-award-1
+ContractID: ocds-1xraxc-89-21-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-89-21-award-1
+ContractID: ocds-1xraxc-MT190009-contract-MT190009-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MT190009-award-001-1
+ContractID: ocds-1xraxc-MT190009-contract-MT190009-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MT190009-award-002-2
+ContractID: ocds-1xraxc-MT190009-contract-MT190009-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-MT190009-award-003-3
+ContractID: ocds-1xraxc-128712-contract-128712, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-128712-award-1
+ContractID: ocds-1xraxc-TRANSPORTE-COVID19-GC-JULIO2020-contract-0000118471-2020, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-TRANSPORTE-COVID19-GC-JULIO2020-award-1
+ContractID: ocds-1xraxc-NSP14-2021-contract-CONT_NSP14-2021_1142, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-NSP14-2021-award-1
+ContractID: ocds-1xraxc-A32-CO-CB-2020-0023-contract-0000E00635, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-A32-CO-CB-2020-0023-award-1
+ContractID: ocds-1xraxc-08-2021-contract-08-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-08-2021-award-1
+ContractID: ocds-1xraxc-PSS-2021-0000019214-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PSS-2021-0000019214-award-1
+ContractID: ocds-1xraxc-PASA-2021-103-S-contract-PASA-103-lote-unico, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-PASA-2021-103-S-award-1
+ContractID: ocds-1xraxc-SERVICIOS-16-17-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SERVICIOS-16-17-award-1
+ContractID: ocds-1xraxc-CONTMAY-2021-6-contract-0, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-CONTMAY-2021-6-award-1
+ContractID: ocds-1xraxc-601-2021-contract-601-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-601-2021-award-1
+ContractID: ocds-1xraxc-SPSC-024-2020-contract-83-2021-3, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPSC-024-2020-award-3-3	ContractStartDate: 2021-05-19 00:00:00+00:00
+ContractID: ocds-1xraxc-SPSC-024-2020-contract-82-2021-2, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPSC-024-2020-award-2-2	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-SPSC-024-2020-contract-82-2021-4, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPSC-024-2020-award-4-4	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-SPSC-024-2020-contract-82-2021-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-SPSC-024-2020-award-1-1	ContractStartDate: 2021-05-20 00:00:00+00:00
+ContractID: ocds-1xraxc-042021-contract-042021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-042021-award-1
+ContractID: ocds-1xraxc-EMERGECOVID2-71-contract-EMERGECOVID2-71, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-EMERGECOVID2-71-award-1
+ContractID: ocds-1xraxc-l-2105-mantelev-contract-L_2105-MANTELEV, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-l-2105-mantelev-award-1
+ContractID: ocds-1xraxc-300-2021-contract-300-2021, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-300-2021-award-1
+ContractID: ocds-1xraxc-DNA-68-2019-contract-DNA-68-2019, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-DNA-68-2019-award-1
+ContractID: ocds-1xraxc-2021_007-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-2021_007-award-1
+ContractID: ocds-1xraxc-1DGT00001623-contract-1, AwardRelated: https://publiccontracting.linkeddata.es/award/ocds-1xraxc-1DGT00001623-award-1

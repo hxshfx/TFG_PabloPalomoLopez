@@ -158,17 +158,130 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public void TestParserGetNextFile1()
+            public void TestGetSpecificElement()
             {
-                Uri uri = _parser.GetNextFile();
-                Assert.True(uri.Equals(new Uri("https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_20210403_150021.atom")));
+                IDictionary<string, XNamespace> namespaces = _parser.GetNamespaces();
+
+                IEnumerable<XName> validPath = new LinkedList<XName>(new XName[]
+                    {
+                        namespaces["cac"] + "ProcurementProject"
+                    }
+                );
+
+                XElement entry = GetEntryElement(_parser, true);
+                _parser.SetEntryRootElement(entry);
+
+                XElement[] queriedElements = _parser.GetElements(validPath);
+                XElement specificElement = Parser.GetSpecificElement(queriedElements[0], "Name");
+
+                Assert.NotNull(specificElement);
+                Assert.Equal(specificElement.Name.Namespace, namespaces["cbc"]);
+                Assert.True("Name".Equals(specificElement.Name.LocalName));
+            }
+        }
+
+        /* Tests de integración del componente de mapeado */
+
+        public class MapperTests
+        {
+            private IMapper _mapper;
+
+            public MapperTests()
+            {
+                Program.InitLogger();
+                _mapper = new Mapper(Program.Log, new Packager(Program.Log, "2021-01-01"));
             }
 
             [Fact]
-            public void TestParserGetNextFile2()
+            public void TestCommit()
             {
-                IParser otherParser = new Parser(Program.Log, new Document("Examples/xml/exampleInvalid.atom"));
-                Assert.Null(otherParser.GetNextFile());
+                IEnumerable<string> pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Award,
+                    Mappings.MappingElements.Awards.Id
+                });
+                XElement element = new XElement("null", "A");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Planning,
+                    Mappings.MappingElements.Plannings.Budget,
+                    Mappings.MappingElements.Plannings.Budgets.Amount
+                });
+                element = new XElement("null", "2");
+                element.SetAttributeValue("null", "EUR");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Tender,
+                    Mappings.MappingElements.Tenders.Title
+                });
+                element = new XElement("null", "C");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Tender,
+                    Mappings.MappingElements.Tenders.Lot,
+                    Mappings.MappingElements.Tenders.Lots.Id
+                });
+                element = new XElement("null", "D");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Contract,
+                    Mappings.MappingElements.Contracts.Id
+                });
+                element = new XElement("null", "E");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                pathMap = new LinkedList<string>(new string[]
+                {
+                    Mappings.MappingElements.Party,
+                    Mappings.MappingElements.Parties.Name
+                });
+                element = new XElement("null", "F");
+                _mapper.MapElement(pathMap, new XElement[]{ element });
+
+                _mapper.Commit("2021-01-01");
+
+                Assert.NotEmpty(_mapper.MappedEntry["awards"]);
+                Assert.NotEmpty(_mapper.MappedEntry["planning"]);
+                Assert.NotEmpty(_mapper.MappedEntry["tender"]);
+                Assert.NotEmpty(_mapper.MappedEntry["tender"]["items"]);
+                Assert.NotEmpty(_mapper.MappedEntry["tender"]["lots"]);
+                Assert.NotEmpty(_mapper.MappedEntry["contracts"]);
+                Assert.NotEmpty(_mapper.MappedEntry["parties"]);
+            }
+        }
+
+        public class ProgramTests
+        {
+            [Fact]
+            public async static void TestProgram1()
+            {
+                Assert.True(await Program.Main(new string[] { "./unexistingDir" } ) == (int) EStatusCodes.INVALID_DIR);
+            }
+
+            [Fact]
+            public async static void TestProgram2()
+            {
+                Assert.True(await Program.Main(new string[] { "./tmp", "--specific" } ) == (int) EStatusCodes.PATH_UNPROVIDED);
+            }
+
+            [Fact]
+            public async static void TestProgram3()
+            {
+                Assert.True(await Program.Main(new string[]{ "./tmp", "--invalid" }) == (int) EStatusCodes.WRONG_CODE);
+            }
+
+            [Fact]
+            public async static void TestProgram4()
+            {
+                Assert.True(await Program.Main(new string[]{ }) == (int) EStatusCodes.DISPLAY_HELP);
             }
         }
 

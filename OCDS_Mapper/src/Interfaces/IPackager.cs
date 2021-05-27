@@ -1,5 +1,4 @@
 using Newtonsoft.Json.Linq;
-using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Interfaces
 {
@@ -7,6 +6,14 @@ namespace OCDS_Mapper.src.Interfaces
 
     public interface IPackager
     {
+        /* Propiedades */
+
+        /*  propiedad Packaged => JObject
+         *      Objeto de empaquetado final
+         */
+        JObject Packaged { get; set; }
+
+
         /* Funciones */
 
         /*  función GetIdentifier(string) => string
@@ -23,9 +30,9 @@ namespace OCDS_Mapper.src.Interfaces
          */
         void Package(JObject entry);
 
-        /*  TODO
-         *
-         *
+        /*  función Publish(string) => void
+         *      Publica los datos escribiéndolos en el directorio de salida
+         *  @param dirPath : path del directorio de salida
          */
         void Publish(string dirPath);
     }

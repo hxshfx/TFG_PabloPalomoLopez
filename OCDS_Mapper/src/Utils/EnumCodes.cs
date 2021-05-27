@@ -1,7 +1,7 @@
 namespace OCDS_Mapper.src.Utils
 {
     /* Enumerado descriptor del estado de terminación proceso */
-    public enum EStatusCodes : int
+    public enum EStatusCodes
     {
         OK              = 0,
         DISPLAY_HELP    = 1,
@@ -20,5 +20,17 @@ namespace OCDS_Mapper.src.Utils
         PROVIDE_DAILY,      // Provee los documentos publicados en el día
         PROVIDE_LATEST,     // Provee sólo el último documento disponible
         PROVIDE_SPECIFIC    // Provee un documento pasado como parámetro
+    }
+
+
+    /* Enumerado descriptor de los niveles de severidad para el logging */
+
+    public enum ELogLevel
+    {
+        DEBUG,      // Nivel más bajo
+        INFO,
+        WARN,
+        ERROR,
+        FATAL       // Nivel más alto
     }
 }

@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using log4net.Core;
 using Newtonsoft.Json.Linq;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Model
 {
@@ -26,10 +26,10 @@ namespace OCDS_Mapper.src.Model
 
         /* Atributos privados */
 
-        /*  atributo _Log => Action<object, string, Level>
+        /*  atributo _Log => Action<object, string, ELogLevel>
          *      Puntero a la función de logging
          */
-        private readonly Action<object, string, Level> _Log;
+        private readonly Action<object, string, ELogLevel> _Log;
 
 
         /*  atributo _awards => JArray
@@ -59,7 +59,7 @@ namespace OCDS_Mapper.src.Model
         /*  atributo _id => string
          *      Copia del identificador único de la licitación
          */
-        private string _id { get; set; }
+        private string _id;
 
 
         /*  atributo _items => JArray
@@ -77,7 +77,7 @@ namespace OCDS_Mapper.src.Model
         /*  atributo _releaseId => string
          *      Copia del identificador único de la entrega
          */
-        private string _releaseId { get; set; }
+        private string _releaseId;
 
 
         /*  atributo _supplierParties => JArray
@@ -97,7 +97,7 @@ namespace OCDS_Mapper.src.Model
 
         // @param Log : Puntero a la función de logging
         // @param packager : instancia del componente de empaquetado
-        public Mapper(Action<object, string, Level> Log, IPackager packager)
+        public Mapper(Action<object, string, ELogLevel> Log, IPackager packager)
         {
             _Log = Log;
             _packager = packager;
@@ -123,7 +123,7 @@ namespace OCDS_Mapper.src.Model
             // Inicializa el objeto JSON para almacenar temporalmente las entidades adjudicatarias
             _supplierParties = new JArray();
 
-            _Log(this, "JSON initialized", Level.Debug);
+            _Log(this, "JSON initialized", ELogLevel.DEBUG);
         }
 
 
@@ -154,22 +154,22 @@ namespace OCDS_Mapper.src.Model
             // Realiza la captura de las posibles excepciones lanzadas
             catch (EmptyMappingRuleException)
             {
-                _Log(this, "An empty mapping rule was provided", Level.Warn);
+                _Log(this, "An empty mapping rule was provided", ELogLevel.WARN);
                 return;
             }
             catch (InvalidPathLengthException)
             {
-                _Log(this, "A mapping rule with invalid length was provided", Level.Warn);
+                _Log(this, "A mapping rule with invalid length was provided", ELogLevel.WARN);
                 return;
             }
             catch (WrongMappingException e)
             {
-                _Log(this, e.Message, Level.Error);
+                _Log(this, e.Message, ELogLevel.ERROR);
                 return;
             }
             catch (Exception e)
             {
-                _Log(this, e.Message, Level.Fatal);
+                _Log(this, e.Message, ELogLevel.FATAL);
                 return;
             }
 
@@ -195,7 +195,7 @@ namespace OCDS_Mapper.src.Model
                     {
                         jContainer = (JContainer) pathToken;
                         jContainer.Add(new JProperty(currentPath, new JObject()));
-                        _Log(this, $"{currentPath} wasn't found, it's created", Level.Debug);
+                        _Log(this, $"{currentPath} wasn't found, it's created", ELogLevel.DEBUG);
                     }
 
                     // Mueve el token a la nueva ruta y mueve el 'currentPath' al siguiente elemento
@@ -214,7 +214,7 @@ namespace OCDS_Mapper.src.Model
                     jContainer[currentPath].Parent.Remove();
                 }
                 jContainer.Add(jProperty);
-                _Log(this, $"Adding element in {currentPath}", Level.Debug);
+                _Log(this, $"Adding element in {currentPath}", ELogLevel.DEBUG);
             }
         }
 
@@ -615,38 +615,6 @@ namespace OCDS_Mapper.src.Model
         }
 
 
-        /*  función SimulateElement(string, int) => JObject
-         *      Simula la creación de un elemento para el testing que
-         *      en condiciones normales se habría creado ya, o en condiciones
-         *      de ejecución estándar debido a datos insuficientes
-         *  @param type : tipo del elemento a simular
-         *  @param id : identificador del elemento a simular
-         *  @return : elemento creado
-         */
-        private JObject SimulateElement(string type, string id)
-        {
-            JObject jobj = new JObject();
-
-            if (type.Equals("award"))
-            {
-                jobj.Add("id", id);
-                _awards.Add(jobj);
-            }
-            else if (type.Equals("lot"))
-            {
-                jobj.Add("id", $"lot-{id}");
-                _lots.Add(jobj);
-            }
-            else if (type.Equals("item"))
-            {
-                jobj.Add("id", id);
-                _items.Add(jobj);
-            }
-            
-            return jobj;
-        }
-
-
         /*  función estática IsContained(JArray, JObject) => bool
          *      Evalúa si un objeto se encuentra dentro del array (si su ID lo está)
          *  @param array : colección en la que buscar
@@ -655,12 +623,14 @@ namespace OCDS_Mapper.src.Model
          */
         private static bool IsContained(JArray array, JObject jobj)
         {
+            // Devuelve false si el array es vacío
             if (!array.Any())
             {
                 return false;
             }
             else
             {
+                // Itera sobre los elementos del array buscando el parámetro por su ID
                 foreach (JToken item in array)
                 {
                     if (item["id"].Equals(jobj["id"]))
@@ -681,8 +651,15 @@ namespace OCDS_Mapper.src.Model
          */
         private static string ParseId(string id)
         {
-            var normalizedString = id.Normalize(NormalizationForm.FormD);
-            var stringBuilder = new StringBuilder();
+            // Si el id no existe (testing), se crea para evitar excepciones
+            if (id == null)
+            {
+                id = "null";
+            }
+            
+            // Normaliza el string a caracteres Unicode
+            string normalizedString = id.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new StringBuilder();
 
             foreach (var c in normalizedString)
             {
@@ -693,7 +670,13 @@ namespace OCDS_Mapper.src.Model
                 }
             }
             
+            // Reemplaza los demás carácteres conflictivos
             stringBuilder = stringBuilder
+                .Replace("–", "-")
+                .Replace(":", "-")
+                .Replace(";", "-")
+                .Replace(".", "-")
+                .Replace("=", "-")
                 .Replace("/", "-")
                 .Replace(" ", "-")
                 .Replace("(", "-")
@@ -702,6 +685,39 @@ namespace OCDS_Mapper.src.Model
                 .Replace("ª", "a");
             
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+
+        /*  función SimulateElement(string, int) => JObject
+         *      Simula la creación de un elemento para el testing que
+         *      en condiciones normales se habría creado ya, o en condiciones
+         *      de ejecución estándar debido a datos insuficientes
+         *  @param type : tipo del elemento a simular
+         *  @param id : identificador del elemento a simular
+         *  @return : elemento creado
+         */
+        private JObject SimulateElement(string type, string id)
+        {
+            JObject jobj = new JObject();
+
+            // Crea el objeto dependiendo del tipo a simular
+            if (type.Equals("award"))
+            {
+                jobj.Add("id", id);
+                _awards.Add(jobj);
+            }
+            else if (type.Equals("lot"))
+            {
+                jobj.Add("id", $"lot-{id}");
+                _lots.Add(jobj);
+            }
+            else if (type.Equals("item"))
+            {
+                jobj.Add("id", id);
+                _items.Add(jobj);
+            }
+            
+            return jobj;
         }
 
 
@@ -736,7 +752,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tag unrecognized", Level.Debug);
+                _Log(this, $"Mapping code {element.Value} at element tag unrecognized", ELogLevel.DEBUG);
                 return null;
             }
 
@@ -896,7 +912,7 @@ namespace OCDS_Mapper.src.Model
                 }
                 else
                 {
-                    _Log(this, $"Mapping code {toMap[0].Value} at element awards.status unrecognized", Level.Debug);
+                    _Log(this, $"Mapping code {toMap[0].Value} at element awards.status unrecognized", ELogLevel.DEBUG);
                     return null;
                 }
             }
@@ -919,7 +935,7 @@ namespace OCDS_Mapper.src.Model
 
                     if (procurementProjectLotID != null && awardIDs.Length > 2 && !procurementProjectLotID.Value.Equals(awardIDs[awardIDs.Length - 2]))
                     {
-                        _Log(this, "Award IDs discrepancy", Level.Error);
+                        _Log(this, "Award IDs discrepancy", ELogLevel.ERROR);
                     }
 
                     if (resultCode.Value.Equals("1") || resultCode.Value.Equals("6"))
@@ -941,7 +957,7 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Mapping code {resultCode.Value} at element awards.status unrecognized", Level.Debug);
+                        _Log(this, $"Mapping code {resultCode.Value} at element awards.status unrecognized", ELogLevel.DEBUG);
                         return null;
                     }
                     award = (JObject) award.Next;
@@ -994,7 +1010,7 @@ namespace OCDS_Mapper.src.Model
                             }
                             else
                             {
-                                _Log(this, $"Identifier {attribute.Value} not recognized", Level.Debug);
+                                _Log(this, $"Identifier {attribute.Value} not recognized", ELogLevel.DEBUG);
                             }
                             identifier.Add("id", ParseId(partyIdentification.Value));
                         }
@@ -1041,7 +1057,7 @@ namespace OCDS_Mapper.src.Model
                 {
                     if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
                     {
-                        _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Debug);
+                        _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", ELogLevel.DEBUG);
                         return null;
                     }
                     value.Add("amount", Convert.ToDouble(payableAmount.Value, System.Globalization.CultureInfo.InvariantCulture));
@@ -1073,7 +1089,7 @@ namespace OCDS_Mapper.src.Model
                         {
                             if (payableAmount.FirstAttribute == null || payableAmount.FirstAttribute.Value != "EUR")
                             {
-                                _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", Level.Debug);
+                                _Log(this, $"Mapping attribute code {payableAmount.FirstAttribute.Value} at element awards.value unrecognized", ELogLevel.DEBUG);
                                 return null;
                             }
 
@@ -1267,13 +1283,13 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {attribute.Value} not recognized", Level.Debug);
+                        _Log(this, $"Identifier {attribute.Value} not recognized", ELogLevel.DEBUG);
                     }
                     identifier.Add("id", ParseId(toMap[0].Value));
                 }
                 else
                 {
-                    _Log(this, $"Identifier without scheme", Level.Debug);
+                    _Log(this, $"Identifier without scheme", ELogLevel.DEBUG);
                 }
             }
             else
@@ -1293,13 +1309,13 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {id1.Value} not recognized", Level.Debug);
+                        _Log(this, $"Identifier {id1.Value} not recognized", ELogLevel.DEBUG);
                     }
                     identifier.Add("id", ParseId(toMap[0].Value));
                 }
                 else
                 {
-                    _Log(this, $"Identifier without scheme", Level.Debug);
+                    _Log(this, $"Identifier without scheme", ELogLevel.DEBUG);
                 }
                 if (id2 != null)
                 {
@@ -1314,7 +1330,7 @@ namespace OCDS_Mapper.src.Model
                     }
                     else
                     {
-                        _Log(this, $"Identifier {id2.Value} not recognized", Level.Debug);
+                        _Log(this, $"Identifier {id2.Value} not recognized", ELogLevel.DEBUG);
                     }
                     additionalIdentifier.Add("id", ParseId(toMap[1].Value));
                     _contractingParty.Add("additionalIdentifiers", new JArray(additionalIdentifier));
@@ -1334,7 +1350,7 @@ namespace OCDS_Mapper.src.Model
             XElement element = toMap[0];
             if (element.FirstAttribute == null || element.FirstAttribute.Value != "EUR")
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element planning.budget.amount unrecognized", Level.Debug);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element planning.budget.amount unrecognized", ELogLevel.DEBUG);
                 return null;
             }
             return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));
@@ -1364,7 +1380,7 @@ namespace OCDS_Mapper.src.Model
                 code = Parser.GetCodeValue("CPV", toMap[0].Value);
                 if (code == null)
                 {
-                    _Log(this, $"CPV element {toMap[0].Value} unrecognized", Level.Debug);
+                    _Log(this, $"CPV element {toMap[0].Value} unrecognized", ELogLevel.DEBUG);
                 }
                 classification.Add("description_es", code);
 
@@ -1399,7 +1415,7 @@ namespace OCDS_Mapper.src.Model
                                 code = Parser.GetCodeValue("CPV", itemClassificationCode.Value);
                                 if (code == null)
                                 {
-                                    _Log(this, $"CPV element {itemClassificationCode.Value} unrecognized", Level.Debug);
+                                    _Log(this, $"CPV element {itemClassificationCode.Value} unrecognized", ELogLevel.DEBUG);
                                 }
                                 classification.Add("description_es", code);
 
@@ -1580,7 +1596,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tender.mainProcurementCategory unrecognized", Level.Debug);
+                _Log(this, $"Mapping code {element.Value} at element tender.mainProcurementCategory unrecognized", ELogLevel.DEBUG);
                 return null;
             }
 
@@ -1619,7 +1635,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping code {element.Value} at element tender.procurementMethod unrecognized", Level.Debug);
+                _Log(this, $"Mapping code {element.Value} at element tender.procurementMethod unrecognized", ELogLevel.DEBUG);
                     return null;
             }
 
@@ -1635,7 +1651,7 @@ namespace OCDS_Mapper.src.Model
                 string mapped = Parser.GetCodeValue("ContractingSTC", element.Value);
                 if (mapped == null)
                 {
-                    _Log(this, $"Mapping code {element.Value} at element tender.procurementMethodDetails unrecognized", Level.Debug);
+                    _Log(this, $"Mapping code {element.Value} at element tender.procurementMethodDetails unrecognized", ELogLevel.DEBUG);
                     return null;
                 }
                 return new JValue(mapped);
@@ -1679,7 +1695,7 @@ namespace OCDS_Mapper.src.Model
                 }
                 else
                 {
-                    _Log(this, $"Mapping code {element.Value} at element tender.submissionMethod unrecognized", Level.Debug);
+                    _Log(this, $"Mapping code {element.Value} at element tender.submissionMethod unrecognized", ELogLevel.DEBUG);
                     return null;
                 }
             }
@@ -1732,7 +1748,7 @@ namespace OCDS_Mapper.src.Model
             }
             else
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.tenderPeriod.durationInDays unrecognized", Level.Debug);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.tenderPeriod.durationInDays unrecognized", ELogLevel.DEBUG);
                 return null;
             }
         }
@@ -1749,7 +1765,7 @@ namespace OCDS_Mapper.src.Model
             XElement element = toMap[0];
             if (element.FirstAttribute == null || element.FirstAttribute.Value != "EUR")
             {
-                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.value unrecognized", Level.Debug);
+                _Log(this, $"Mapping attribute code {element.FirstAttribute.Value} at element tender.value unrecognized", ELogLevel.DEBUG);
                 return null;
             }
             return new JObject(new JProperty("amount", Convert.ToDouble(element.Value, System.Globalization.CultureInfo.InvariantCulture)), new JProperty("currency", "EUR"));

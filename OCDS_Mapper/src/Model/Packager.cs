@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using log4net.Core;
 using Newtonsoft.Json.Linq;
 using OCDS_Mapper.src.Interfaces;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Model
 {
@@ -11,12 +11,21 @@ namespace OCDS_Mapper.src.Model
 
     public class Packager : IPackager
     {
+        /* Propiedades */
+
+        /*  propiedad Packaged => JObject
+         *      Objeto de empaquetado final
+         */
+        public JObject Packaged { get; set; }
+
+
+
         /* Atributos privados */
 
-        /*  atributo _Log => Action<object, string, Level>
+        /*  atributo _Log => Action<object, string, ELogLevel>
          *      Puntero a la función de logging
          */
-        private readonly Action<object, string, Level> _Log;
+        private readonly Action<object, string, ELogLevel> _Log;
 
 
         /*  atributo _filename => string
@@ -31,15 +40,11 @@ namespace OCDS_Mapper.src.Model
         private readonly IDictionary<string, int> _idOccurrences;
 
 
-        /*  atributo _packaged => JObject
-         *      Objeto de empaquetado final
-         */
-        private readonly JObject _packaged;
-
         /*  atributo _uri => string
          *      Uri que describe el paquete que será publicado
          */
         private readonly string _uri;
+
 
         /*  atributo _uriOccurrences => IDictionary<string, int>
          *      Diccionario que controla si hay documentos con mismas URIs
@@ -52,16 +57,16 @@ namespace OCDS_Mapper.src.Model
 
         // @param Log : Puntero a la función de logging
         // @param timestamp : timestamp del documento de licitaciones
-        public Packager(Action<object, string, Level> Log, string timestamp)
+        public Packager(Action<object, string, ELogLevel> Log, string timestamp)
         {
             _Log = Log;
 
             // Inicializa las estructuras de la instancia
-            _packaged = new JObject();
+            Packaged = new JObject();
             _idOccurrences = new Dictionary<string, int>();
 
+            // Parsea el timestamp y actualiza el diccionario de URIs
             string id = GetDate(DateTime.Parse(timestamp));
-
             if (!_uriOccurrences.ContainsKey(id))
             {
                 _uriOccurrences[id] = 1;
@@ -71,6 +76,7 @@ namespace OCDS_Mapper.src.Model
                 id = $"{id}_{_uriOccurrences[id]++}";
             }
 
+            // Actualiza los campos que describen el documento
             _filename = $"document_{id}.json";
             _uri = $"{Program.Configuration["Upload_URL"]}{_filename}";
 
@@ -109,23 +115,24 @@ namespace OCDS_Mapper.src.Model
          */
         public void Package(JObject entry)
         {
-            JArray releases = (JArray) _packaged["releases"];
+            JArray releases = (JArray) Packaged["releases"];
             releases.Add(entry);
         }
 
 
         /*  función Publish(string) => void
-         *      TODO
-         *  @param dirPath : path en el que escribir el documento
+         *      Publica los datos escribiéndolos en el directorio de salida
+         *  @param dirPath : path del directorio de salida
          */
         public void Publish(string dirPath)
         {
+            // Construye el path del fichero mediante el directorio de salida y el nombre del documento
             string filePath = $"{dirPath}/{_filename}";
             using (StreamWriter sw = new StreamWriter(filePath))
             {
-                sw.Write(_packaged.ToString());
+                sw.Write(Packaged.ToString());
             }
-            _Log(this, $"Document {filePath} mapped and written", Level.Info);
+            _Log(this, $"Document {filePath} mapped and written", ELogLevel.INFO);
         }
 
 
@@ -137,12 +144,12 @@ namespace OCDS_Mapper.src.Model
          */
         private void InsertMetadata()
         {
-            _packaged.Add("extensions", new JArray(Program.Configuration["Lot_extension_URL"]));
-            _packaged.Add("publisher", new JObject(new JProperty("name", "Ontology Engineering Group"), new JProperty("uri", "https://oeg.fi.upm.es/")));
-            _packaged.Add("publishedDate", GetDate(DateTime.Now));
-            _packaged.Add("uri", _uri);
-            _packaged.Add("version", "1.1");
-            _packaged.Add("releases", new JArray());
+            Packaged.Add("extensions", new JArray(Program.Configuration["Lot_extension_URL"]));
+            Packaged.Add("publisher", new JObject(new JProperty("name", "Ontology Engineering Group"), new JProperty("uri", "https://oeg.fi.upm.es/")));
+            Packaged.Add("publishedDate", GetDate(DateTime.Now));
+            Packaged.Add("uri", _uri);
+            Packaged.Add("version", "1.1");
+            Packaged.Add("releases", new JArray());
         }
 
 

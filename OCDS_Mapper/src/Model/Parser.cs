@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using log4net.Core;
 using OCDS_Mapper.src.Exceptions;
 using OCDS_Mapper.src.Interfaces;
+using OCDS_Mapper.src.Utils;
 
 namespace OCDS_Mapper.src.Model
 {
@@ -30,10 +30,10 @@ namespace OCDS_Mapper.src.Model
 
         /* Atributos privados */
 
-        /*  atributo _Log => Action<object, string, Level>
+        /*  atributo _Log => Action<object, string, ELogLevel>
          *      Puntero a la función de logging
          */
-        private readonly Action<object, string, Level> _Log;
+        private readonly Action<object, string, ELogLevel> _Log;
 
 
         /*  atributo estático _codeLists => IDictionary<string, XElement>
@@ -57,7 +57,7 @@ namespace OCDS_Mapper.src.Model
 
         // @param Log : Puntero a la función de logging
         // @param document : documento atom a parsear
-        public Parser(Action<object, string, Level> Log, Document document)
+        public Parser(Action<object, string, ELogLevel> Log, Document document)
         {
             _Log = Log;
 
@@ -65,7 +65,7 @@ namespace OCDS_Mapper.src.Model
             DocumentRoot = XElement.Load(document.Stream);
             document.Stream.Dispose();
 
-            _Log(this, "XML document loaded", Level.Info);
+            _Log(this, "XML document loaded", ELogLevel.INFO);
         }
 
 
@@ -87,10 +87,10 @@ namespace OCDS_Mapper.src.Model
             {
                 // Construye un par a través del nombre del atributo y el namespace que representa su valor
                 namespaces.Add(attr.Name.LocalName, XNamespace.Get(attr.Value));
-                _Log(this, $"Adding to namespace: {attr.Name.LocalName}", Level.Debug);
+                _Log(this, $"Adding to namespace: {attr.Name.LocalName}", ELogLevel.DEBUG);
             }
 
-            _Log(this, $"Loaded namespace with {namespaces.Count} elements", Level.Debug);
+            _Log(this, $"Loaded namespace with {namespaces.Count} elements", ELogLevel.DEBUG);
             return namespaces;
         }
 
@@ -109,7 +109,7 @@ namespace OCDS_Mapper.src.Model
                 from entry in DocumentRoot.Elements(namespaces["xmlns"] + "entry")
                 select entry;
 
-            _Log(this, $"Loaded entry set with {entrySet.Count()} elements", Level.Info);
+            _Log(this, $"Loaded entry set with {entrySet.Count()} elements", ELogLevel.INFO);
             return entrySet;
         }
 
@@ -161,7 +161,7 @@ namespace OCDS_Mapper.src.Model
                 // Si no lo encuentra, devuelve null
                 if (!query.Any())
                 {
-                    _Log(this, $"Elemento {pathToElement.Last().LocalName} no encontrado", Level.Debug);
+                    _Log(this, $"Elemento {pathToElement.Last().LocalName} no encontrado", ELogLevel.DEBUG);
                     return null;
                 }
                 // Si existe, actualiza el elemento de búsqueda
@@ -198,13 +198,13 @@ namespace OCDS_Mapper.src.Model
             // Si no lo encuentra, devuelve null
             if (!query.Any())
             {
-                _Log(this, "Link to next file couldn't be found", Level.Warn);
+                _Log(this, "Link to next file couldn't be found", ELogLevel.WARN);
                 return null;
             }
             // Si existe, devuelve la URI correspondiente al siguiente fichero
             else
             {
-                _Log(this, $"Linked next file: {query.First().FirstAttribute.Value}", Level.Debug);
+                _Log(this, $"Linked next file: {query.First().FirstAttribute.Value}", ELogLevel.DEBUG);
                 return new Uri(query.First().FirstAttribute.Value);
             }
         }
@@ -238,7 +238,7 @@ namespace OCDS_Mapper.src.Model
             // Si no lo encuentra, devuelve null
             if (!query.Any())
             {
-                _Log(this, "Updated element couldn't be found", Level.Warn);
+                _Log(this, "Updated element couldn't be found", ELogLevel.WARN);
                 return null;
             }
             // Si existe, devuelve el timestamp del documento

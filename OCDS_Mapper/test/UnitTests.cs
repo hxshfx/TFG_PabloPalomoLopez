@@ -541,7 +541,7 @@ namespace OCDS_Mapper.test
                     JValue idValue = (JValue) idProperty.First;
                     JValue descriptionValue = (JValue) descriptionProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                     Assert.True("Art. 131 Ley 9/2007: Oferta con mejor relación calidad – precio.".Equals(descriptionValue.Value));
                 }
 
@@ -620,8 +620,8 @@ namespace OCDS_Mapper.test
                     JValue descriptionValue1 = (JValue) descriptionProperty1.First;
                     JValue descriptionValue2 = (JValue) descriptionProperty2.First;
 
-                    Assert.True("1".Equals(idValue1.Value));
-                    Assert.True("2".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2".Equals(idValue2.Value));
                     Assert.True("Mejor oferta".Equals(descriptionValue1.Value));
                     Assert.True("Oferta más ventajosa".Equals(descriptionValue2.Value));
                 }
@@ -820,7 +820,7 @@ namespace OCDS_Mapper.test
                     JValue idValue = (JValue) idProperty.First;
                     JValue statusValue = (JValue) statusProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                     Assert.True("active".Equals(statusValue.Value));
                 }
             
@@ -899,8 +899,8 @@ namespace OCDS_Mapper.test
                     JValue statusValue1 = (JValue) statusProperty1.First;
                     JValue statusValue2 = (JValue) statusProperty2.First;
 
-                    Assert.True("1".Equals(idValue1.Value));
-                    Assert.True("2".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2".Equals(idValue2.Value));
                     Assert.True("pending".Equals(statusValue1.Value));
                     Assert.True("cancelled".Equals(statusValue2.Value));
                 }
@@ -974,7 +974,7 @@ namespace OCDS_Mapper.test
                     JValue idValue = (JValue) idProperty.First;
                     JArray supplierArray = (JArray) suppliersProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                     
                     Assert.Single(supplierArray);
                     Assert.NotNull(supplierArray.First);
@@ -1001,7 +1001,7 @@ namespace OCDS_Mapper.test
                     JValue supplierIdValue = (JValue) supplierIdProperty.First;
                     JValue supplierNameValue = (JValue) supplierNameProperty.First;
 
-                    Assert.True("A28885614-0".Equals(supplierIdValue.Value));
+                    Assert.True("A28885614".Equals(supplierIdValue.Value));
                     Assert.True("GRASAS DEL CENTRO, S.A".Equals(supplierNameValue.Value));
 
                     JProperty parties = (JProperty) _mapper.MappedEntry.Last;
@@ -1049,7 +1049,7 @@ namespace OCDS_Mapper.test
                     JProperty partyIdProperty = (JProperty) identifierProperty.Next;
 
                     Assert.True("id".Equals(partyIdProperty.Name));
-                    Assert.True("A28885614-0".Equals(partyIdProperty.Value.ToString()));
+                    Assert.True("A28885614".Equals(partyIdProperty.Value.ToString()));
 
                     Assert.IsType<JProperty>(partyIdProperty.Next);
 
@@ -1142,7 +1142,7 @@ namespace OCDS_Mapper.test
 
                     JValue idValue = (JValue) idProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
 
                     JObject valueObject = (JObject) valueProperty.First;
 
@@ -1245,8 +1245,8 @@ namespace OCDS_Mapper.test
                     JValue idValue1 = (JValue) idProperty1.First;
                     JValue idValue2 = (JValue) idProperty2.First;
 
-                    Assert.True("1".Equals(idValue1.Value));
-                    Assert.True("2".Equals(idValue2.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue1.Value));
+                    Assert.True("ocds-1xraxc--award-2".Equals(idValue2.Value));
 
                     JObject valueObject1 = (JObject) valueProperty1.First;
                     JObject valueObject2 = (JObject) valueProperty2.First;
@@ -1347,7 +1347,7 @@ namespace OCDS_Mapper.test
 
                     JValue idValue = (JValue) idProperty.First;
 
-                    Assert.True("1".Equals(idValue.Value));
+                    Assert.True("ocds-1xraxc--award-1".Equals(idValue.Value));
                 }
             }
 
@@ -4844,15 +4844,25 @@ namespace OCDS_Mapper.test
             }
 
             [Fact]
-            public void TestConstructor()
+            public void TestGetIdentifier()
             {
-                Assert.True(true); // TODO
+                Assert.True(_packager.GetIdentifier("ABCD").Equals("1"));
+                Assert.True(_packager.GetIdentifier("ABCD").Equals("2"));
+                Assert.True(_packager.GetIdentifier("ABCDE").Equals("1"));
             }
 
             [Fact]
-            public void TestGetNamespaces()
+            public void TestPackage()
             {
-                Assert.True(true); // TODO
+                _packager.Package(new JObject(new JProperty("null", "null")));
+                Assert.NotEmpty(_packager.Packaged["releases"]);
+            }
+
+            [Fact]
+            public void TestPublish()
+            {
+                _packager.Publish("./tmp");
+                Assert.True(File.Exists("./tmp/document_2021-01-01T00:00:00Z.json"));
             }
         }
 
@@ -4904,6 +4914,31 @@ namespace OCDS_Mapper.test
                 strings.Should().Equal(expectedStrings);
                 namespaces.Should().Equal(expectedNamespaces);
             }
+
+            [Fact]
+            public void TestGetCodeValue()
+            {
+                string codeValue1 = Parser.GetCodeValue("CPV", "19212310");
+                string codeValue2 = Parser.GetCodeValue("ContractingSTC", "1");
+
+                codeValue1.Should().Equals("Artículos de lona.");
+                codeValue2.Should().Equals("Establecimiento del Acuerdo Marco");
+            }
+
+            [Fact]
+            public void TestParserGetNextFile1()
+            {
+                Uri uri = _parser.GetNextFile();
+                Assert.True(uri.Equals(new Uri("https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_20210403_150021.atom")));
+            }
+
+            [Fact]
+            public void TestParserGetNextFile2()
+            {
+                IParser otherParser = new Parser(Program.Log, new Document("Examples/xml/exampleInvalid.atom"));
+                Assert.Null(otherParser.GetNextFile());
+            }
+
         }
 
         /* Tests unitarios del componente de provisión */

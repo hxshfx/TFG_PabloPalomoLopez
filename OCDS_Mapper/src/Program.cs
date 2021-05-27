@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using log4net;
-using log4net.Config;
-using log4net.Core;
 using Microsoft.Extensions.Configuration;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 using OCDS_Mapper.src.Model;
 using OCDS_Mapper.src.Interfaces;
 using OCDS_Mapper.src.Utils;
@@ -44,7 +43,7 @@ namespace OCDS_Mapper
         /*  atributo estático _logger => ILog
          *      Objeto de logging de la aplicación
          */        
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(Program));
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
         /*  atributo estático _providerCode => EProviderOperationCode
@@ -86,10 +85,11 @@ namespace OCDS_Mapper
                 return (int) EStatusCodes.DISPLAY_HELP;
             }
 
+            // Comprueba si los argumentos son correctos
             EStatusCodes statusCode;
             IEnumerator<string> argsEnumerator = args.AsEnumerable<string>().GetEnumerator();
 
-            if ((statusCode = CheckProviderCode(argsEnumerator)) != EStatusCodes.OK)
+            if ((statusCode = CheckArguments(argsEnumerator)) != EStatusCodes.OK)
             {
                 return (int) statusCode;
             }
@@ -114,7 +114,7 @@ namespace OCDS_Mapper
         /*  función estática asíncrona Compute() => EStatusCodes
          *      Realiza el procesado de documentos CODICE al esquema OCDS
          *      Pipeline completo desde la provisión de documentos hasta el empaquetado de los documentos mapeados
-         *      TODO
+         *  @return : código de salida del programa
          */
         public async static Task<EStatusCodes> Compute()
         {
@@ -141,7 +141,7 @@ namespace OCDS_Mapper
                     bool sameDay = provider.SetParser(parser);
                     if (!sameDay)
                     {
-                        Log(null, "Today's documents processed", Level.Info);
+                        Log(null, "Today's documents processed", ELogLevel.INFO);
                         return EStatusCodes.OK;
                     }
                 }
@@ -176,13 +176,17 @@ namespace OCDS_Mapper
                     packager.Package(mapper.MappedEntry);
                 }
 
+                // Publica los datos empaquetados
                 packager.Publish(_packagerDirPath);
 
+                // Salvo que se esté mapeando un documento concreto, borra el documento sobre
+                // el que se ha realizado el procesado (.atom)
                 if (_providerCode != EProviderOperationCode.PROVIDE_SPECIFIC)
                 {
                     provider.RemoveFile(document.Path);
                 }
                 
+                // Se bloquea hasta recibir un nuevo documento del Provider
                 document = await provider.TakeFile();
             }
 
@@ -195,8 +199,18 @@ namespace OCDS_Mapper
          */
         public static void InitLogger()
         {
-            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            LoggingConfiguration config = new NLog.Config.LoggingConfiguration();
+
+            // Establece las salidas de logging a consola y archivo
+            Target logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+            Target logfile = new NLog.Targets.FileTarget("logfile") { FileName = "nlog.log" };
+                        
+            // Añade las reglas de configuración con los umbrales de los niveles de seguridad
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
+                        
+            // Aplica la configuración
+            NLog.LogManager.Configuration = config;
         }
 
 
@@ -206,7 +220,7 @@ namespace OCDS_Mapper
          *  @param message : mensaje a retransmitir
          *  @param level : nivel de severidad del mensaje
          */
-        public static void Log(object component, string message, Level level)
+        public static void Log(object component, string message, ELogLevel level)
         {
             if (component == null)
             {
@@ -228,25 +242,25 @@ namespace OCDS_Mapper
             {
                 message = $"Mapper - {message}";
             }
-            switch (level.Name)
+            switch (level)
             {
-                case "DEBUG":
+                case ELogLevel.DEBUG:
                     _logger.Debug(message);
                     break;
-                case "INFO":
+                case ELogLevel.INFO:
                     _logger.Info(message);
                     break;
-                case "WARN":
+                case ELogLevel.WARN:
                     _logger.Warn(message);
                     break;
-                case "ERROR":
+                case ELogLevel.ERROR:
                     _logger.Error(message);
                     break;
-                case "FATAL":
+                case ELogLevel.FATAL:
                     _logger.Fatal(message);
                     break;
                 default:
-                    Console.WriteLine("Directiva " + level.Name + " no reconocida");
+                    Console.WriteLine("Directiva " + level.ToString() + " no reconocida");
                     break;
             }
         }
@@ -268,25 +282,27 @@ namespace OCDS_Mapper
                         |--specific : <file> (will map provided <file>, local or remote)",
                         @"[ \t]+\|", 
                     string.Empty),
-                Level.Info);
+                ELogLevel.INFO);
         }
     
     
     
         /* Funciones auxiliares */
 
-        /*  función estática CheckProviderCode(string) => bool
-         *      Comprueba si el primer argumento (modo de operación del Provider) es correcto,
-         *      y actualiza los campos _providerCode, _providerFilePath y _packagerDirPath
-         *      @return 0 si es correcto, o el código de error en otro caso
+        /*  función estática CheckArguments(string) => bool
+         *      Comprueba si el primer argumento con el directorio de salido es correcto,
+         *      y si el segundo argumento (modo de operación del Provider) es correcto.
+         *      Comprueba en el modo --specific si se provee el tercer argumento necesario.
+         *      Actualiza los campos _providerCode, _providerFilePath (solo --specific) y _packagerDirPath
+         *      @return OK si es correcto, o el código de error en otro caso
          */
-        private static EStatusCodes CheckProviderCode(IEnumerator<string> args)
+        private static EStatusCodes CheckArguments(IEnumerator<string> args)
         {
             args.MoveNext();
 
             if (!Directory.Exists(args.Current))
             {
-                Log(null, "Please provide a valid directory to store processed documents", Level.Warn);
+                Log(null, "Please provide a valid directory to store processed documents", ELogLevel.WARN);
                 return EStatusCodes.INVALID_DIR;
             }
 
@@ -315,7 +331,7 @@ namespace OCDS_Mapper
                 // En caso de querer mapear un documento específico, comprueba si se ha pasado como argumento
                 if (!args.MoveNext())
                 {
-                    Log(null, "Please provide a file to be mapped", Level.Warn);
+                    Log(null, "Please provide a file to be mapped", ELogLevel.WARN);
                     return EStatusCodes.PATH_UNPROVIDED;
                 }
 

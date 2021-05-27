@@ -95,7 +95,7 @@ if __name__ == '__main__':
         logger.error('Directory provided didn\'t contain json documents to process')
         exit(2)
     # END IF
-    
+
     for json_filename, json_filecontent in json_files.items():
         xml_filename = json_to_xml(json_filecontent)
         return_code = subprocess.call("node index.js %s" % json_filename, shell=True)

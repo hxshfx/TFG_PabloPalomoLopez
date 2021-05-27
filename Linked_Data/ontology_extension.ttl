@@ -1,14 +1,11 @@
 @prefix : <http://data.tbfy.eu/ontology/ocds#> .
 @prefix dc: <http://purl.org/dc/terms/> .
-@prefix org: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ocds: <http://data.tbfy.eu/ontology/ocds#> .
 @prefix ocdsext: <http://data.tbfy.eu/ontology/ocds_extension#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @base <http://data.tbfy.eu/ontology/ocds#> .
 
 <http://data.tbfy.eu/ontology/ocds_extension#> rdf:type owl:Ontology .
