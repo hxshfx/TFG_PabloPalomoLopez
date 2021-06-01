@@ -1,5 +1,16 @@
 \mysection{Conclusiones}
 
-    ...
-
+    Resumidamente, este trabajo ha buscado implementar una serie de funcionalidades que mejorasen la calidad y la accesibilidad de los datos en el campo de la contratación pública; desde el primer análisis en el que se evidenció la necesidad de realizar la portabilidad de los datos entre los esquemas \texttt{CODICE} y \texttt{OCDS}, hasta la propia publicación de los datos tras el despliegue del \textit{software} desarrollado.
+    \\ \\
+    En general, todos los objetivos planteados se han cumplido, que si bien no eran muchos, eran concretos y necesarios. En particular, el desarrollo realizado de un sistema capaz de admitir distintos tipos de modos de operación para múltiples casos de uso, y cuyo despliegue es ya operativo, es el mayor logro de este trabajo. 
+    \\ \\
+    Se anima a cualquier parte interesada de la comunidad de datos abiertos ha reutilizar dicho \textit{software} (información relativa a la licencia sobre la que se distribuye el \textit{software} en \hyperref[sec:consideraciones]{la última sección del trabajo}). Asimismo, se invita a cualquier desarrollador a realizar cualquier tipo de modificaciones que crea de interés mediante la creación de \textit{pull requests}, la metodología estándar de creación y cambio de funcionalidades en los proyectos alojados en repositorios de herramientas de integración continua como \textit{GitHub}.
+    \\ \\
+    Con respecto a las líneas futuras sobre las que se podría trabajar en el proyecto, quedan enumeradas a continuación las que se plantean más interesantes:
+    \begin{itemize}
+        \item Alcanzar una mayor completitud de la cantidad de reglas analizadas, descritas, implementadas y documentadas que el \textit{software} es capaz de procesar: en el momento de la publicación de este trabajo, la cantidad de elementos de \texttt{CODICE} con correspondencia a elementos \texttt{OCDS} es del 36\%, un porcentaje bajo pero que recoge la mayoría de los elementos de interés.
+        \item Realizar el despliegue de una \textit{API} por encima de los datos abiertos publicados que sea capaz de explotarlos: ahora mismo, los datos enlazados son públicos y su consulta puede ser realizada mediante \textit{queries} \texttt{SPARQL} como las descritas en el \hyperref[annex:sparql]{anexo III}. Sin embargo, la construcción de una capa capaz de abstraer la complejidad de dichas \textit{queries} puede ser de interés.
+        \item Integrar la ontología extendida en las ya existentes: con motivo de la utilización del sistema de lotes en \texttt{OCDS} mediante la extensión de mismo nombre, fue necesario crear una pequeña ampliación de la ontología \cite{MYONT} que fuera capaz de recoger las relaciones y entidades derivadas de la utilización de lotes.
+        \item Construir herramientas de Inteligencia Artficial capaces de detectar a través de los datos posibles casos de delitos fiscales: ésta es quizá la línea de exploración futura más ambiciosa de todas, pero también la que mayores beneficios pueda tener. Debido a que la totalidad de contrataciones públicas que se licitan en España están obligadas a ser publicadas en los portales gubernamentales de los que el sistema desarrollado extrae los datos, todas las irregularidades también quedan de una manera u otra reflejadas. El desarrollo de herramientas que mediante \textit{IA} sean capaces de detectar aquellos patrones o anomalías que puedan evidenciar delitos fiscales como la malversación de fondos públicos sería una línea a explorar de muchísimo interés.
+    \end{itemize}
 \newpage

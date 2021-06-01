@@ -84,6 +84,7 @@
 % Hyperlinks
 \PassOptionsToPackage{obeyspaces}{url}
 \usepackage{breakurl}
+\usepackage{xurl}
 \usepackage{hyperref}
 \hypersetup{
     breaklinks=true,
@@ -415,6 +416,9 @@
 % Fixed tabbing
 \usepackage{tabto}
 
+% Width fixer
+\usepackage{changepage}
+
 % Section label commands
 \usepackage{nameref}
 \newcommand{\currentsection}{}
@@ -526,8 +530,9 @@
 % Start the document
 \begin{document}
     % Include the cover
-    \afterpage{\blankpage}
     \input{portada.tex}
+    \afterpage{\blankpage{}}
+    
     % Include the different sections
     \pagenumbering{roman}
     \input{includes/abstract}
@@ -536,14 +541,16 @@
     \input{includes/indice}
     \input{includes/indice_tablas}
     \input{includes/indice_figuras}
+    
     \pagenumbering{arabic}
     \input{includes/introduccion}
     \input{includes/estado_arte}
     \input{includes/software}
     \input{includes/correspondencias}
     \input{includes/datos_enlazados}
-    \input{includes/analisis_impacto}
     \input{includes/conclusiones}
+    \input{includes/analisis_impacto}
+    \input{includes/consideraciones}
     \input{includes/referencias}
     \input{includes/anexos}
 \end{document}

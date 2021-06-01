@@ -47,7 +47,7 @@
             \captionof{figure}{Ejemplo de una sentencia de \texttt{LINQ}}
             \label{fig:linq}
         
-        \subsubsection{Librerías utilizadas}
+        \subsubsection{Librerías utilizadas} \label{subsubsec:libreria}
             El sistema utiliza distintas librerías para realizar la implementación de las funcionalidades requeridas. En concreto, estas librerías son:
             
             \begin{itemize}
@@ -142,7 +142,7 @@
             \end{figure}
             
             En el diagrama de interrelación de componentes (véase \hyperref[fig:componentes]{figura 12}) se pueden apreciar dos tipos de flujo distintos.
-            \\ \\
+\newpage
             El principal, el flujo de recursos, representa el funcionamiento básico del sistema: el componente de provisión de datos (\textit{Provider}) suministra los documentos con los datos de contrataciones públicas bajo el esquema \texttt{CODICE} al componente de extracción de datos (\textit{Parser}). Una vez los datos del documento han sido extraídos, por cada entrada del documento de contrataciones se genera una nueva instancia del componente de mapeado (\textit{Mapper}), que implementa las reglas de mapeado descritas en el componente estático \textit{Mappings}. Cuando el documento ha sido totalmente procesado, el componente de empaquetado de datos (\textit{Packager}) finaliza el pipeline del sistema, publicando los datos de manera local.
             \\ \\
             El flujo secundario representa el uso de métodos entre los distintos componentes, ya sea de manera estática o mediante llamadas a instancias de los componentes.
@@ -292,7 +292,7 @@
     
             \begin{figure}[h]
                 \centering
-                \includegraphics[]{provider.pdf}
+                \includegraphics[width=0.8\linewidth]{provider.pdf}
                 \captionof{figure}{Diagrama \texttt{UML} del componente \textit{Provider}}
                 \label{fig:provider}
             \end{figure}
@@ -445,10 +445,10 @@
                 \hline
                     \texttt{\textit{RF-38}} & \texttt{UnitTests.MapperTests.\textit{TenderSubmissionMethodTests}} \\
                 \hline
-                    \texttt{\textit{RF-39}} & \texttt{UnitTests.MapperTests.\textit{PartiesNameTests}} \\
                 \hline
                     Código del requisito & Ruta del elemento de prueba \\
                 \hline
+                    \texttt{\textit{RF-39}} & \texttt{UnitTests.MapperTests.\textit{PartiesNameTests}} \\
                 \hline
                     \texttt{\textit{RF-40}} & \texttt{UnitTests.MapperTests.\textit{PartiesIdentifierTests}} \\
                 \hline
@@ -476,7 +476,7 @@
                 \hline
                     \texttt{\textit{RF-52}} & \texttt{UnitTests.PackagerTests.\textit{TestPackage}} \\
                 \hline
-                    \texttt{\textit{RF-53}} & \texttt{UnitTests.MapperTests.\textit{TestPublish}} \\
+                    \texttt{\textit{RF-53}} & \texttt{UnitTests.PackagerTests.\textit{TestPublish}} \\
                 \hline
                     \texttt{\textit{RF-54}} & \texttt{IntegrationTests.ProgramTests.\textit{TestProgram\{1:3\}}} \\
                 \hline
@@ -492,7 +492,7 @@
         
         \begin{figure}[!htb]
             \centering
-            \includegraphics[width=0.95\textwidth]{main_flow.pdf}
+            \includegraphics[width=0.825\textwidth]{main_flow.pdf}
             \captionof{figure}{Flujo de ejecución general de la aplicación}
             \label{fig:mainflow}
         \end{figure}
