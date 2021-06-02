@@ -1,12 +1,16 @@
-#########################################################
+################################################################
 ## generate_rdf.py
 ##   Script for RDF data generation from JSON sources
 ##   Stores in ./rdf folder the data generated
 ##   Uses Node.js module RocketRML to process data
 ##   Usage: ./python3 generate_rdf.py <dir>
 ##       <dir> : directory with JSON files to be processed
-#########################################################
-
+################################################################
+## This script is part of the Final Degree Project:
+## "Transformación de los datos de licitaciones de la Plataforma
+##  de Contratación Pública al estándar OCDS y su publicación
+##  como datos enlazados"
+################################################################
 
 #########
 # Imports
@@ -21,7 +25,6 @@ import re
 import subprocess
 import sys
 import xmltodict
-
 
 ###########
 # Functions

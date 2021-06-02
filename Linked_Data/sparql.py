@@ -1,11 +1,15 @@
-##############################################################
+################################################################
 ## sparql.py
 ##   Script for SPARQL queries' battery execution
 ##   Stores in ./queries folder the data extracted from queries
 ##   Usage: ./python3 sparql.py <dir>
 ##       <dir> : directory with RDF data to be queried
-##############################################################
-
+################################################################
+## This script is part of the Final Degree Project:
+## "Transformación de los datos de licitaciones de la Plataforma
+##  de Contratación Pública al estándar OCDS y su publicación
+##  como datos enlazados"
+################################################################
 
 #########
 # Imports
@@ -18,7 +22,6 @@ import pathlib
 import rdflib
 import rdflib.plugins.sparql as sparql
 import sys
-
 
 ###################
 # Data initializing
@@ -36,7 +39,6 @@ TBFY = rdflib.Namespace('http://data.tbfy.eu/ontology/tbfy#')
 
 logger = logging.getLogger('generate_rdf')
 logging.basicConfig(level=logging.INFO)
-
 
 #########
 # Queries
@@ -270,20 +272,19 @@ q8 = sparql.prepareQuery('''
     initNs = { 'dc' : DC, 'ocds' : OCDS, 'org' : ORG, 'schema' : SCHEMA , 'skos' : SKOS }
 )
 
-
 #################
 # Query execution
 #################
 
-def execute_query(index:int, output_file:io.TextIOWrapper, query:sparql.parser.Query):
+def execute_query(index:int, output_file:io.TextIOWrapper, input_query:sparql.parser.Query):
     '''
         function execute_query() -> None
             @param index        : index of query being processed
             @param output_file  : file to store query results into
-            @param query        : query object to execute
+            @param input_query  : query object to execute
     '''
 
-    rows = graph.query(query)
+    rows = graph.query(input_query)
 
     if index == 1:      # q1
         logger.info('Executing releases query')
@@ -440,7 +441,7 @@ if __name__ == '__main__':
     for path in pathlib.Path(input_directory).iterdir():
         if path.is_file() and path.suffix == '.n3':
             file = open(path, 'r')
-            graph.parse(file, format = 'n3')
+            graph.parse(file, format='n3')
             file.close()
             logger.info('Merged RDF data (%s) into process graph' % file.name)
         # END IF
@@ -459,8 +460,8 @@ if __name__ == '__main__':
 
     queries = [q1, q2, q3, q4, q5, q6, q7, q8]
 
-    for index, (output_file, query) in enumerate(zip(output_files, queries)):
-        execute_query(index + 1, output_file, query)
+    for index, (output_file, input_query) in enumerate(zip(output_files, queries)):
+        execute_query(index + 1, output_file, input_query)
         output_file.close()
     # END FOR
     

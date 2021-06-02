@@ -4013,7 +4013,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod1()
+                public void TestTenderSubmissionMethod1()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4060,7 +4060,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod2()
+                public void TestTenderSubmissionMethod2()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4107,7 +4107,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod3()
+                public void TestTenderSubmissionMethod3()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4158,7 +4158,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod4()
+                public void TestTenderSubmissionMethod4()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4205,7 +4205,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod5()
+                public void TestTenderSubmissionMethod5()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4221,7 +4221,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod6()
+                public void TestTenderSubmissionMethod6()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4248,7 +4248,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod1()
+                public void TestTenderSubmissionMethodDetails1()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {
@@ -4289,7 +4289,7 @@ namespace OCDS_Mapper.test
                 }
 
                 [Fact]
-                public void TestTenderProcurementMethod2()
+                public void TestTenderSubmissionMethodDetails2()
                 {
                     IEnumerable<string> pathMap = new LinkedList<string>(new string[]
                     {

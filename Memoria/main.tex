@@ -97,10 +97,12 @@
 
 % Colour definitions
 \usepackage[dvipsnames]{xcolor}
+\definecolor{DarkBlue}{rgb}{0.0,0.2,0.4}
 \definecolor{DarkGray}{rgb}{0.4,0.4,0.4}
 \definecolor{DarkGreen}{rgb}{0.0,0.34,0.25}
 \definecolor{DarkRed}{rgb}{0.42,0.07,0.02}
 \definecolor{DarkViolet}{rgb}{0.4,0.0,0.4}
+\definecolor{DarkYellow}{rgb}{0.6,0.4,0.1}
 
 % Language highlighting
 \usepackage{listings}
@@ -413,6 +415,133 @@
     stringstyle=\color{black},
     tabsize=10
 }
+\lstdefinelanguage{lPython}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    breakatwhitespace=true,
+    commentstyle=\color{DarkGreen},
+    frame=single,
+    gobble=19,
+    keywordstyle=[1]{\textit},
+    keywordstyle=[2]{\color{DarkYellow}},
+    keywordstyle=[3]{\color{DarkBlue}},
+    keywordstyle=[4]{\color{RedViolet}},
+    keywords=[1]{
+        and,
+        as,
+        def,
+        elif,
+        for,
+        if,
+        import,
+        in,
+        not,
+        True,
+        return,
+        __name__
+    },
+    morekeywords=[2]{
+        basicConfig,
+        call,
+        close,
+        compile,
+        enumerate,
+        error,
+        execute_query,
+        exit,
+        get_json_files,
+        getLogger,
+        info,
+        isdir,
+        is_file,
+        items,
+        iterdir,
+        json_to_xml,
+        len,
+        loads,
+        open,
+        parse,
+        prepareQuery,
+        query,
+        read,
+        remove,
+        replace,
+        sub,
+        unparse,
+        write,
+        zip
+    },
+    morekeywords=[3]{
+        argv,
+        DC,
+        directory,
+        file,
+        graph,
+        json_data,
+        json_file,
+        json_filecontent,
+        json_filename,
+        json_files,
+        logger,
+        INFO,
+        index,
+        input_directory,
+        OCDS,
+        OCDSEXT,
+        ORG,
+        output_file,
+        output_files,
+        path,
+        q1,
+        q2,
+        q3,
+        q4,
+        q5,
+        q6,
+        q7,
+        q8,
+        queries,
+        input_query,
+        return_code,
+        rows,
+        SCHEMA,
+        SKOS,
+        TBFY,
+        xml_data,
+        xml_file,
+        xml_filename
+    },
+    morekeywords=[4]{
+        Graph,
+        int,
+        io,
+        logging,
+        json,
+        Namespace,
+        os,
+        parser,
+        pathlib,
+        Path,
+        plugins,
+        Query,
+        rdflib,
+        re,
+        subprocess,
+        sparql,
+        sys,
+        TextIOWrapper,
+        xmltodict
+    },
+    morecomment=[l]{\#},
+    morestring=[d]{"},
+    morestring=[d]{'},
+    morestring=[s][]{\#\{}{\}},
+    sensitive=true,
+    showspaces=false,
+    showstringspaces=false,
+    stringstyle=\color{BrickRed},
+    tabsize=10
+}
 % Fixed tabbing
 \usepackage{tabto}
 
@@ -436,6 +565,9 @@
 
 % Multipage tables
 \usepackage{longtable}
+
+% Right-alignment text
+\usepackage{ragged2e}
 
 % Indexes name change
 \renewcommand*\contentsname{Índice}
@@ -508,7 +640,7 @@
 
 % Set the date format
 \date { 
-    Madrid, mayo de 2021
+    Madrid, junio de 2021
 }
 
 % A macro to print the title

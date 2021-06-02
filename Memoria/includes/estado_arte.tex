@@ -3,9 +3,9 @@
     \subsection{Datos abiertos y datos enlazados}
         Para poder valorar este proyecto, es fundamental comprender las bases sobre las que se sustenta el mismo: los datos abiertos y los datos enlazados.
         \\  \\
-        Los datos abiertos (\textit{open data}, en inglés) son datos que pueden ser utilizados, reutilizados y redistribuidos libremente por cualquier persona, y que se encuentran sujetos, a lo sumo, al requerimiento de atribución y de compartirse de la misma manera que aparecen \cite{OPENDATA}.
+        Los datos abiertos (\textit{open data}, en inglés) son datos que pueden ser utilizados, reutilizados y redistribuidos libremente por cualquier persona, y que se encuentran sujetos, a lo sumo, al requerimiento de atribución y de compartirse de la misma manera que aparecen.
         \\ \\
-        Sin embargo, más allá de las propiedades que los datos abiertos deben satisfacer (disponibilidad, accesibilidad, reutilización, redistribución y participación universal), el valor de estos datos es la interoperabilidad. La interoperabilidad denota la habilidad de diversos sistemas y organizaciones para trabajar en conjunto. En este escenario, nos referimos a la cualidad de integrar diferentes conjuntos de datos.
+        Sin embargo, más allá de las propiedades que los datos abiertos deben satisfacer (disponibilidad, accesibilidad, reutilización, redistribución y participación universal), el valor de estos datos es la interoperabilidad. La interoperabilidad denota la habilidad de diversos sistemas y organizaciones para trabajar en conjunto. En este escenario, nos referimos a la cualidad de integrar diferentes conjuntos de datos \cite{OPENDATA}.
         \\ \\
         Gracias a la interoperabilidad de los datos abiertos, se pueden construir \hyperref[sec:software]{sistemas} como los que se describirán en este trabajo posteriormente, capaces de reutilizar los datos publicados por una fuente y transportarlos a otro dominio, con el objetivo de explotar la información a través de nuevas vías.
         \\ \\
@@ -31,17 +31,17 @@
             \label{fig:linked}
         \end{figure}
 
-        \noindent A modo de ejemplo, y con el objetivo de reflejar algunos de los principios básicos de los datos enlazados, se muestra en la \hyperref[fig:linked]{figura 2} un caso de uso de una consulta sobre datos enlazados. La consulta es simple: un equipo solicita el recurso que representa la entidad de España al servidor de \textit{DBpedia} \cite{DBPEDIA}, uno de los proyectos más ambiciosos de la ``Web Semántica", que busca extraer la información de la más amplia enciclopedia \textit{online}, \textit{Wikipedia}, para generar datos enlazados.
+        \noindent A modo de ejemplo, y con el objetivo de reflejar algunos de los principios básicos de los datos enlazados, se muestra en la \hyperref[fig:linked]{figura 2} un caso de uso de una consulta sobre datos enlazados. La consulta es simple: un equipo solicita el recurso que representa la entidad de España al servidor de \textit{DBpedia} \cite{DBPEDIA}, uno de los proyectos más ambiciosos de la \textit{Web Semántica}, que busca extraer la información de la más amplia enciclopedia \textit{online}, \textit{Wikipedia}, para generar datos enlazados.
         \\ \\
         En el ejemplo se pueden ver algunas de las peculiaridades de los datos enlazados:
         \begin{itemize}
             \item Uso de \texttt{URI}s como identificadores: con el objetivo de evitar ambigüedades y poder ofrecer una forma estandarizada y unívoca de identificación de entidades, todos los recursos se identifican mediante una \texttt{URI} (por su traducción del inglés, Identificador de recursos uniforme). Por lo tanto, una \texttt{URI} no es sólo una dirección, sino también un identificador: en el ejemplo, \texttt{\url{https://dbpedia.org/resource/Spain}} es la dirección en la que se aloja el recurso, pero también es el identificador que permite a cualquier otro sistema reutilizar dicho recurso.
             \item Protocolo \texttt{HTTP}: para evitar la multiplicidad de esquemas de \texttt{URI}s, se utiliza \texttt{HTTP} para asegurar que cualquier recurso pueda ser buscado y accedido en la Web.
-            \item Obtención de recursos mediante \texttt{RDF}: Una vez se ha realizado una búsqueda y se pretende acceder a un recurso identificado por su \texttt{URI}, se obtiene una respuesta en forma de documento en formato \texttt{RDF}, que será explicado con más precisión en la \hyperref[subsubsec:RDF]{posterior sección}. Además, la forma de realizar consultas estructuradas sobre datos enlazados más allá de su obtención mediante \texttt{URI}s será descrita en \hyperref[subsubsec:SPARQL]{otra sección}.
+            \item Obtención de recursos mediante \texttt{RDF}: Una vez se ha realizado una búsqueda y se pretende acceder a un recurso identificado por su \texttt{URI}, se obtiene una respuesta en forma de documento en formato \texttt{RDF}, que será explicado con más precisión en la \hyperref[subsubsec:RDF]{posterior sección}. Además, la forma de realizar consultas estructuradas sobre datos enlazados más allá de su obtención mediante \texttt{URI}s será descrita en \hyperref[subsubsec:SPARQL]{la última subsección}.
         \end{itemize}
         
         \subsubsection{Modelo de datos \texttt{RDF}} \label{subsubsec:RDF}
-            Si bien debido a la comparación previa entre la Web estándar y la denominada ``Web Semántica" podría parecer que \texttt{RDF} es un lenguaje de marcado de texto como lo es \texttt{HTML}, esto no es así: \texttt{RDF} es un \textit{framework} de representación de información: un modelo que permite codificar la información, sus propiedades, y las relaciones entre sí.
+            Si bien debido a la comparación previa entre la Web estándar y la denominada \textit{Web Semántica} podría parecer que \texttt{RDF} es un lenguaje de marcado de texto como lo es \texttt{HTML}, esto no es así: \texttt{RDF} es un \textit{framework} de representación de información: un modelo que permite codificar la información, sus propiedades, y las relaciones entre sí.
             \\ \\
             La sintaxis de este modelo es simple: se basa en conjuntos de tripletas de la forma sujeto-predicado-objeto, donde éstos pueden ser \texttt{URI}s, literales o elementos vacíos. Mediante estos conjuntos de definiciones se pueden construir \textit{datasets}, que a su vez se pueden organizar en grafos de conocimiento; estructuras con una alta riqueza en términos de información.
             \\ \\
@@ -118,7 +118,7 @@
             En el portal institucional del Ministerio de Hacienda, concretamente en la sección de licitaciones publicadas en la Plataforma de Contratación del Sector Público \cite{PORTALHAC}, se pueden encontrar los documentos de licitaciones elaborados por la Dirección General del Patrimonio del Estado a partir de los datos que introducen los órganos de contratación como responsables de sus perfiles de contratantes. Estos documentos siguen el esquema \texttt{CODICE}, si bien no en todos los documentos van a aparecer los mismos elementos, dado que se proporcionan tres distintos tipos de documentos: licitaciones publicadas en la Plataforma de Contratación del Sector Público (excluyendo contratos menores), licitaciones publicadas mediante mecanismos de agregación y licitaciones correspondientes a contratos menores \cite{CODICETIPOS}. Este trabajo se ha centrado en el primero de los tipos previamente descritos, que incluye como superconjunto al tercero, el de los contratos menores.
             
         \subsubsection{Estándar \texttt{OCDS}}
-            El Estándar de Datos para las Contrataciones Abiertas (\texttt{OCDS}, por sus siglas en inglés) permite la divulgación de datos y documentos de todas las etapas del proceso de contratación mediante la definición de un modelo de datos común. Se creó para apoyar a las organizaciones a aumentar la transparencia de la contratación y permitir un análisis más profundo de los datos de contrataciones por una amplia gama de usuarios \cite{OCDS}.
+            El Estándar de Datos para las Contrataciones Abiertas (\texttt{OCDS}, por sus siglas en inglés) permite la divulgación de datos y documentos de todas las etapas del proceso de contratación mediante la definición de un modelo de datos común. Se creó para apoyar a las organizaciones a aumentar la transparencia de la contratación y permitir un análisis más profundo de los datos de contrataciones por una amplia gama de usuarios.
         
             \begin{figure}[h]
                 \centering
@@ -126,7 +126,7 @@
                 \captionof{figure}{Logo del estándar \texttt{OCDS}}
             \end{figure}
             
-            \noindent \texttt{OCDS} es un estándar de datos abierto, gratuito y no protegido por derechos de propiedad intelectual para la contratación pública, implementado por más de 30 gobiernos en todo el mundo. Es el único estándar abierto internacional para la publicación de información relacionada con la planeación, licitación e implementación de contratos públicos y ha sido avalado por el G20, el G7 e importantes organizaciones internacionales.
+            \noindent \texttt{OCDS} es un estándar de datos abierto, gratuito y no protegido por derechos de propiedad intelectual para la contratación pública, implementado por más de 30 gobiernos en todo el mundo. Es el único estándar abierto internacional para la publicación de información relacionada con la planeación, licitación e implementación de contratos públicos y ha sido avalado por el G20, el G7 e importantes organizaciones internacionales \cite{OCDS}.
             \\ \\
             \texttt{OCDS} describe cómo publicar datos y documentos en todas las etapas del proceso de contratación. Fue creado para brindar apoyo a las organizaciones con el objetivo de aumentar la transparencia en las contrataciones y permitir un análisis más exhaustivo de los datos sobre contrataciones por parte de una amplia variedad de usuarios. \texttt{OCDS} brinda:
             

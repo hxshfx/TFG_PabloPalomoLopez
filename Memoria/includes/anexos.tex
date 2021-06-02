@@ -1,6 +1,6 @@
 \mysection{Anexos}
 
-    \subsection{Anexo I: Interfaces de los componentes del \textit{OCDS\_Mapper}}
+    \subsection{Anexo I: Interfaces de los componentes del \textit{OCDS\_Mapper}} \label{annex:interfaces}
         \subsubsection{Componente \textit{Provider}}
             \begin{lstlisting}[language=lCSharp]
                 namespace OCDS_Mapper.src.Interfaces
@@ -210,7 +210,7 @@
             
 \newpage
 
-    \subsection{Anexo II: Ejemplos de los mapeados entre \texttt{CODICE} y \texttt{OCDS}}
+    \subsection{Anexo II: Ejemplos de los mapeados entre \texttt{CODICE} y \texttt{OCDS}} \label{annex:correspondencias}
 
         \subsubsection{Datos generales del expediente}
             \paragraph{Estado} \mbox{}\\
@@ -251,7 +251,7 @@
                 
                 \begin{lstlisting}[language=lJSON]
                     {
-                        "ocid": "ES-002/2021-CONTR"
+                        "ocid": "<OCDS-PREFIX>-002/2021-CONTR"
                     }
                 \end{lstlisting}
                 
@@ -399,43 +399,7 @@
                         }
                     }
                 \end{lstlisting}
-                        
-            \paragraph{Enlaces de descarga de pliegos} \mbox{}\\
-                \begin{lstlisting}[language=lXML]
-                    <cac-place-ext:ContractFolderStatus>
-                        <cac:LegalDocumentReference>
-                            <cbc:ID>
-                                PPT_2020_00120.pdf
-                            </cbc:ID>
-                            <cac:Attachment>
-                                <cac:ExternalReference>
-                                    <cbc:URI>
-                                        https://contrataciondelestado.es/wps/wcm/...
-                                    </cbc:URI>
-                                </cac:ExternalReference>
-                            </cac:Attachment>
-                        </cac:LegalDocumentReference>
-                    </cac-place-ext:ContractFolderStatus>
-                \end{lstlisting}
-                
-                \begin{center}
-                    $\big\Downarrow$
-                \end{center}
 \newpage
-                \begin{lstlisting}[language=lJSON]
-                    {
-                        "tender": {
-                            "documents": [
-                                {
-                                    "documentType": "technicalSpecifications",
-                                    "id": "PPT_2020_00120.pdf",
-                                    "url": "https://contrataciondelestado.es/wps/wcm/..."
-                                }
-                            ]
-                        }
-                    }
-                \end{lstlisting}
-                
         \subsubsection{Lotes y artículos}
             \paragraph{Número de lote} \mbox{}\\
                 \begin{lstlisting}[language=lXML]
@@ -533,7 +497,7 @@
                     }
                 \end{lstlisting}
                 
-            \paragraph{Clasificación \textit{CPV}} \mbox{}\\
+            \paragraph{Clasificación \texttt{CPV}} \mbox{}\\
                 \begin{lstlisting}[language=lXML]
                     <cac-place-ext:ContractFolderStatus>
                         <cac:ProcurementProjectLot>
@@ -877,7 +841,7 @@
                     {
                         "awards": [
                             {
-                                "id": "1"
+                                "id": "<OCDS-PREFIX>-<ID>-1"
                             }
                         ]
                     }
@@ -1089,7 +1053,7 @@
                     {
                         "contracts": [
                             {
-                                "id": "1"
+                                "id": "<OCDS-PREFIX>-<ID>-1"
                             }
                         ]
                     }
@@ -1385,5 +1349,295 @@
                             } .
                         } .
                     }
+                \end{lstlisting}
+            \end{minipage}
+            
+    \subsection{Anexo IV: \textit{Scripts} \texttt{Python} para la generación y explotación de datos enlazados} \label{annex:scriptspy}
+        \subsubsection{\textit{Script} de generación de datos} \label{subsubsec:py1}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                    ################################################################
+                    ## generate_rdf.py
+                    ##   Script for RDF data generation from JSON sources
+                    ##   Stores in ./rdf folder the data generated
+                    ##   Uses Node.js module RocketRML to process data
+                    ##   Usage: ./python3 generate_rdf.py <dir>
+                    ##       <dir> : directory with JSON files to be processed
+                    ################################################################
+                    ## This script is part of the Final Degree Project:
+                    ## "Transformación de los datos de licitaciones de la Plataforma
+                    ##  de Contratación Pública al estándar OCDS y su publicación
+                    ##  como datos enlazados"
+                    ################################################################
+                    
+                    #########
+                    # Imports
+                    #########
+                    
+                    import io
+                    import logging
+                    import json
+                    import os
+                    import pathlib
+                    import re
+                    import subprocess
+                    import sys
+                    import xmltodict
+                    
+                    ###########
+                    # Functions
+                    ###########
+                    
+                    def get_json_files(directory:pathlib.Path):
+                        '''
+                            function get_json_files() -> dict<str, io.TextIOWrapper>
+                                @param directory    : directory to search json files into
+                                @return             : mapping between json filenames and their text streams
+                        '''
+                    
+                        json_files = {}
+                        for path in directory.iterdir():
+                            if path.is_file() and path.suffix == '.json':
+                                json_files[path.name.replace('.json', '')] = open(path, 'r')
+                            # END IF
+                        # END FOR
+                    
+                        return json_files
+                    # END FUNCTION
+                \end{lstlisting}
+            \end{minipage}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                    def json_to_xml(json_file:io.TextIOWrapper):
+                        '''
+                            function json_to_xml() -> str
+                                @param json_file    : json file text stream
+                                @return             : filename of XML temporary file to be removed
+                        '''
+                    
+                        json_data = json.loads(json_file.read())
+                        json_data = { 'root' : json_data }
+                    
+                        xml_data = xmltodict.unparse(json_data, pretty=True)
+                        xml_data = re.compile(u'[\x00-\x08\x0b-\x1f\x7f-\x84\x86-\x9f\ud800-
+                                              \udfff\ufdd0-\ufddf\ufffe-\uffff]').sub('', xml_data)
+                    
+                        xml_filename = 'input.xml'
+                        xml_file = open(xml_filename, 'w+', encoding='utf8', errors='ignore')
+                        xml_file.write(xml_data)
+                    
+                        json_file.close()
+                        xml_file.close()
+                    
+                        return xml_filename
+                    # END FUNCTION
+                    
+                    
+                    ############
+                    # Entrypoint
+                    ############
+                    
+                    if __name__ == '__main__':
+                    
+                        logger = logging.getLogger()
+                        logging.basicConfig(level=logging.INFO)
+                    
+                        if len(sys.argv) != 2:
+                            logger.error('Please provide an argument describing input directory')
+                            logger.info('Usage: python3 generate_rdf.py <dir>')
+                            exit(1)
+                        # END IF
+                    
+                        input_directory = sys.argv[1]
+                        if not os.path.isdir(input_directory):
+                            logger.error('Please provide a valid input directory')
+                            logger.info('Usage: python3 generate_rdf.py <dir>')
+                            exit(1)
+                        # END IF
+                        
+                        json_files = get_json_files(pathlib.Path(input_directory))
+                        if len(json_files) == 0:
+                            logger.error('Directory provided didnt contain json documents to process')
+                            exit(2)
+                        # END IF
+                \end{lstlisting}
+            \end{minipage}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                        json_files = get_json_files(pathlib.Path(input_directory))
+                        if len(json_files) == 0:
+                            logger.error('Directory provided didnt contain json documents to process')
+                            exit(2)
+                        # END IF
+                    
+                        for json_filename, json_filecontent in json_files.items():
+                            xml_filename = json_to_xml(json_filecontent)
+                            return_code = subprocess.call('node index.js %s' % json_filename, shell=True)
+                    
+                            if return_code == 0:
+                                logger.info('File %s processed, RDF data generated at %s' %
+                                            ('%s.json' % json_filename, './rdf/%s.n3' % json_filename))
+                                os.remove(xml_filename)
+                            else:
+                                logger.error('An error occurred while executing Node.js RocketRML application')
+                                exit(3)
+                            # END IF-ELSE
+                        # END FOR
+                        
+                        exit(0)
+                    # END MAIN
+                \end{lstlisting}
+            \end{minipage}
+    
+        \subsubsection{\textit{Script} de explotación de datos} \label{subsubsec:py2}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                    ################################################################
+                    ## sparql.py
+                    ##   Script for SPARQL queries' battery execution
+                    ##   Stores in ./queries folder the data extracted from queries
+                    ##   Usage: ./python3 sparql.py <dir>
+                    ##       <dir> : directory with RDF data to be queried
+                    ################################################################
+                    ## This script is part of the Final Degree Project:
+                    ## "Transformación de los datos de licitaciones de la Plataforma
+                    ##  de Contratación Pública al estándar OCDS y su publicación
+                    ##  como datos enlazados"
+                    ################################################################
+                    
+                    #########
+                    # Imports
+                    #########
+                    
+                    import io
+                    import logging
+                    import os
+                    import pathlib
+                    import rdflib
+                    import rdflib.plugins.sparql as sparql
+                    import sys
+                    
+                    ###################
+                    # Data initializing
+                    ###################
+                    
+                    graph = rdflib.Graph()
+                    
+                    DC = rdflib.Namespace('http://purl.org/dc/terms/')
+                    OCDS = rdflib.Namespace('http://data.tbfy.eu/ontology/ocds#')
+                    OCDSEXT = rdflib.Namespace('http://data.tbfy.eu/ontology/ocds_extension#')
+                    ORG = rdflib.Namespace('http://www.w3.org/ns/org#')
+                    SCHEMA = rdflib.Namespace('http://schema.org/')
+                    SKOS = rdflib.Namespace('http://www.w3.org/2004/02/skos/core#')
+                    TBFY = rdflib.Namespace('http://data.tbfy.eu/ontology/tbfy#')
+                    
+                    logger = logging.getLogger('generate_rdf')
+                    logging.basicConfig(level=logging.INFO)
+                \end{lstlisting}
+            \end{minipage}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                    #########
+                    # Queries
+                    #########
+                    
+                    # descritas en la sección 10.3 de esta memoria
+                    
+                    q1 = sparql.prepareQuery('''  
+                    ... ''')
+                    q2 = sparql.prepareQuery('''
+                    ... ''')
+                    q3 = sparql.prepareQuery('''
+                    ... ''')
+                    q4 = sparql.prepareQuery('''
+                    ... ''')
+                    q5 = sparql.prepareQuery('''
+                    ... ''')
+                    q6 = sparql.prepareQuery('''
+                    ... ''')
+                    q7 = sparql.prepareQuery('''
+                    ... ''')
+                    q8 = sparql.prepareQuery('''
+                    ... ''')
+                    
+                    #################
+                    # Query execution
+                    #################
+                    
+                    def execute_query(index:int, output_file:io.TextIOWrapper,
+                                      input_query:sparql.parser.Query):
+                        '''
+                            function execute_query() -> None
+                                @param index        : index of query being processed
+                                @param output_file  : file to store query results into
+                                @param input_query  : query object to execute
+                        '''
+                    
+                        rows = graph.query(input_query)
+                    
+                        if index == 1:   ...   # q1
+                        elif index == 2: ...   # q2
+                        elif index == 3: ...   # q3
+                        elif index == 4: ...   # q4
+                        elif index == 5: ...   # q5
+                        elif index == 6: ...   # q6
+                        elif index == 7: ...   # q7
+                        elif index == 8: ...   # q8
+                        # END IF-ELIF
+                    # END FUNCTION
+                \end{lstlisting}
+            \end{minipage}
+            \begin{minipage}{\linewidth}
+                \begin{lstlisting}[language=lPython]
+                    ############
+                    # Entrypoint
+                    ############
+                    
+                    if __name__ == '__main__':
+                    
+                        if len(sys.argv) != 2:
+                            logger.error('Please provide an argument describing input directory')
+                            logger.info('Usage: python3 sparql.py <dir>')
+                            exit(1)
+                        # END IF
+                    
+                        input_directory = sys.argv[1]
+                        if not os.path.isdir(input_directory):
+                            logger.error('Please provide a valid input directory')
+                            logger.info('Usage: python3 sparql.py <dir>')
+                            exit(1)
+                        # END IF
+                    
+                        logger.info('RDF data loading')
+                        for path in pathlib.Path(input_directory).iterdir():
+                            if path.is_file() and path.suffix == '.n3':
+                                file = open(path, 'r')
+                                graph.parse(file, format='n3')
+                                file.close()
+                                logger.info('Merged RDF data (%s) into process graph' % file.name)
+                            # END IF
+                        # END FOR
+                    
+                        output_files = [
+                            open('./queries/1-releases.txt', 'w'),
+                            open('./queries/2-contractingProcesses.txt', 'w'),
+                            open('./queries/3-awards.txt', 'w'),
+                            open('./queries/4-contracts.txt', 'w'),
+                            open('./queries/5-plannings.txt', 'w'),
+                            open('./queries/6-tenders.txt', 'w'),
+                            open('./queries/7-tendersItemsLots.txt', 'w'),
+                            open('./queries/8-parties.txt', 'w')
+                        ]
+                    
+                        queries = [q1, q2, q3, q4, q5, q6, q7, q8]
+                    
+                        for index, (output_file, input_query) in enumerate(zip(output_files, queries)):
+                            execute_query(index + 1, output_file, input_query)
+                            output_file.close()
+                        # END FOR
+                        
+                        logger.info('Queries execution finished')
+                        exit(0)
+                    # END MAIN
                 \end{lstlisting}
             \end{minipage}

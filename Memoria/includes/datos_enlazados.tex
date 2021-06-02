@@ -9,7 +9,7 @@
         \label{fig:pipeline}
     \end{figure}
     
-    \noindent En la \hyperref[fig:pipeline]{figura 21} se representa el \textit{pipeline} completo, además del formato de los datos a lo largo de las diferentes fases del procesamiento. Los datos de licitaciones originales que provienen de la Plataforma de Contratación Pública están en el formato \texttt{XML} y siguiendo el esquema \texttt{CODICE}. Una vez son procesados por el sistema \textit{OCDS\_Mapper}, éstos pasan al esquema \texttt{OCDS} y al formato \texttt{JSON}. Tras ser mapeados, se transforman mediante un sencillo script en el lenguaje \texttt{Python} (accesible en el repositorio del trabajo \cite{SCRIPTGEN}) al formato \texttt{XML} para su procesado de reglas \texttt{RML}. Éste se realiza haciendo uso de la librería \textit{RocketRML} \cite{ROCKETRML} (licencia CC-BY-SA 4.0 \cite{LICCC}), ejecutada en el entorno \texttt{Node.js}, para obtener finalmente los datos enlazados \texttt{RDF}.
+    \noindent En la \hyperref[fig:pipeline]{figura 21} se representa el \textit{pipeline} completo, además del formato de los datos a lo largo de las diferentes fases del procesamiento. Los datos de licitaciones originales que provienen de la Plataforma de Contratación Pública están en el formato \texttt{XML} y siguiendo el esquema \texttt{CODICE}. Una vez son procesados por el sistema \textit{OCDS\_Mapper}, éstos pasan al esquema \texttt{OCDS} y al formato \texttt{JSON}. Tras ser mapeados, se transforman mediante un sencillo script en el lenguaje \texttt{Python} (accesible en el repositorio del trabajo \cite{SCRIPTGEN} y en la \hyperref[subsubsec:py1]{sección 10.4.1} del \hyperref[annex:scriptspy]{Anexo IV}) al formato \texttt{XML} para su procesado de reglas \texttt{RML}. Éste se realiza haciendo uso de la librería \textit{RocketRML} \cite{ROCKETRML} (licencia CC-BY-SA 4.0 \cite{LICCC}), ejecutada en el entorno \texttt{Node.js}, para obtener finalmente los datos enlazados \texttt{RDF}.
     \\ \\
     Podría parecer que la transformación a \texttt{JSON} en medio del \textit{pipeline} para posteriormente volver al formato \texttt{XML} inicial es innecesaria, pero esto se hace debido a que \texttt{OCDS} requiere \texttt{JSON} como formato de sus datos, mientras que las reglas de mapeado de \texttt{RML} utilizadas están declaradas haciendo uso de \texttt{XPath}, necesitando \texttt{XML} como formato de entrada.
     
@@ -18,7 +18,7 @@
         
         \begin{figure}[h]
             \centering
-            \includegraphics[width=\textwidth]{ocdsreport_1.png}
+            \includegraphics[width=0.925\textwidth]{ocdsreport_1.png}
             \captionof{figure}{Reporte general de la herramienta de revisión de \texttt{OCDS}}
         \end{figure}
         
@@ -47,14 +47,14 @@
     \subsection{Consultas sobre los datos generados} \label{subsec:rdflib}
         Para comprobar que la integridad de los datos enlazados generados se ha preservado tras su procesamiento mediante las reglas \texttt{RML}, se ha confeccionado una batería de consultas \texttt{SPARQL} que asevera que toda la información codificada en dichas reglas se haya preservado.
         \\ \\
-        La implementación de las consultas se ha realizado mediante un sencillo script en \texttt{Python} (accesible en el repositorio \cite{SCRIPTRDF}) haciendo uso de la librería \textit{RDFLib} (licencia BSD 3-Clause \cite{LICBSD3}). El conjunto de \textit{queries} \texttt{SPARQL} se encuentra en el \hyperref[annex:sparql]{Anexo III}.
+        La implementación de las consultas se ha realizado mediante un sencillo script en \texttt{Python} (accesible en el repositorio \cite{SCRIPTRDF} y en la \hyperref[subsubsec:py2]{sección 10.4.2} del \hyperref[annex:scriptspy]{Anexo IV}) haciendo uso de la librería \textit{RDFLib} (licencia BSD 3-Clause \cite{LICBSD3}). El conjunto de \textit{queries} \texttt{SPARQL} se encuentra en el \hyperref[annex:sparql]{Anexo III}.
         \\ \\
         En el repositorio del trabajo se localizan ficheros de ejemplo de la ejecución completa del \textit{pipeline} del sistema, desde los documentos originales \cite{TFGEJ1} hasta los ficheros de texto resultantes de la ejecución de las consultas descritas en esta sección \cite{TFGEJ2}, pasando por su primer procesado a \texttt{JSON} \cite{TFGEJ3} y su versión \texttt{RDF} \cite{TFGEJ4}.
         
     \subsection{Despliegue del sistema}
         Finalmente, el \textit{pipeline} completo, desde la adquisición de documentos de la Plataforma de Contratación Pública hasta la publicación de los datos enlazados ha sido desplegado en una máquina virtual provista para este propósito gracias al \textit{Ontology Engineering Group} \cite{OEG} de la UPM.
         \\ \\
-        Dicha máquina virtual está compuesta por 2 procesadores Intel Xeon \texttt{CPU E5-2650 v3 @ 2.30GHz}, con 40 \textit{cores} por procesador. Cuenta asímismo con \texttt{4096 MBs} de RAM de tecnología \texttt{RDIMM} y velocidad \texttt{2133 MT/s}, y su almacenamiento es de \texttt{19 GBs}. El software de virtualización que soporta la infraestructura es \texttt{QEMU-KVM}.
+        Dicha máquina virtual está compuesta por 2 procesadores Intel Xeon \texttt{CPU E5-2650 v3 @ 2.30GHz}, con 40 \textit{cores} por procesador. Cuenta asímismo con \texttt{4096 MBs} de memoria \texttt{RAM} de tecnología \texttt{RDIMM} y velocidad \texttt{2133 MT/s}, y su almacenamiento es de \texttt{19 GBs}. El software de virtualización que soporta la infraestructura es \texttt{QEMU-KVM}.
         \\ \\
         En la máquina virtual, mediante el servicio Unix \texttt{cron}, se ha configurado un \textit{script} de ejecución diaria que realiza todas las etapas del procesamiento: en primer lugar, ejecuta el software \textit{OCDS\_Mapper} con el modo de operación \texttt{--daily}, dado que el servicio se ejecuta diariamente, de medianoche, y se pretenden realizar procesamientos de los datos publicados en el día anterior. Una vez se completa esa fase y se realiza el procesado a \texttt{RML} descrito en esta sección, el \textit{script} lleva al directorio \texttt{/var/www/html} dos conjuntos de ficheros: los \texttt{JSON} que devuelve el \textit{OCDS\_Mapper}, de interés por ser documentos válidos con respecto al estándar \texttt{OCDS}, y los correspondientes \texttt{N-Triples} (\texttt{RDF}) que salen de la ejecución del \textit{RocketRML}.
         \\ \\

@@ -22,7 +22,7 @@
         \subsubsection{Arquitectura de componentes orientada a servicios}
             Con el objetivo de alcanzar la máxima abstracción de tareas posible, el sistema se ha diseñado de tal forma que cada componente realice un servicio concreto, con una funcionalidad bien definida, capaz de integrarse con el resto de componentes del sistema.
             \\ \\
-            El \textit{OCDS\_Mapper}, por tanto, estará compuesto de componentes individuales, concretamente 4, descritos en la subsección \hyperref[subsubsec:componentes]{Componentes software}.
+            El \textit{OCDS\_Mapper}, por tanto, estará compuesto de componentes individuales, concretamente 4, descritos en la subsección \hyperref[subsubsec:componentes]{componentes software}.
             
         \subsubsection{Patrón de productor-consumidor}
             El sistema implementará el patrón de diseño software de productor-consumidor de la siguiente manera:
@@ -32,7 +32,7 @@
             Para asegurar un correcto flujo de recursos entre los componentes que sigan dichos roles se implementan mecanismos de sincronización y exclusión mutua entre ellos.
         
         \subsubsection{Mecanismo de consultas}
-            Para realizar las búsquedas de elementos sobre los documentos de licitaciones de la Plataforma de Contratacíon Pública del Estado se ha utilizado la tecnología \textit{Language Integrated Query} (\texttt{LINQ}), propia del framework \texttt{.NET}.
+            Para realizar las búsquedas de elementos sobre los documentos de licitaciones de la Plataforma de Contratacíon Pública del Estado se ha utilizado la tecnología \textit{Language Integrated Query} (\texttt{LINQ}), propia del \textit{framework} \texttt{.NET}.
             \\ \\
             A través de \texttt{LINQ} se pueden realizar consultas sobre estructuras de datos mediante una sintaxis parecida a la del lenguaje \textit{Structured Query Language} (\texttt{SQL}). En concreto, para el tipo de datos que la aplicación obtiene (extensión \texttt{.atom}, formato \texttt{XML}), la rama de \texttt{LINQ} utilizada es \texttt{LINQ to XML} \cite{LINQXML}.
             \\ \\
@@ -52,11 +52,11 @@
             
             \begin{itemize}
                 \item AsyncEx \cite{LIBASYNC}: Librería utilizada para el uso de colecciones aptas para la exclusión mutua. Licencia MIT \cite{LICMIT}.
-                \item FluentAssertions \cite{LIBASSERT}: Librería de ayuda en la codificación de tests. Liencia Apache \cite{LICAPACHE}.
+                \item FluentAssertions \cite{LIBASSERT}: Librería de ayuda en la codificación de tests. Licencia Apache v2 \cite{LICAPACHE}.
                 \item Microsoft.Extensions.Configuration \cite{LIBCONFIG}: Librería utilizada para pasar información a la aplicación mediante ficheros de configuración. Licencia MIT \cite{LICMIT}.
                 \item NLog \cite{LIBNLOG}: Librería para llevar el registro del funcionamiento del sistema. Licencia BSD 3-Clause \cite{LICBSD3}.
                 \item Json.NET \cite{LIBJSON}: Librería utilizada para la construcción de documentos en formato JSON. Licencia MIT \cite{LICMIT}.
-                \item xUnit \cite{LIBXUNIT}: Librería para realizar el testing del sistema. Liencia Apache \cite{LICAPACHE}.
+                \item xUnit \cite{LIBXUNIT}: Librería para realizar el \textit{testing} del sistema. Liencia Apache v2 \cite{LICAPACHE}.
             \end{itemize}   
     
     \subsection{Estructura de la aplicación}
@@ -114,6 +114,8 @@
             Dado que el sistema está diseñado mediante una arquitectura de componentes orientada a servicios, el diseño de la arquitectura se limita a la propia descripción de los componentes que lo integran.
             \\ \\
             Posteriormente, en el \hyperref[subsec:detallado]{diseño detallado del sistema}, se incluirán los diagramas \texttt{UML} individuales de cada componente, acompañados en la sección de \hyperref[subsec:flujo]{flujo de ejecución} por una serie de diagramas de flujo con la representación de la ejecución del sistema.
+            \\ \\
+            Las interfaces de los componentes del sistema pueden encontrarse en el \hyperref[annex:interfaces]{Anexo I}.
             
             \begin{center}
                 \begin{tabular}{|| M{3cm} | M{12cm} ||} 
@@ -301,16 +303,16 @@
                 El componente de provisión de datos debe ser capaz de cargar en memoria para su posterior procesado un fichero localizado en el sistema de ficheros local de la máquina ejecutando el proceso. También debe notificar si la ruta al fichero local especificado no es correcta o si en ella no existe dicho fichero.
                 
             \paragraph{Caso de uso II: modo de descarga remota} \mbox{}\\
-                El componente de provisión de datos debe ser capaz de descargar para su posterior procesado un documento de licitaciones desde la Plataforma de Contratación Pública. También debe notificar si la URL no es correcta.
+                El componente de provisión de datos debe ser capaz de descargar para su posterior procesado un documento de licitaciones desde la Plataforma de Contratación Pública. También debe notificar si la \texttt{URL} no es correcta.
             
             \paragraph{Caso de uso III: provisión simple} \mbox{}\\
-                El componente de provisión de datos debe ser, si así se especifica, capaz de proveer un único documento de licitaciones, el cual podrá ser cargado o descargado de manera local o remota, respectivamente. En el caso de una provisión simple de manera remota, el componente tratará de descargar aquel documento más reciente, cuya URL \cite{LICIDIA} queda descrita en el portal de datos abiertos del Ministerio de Hacienda \cite{PORTALHAC}.
+                El componente de provisión de datos debe ser, si así se especifica, capaz de proveer un único documento de licitaciones, el cual podrá ser cargado o descargado de manera local o remota, respectivamente. En el caso de una provisión simple de manera remota, el componente tratará de descargar aquel documento más reciente, cuya \texttt{URL} \cite{LICIDIA} queda descrita en el portal de datos abiertos del Ministerio de Hacienda \cite{PORTALHAC}.
                 
             \paragraph{Caso de uso IV: provisión continua} \mbox{}\\
-                El componente de provisión de datos debe ser capaz, si así se especifica, y sólo en el modo de carga remota, de encontrar en el documento de licitaciones siendo descargado el enlace al siguiente documento, con el fin de proveer un flujo continuo de recursos para el procesado en el sistema. El primer documento del flujo será el más reciente, descrito en el apartado anterior.
+                El componente de provisión de datos debe ser capaz, si así se especifica, y sólo en el modo de descarga remota, de encontrar en el documento de licitaciones siendo descargado el enlace al siguiente documento, con el fin de proveer un flujo continuo de recursos para el procesado en el sistema. El primer documento del flujo será el más reciente, descrito en el apartado anterior.
                 
             \paragraph{Caso de uso V: provisión diaria} \mbox{}\\
-                El componente de provisión de datos debe ser capaz, si así se especifica, y sólo en el modo de carga remota, de igual manera que con el caso de uso de la provisión continua, de proveer un flujo de recursos para ser procesados, con la salvedad que dicho flujo se limite exclusivamente al conjunto de documentos publicados en el día anterior.
+                El componente de provisión de datos debe ser capaz, si así se especifica, y sólo en el modo de descarga remota, de igual manera que con el caso de uso de la provisión continua, de proveer un flujo de recursos para ser procesados, con la salvedad que dicho flujo se limite exclusivamente al conjunto de documentos publicados en el día anterior.
                 
         \subsubsection{Casos de uso del componente de parseo de datos}
     
@@ -546,7 +548,7 @@
         Se han realizado algunas excepciones al análisis estático del código, cuyas justificaciones se presentan a continuación:
         \begin{itemize}
             \item Regla \texttt{S125}: \textit{"Sections of code should not be commented out"} \cite{SONAR125}. Ignorada debido a que se generaba la alerta en comentarios informativos del funcionamiento de los métodos.
-            \item Regla \texttt{S1168}: \textit{"Empty arrays and collections should be returned instead of null"} \cite{SONAR1168}. Teniendo el cuenta la implementación del componente \textit{Mapper}, los métodos que no devuelven un objeto \texttt{JObject} devuelven \texttt{null} debido a que el objeto \texttt{JObject} vacío representa un elemento \texttt{JSON} vacío, lo cual no es equivalente a \texttt{null}.
+            \item Regla \texttt{S1168}: \textit{"Empty arrays and collections should be returned instead of null"} \cite{SONAR1168}. Ignorada debido a que teniendo el cuenta la implementación del componente \textit{Mapper}, los métodos que no devuelven un objeto \texttt{JObject} devuelven \texttt{null} debido a que el objeto \texttt{JObject} vacío representa un elemento \texttt{JSON} vacío, lo cual no es equivalente a \texttt{null}.
             \item Regla \texttt{S3776}: \textit{"Cognitive Complexity of functions should not be too high"} \cite{SONAR3776}. Por el motivo descrito en el apartado anterior, debido a que cada regla de mapeado está implementada en un sólo método por motivos del modelado del sistema, se ha ignorado esta regla en dichos métodos.
         \end{itemize}
     

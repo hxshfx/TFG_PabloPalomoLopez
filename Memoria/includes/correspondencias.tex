@@ -1,6 +1,6 @@
 \mysection{Correspondencias entre \texttt{CODICE} y \texttt{OCDS}}
 
-    En esta sección se describirán las correspondencias que se han establecido entre los elementos del estándar \texttt{CODICE} y el estándar \texttt{OCDS}. Dichas correspondencias han sido las implementadas en el \hyperref[sec:software]{software desarrollado}.
+    En esta sección se describirán las correspondencias que se han establecido entre los elementos del estándar \texttt{CODICE} y el estándar \texttt{OCDS}. Dichas correspondencias han sido las implementadas en el \hyperref[sec:software]{software desarrollado}. Los ejemplos resultantes de cada regla enumerada en esta sección pueden encontrarse en el \hyperref[annex:correspondencias]{Anexo II}.
     \\ \\
     No todos los elementos de \texttt{CODICE} han sido mapeados, ni todos los campos de \texttt{OCDS} han sido cubiertos, pero sí se han considerado aquellos elementos de mayor interés.
 
@@ -28,7 +28,7 @@
                         \subitem - \texttt{ANUL} (Anulada) $\rightarrow$ \texttt{awardCancellation}
             \end{itemize}
         
-        \subsubsection{Número de expediente}
+        \subsubsection{Número de expediente} \label{subsubsec:expediente}
             \begin{itemize}
                 \item \textbf{Elemento en el esquema \texttt{CODICE}}:
                     \tabto{7.6cm} \texttt{cac-place-ext:ContractFolderStatus/} \\
@@ -335,7 +335,7 @@
                 \item \textbf{Elementos en el esquema \texttt{OCDS}}:
                     \tabto{7.6cm} \texttt{awards[i].\textit{suppliers}} \\
                     \tabto{7.6cm} \texttt{\textit{parties[j]}}
-                \item \textbf{Comentarios}: Debido a que este mapeado introduce en el documento la identidad del adjudicatario, también debe introducir en el campo \texttt{parties} la referencia a dicha parte involucrada. De manera análoga al mapeado que realiza  \hyperref[subsec:UbicacionOrganica]{ubicación orgánica}, el campo \texttt{identifier} tanto en el campo \texttt{suppliers} como en la colección \texttt{parties} detecta si la identificación de la entidad es del tipo DIR3 o NIF, indicándolo en el campo \texttt{schema}. Por último, este mapeado también introduce en la referencia al adjudicatario en \texttt{parties} en el campo \texttt{roles} el valor \texttt{supplier}, tal y como se indica en la lista de códigos de \texttt{OCDS} sobre roles de las partes involucradas \cite{CR18}.
+                \item \textbf{Comentarios}: Debido a que este mapeado introduce en el documento la identidad del adjudicatario, también debe introducir en el campo \texttt{parties} la referencia a dicha parte involucrada. De manera análoga al mapeado que realiza  \hyperref[subsec:UbicacionOrganica]{ubicación orgánica}, el campo \texttt{identifier} tanto en el campo \texttt{suppliers} como en la colección \texttt{parties} detecta si la identificación de la entidad es del tipo \texttt{DIR3} o \texttt{NIF}, indicándolo en el campo \texttt{schema}. Por último, este mapeado también introduce en la referencia al adjudicatario en \texttt{parties} en el campo \texttt{roles} el valor \texttt{supplier}, tal y como se indica en la lista de códigos de \texttt{OCDS} sobre roles de las partes involucradas \cite{CR18}.
             \end{itemize}
             
         \subsubsection{Importe de adjudicación}
